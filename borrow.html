@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="js/jsPDF/dist/jspdf.umd.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    
+    <title>Borrow</title>
+    <style>
+  
+      @import url('https://fonts.googleapis.com/css?family=Abel');
+      
+      body, html {
+        color: black;
+        font-family: 'Abel', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+      }
+      
+      body {
+        font-size: 1.2em;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -ms-background-size: cover;
+        background-size: cover;
+      }
+      
+      .text-box {
+        border-radius: 20px;
+        margin: 2em auto;
+        padding: 20px;
+        width: 90%;
+      }
+      
+      h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 2.8em;
+        color: black;
+        text-align: center;
+        letter-spacing: 2px;
+        word-spacing: 5px;
+        line-height: 1em;
+        font-weight: bold;
+      }
+      
+      h2 {
+        margin: 0;
+        padding: 0;
+        font-size: 1.8em;
+        color: black;
+        text-align: center;
+        letter-spacing: 2px;
+        word-spacing: 5px;
+        line-height: 1em;
+        font-weight: bold;
+      }
+      
+      h3 {
+        margin: 0;
+        padding: 0;
+        font-size: 1.0em;
+        color: black;
+        text-align: center;
+        letter-spacing: 2px;
+        word-spacing: 5px;
+        line-height: 1em;
+/*      font-weight: bold;*/
+      }
+      
+      p {
+        display: block;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        font-size: 1.2em;
+        line-height: 1.2em;
+      }
+      
+      hr {
+        width: 70%;
+        margin: 10px auto;
+      }
+      
+      .container {
+        border-radius: 20px;
+        margin: auto;
+        width: 90%;
+        padding: 1em;
+        
+      }
+      
+      #survey-form {
+        margin: 0 auto;
+        width: 80%;
+        padding: 10px;
+      }
+      
+      .labels {
+        display: inline-block;
+        text-align: right;
+        width: 40%;
+        vertical-align: top; 
+        margin-top: 20px;
+      }
+      
+      .input-tab {
+        display: inline-block;
+        text-align: left;
+        width: 50%;
+        margin-left: 10px;
+      }
+      
+      .input-field {
+        display: inline-block;
+        width: 100%;
+        padding: 5px;
+        margin: 18px 0 0 10px;
+        border: 1px solid #0000FF;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: bold;
+      }
+      
+      ::-webkit-input-placeholder {
+        font-style: italic;
+        font-weight: 300;
+      }
+      
+      input {
+        margin: 7px;
+      }
+      
+      #dropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }      
+      
+      
+      #intrestBinaryDropdownID {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }    
+      
+      #intrestPaymentDropdownID {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }    
+      
+      #borrowerDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }   
+      
+      #controlPersonAuthDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }   
+      
+      #personalGuarantorDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }   
+      
+      #usCitizenDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }
+      
+      #ownRentDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }
+      
+      #bankAccountTypeDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }
+      
+      .fileUploadButton {
+        background-color: #0000FF;
+        margin: 0;
+        border-radius: 4px;
+        color: white;
+        font-size: 1em;
+        font-weight: bold;
+        font-family: inherit;
+        padding: 4px 8px;
+        border: 1px solid;
+        cursor: pointer;
+        display: inline-block;
+        text-align: center;
+        margin: 15px 0 0;
+      }
+      
+      .fileUploadButton:hover {
+        background-color: #00008B;
+      }
+      
+      
+      input[type="date"] {
+        display: inline-block;
+        width: 18%;
+        padding: 5px;
+        margin: 18px 0 0 10px;
+        border: 1px solid #0000FF;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: bold;
+        color: #333;
+        background-color: #fff;
+      }
+      
+      .btn {
+        width: 100%;
+        text-align: center;
+        margin: 20px;
+      }
+      
+      #submitButtonContainer {
+        display: flex;
+        justify-content: center;
+      }
+      
+      #addUboContainer {
+        display: flex;
+        justify-content: center;
+      }
+      
+      #removeUboContainer {
+        display: flex;
+        justify-content: center;
+      }
+      
+      
+      button {
+        background-color: #0000FF;
+        margin: 0;
+        border-radius: 4px;
+        color: white;
+        font-size: 1em;
+        font-weight: bold;
+        font-family: inherit;
+        padding: 10px 15px;
+        border: 1px solid;
+      }
+      
+      button:hover {
+        background-color: #00008B;
+      }
+      
+      footer {
+        text-align: center;
+        font-size: 17px;
+        margin: 20px;
+      }
+      
+      
+      header {
+        display: flex;
+        justify-content: center;
+        padding-top: 20px;
+      }
+      
+      nav {
+        padding: 10px 0;
+      }
+      
+      nav ul {
+        display: flex;
+        list-style-type: none;
+        margin: 0 50px;
+        padding: 0;
+      }
+      
+      nav li {
+        margin: 0 50px;
+      }
+      
+      .banner a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+      }
+      
+      .banner a:hover {
+        text-decoration: underline;
+      }
+      
+      a {
+        color: white;
+        text-decoration: none;
+      }
+      
+      main {
+        padding: 20px;
+      }
+      
+      h1 {
+        text-align: center;
+      }
+      
+      nav {
+        background-color: #333;
+        overflow: hidden;
+      }
+      
+      nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+      
+      nav li {
+        float: left;
+      }
+      
+      nav li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      
+      textarea {
+        resize: none;
+      }
+      
+      
+      
+  
+    </style>    
+  </head>
+  <body>
+    <header>
+      <header>
+        <div class="logo">
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="solutions.html">Solutions</a></li>
+            <li><a href="borrow.html">Borrow</a></li>
+            <li><a href="invest.html">Invest</a></li>
+            <li><a href="login.html">Log In</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </header>
+    </header>
+    
+    <header>
+      <div class="text-box">
+        <h1 id="title">LONGLINE LENDING LLC</h1>
+        <h1 id="title">LOAN APPLICATION FORM</h1>
+      </div>
+    </header>
+    <main>
+      <div class="container" id="entireForm">
+        <form id="survey-form" method="GET" required>
+          
+          <h2 id="title">Step 1 - Loan Purpose</h2>
+          <br>
+          <div class="labels">
+            <label></label></div>
+          <div class="input-tab" requried>
+            <input type="checkbox" name="asset" value="asset">Asset Purchase or Down Payment<br>
+            <input type="checkbox" name="industrial" value="ind">Industrial Use<br>
+            <input type="checkbox" name="tax" value="tax">Tax Payment<br>
+            <input type="checkbox" name="insurance" value="insurance">Insurance Premium<br>
+            <input type="checkbox" name="trade" value="trade">Margin Trading or Investment<br>
+            <input type="checkbox" name="edu" value="edu">Education Expenses<br>
+            <input type="checkbox" name="otherLoan" value="otherLoan" onclick="otherLoanFunction(this)" >Other<br>
+            <p id="insertOtherLoan"></p>
+          </div>   
+          
+          
+          <br><br><br><h2 id="title">Step 2 - Loan Amount Requested</h2>
+          <br>
+          <h3 id="subtitle">In Tranches of USD $20,000</h3>
+          <br>
+    
+          <div class="labels">
+            <label id="loanAmountLabel" for="loanAmountLabel">Loan Amount USD $</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="loanTotal" name="loanTotal" placeholder="Loan Amount" required autofocus style="width: 150px;" onchange="updateLoanAmount()" >
+          </div>
+          
+          <div class="labels">
+            <label id="trancheLabel" for="trancheLabel">Amount per Tranche USD $</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="trancheAmt" name=trancheAmt placeholder="Amount per Tranche" required autofocus style="width: 150px;" onchange="updateLoanAmount()" readonly>
+          </div>
+          
+          <div class="labels">
+            <label id="numberOfTranchesLabel" for="numberOfTranchesLabel">Number of Tranches</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="numTranches" name="numTranches" placeholder="Number of Tranches" required autofocus style="width: 150px;" onchange="updateLoanAmount()" pattern="[0-9]+" title="Please enter only numbers.">
+          </div>
+        
+          
+          <br><br><br><h2 id="title">Step 3 - Collateral Information</h2><br>
+<!--      <h3 id="subtitle">Escrow Type</h3>-->
+<!--      <br>-->
+          <div class="labels">
+            <label></label></div>
+          <div class="input-tab">
+            <input type="checkbox" name="personalProp" value="personalProp">Personal Property<br>
+            <input type="checkbox" name="realProp" value="realProp">Real Property<br>
+            <input type="checkbox" name="titledProp" value="titledProp">Titled Property<br>
+            <input type="checkbox" name="equityIns" value="equityIns">Equity Instruments<br>
+            <input type="checkbox" name="debtIns" value="debtIns">Debt Instruments<br>
+            <input type="checkbox" name="negotiableIns" value="negotiableIns">Negotiable Instruments<br>
+            <input type="checkbox" name="banknotes" value="banknotes">Banknotes<br>
+            <input type="checkbox" name="otherEscrow" value="otherEscrow" onclick="otherEscrowFucntion(this)" >Other<br>
+            <p id="insertOtherEscrow"></p>
+          </div>   
+
+          <div class="labels">
+            <label id="collateralLabel" for="collateralLabel">Collateral Specifications</label>
+          </div>
+          <div class="input-tab">
+            <textarea class="input-field" id="escrowSpec" name="escrowSpec" rows="5" cols="40" placeholder="Collateral Specifications..." requried></textarea>
+          </div>
+          
+          <div class="labels">
+            <label id="collateralValueLabel" for="collateralValueLabel">Collateral Value USD $</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="escrowAmt" name="escrowAmt" placeholder="Escrow Value" required autofocus style="width: 150px;" readonly>
+          </div>
+          
+          <div class="labels">
+            <label id="escrowLabel" for="escrowLabel">Escrow Agent</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="escrowAgt" name="escrowAgt" placeholder="Escrow Agent" required autofocus style="width: 150px;">
+          </div>
+          
+          <div class="labels">
+            <label id="vaultLabel" for="vaultLabel">Vault Information</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="vaultInfo" name="vaultInfo" placeholder="Vault Information" required autofocus style="width: 150px;">
+          </div>
+          
+          <br><br>
+                    
+          <div class="labels">
+            <label></label>
+          </div>
+          <div class="input-tab">
+            <input type="checkbox" name="secRec" value="secRec">Security Received
+            <input type="date" id="secRecDate" name="secRecDate"><br>
+            <input type="checkbox" name="secGtd" value="secGtd">Security Guaranteed<br>
+          </div>
+
+          
+          <br><br><br><h2 id="title">Step 4 - Tentative Loan Terms</h2><br>
+          <div class="labels">
+            <label id="orgFeeLabel" for="orgFeeLabel">Origination Fee (points)</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="orgFee" name="orgFee" placeholder="Origination Fee (points)" required autofocus style="width: 50px;" readonly>
+            <label id="usdLabel" for="usdLabel">&nbsp;USD $</label>
+            <input class="input-field" type="text" id="orgFeeUSD" name="orgFeeUSD" placeholder="USD $" required autofocus style="width: 50px;" readonly>
+
+            <div class="input-tab" style="margin-left: 20px;">
+              <input type="checkbox" name="agreeOrgFee" value="agreeOrgFee">Agree<br>
+            </div>  
+
+          </div>
+          
+          <div class="labels">
+            <label id="intrestLabel" for="intrestLabel">Interest Rate (monthly)</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="interestRate" name="interestRate" placeholder="Interest Rate (weekly)" required autofocus style="width: 50px;" readonly>
+            <label id="aprLabel" for="aprLabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;APR</label>
+            <input class="input-field" type="text" id="apr" name="apr" placeholder="APR" required autofocus style="width: 50px;" readonly>
+            
+            <div class="input-tab" style="margin-left: 19px;">
+              <input type="checkbox" name="agreeAPR" value="agreeAPR">Agree
+            </div>   
+
+          </div>
+          
+          <div class="labels">
+            <label for="dropdown">Interest Only</label>
+          </div>
+          <div class="input-tab">
+            <select id="intrestBinaryDropdownID" name="intrestBinaryDropdown">
+              <option disabled value selected>Select an option</option>
+              <option value="interestYes">Yes</option>
+              <option value="interestNo">No</option>
+              <option value="interestNA">N/A</option>
+            </select>
+            
+            
+            <div class="input-tab" style="margin-left: 63px;">
+              <input type="checkbox" name="agreeInterestOnly" value="agreeInterestOnly">Agree
+            </div> 
+            
+          </div>
+          
+          <div class="labels">
+            <label for="dropdown">Interest Due</label>
+          </div>
+          <div class="input-tab">
+            <select id="intrestPaymentDropdownID" name="intrestPaymentDropdown">
+              <option disabled value selected>Select an option</option>
+              <option value="interestDueWeekly">Weekly</option>
+              <option value="interestDueMonthly">Monthly</option>
+              <option value="interestDueMat">On-Maturity</option>
+            </select>
+          
+            <div class="input-tab" style="margin-left: 63px;">
+              <input type="checkbox" name="agreeInterestDue" value="agreeInterestDue">Agree
+            </div>   
+            
+          
+          </div>
+          
+          <div class="labels">
+            <label id="loanTermLabel" for="loanTermLabel">Loan Term (months)</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="loanTerm" name="loanTerm" placeholder="Loan Term" required autofocus style="width: 50px;" readonly>
+          
+            <div class="input-tab" style="margin-left: 151px;">
+              <input type="checkbox" name="agreeLoanTerm" value="agreeLoanTerm">Agree
+            </div>   
+            
+          
+          </div>
+          
+          <div class="labels">
+            <label id="loanProceedsLabel" for="loanProceedsLabel">Loan Proceeds Less Points USD $</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="loanProceeds" name="loanProceeds" placeholder="Loan Proceeds" required style="width: 150px;" readonly>
+            <div class="input-tab" style="margin-left: 51px;">
+              <input type="checkbox" name="agreeLoanProceeds" value="agreeLoanProceeds">Agree
+            </div>
+          </div>
+          
+          <div class="labels">
+            <label id="bankFeesLabel" for="bankFeesLabel">Bank Fees USD $</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="bankFees" name="bankFees" placeholder="Bank Fees" style="width: 50px;" readonly>
+          
+            <div class="input-tab" style="margin-left: 151px;">
+              <input type="checkbox" name="agreeBankFees" value="agreeBankFees">Agree
+            </div> 
+            
+          
+          
+          </div>
+          
+          <div class="labels">
+            <label id="totalDisbursedLabel" for="totalDisbursedLabel">Total to be Disbursed USD $</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="disbursedTotal" name="disbursedTotal" placeholder="Disbursed Total" style="width: 150px;" readonly>
+          
+            <div class="input-tab" style="margin-left: 51px;">
+              <input type="checkbox" name="agreeDisbursedTotal" value="agreeDisbursedTotal">Agree
+            </div> 
+          </div>
+
+          <br><br><br><h2 id="title">Step 5 - Borrower Information</h2><br>
+          <div class="labels">
+            <label for="dropdown">Borrower is an</label>
+          </div>
+          <div class="input-tab">
+            <select id="borrowerDropdown" name="intrestBinaryDropdown" onchange="handleBorrowerSelect()" requried>
+              <option disabled value selected>Select an option</option>
+              <option value="individualBorrower">Individual</option>
+              <option value="entityBorrower">Entity</option>
+            </select>
+          </div>
+          
+          <div id="entityBorrowerDetails"></div>
+          
+          
+          <br><br><br><h2 id="title">Step 6</h2><br>
+          
+          <div class="labels">
+            <label id="numberEntitysLabel" for="numberEntitysLabel">Number of Entity UBOs</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="number" id="totalUboCount" name="totalUboCount" min="1" max="8" placeholder="# of UBOs" style="width: 150px;" required></div>
+          
+          <div class="labels">
+            <label id="numberDirectorsLabel" for="numberDirectorsLabel">Number of Different Entity Directors</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="number" id="totalDirectorCount" name="totalDirectorCount" min="1" max="8" placeholder="# of Entity Directors" style="width: 150px;" required></div>
+          
+          
+          <br><br><br><h2 id="title">Step 7</h2><br>
+          <h3 id="subtitle">UBO and Director Info</h3>
+
+          <br><br><h3 id="subtitle">Info for UBO 1</h3>
+          
+          
+          <div class="labels">
+            <label for="dropdown">Control Person Authorized to Apply for, Take, and Execute, Loan?</label>
+          </div>
+          <div class="input-tab">
+            <select id="controlPersonAuthDropdown" name="controlPersonAuthDropdown1" required>
+              <option disabled value selected>Select an option</option>
+              <option value="controlPersonAuthYes1">Yes</option>
+              <option value="controlPersonAuthNo1">No</option>
+            </select>
+          </div>
+          
+          <div class="labels">
+            <label for="dropdown">Personal Guarantor?</label>
+          </div>
+          <div class="input-tab">
+            <select id="personalGuarantorDropdown" name="personalGuarantorDropdown1" requried>
+              <option disabled value selected>Select an option</option>
+              <option value="personalGuarantorYes1">Yes</option>
+              <option value="personalGuarantorNo1">No</option>
+            </select>
+          </div>
+          
+          <div class="labels">
+            <label for="dropdown">U.S. Citizen or Green Card?</label>
+          </div>
+          <div class="input-tab">
+            <select id="usCitizenDropdown" name="usCitizenDropdown1" requried>
+              <option disabled value selected>Select an option</option>
+              <option value="usCitizenYes1">Yes</option>
+              <option value="usCitizenYes1">No</option>
+            </select>
+          </div>
+          
+          <div class="labels">
+            <label id="firstName" for="firstName">First Name(s)</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="firstName1" name="firstName1" placeholder="First Name(s)" style="width: 150px;" required>
+          </div>
+          
+          <div class="labels">
+            <label id="middleName" for="middleName">Middle Name(s)</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="middleName1" name="middleName1" placeholder="Middle Name(s)" style="width: 150px;">
+          </div>
+          
+          <div class="labels">
+            <label id="name-label" for="name">Last Name(s)</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="lastName1" name="lastName1" placeholder="Last Name(s)" style="width: 150px;" required>
+          </div>
+          
+          <div class="labels">
+            <label id="homeBankAddressLabel" for="homeBankAddressLabel">Home Address (must match recent bill)</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="homeAddress1" name="homeAddress1" placeholder="Home Address" style="width: 150px;" required>
+          </div>
+          
+          <div class="labels">
+            <label id="homeCountryLabel" for="homeCountryLabel">Home Country</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="homeCountry1" name="homeCountry1" placeholder="Home Country" style="width: 150px;" required>
+          </div>
+          
+          <div class="labels">
+            <label id="homeStreetAddressLabel" for="homeStreetAddressLabel">Home Street Address</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="homeStreetAddress1" name="homeStreetAddress1" placeholder="Home Street Address" style="width: 150px;" required>
+          </div>
+          
+          <div class="labels">
+            <label id="homeCityLabel" for="homeCityLabel">Home City</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="homeCity1" name="homeCity1" placeholder="Home City" style="width: 150px;" required>
+          </div>
+          
+          <div class="labels">
+            <label id="homeStateLabel" for="homeStateLabel">Home State or Province</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="homeState1" name="homeState1" placeholder="Home State or Province" style="width: 150px;" required>
+          </div>
+          
+          <div class="labels">
+            <label id="homeZipLabel" for="homeZipLabel">Home Zip or Province</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="homeZip1" name="homeZip1" placeholder="Home Zip" style="width: 150px;" required>
+          </div>
+          
+          <div class="labels">
+            <label for="dropdown">Own or Rent?</label>
+          </div>
+          <div class="input-tab">
+            <select id="ownRentDropdown" name="ownRentDropdown1" requried>
+              <option disabled value selected>Select an option</option>
+              <option value="own1">Own</option>
+              <option value="rent1">Rent</option>
+            </select>
+          </div>
+          
+          <div class="labels">
+            <label id="mortgageLabel" for="mortgageLabel">Monthly Mortgage or Rent in USD</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="monthlyRent1" name="monthlyRent1" placeholder="Monthly Mortgage or Rent" style="width: 150px;" required pattern="[0-9]+" title="Please enter only numbers.">
+          </div>
+          
+          <div class="labels">
+            <label id="passportNumberLabel" for="passportNumberLabel">Passport Number</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="passportNumber1" name="passportNumber1" placeholder="Passport Number" style="width: 150px;" required>
+          </div>
+          
+          <div class="labels">
+            <label id="ssnLabel" for="ssnLabel">SSN or ID Number</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="ssn1" name="ssn1" placeholder="SSN or ID Number" style="width: 150px;" required>
+          </div>
+          
+          <div class="labels">
+            <label id="dobLabel" for="dobLabel">Date of Birth</label>
+          </div>
+          <div class="input-tab">
+            <input type="date" id="dob1" name="dob1">
+          </div>
+          
+          <div class="labels">
+            <label id="emailLabel" for="emailLabel">Email Address</label></div>
+          <div class="input-tab">
+            <input class="input-field" type="email" id="email1" name="email1" placeholder="email@email.com" style="width: 350px;" required>
+          </div>
+          
+          <div class="labels">
+            <label id="phoneLabel" for="phoneLabel">Telephone</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="phone1" name="phone1" placeholder="Telephone" style="width: 150px;" required>
+          </div>
+          
+          <div class="labels">
+            <label id="ficoLabel" for="ficoLabel">FICO or NOSIS Score</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="ficoScore1" name="ficoScore1" placeholder="FICO or NOSIS Score" style="width: 150px;" required pattern="[0-9]+" title="Please enter only numbers.">
+          </div>
+          
+          <div class="labels">
+            <label id="incomeLabel" for="incomeLabel">Monthly Income in USD</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="income1" name="income1" placeholder="Monthly Income in USD" style="width: 150px;" required pattern="[0-9]+" title="Please enter only numbers.">
+          </div>
+          
+          <br><br><div style="font-size: 18px; width: 600px; margin-left: 375px;">
+            Are you a Politically Exposed Person (PEP) or related to a PEP? <br> A PEP is person who is or has been entrusted with any prominent public function in  the United States of America, a country or territory outside United States of  America, or by an international organization. By “related”, we mean that you are a parent, spouse, sibling or child of a PEP, or closely connected to a PEP either socially  or professionally.
+          </div>
+          
+          <div class="labels">
+            <label></label>
+          </div>
+          <div class="input-tab">
+            <label><input type="radio" name="pep" value="yesPep1" style="margin-left: 50px;" checked>Yes</label>
+            <label><input type="radio" name="pep" value="no1">No</label>
+          </div>
+          
+          <br><br><div style="font-size: 18px; width: 600px; margin-left: 375px;">
+            Have you ever been convicted of a crime involving fraud or dishonesty? 
+          </div>
+          
+          <div class="labels">
+            <label></label>
+          </div>
+          <div class="input-tab">
+            <label><input type="radio" name="crime" value="yesCrime1" style="margin-left: 50px;" checked>Yes</label>
+            <label><input type="radio" name="crime" value="noCrime1">No</label>
+          </div>
+          
+          <br><br><div style="font-size: 18px; width: 600px; margin-left: 375px;">
+            I declare that the above information is true and correct. I am aware that I may be  subject to prosecution and criminal sanction under written law if I am found to have  made any false statement which I know to be false or which I do not believe to be true,  or if I have intentionally suppressed any material fact. 
+          </div><br>
+          
+          <div class="labels">
+            <label></label>
+          </div>
+          <div class="input-tab" style="margin-left: 20px;">
+            <input type="checkbox" name="declareCheckbox" value="declareCheckbox">I declare that the above information is true and correct.<br>
+          </div> 
+
+          
+          
+          <div class="addUboContainer">
+            <div class="btn">
+              <button id="addUboButton1" type="button">Add Another UBO</button>
+            </div>
+          </div>
+          
+<!--      <div class="removeUboContainer">-->
+<!--        <div class="btn">-->
+<!--          <button id="removeUboButton1" type="button">Remove Above UBO</button>-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+
+
+
+          <div id="uboInfo"></div>
+        
+        
+        
+        
+        
+          <br><br><br><h2 id="title">Step 9</h2><br>
+          <h3 id="subtitle">Bank Account Information</h3>
+
+
+          <div class="labels">
+            <label id="abaNumberLabel" for="abaNumberLabel">ABA Number</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="abaNumber" name="abaNumber" placeholder="ABA Number" required style="width: 150px;">
+          </div>
+          
+          <div class="labels">
+            <label id="bankNameLabel" for="bankNameLabel">Bank Name</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="bankName" name="bankName" placeholder="Bank Name" required style="width: 150px;">
+          </div>
+          
+          <div class="labels">
+            <label id="bankAddressLabel" for="bankAddressLabel">Bank Address</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="bankAddress" name="bankAddress" placeholder="Bank Address" required style="width: 150px;">
+          </div>
+
+          <div class="labels">
+            <label id="bankCityLabel" for="bankCityLabel">Bank City</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="bankCity" name="bankCity" placeholder="Bank City" required style="width: 150px;">
+          </div>
+          
+          <div class="labels">
+            <label id="bankStateLabel" for="bankStateLabel">Bank State</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="bankState" name="bankState" placeholder="Bank State" required style="width: 150px;">
+          </div>
+          
+          <div class="labels">
+            <label id="accountNumberLabel" for="accountNumberLabel">Account Number</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="accountNumber" name="accountNumber" placeholder="Account Number" required style="width: 150px;">
+          </div>
+
+
+          <div class="labels">
+            <label for="dropdown">Bank Account Type</label>
+          </div>
+          <div class="input-tab">
+            <select id="bankAccountTypeDropdown" name="bankAccountTypeDropdown" onchange="otherBankAccountType()" required>
+              <option disabled value selected>Select an option</option>
+              <option value="bankChecking">Checking</option>
+              <option value="bankSavings">Savings</option>
+              <option value="bankInvestment">Investment</option>
+              <option value="bankOther">Other</option>
+            </select>
+          </div>
+          <div id="bankOtherInputContainer"></div>
+          
+          <div class="labels">
+            <label id="ibanLabel" for="ibanLabel">IBAN</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="iban" name="iban" placeholder="IBAN" required style="width: 150px;">
+          </div>
+          
+          <div class="labels">
+            <label id="swiftLabel" for="swiftLabel">SWIFT</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="swift" name="swift" placeholder="SWIFT" required style="width: 150px;">
+          </div>
+          
+          <div class="labels">
+            <label id="memoLabel" for="memoLabel">Memo</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="memo" name="memo" placeholder="Memo" required style="width: 150px;">
+          </div>
+
+          
+          
+          <div class="labels">
+            <label id="bankAcctFileLabel" for="bankAcctFileLabel">Bank Account Statement</label>
+          </div>
+          <div class="input-tab">
+            <label for="bankAcctFile" class="fileUploadButton">Choose File
+              <input id="bankAcctFile" type="file" name="bankAcctFile" style="display:none" onchange="displayFileName('bankAcctFile', 'bankAcctFileNameSpan')">
+            </label>
+            <span id="bankAcctFileNameSpan">Uploaded File: None</span>
+          </div>
+          
+          <div class="labels">
+            <label id="passportFileLabel" for="passportFileLabel">Passport</label>
+          </div>
+          <div class="input-tab">
+            <label for="passportFile" class="fileUploadButton">Choose File
+              <input id="passportFile" type="file" name="passportFile" style="display:none" onchange="displayFileName('passportFile', 'passportFileNameSpan')">
+            </label>
+            <span id="passportFileNameSpan">Uploaded File: None</span>
+          </div>
+          
+          <div class="labels">
+            <label id="dniFrontFileLabel" for="dniFrontFileLabel">DNI/Drivers License (Front)</label>
+          </div>
+          <div class="input-tab">
+            <label for="dniFrontFile" class="fileUploadButton">Choose File
+              <input id="dniFrontFile" type="file" name="dniFrontFile" style="display:none" onchange="displayFileName('dniFrontFile', 'dniFrontFileNameSpan')">
+            </label>
+            <span id="dniFrontFileNameSpan">Uploaded File: None</span>
+          </div>
+          
+          <div class="labels">
+            <label id="dniReverseFileLabel" for="dniFrontFileLabel">DNI/Drivers License (Reverse)</label>
+          </div>
+          <div class="input-tab">
+            <label for="dniReverseFile" class="fileUploadButton">Choose File
+              <input id="dniReverseFile" type="file" name="dniReverseFile" style="display:none" onchange="displayFileName('dniReverseFile', 'dniReverseFileNameSpan')">
+            </label>
+            <span id="dniReverseFileNameSpan">Uploaded File: None</span>
+          </div>
+          
+          <div class="labels">
+            <label id="billAddressProofFileLabel" for="billAddressProofFileLabel">Bill for Proof of Address</label>
+          </div>
+          <div class="input-tab">
+            <label for="billAddressProofFile" class="fileUploadButton">Choose File
+              <input id="billAddressProofFile" type="file" name="billAddressProofFile" style="display:none" onchange="displayFileName('billAddressProofFile', 'billAddressProofFileNameSpan')">
+            </label>
+            <span id="billAddressProofFileNameSpan">Uploaded File: None</span>
+          </div>
+          
+          
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <div class="labels">
+            <label id="name-label" for="name">* Full Name</label></div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="name" name="name" placeholder="Enter your name">
+          </div>
+          
+          <div class="labels">
+            <label id="email-label" for="email">* Email</label></div>
+          <div class="input-tab">
+            <input class="input-field" type="email" id="email" name="email" placeholder="email@email.com"></div>
+          
+          <div class="labels">
+            <label id="number-label" for="number">* Age</label></div>
+          <div class="input-tab">
+            <input class="input-field" type="number" id="number" name="number" min="1" max="120" placeholder="15"></div>
+          
+          
+          <div class="labels">
+            <label for="dropdown">How do you watch South Park?</label></div>
+          <div class="input-tab">
+            <select id="dropdown" name="site">
+              <option disabled value selected>Select an option</option>
+              <option value="web">Website</option>
+              <option value="hulu">Hulu</option>
+              <option value="youtube">Youtube</option>
+              <option value="tv">TV</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <div class="labels">
+            <label>How much do you like South Park?</label></div>
+          <div class="input-tab">
+            <input type="radio" name="radio-button" value="love">I love it!<br>
+            <input type="radio" name="radio-button" value="like">I like it<br>
+            <input type="radio" name="radio-button" value="ok">It's ok<br>
+            <input type="radio" name="radio-button" value="nah">Not really<br>
+          </div>
+          
+          <div class="labels">
+            <label for="dropdown">How many seasons of South Park have you watched?</label></div>
+          <div class="input-tab">
+            <select id="dropdown" name="seasons">
+              <option disabled value selected>Select an option</option>
+              <option value="<=5">0-5</option>
+              <option value="<=10">6-10</option>
+              <option value="<=15">10-15</option>
+              <option value="<=21">15-21</option>
+            </select>
+          </div>
+          
+          <div class="labels">
+            <label for="comments">Tell us more about your favorite character(s) or episode(s)</label></div>
+          <div class="input-tab">
+            <textarea class="input-field" id="comments" name="comments" rows="10" cols="40" placeholder="Your comments..."></textarea></div>
+          
+          
+          <div class="submitButtonContainer">
+            <div class="btn">
+              <button id="submit" type="submit">Submit</button>
+            </div>
+          </div>
+          
+        </form>
+      </div>
+      
+      
+
+      
+    </main>
+    <footer>
+      <p id="copyright"></p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js "></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script defer src="borrow.js"></script>
+  </body>
+</html>
+<!--
+
+if ind -> jump to ubo entry w/o control
+no dir
+
+remove step 6
+add ubo btn to add ubo based on step 6 current format
+
+
+if ubo == dir, keep same info
+if ubo != dir, new  info
+
+on sub btn, save html file as is? print?
+
+
+-->
+
+
+
+
+

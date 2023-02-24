@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    
+    <title>Log In</title>
+    <style>
+  
+      @import url('https://fonts.googleapis.com/css?family=Abel');
+      
+      body, html {
+        color: black;
+        font-family: 'Abel', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+      }
+      
+      body {
+        font-size: 1.2em;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -ms-background-size: cover;
+        background-size: cover;
+      }
+      
+      .text-box {
+        border-radius: 20px;
+        margin: 2em auto;
+        padding: 20px;
+        width: 90%;
+      }
+      
+      h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 2.8em;
+        color: black;
+        text-align: center;
+        letter-spacing: 2px;
+        word-spacing: 5px;
+        line-height: 1em;
+        font-weight: bold;
+      }
+      
+      h2 {
+        margin: 0;
+        padding: 0;
+        font-size: 1.8em;
+        color: black;
+        text-align: center;
+        letter-spacing: 2px;
+        word-spacing: 5px;
+        line-height: 1em;
+        font-weight: bold;
+      }
+      
+      h3 {
+        margin: 0;
+        padding: 0;
+        font-size: 1.0em;
+        color: black;
+        text-align: center;
+        letter-spacing: 2px;
+        word-spacing: 5px;
+        line-height: 1em;
+/*      font-weight: bold;*/
+      }
+      
+      p {
+        display: block;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        font-size: 1.2em;
+        line-height: 1.2em;
+      }
+      
+      hr {
+        width: 70%;
+        margin: 10px auto;
+      }
+      
+      .container {
+        border-radius: 20px;
+        margin: auto;
+        width: 90%;
+        padding: 1em;
+        
+      }
+      
+      #survey-form {
+        margin: 0 auto;
+        width: 80%;
+        padding: 10px;
+      }
+      
+      .labels {
+        display: inline-block;
+        text-align: right;
+        width: 40%;
+        vertical-align: top; 
+        margin-top: 20px;
+      }
+      
+      .input-tab {
+        display: inline-block;
+        text-align: left;
+        width: 50%;
+        margin-left: 10px;
+      }
+      
+      .input-field {
+        display: inline-block;
+        width: 100%;
+        padding: 5px;
+        margin: 18px 0 0 10px;
+        border: 1px solid #0000FF;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: bold;
+      }
+      
+      ::-webkit-input-placeholder {
+        font-style: italic;
+        font-weight: 300;
+      }
+      
+      input {
+        margin: 7px;
+      }
+      
+      #dropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+      }
+      .btn {
+        width: 100%;
+        text-align: center;
+        margin: 20px;
+      }
+      
+      button {
+        background-color: #e67e22;
+        border-radius: 4px;
+        color: white;
+        font-size: 1em;
+        font-weight: bold;
+        font-family: inherit;
+        padding: 10px 15px;
+        border: 1px solid;
+      }
+      
+      button:hover {
+        background-color: #bf6516;
+      }
+      
+      footer {
+        text-align: center;
+        font-size: 17px;
+        margin: 20px;
+      }
+      
+      header {
+        display: flex;
+        justify-content: center;
+        padding-top: 20px;
+      }
+      
+      nav {
+        padding: 10px 0;
+      }
+      
+      nav ul {
+        display: flex;
+        list-style-type: none;
+        margin: 0 50px;
+        padding: 0;
+      }
+      
+      nav li {
+        margin: 0 50px;
+      }
+      
+      .banner a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+      }
+      
+      .banner a:hover {
+        text-decoration: underline;
+      }
+      
+      a {
+        color: white;
+        text-decoration: none;
+      }
+      
+      main {
+        padding: 20px;
+      }
+      
+      h1 {
+        text-align: center;
+      }
+      
+      nav {
+        background-color: #333;
+        overflow: hidden;
+      }
+      
+      nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+      
+      nav li {
+        float: left;
+      }
+      
+      nav li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      
+      textarea {
+        resize: none;
+      }
+
+      
+    </style>    
+  </head>
+  <body>
+    <header>
+      <header>
+        <div class="logo">
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="solutions.html">Solutions</a></li>
+            <li><a href="borrow.html">Borrow</a></li>
+            <li><a href="invest.html">Invest</a></li>
+            <li><a href="login.html">Log In</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </header>
+    </header>
+    
+    <header>
+      <div class="text-box">
+        <h1 id="title">Log In</h1>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <form id="survey-form" method="GET">
+          
+          <h2 id="title">Step 1 - Loan Purpose</h2>
+          <br>
+          <div class="labels">
+            <label></label></div>
+          <div class="input-tab">
+            <input type="checkbox" name="asset" value="asset">Asset Purchase or Down Payment<br>
+            <input type="checkbox" name="industrial" value="ind">Industrial Loan<br>
+            <input type="checkbox" name="tax" value="tax">Tax Payment<br>
+            <input type="checkbox" name="insurance" value="insurance">Insurance Premium<br>
+            <input type="checkbox" name="trade" value="trade">Margin Trading or Investment<br>
+            <input type="checkbox" name="edu" value="edu">Education Expenses<br>
+            <input type="checkbox" name="otherLoan" value="otherLoan" onclick="otherLoanFunction(this)" >Other<br>
+            <p id="insertOtherLoan"></p>
+          </div>   
+          
+          <br><br><br>
+          
+          <h2 id="title">Step 2 - Loan Amount Requested</h2>
+          <br>
+          <h3 id="subtitle">In Tranches of USD$ 20,000</h3>
+          <br>
+    
+          <div class="labels">
+            <label id="name-label" for="name">Loan Amount</label></div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="loanAmt" name="loanAmt" placeholder="Loan Total" required autofocus style="width: 150px;" onchange="updateLoanAmount()" readonly>
+          </div>
+          
+          <div class="labels">
+            <label id="name-label" for="name">Amount per Tranche</label></div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="trancheAmt" name=trancheAmt placeholder="Amount per Tranche" required autofocus style="width: 150px;" onchange="updateLoanAmount()" readonly>
+          </div>
+          
+          <div class="labels">
+            <label id="name-label" for="name">Number of Tranches</label></div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="numTranches" name="numTranches" placeholder="Number of Tranches" required autofocus style="width: 150px;" onchange="updateLoanAmount()">
+          </div>
+        
+          
+          <br><br><br>
+          
+          <h2 id="title">Step 3 - Escrow Information</h2>
+          <br>
+<!--      <h3 id="subtitle">Escrow Type</h3>-->
+<!--      <br>-->
+          <div class="labels">
+            <label></label></div>
+          <div class="input-tab">
+            <input type="checkbox" name="personalProp" value="personalProp">Personal Property<br>
+            <input type="checkbox" name="realProp" value="realProp">Real Property<br>
+            <input type="checkbox" name="titledProp" value="titledProp">Titled Property<br>
+            <input type="checkbox" name="stock" value="stock">Stock Instruments<br>
+            <input type="checkbox" name="debt" value="debt">Debt Instruments<br>
+            <input type="checkbox" name="negotiable" value="negotiable">Negotiable Instruments<br>
+            <input type="checkbox" name="banknotes" value="banknotes">Banknotes<br>
+            <input type="checkbox" name="otherEscrow" value="otherEscrow" onclick="otherEscrowFucntion(this)" >Other<br>
+            <p id="insertOtherEscrow"></p>
+          </div>   
+
+          <div class="labels">
+            <label id="name-label" for="name">Escrow Specifications</label></div>
+          <div class="input-tab">
+            <textarea class="input-field" id="escrowSpec" name="escrowSpec" rows="5" cols="40" placeholder="Your comments..."></textarea>
+          </div>
+          
+          
+          
+          
+          
+    
+          
+          
+          
+          <div class="labels">
+            <label id="name-label" for="name">* Full Name</label></div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="name" name="name" placeholder="Enter your name" required autofocus>
+          </div>
+          
+          <div class="labels">
+            <label id="email-label" for="email">* Email</label></div>
+          <div class="input-tab">
+            <input class="input-field" type="email" id="email" name="email" placeholder="email@email.com" required></div>
+          
+          <div class="labels">
+            <label id="number-label" for="number">* Age</label></div>
+          <div class="input-tab">
+            <input class="input-field" type="number" id="number" name="number" min="1" max="120" placeholder="15" required></div>
+          
+          
+          <div class="labels">
+            <label for="dropdown">How do you watch South Park?</label></div>
+          <div class="input-tab">
+            <select id="dropdown" name="site">
+              <option disabled value selected>Select an option</option>
+              <option value="web">Website</option>
+              <option value="hulu">Hulu</option>
+              <option value="youtube">Youtube</option>
+              <option value="tv">TV</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <div class="labels">
+            <label>How much do you like South Park?</label></div>
+          <div class="input-tab">
+            <input type="radio" name="radio-button" value="love">I love it!<br>
+            <input type="radio" name="radio-button" value="like">I like it<br>
+            <input type="radio" name="radio-button" value="ok">It's ok<br>
+            <input type="radio" name="radio-button" value="nah">Not really<br>
+          </div>
+          
+          <div class="labels">
+            <label for="dropdown">How many seasons of South Park have you watched?</label></div>
+          <div class="input-tab">
+            <select id="dropdown" name="seasons">
+              <option disabled value selected>Select an option</option>
+              <option value="<=5">0-5</option>
+              <option value="<=10">6-10</option>
+              <option value="<=15">10-15</option>
+              <option value="<=21">15-21</option>
+            </select>
+          </div>
+          
+          <div class="labels">
+            <label for="comments">Tell us more about your favorite character(s) or episode(s)</label></div>
+          <div class="input-tab">
+            <textarea class="input-field" id="comments" name="comments" rows="10" cols="40" placeholder="Your comments..."></textarea></div>
+          
+          <div class="btn">
+            <button id="submit" type="submit">Submit</button>
+          </div>
+          
+        </form>
+      </div>
+      
+    </main>
+    <footer>
+      <p id="copyright"></p>
+    </footer>
+    <script defer src="login.js"></script>
+  </body>
+</html>
