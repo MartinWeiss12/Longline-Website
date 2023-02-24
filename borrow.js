@@ -585,19 +585,6 @@ addEventListenersToButtons(); // Call the function again to update the event lis
 
 
 
-const removeButton = document.getElementById('removeUboButton');
-
-// Add an event listener to the remove button
-removeButton.addEventListener('click', function() {
-  // Get a reference to the uboInfo div
-  const uboInfoDiv = document.getElementById('uboInfo');
-  
-  // Remove all the HTML from the div
-  uboInfoDiv.innerHTML = '';
-});
-
-
-
 
 
 
