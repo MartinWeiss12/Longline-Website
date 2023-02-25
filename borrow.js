@@ -917,25 +917,46 @@ const htmlForEntity = `
   </div>
 `;
 
-// function for if borrower is an individual or entity
+
+
+
+
+
+
+
+
+
+
+
+
+
+//function handleBorrowerSelect() {
+//var select = document.getElementById("borrowerDropdown");
+//var option = select.options[select.selectedIndex];
+//
+//if (option.value == "individualBorrower") {
+//  entityContainer.innerHTML = htmlForFirstIndividual;
+//  document.getElementById("addIndividualButton1").style.display = "flex";
+//}
+//
+//if (option.value == "entityBorrower") {
+//  entityContainer.innerHTML = htmlForEntity;
+//  document.getElementById("addIndividualButton1").style.display = "none";
+//} 
+//}
+
 function handleBorrowerSelect() {
   var select = document.getElementById("borrowerDropdown");
   var option = select.options[select.selectedIndex];
-
+  
   if (option.value == "individualBorrower") {
     entityContainer.innerHTML = htmlForFirstIndividual;
-    let individualSelected = true;
-
   }
   
   if (option.value == "entityBorrower") {
     entityContainer.innerHTML = htmlForEntity;
-    let entitySelected = true;
-    
   } 
 }
-
-
 
 
 
@@ -1227,23 +1248,21 @@ const htmlForAdditionalIndividual = `
 
 
 
-
-
 // Get references to the add button and the div where the HTML will be added
 const additionalIndividualInfoDiv = document.getElementById('additionalIndividualInfo');
 
 // Define a variable to keep track of the number of times the button has been clicked
-let individualCount = 2;
+let individualCount = 1;
 
 function addEventListenersToAddIndividualButtons() {
-  for (let i = 1; i <= 9; i++) {
+  for (let i = 1; i < 9; i++) {
     // Get a reference to the add button for this iteration
     const addIndividualButton = document.getElementById(`addIndividualButton${i}`);
-    const testButton = document.getElementById('testButton');
+//  const testButton = document.getElementById('testButton');
     
     // Add an event listener to the add button
-    //  addIndividualButton.addEventListener('click', function() {
-    testButton.addEventListener('click', function() {
+//  testButton.addEventListener('click', function() {
+    addIndividualButton.addEventListener('click', function() {
       // Only add HTML if the click count is less than or equal to 8
       if (individualCount < 9) {
         // Add the base HTML to the div
@@ -1263,11 +1282,13 @@ function addEventListenersToAddIndividualButtons() {
 // Call the function to add event listeners to the buttons initially
 addEventListenersToAddIndividualButtons();
 
-// Update uboCount here
-individualCount = 3;
+// Update individualCount here
+individualCount = 2;
 
 // Call the function again to update the event listeners
 addEventListenersToAddIndividualButtons();
+
+
 
 
 
