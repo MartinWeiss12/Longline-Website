@@ -234,6 +234,17 @@
         width: 150px;
       }
       
+      #loanAssementDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }
+      
       .fileUploadButton {
         background-color: #0000FF;
         margin: 0;
@@ -418,7 +429,7 @@
           <br>
           <div class="labels">
             <label></label></div>
-          <div class="input-tab" requried>
+          <div class="input-tab" required>
             <input type="checkbox" name="asset" value="asset">Asset Purchase or Down Payment<br>
             <input type="checkbox" name="industrial" value="ind">Industrial Use<br>
             <input type="checkbox" name="tax" value="tax">Tax Payment<br>
@@ -478,7 +489,7 @@
             <label id="collateralLabel" for="collateralLabel">Collateral Specifications</label>
           </div>
           <div class="input-tab">
-            <textarea class="input-field" id="escrowSpec" name="escrowSpec" rows="5" cols="40" placeholder="Collateral Specifications..." requried></textarea>
+            <textarea class="input-field" id="escrowSpec" name="escrowSpec" rows="5" cols="40" placeholder="Collateral Specifications..." required></textarea>
           </div>
           
           <div class="labels">
@@ -632,7 +643,7 @@
             <label for="dropdown">Borrower is an</label>
           </div>
           <div class="input-tab">
-            <select id="borrowerDropdown" name="intrestBinaryDropdown" onchange="handleBorrowerSelect()" requried>
+            <select id="borrowerDropdown" name="intrestBinaryDropdown" onchange="handleBorrowerSelect()" required>
               <option disabled value selected>Select an option</option>
               <option value="individualBorrower">Individual</option>
               <option value="entityBorrower">Entity</option>
@@ -663,7 +674,7 @@
             <label for="dropdown">Personal Guarantor?</label>
           </div>
           <div class="input-tab">
-            <select id="personalGuarantorDropdown" name="personalGuarantorDropdown1" requried>
+            <select id="personalGuarantorDropdown" name="personalGuarantorDropdown1" required>
               <option disabled value selected>Select an option</option>
               <option value="personalGuarantorYes1">Yes</option>
               <option value="personalGuarantorNo1">No</option>
@@ -674,7 +685,7 @@
             <label for="dropdown">U.S. Citizen or Green Card?</label>
           </div>
           <div class="input-tab">
-            <select id="usCitizenDropdown" name="usCitizenDropdown1" requried>
+            <select id="usCitizenDropdown" name="usCitizenDropdown1" required>
               <option disabled value selected>Select an option</option>
               <option value="usCitizenYes1">Yes</option>
               <option value="usCitizenYes1">No</option>
@@ -748,7 +759,7 @@
             <label for="dropdown">Own or Rent?</label>
           </div>
           <div class="input-tab">
-            <select id="ownRentDropdown" name="ownRentDropdown1" requried>
+            <select id="ownRentDropdown" name="ownRentDropdown1" required>
               <option disabled value selected>Select an option</option>
               <option value="own1">Own</option>
               <option value="rent1">Rent</option>
@@ -810,7 +821,7 @@
             <input class="input-field" type="text" id="income1" name="income1" placeholder="Monthly Income in USD" style="width: 150px;" required pattern="[0-9]+" title="Please enter only numbers.">
           </div>
           
-          <br><br><div style="font-size: 18px; width: 600px; margin-left: 375px;">
+          <br><br><div style="font-size: 18px; width: 700px; margin-left: 325px; text-align: justify;">
             Are you a Politically Exposed Person (PEP) or related to a PEP? <br> A PEP is person who is or has been entrusted with any prominent public function in  the United States of America, a country or territory outside United States of  America, or by an international organization. By “related”, we mean that you are a parent, spouse, sibling or child of a PEP, or closely connected to a PEP either socially  or professionally.
           </div>
           
@@ -822,7 +833,7 @@
             <label><input type="radio" name="pep" value="no1">No</label>
           </div>
           
-          <br><br><div style="font-size: 18px; width: 600px; margin-left: 375px;">
+          <br><br><div style="font-size: 18px; width: 700px; margin-left: 325px;">
             Have you ever been convicted of a crime involving fraud or dishonesty? 
           </div>
           
@@ -834,7 +845,7 @@
             <label><input type="radio" name="crime" value="noCrime1">No</label>
           </div>
           
-          <br><br><div style="font-size: 18px; width: 600px; margin-left: 375px;">
+          <br><br><div style="font-size: 18px; width: 700px; margin-left: 325px; text-align: justify;">
             I declare that the above information is true and correct. I am aware that I may be  subject to prosecution and criminal sanction under written law if I am found to have  made any false statement which I know to be false or which I do not believe to be true,  or if I have intentionally suppressed any material fact. 
           </div><br>
           
@@ -1023,6 +1034,44 @@
             <span id="ofacFileNameSpan">Uploaded File: None</span>
           </div>
           
+          
+          <br><br><div style="font-size: 18px; width: 700px; margin-left: 325px; text-align: justify;">
+            I hereby submit my application for credit with Longline Lending LLC directly or via a loan officer
+            personally authorized by me to receive my application by voice, facsimile, or electronic means as my
+            agent. I certify that I made no misrepresentation in this loan application or in any related documents,
+            that all information is true and complete, and that I did not omit any important information. I certify
+            that the request for the loan is genuine and not fraudulent in nature for any improper or illegal use. I
+            agree that any property securing the loan or credit will not be used for any illegal or restricted purpose,
+            and the proceeds of the loan will also not be used for any illegal or restricted purpose. Longline Lending
+            LLC is authorized to verify application information with other parties (such as banks, employers, relatives
+            and credit reporting agencies) and to make any investigation of my credit or other application
+            information, either directly or through any agency employed by Longline Lending LLC for that purpose.
+            From time to time, Longline Lending LLC may disclose to other interested parties information as to
+            Longline Lending LLC’s experiences or transactions with my account. I understand that Longline Lending
+            LLC will retain this application and any other credit information Longline Lending LLC receives, even if no
+            loan or credit is granted. Longline Lending LLC reserves the right to refuse credit for any legal reason. By
+            checking yes, you confirm that you are 18 years or older and are considered to have signed this
+            application for a short-term loan from Longline Lending LLC.
+          </div>
+          
+          <div class="labels">
+            <label id="loanOfficerNameLabel" for="loanOfficerNameLabel">Loan Officer Name</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="loanOfficerName" name="loanOfficerName" placeholder="Loan Officer Name" style="width: 150px;" required>
+          </div>
+          
+          <div class="labels">
+            <label for="dropdown">Loan Officer’s Assessment of Borrower’s Ability to Repay</label>
+          </div>
+          <div class="input-tab">
+            <select id="loanAssementDropdown" name="loanAssementDropdown" required>
+              <option disabled value selected>Select an option</option>
+              <option value="loanAssementYes">Yes</option>
+              <option value="loanAssementNo">No</option>
+            </select>
+          </div>
+          
           <div class="submitButtonContainer">
             <div class="btn">
               <button id="submit" type="submit">Submit</button>
@@ -1050,12 +1099,10 @@ no dir
 if ubo == dir, keep same info
 if ubo != dir, new  info
 
-
-
-
 -->
 
 
 
 
 
+          

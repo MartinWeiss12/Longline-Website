@@ -258,7 +258,7 @@ const htmlForEntity = `
     </div>
   </div>
   
-  <br><br><h3>Upload PDF or Image for each of the Following</h3>
+  <br><br><h3>Upload PDF or Image for Each of the Following</h3>
   
   <div class="labels">
     <label id="entityArticlesLabel" for="entityArticlesLabel">Articles of Organization</label>
@@ -493,7 +493,7 @@ const baseHtml = `
     <input class="input-field" type="text" id="income{{index}}" name="income{{index}}" placeholder="Monthly Income in USD" style="width: 150px;" pattern="[0-9]+" title="Please enter only numbers.">
   </div>
 
-  <br><br><div style="font-size: 18px; width: 600px; margin-left: 375px;">
+  <br><br><div style="font-size: 18px; width: 700px; margin-left: 325px; text-align: justify;">
     Are you a Politically Exposed Person (PEP) or related to a PEP? <br> A PEP is person who is or has been entrusted with any prominent public function in  the United States of America, a country or territory outside United States of  America, or by an international organization. By “related”, we mean that you are a parent, spouse, sibling or child of a PEP, or closely connected to a PEP either socially  or professionally.
   </div>
 
@@ -505,7 +505,7 @@ const baseHtml = `
     <label><input type="radio" name="pep{{index}}" value="no{{index}}">No</label>
   </div>
 
-  <br><br><div style="font-size: 18px; width: 600px; margin-left: 375px;">
+  <br><br><div style="font-size: 18px; width: 700px; margin-left: 325px;">
     Have you ever been convicted of a crime involving fraud or dishonesty? 
   </div>
 
@@ -517,7 +517,7 @@ const baseHtml = `
     <label><input type="radio" name="crime{{index}}" value="noCrime{{index}}">No</label>
   </div>
 
-  <br><br><div style="font-size: 18px; width: 600px; margin-left: 375px;">
+  <br><br><div style="font-size: 18px; width: 700px; margin-left: 325px; text-align: justify;">
     I declare that the above information is true and correct. I am aware that I may be  subject to prosecution and criminal sanction under written law if I am found to have  made any false statement which I know to be false or which I do not believe to be true,  or if I have intentionally suppressed any material fact. 
   </div><br>
 
@@ -601,30 +601,19 @@ function otherBankAccountType() {
 
 const submitButton = document.getElementById("submit");
 
-submitButton.addEventListener("click", function () {
-  window.jsPDF = window.jspdf.jsPDF;
-  var docPDF = new jsPDF();
-  var elementHTML = document.querySelector("#entireForm");
-  docPDF.html(elementHTML, {
-    callback: function () {
+function formAsPdf() {
+  submitButton.addEventListener("click", function () {
+    window.jsPDF = window.jspdf.jsPDF;
+    var docPDF = new jsPDF();
+    var elementHTML = document.querySelector("#entireForm");
+    docPDF.fromHTML(elementHTML, function() {
       const currentDate = new Date().toISOString().slice(0, 10); // get current date in YYYY-MM-DD format
       const filename = `${firstName1.value}_${lastName1.value}_${currentDate}.pdf`; // create filename using values from the form and the current date
       docPDF.save(filename); // save the file with the generated filename
-    },
-    width: 50,
-    windowWidth: 450,
+    });
   });
-});
+}
 
 
 
-
-
-//const submitButton = document.getElementById("submit");
-//submitButton.addEventListener("click", function () {
-//window.jsPDF = window.jspdf.jsPDF;
-//var docPDF = new jsPDF();
-//var elementHTML = document.querySelector("#entireForm");
-//});
-
-
+  
