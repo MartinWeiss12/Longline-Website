@@ -475,19 +475,17 @@ const htmlForFirstIndividual = `
     </label>
     <span id="individualOfacFileNameSpan1">Uploaded File: None</span>
   </div>
-
-  <div class="addIndividualContainer">
-    <div class="btn">
-      <button id="addIndividualButton1" type="button">Add Another Individual</button>
-    </div>
-  </div>
 `;
   
   
   
 
   
-  
+//<div class="addIndividualContainer">
+//<div class="btn">
+//<button id="addIndividualButton1" type="button">Add Another Individual</button>
+//</div>
+//</div>
   
   
   
@@ -927,23 +925,9 @@ const htmlForEntity = `
 
 
 
+var addIndividualButton = document.getElementById("addIndividualButton1");
 
-
-
-//function handleBorrowerSelect() {
-//var select = document.getElementById("borrowerDropdown");
-//var option = select.options[select.selectedIndex];
-//
-//if (option.value == "individualBorrower") {
-//  entityContainer.innerHTML = htmlForFirstIndividual;
-//  document.getElementById("addIndividualButton1").style.display = "flex";
-//}
-//
-//if (option.value == "entityBorrower") {
-//  entityContainer.innerHTML = htmlForEntity;
-//  document.getElementById("addIndividualButton1").style.display = "none";
-//} 
-//}
+addIndividualButton.style.display = "none"; // hide the button by default
 
 function handleBorrowerSelect() {
   var select = document.getElementById("borrowerDropdown");
@@ -951,10 +935,12 @@ function handleBorrowerSelect() {
   
   if (option.value == "individualBorrower") {
     entityContainer.innerHTML = htmlForFirstIndividual;
+    addIndividualButton.style.display = "block"; // show the button
   }
   
   if (option.value == "entityBorrower") {
     entityContainer.innerHTML = htmlForEntity;
+    addIndividualButton.style.display = "none"; // hide the button
   } 
 }
 
@@ -978,9 +964,10 @@ function handleBorrowerSelect() {
 
 
 
+
 const htmlForAdditionalIndividual = `
     
-  <br><h3 id="individualInfoSubtitle{{index}}">Info for Individual {{index}}</h3>
+  <br><br><h3 id="individualInfoSubtitle{{index}}">Info for Individual {{index}}</h3>
   
   <div class="labels">
     <label for="dropdown">Personal Guarantor?</label>
@@ -1238,14 +1225,14 @@ const htmlForAdditionalIndividual = `
     <span id="individualOfacFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
 
-  <div class="addIndividualContainer">
-    <div class="btn">
-      <button id="addIndividualButton{{index}}" type="button">Add Another Individual</button>
-    </div>
-  </div>
+
 `;
 
-
+//<div class="addIndividualContainer">
+//<div class="btn">
+//<button id="addIndividualButton{{index}}" type="button">Add Another Individual</button>
+//</div>
+//</div>
 
 
 // Get references to the add button and the div where the HTML will be added
