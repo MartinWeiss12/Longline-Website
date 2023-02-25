@@ -410,7 +410,7 @@ const htmlForFirstIndividual = `
   </div>
 
   <div class="labels">
-    <label id="individualPassportFileLabel1" for="individualPassportFileLabel1">Passport</label>
+    <label id="individualPassportFileLabel1" for="individualPassportFileLabel1" required>Passport</label>
   </div>
   <div class="input-tab">
     <label for="individualPassportFile1" class="fileUploadButton">Choose File
@@ -420,7 +420,7 @@ const htmlForFirstIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualDniFrontFileLabel1" for="individualDniFrontFileLabel1">DNI/Drivers License (Front)</label>
+    <label id="individualDniFrontFileLabel1" for="individualDniFrontFileLabel1" required>DNI/Drivers License (Front)</label>
   </div>
   <div class="input-tab">
     <label for="individualDniFrontFile1" class="fileUploadButton">Choose File
@@ -430,7 +430,7 @@ const htmlForFirstIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualDniReverseFileLabel1" for="individualDniReverseFileLabel1">DNI/Drivers License (Reverse)</label>
+    <label id="individualDniReverseFileLabel1" for="individualDniReverseFileLabel1" required>DNI/Drivers License (Reverse)</label>
   </div>
   <div class="input-tab">
     <label for="individualDniReverseFile1" class="fileUploadButton">Choose File
@@ -440,7 +440,7 @@ const htmlForFirstIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualBillAddressProofFileLabel1" for="individualBillAddressProofFileLabel1">Bill for Proof of Address</label>
+    <label id="individualBillAddressProofFileLabel1" for="individualBillAddressProofFileLabel1" required>Bill for Proof of Address</label>
   </div>
   <div class="input-tab">
     <label for="individualBillAddressProofFile1" class="fileUploadButton">Choose File
@@ -450,7 +450,7 @@ const htmlForFirstIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualCreditCheckFileLabel1" for="individualCreditCheckFileLabel1">Credit Check/NOSIS</label>
+    <label id="individualCreditCheckFileLabel1" for="individualCreditCheckFileLabel1" required>Credit Check/NOSIS</label>
   </div>
   <div class="input-tab">
     <label for="individualCreditCheckFile1" class="fileUploadButton">Choose File
@@ -460,7 +460,7 @@ const htmlForFirstIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualWorldCheckFileLabel1" for="individualWorldCheckFileLabel1">World Check</label>
+    <label id="individualWorldCheckFileLabel1" for="individualWorldCheckFileLabel1" required>World Check</label>
   </div>
   <div class="input-tab">
     <label for="individualWorldCheckFile1" class="fileUploadButton">Choose File
@@ -470,7 +470,7 @@ const htmlForFirstIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualOfacFileLabel1" for="individualOfacFileLabel1">OFAC Check</label>
+    <label id="individualOfacFileLabel1" for="individualOfacFileLabel1" required>OFAC Check</label>
   </div>
   <div class="input-tab">
     <label for="individualOfacFile1" class="fileUploadButton">Choose File
@@ -479,53 +479,6 @@ const htmlForFirstIndividual = `
     <span id="individualOfacFileNameSpan1">Uploaded File: None</span>
   </div>
 `;
-  
-  
-  
-
-  
-//<div class="addIndividualContainer">
-//<div class="btn">
-//<button id="addIndividualButton1" type="button">Add Another Individual</button>
-//</div>
-//</div>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
 // base html for entity details
 const htmlForEntity = `
@@ -627,16 +580,8 @@ const htmlForEntity = `
     <span id="entityOtherFileNameSpan">Uploaded File: None</span>
   </div>
 
-
-
-
-
-
-
-  <br><br><br><h2 id="title">Step 6 - UBO and Director Info</h2><br>
-  
+  <br><br><br><h2 id="title">Step 6 - UBO and Director Info</h2><br>  
   <br><h3 id="uboInfoSubtitle1">Info for UBO 1</h3>
-  
   
   <div class="labels">
     <label for="dropdown">Control Person Authorized to Apply for, Take, and Execute, Loan?</label>
@@ -904,18 +849,6 @@ const htmlForEntity = `
     </label>
     <span id="uboOfacFileNameSpan1">Uploaded File: None</span>
   </div>
-
-  <div class="addUboContainer">
-    <div class="btn">
-      <button id="addUboButton1" type="button">Add Another UBO</button>
-    </div>
-  </div>
-  
-  <div class="addDirectorContainer">
-    <div class="btn">
-      <button id="addDirectorButton1" type="button">Add an Entity Director who is not a UBO</button>
-    </div>
-  </div>
 `;
 
 
@@ -929,23 +862,47 @@ const htmlForEntity = `
 
 
 var addIndividualButton = document.getElementById("addIndividualButton1");
-
 addIndividualButton.style.display = "none"; // hide the button by default
+
+var addUboButton = document.getElementById("addUboButton1");
+addUboButton.style.display = "none"; // hide the button by default
+
+var addDirectorButton = document.getElementById("addDirectorButton1");
+addDirectorButton.style.display = "none"; // hide the button by default
 
 function handleBorrowerSelect() {
   var select = document.getElementById("borrowerDropdown");
   var option = select.options[select.selectedIndex];
   
   if (option.value == "individualBorrower") {
+    
     entityContainer.innerHTML = htmlForFirstIndividual;
+    
+    addUboButton.style.display = "none"; // hide the button
+    
+    addDirectorButton.style.display = "none"; // hide the button
+
     addIndividualButton.style.display = "block"; // show the button
     addIndividualButton.style.margin = "0 auto";
     
   }
   
   if (option.value == "entityBorrower") {
+    
+    document.getElementById("additionalIndividualInfo").innerHTML = "";
+
+    
     entityContainer.innerHTML = htmlForEntity;
+    
     addIndividualButton.style.display = "none"; // hide the button
+    
+    addUboButton.style.display = "block"; // show the button
+    addUboButton.style.margin = "0 auto";
+    
+    addDirectorButton.style.display = "block"; // show the button
+    addDirectorButton.style.margin = "0 auto";
+    
+
   } 
 }
 
@@ -1237,9 +1194,11 @@ const htmlForAdditionalIndividual = `
 // Get a reference to the div where the HTML will be added
 const additionalIndividualInfoDiv = document.getElementById('additionalIndividualInfo');
 
+let individualCount = 2;
+
+
 function addEventListenersToAddIndividualButtons() {
   // Define a variable to keep track of the number of times the button has been clicked
-  let individualCount = 2;
   
   // Add an event listener to each button
   for (let i = 1; i < 9; i++) {
@@ -1570,18 +1529,6 @@ const htmlForAdditionalUbo = `
     </label>
     <span id="uboOfacFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
-
-  <div class="addUboContainer">
-    <div class="btn">
-      <button id="addUboButton{{index}}" type="button">Add Another UBO</button>
-    </div>
-  </div>
-  
-  <div class="addDirectorContainer">
-    <div class="btn">
-      <button id="addDirectorButton{{index}}" type="button">Add an Entity Director Who is not a UBO</button>
-    </div>
-  </div>
 `;
 
 
@@ -1597,7 +1544,6 @@ const htmlForAdditionalUbo = `
 const htmlForAdditionalDirector = `
 
   <br><h3 id="directorInfoSubtitle{{index}}">Info for director {{index}}</h3>
-  
   
   <div class="labels">
     <label for="dropdown">Control Person Authorized to Apply for, Take, and Execute, Loan?</label>
@@ -1864,18 +1810,6 @@ const htmlForAdditionalDirector = `
       <input id="directorOfacFile{{index}}" type="file" name="directorOfacFile{{index}}" style="display:none" onchange="displayFileName('directorOfacFile{{index}}', 'directorOfacFileNameSpan{{index}}')">
     </label>
     <span id="directorOfacFileNameSpan{{index}}">Uploaded File: None</span>
-  </div>
-
-  <div class="addUboContainer">
-    <div class="btn">
-      <button id="addUboButton{{index}}" type="button">Add Another UBO</button>
-    </div>
-  </div>
-  
-  <div class="addDirectorContainer">
-    <div class="btn">
-      <button id="addDirectorButton{{index}}" type="button">Add an Entity Director Who is not a director</button>
-    </div>
   </div>
 `;
 
