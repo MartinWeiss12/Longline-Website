@@ -924,10 +924,14 @@ function handleBorrowerSelect() {
 
   if (option.value == "individualBorrower") {
     entityContainer.innerHTML = htmlForFirstIndividual;
+    let individualSelected = true;
+
   }
   
   if (option.value == "entityBorrower") {
     entityContainer.innerHTML = htmlForEntity;
+    let entitySelected = true;
+    
   } 
 }
 
@@ -941,9 +945,21 @@ function handleBorrowerSelect() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 const htmlForAdditionalIndividual = `
     
-  <br><h3 id="individualInfoSubtitle{{index}}">Info for UBO {{index}}</h3>
+  <br><h3 id="individualInfoSubtitle{{index}}">Info for Individual {{index}}</h3>
   
   <div class="labels">
     <label for="dropdown">Personal Guarantor?</label>
@@ -1213,7 +1229,45 @@ const htmlForAdditionalIndividual = `
 
 
 
+// Get references to the add button and the div where the HTML will be added
+const additionalIndividualInfoDiv = document.getElementById('additionalIndividualInfo');
 
+// Define a variable to keep track of the number of times the button has been clicked
+let individualCount = 2;
+
+function addEventListenersToAddIndividualButtons() {
+  for (let i = 1; i <= 9; i++) {
+    // Get a reference to the add button for this iteration
+    const addIndividualButton = document.getElementById(`addIndividualButton${i}`);
+    const testButton = document.getElementById('testButton');
+    
+    // Add an event listener to the add button
+    //  addIndividualButton.addEventListener('click', function() {
+    testButton.addEventListener('click', function() {
+      // Only add HTML if the click count is less than or equal to 8
+      if (individualCount < 9) {
+        // Add the base HTML to the div
+        const htmlForAdditionalIndividualWithIndex = htmlForAdditionalIndividual.replace(/{{index}}/g, individualCount);
+        additionalIndividualInfoDiv.insertAdjacentHTML('beforeend', htmlForAdditionalIndividualWithIndex);
+        
+        // Increment the click count
+        individualCount++;
+        
+        // Call the function to add event listeners to the buttons again
+        addEventListenersToAddIndividualButtons();
+      }
+    });
+  }
+}
+
+// Call the function to add event listeners to the buttons initially
+addEventListenersToAddIndividualButtons();
+
+// Update uboCount here
+individualCount = 3;
+
+// Call the function again to update the event listeners
+addEventListenersToAddIndividualButtons();
 
 
 
