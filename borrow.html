@@ -8,7 +8,7 @@
     
     <title>Borrow</title>
     <style>
-  
+      
       @import url('https://fonts.googleapis.com/css?family=Abel');
       
       body, html {
@@ -67,7 +67,7 @@
         letter-spacing: 2px;
         word-spacing: 5px;
         line-height: 1em;
-/*      font-weight: bold;*/
+        /*      font-weight: bold;*/
       }
       
       p {
@@ -254,7 +254,6 @@
         background-color: #00008B;
       }
       
-      
       input[type="date"] {
         display: inline-block;
         width: 18%;
@@ -284,12 +283,6 @@
         display: flex;
         justify-content: center;
       }
-      
-      #removeUboContainer {
-        display: flex;
-        justify-content: center;
-      }
-      
       
       button {
         background-color: #0000FF;
@@ -389,7 +382,7 @@
       
       
       
-  
+      
     </style>    
   </head>
   <body>
@@ -441,7 +434,7 @@
           <br>
           <h3 id="subtitle">In Tranches of USD $20,000</h3>
           <br>
-    
+          
           <div class="labels">
             <label id="loanAmountLabel" for="loanAmountLabel">Loan Amount USD $</label>
           </div>
@@ -462,11 +455,11 @@
           <div class="input-tab">
             <input class="input-field" type="text" id="numTranches" name="numTranches" placeholder="Number of Tranches" required autofocus style="width: 150px;" onchange="updateLoanAmount()" pattern="[0-9]+" title="Please enter only numbers.">
           </div>
-        
+          
           
           <br><br><br><h2 id="title">Step 3 - Collateral Information</h2><br>
-<!--      <h3 id="subtitle">Escrow Type</h3>-->
-<!--      <br>-->
+          <!--      <h3 id="subtitle">Escrow Type</h3>-->
+          <!--      <br>-->
           <div class="labels">
             <label></label></div>
           <div class="input-tab">
@@ -480,7 +473,7 @@
             <input type="checkbox" name="otherEscrow" value="otherEscrow" onclick="otherEscrowFucntion(this)" >Other<br>
             <p id="insertOtherEscrow"></p>
           </div>   
-
+          
           <div class="labels">
             <label id="collateralLabel" for="collateralLabel">Collateral Specifications</label>
           </div>
@@ -510,7 +503,7 @@
           </div>
           
           <br><br>
-                    
+          
           <div class="labels">
             <label></label>
           </div>
@@ -519,7 +512,7 @@
             <input type="date" id="secRecDate" name="secRecDate"><br>
             <input type="checkbox" name="secGtd" value="secGtd">Security Guaranteed<br>
           </div>
-
+          
           
           <br><br><br><h2 id="title">Step 4 - Tentative Loan Terms</h2><br>
           <div class="labels">
@@ -529,11 +522,11 @@
             <input class="input-field" type="text" id="orgFee" name="orgFee" placeholder="Origination Fee (points)" required autofocus style="width: 50px;" readonly>
             <label id="usdLabel" for="usdLabel">&nbsp;USD $</label>
             <input class="input-field" type="text" id="orgFeeUSD" name="orgFeeUSD" placeholder="USD $" required autofocus style="width: 50px;" readonly>
-
+            
             <div class="input-tab" style="margin-left: 20px;">
               <input type="checkbox" name="agreeOrgFee" value="agreeOrgFee">Agree<br>
             </div>  
-
+            
           </div>
           
           <div class="labels">
@@ -547,7 +540,7 @@
             <div class="input-tab" style="margin-left: 19px;">
               <input type="checkbox" name="agreeAPR" value="agreeAPR">Agree
             </div>   
-
+            
           </div>
           
           <div class="labels">
@@ -578,12 +571,12 @@
               <option value="interestDueMonthly">Monthly</option>
               <option value="interestDueMat">On-Maturity</option>
             </select>
-          
+            
             <div class="input-tab" style="margin-left: 63px;">
               <input type="checkbox" name="agreeInterestDue" value="agreeInterestDue">Agree
             </div>   
             
-          
+            
           </div>
           
           <div class="labels">
@@ -591,12 +584,12 @@
           </div>
           <div class="input-tab">
             <input class="input-field" type="text" id="loanTerm" name="loanTerm" placeholder="Loan Term" required autofocus style="width: 50px;" readonly>
-          
+            
             <div class="input-tab" style="margin-left: 151px;">
               <input type="checkbox" name="agreeLoanTerm" value="agreeLoanTerm">Agree
             </div>   
             
-          
+            
           </div>
           
           <div class="labels">
@@ -614,13 +607,13 @@
           </div>
           <div class="input-tab">
             <input class="input-field" type="text" id="bankFees" name="bankFees" placeholder="Bank Fees" style="width: 50px;" readonly>
-          
+            
             <div class="input-tab" style="margin-left: 151px;">
               <input type="checkbox" name="agreeBankFees" value="agreeBankFees">Agree
             </div> 
             
-          
-          
+            
+            
           </div>
           
           <div class="labels">
@@ -628,12 +621,12 @@
           </div>
           <div class="input-tab">
             <input class="input-field" type="text" id="disbursedTotal" name="disbursedTotal" placeholder="Disbursed Total" style="width: 150px;" readonly>
-          
+            
             <div class="input-tab" style="margin-left: 51px;">
               <input type="checkbox" name="agreeDisbursedTotal" value="agreeDisbursedTotal">Agree
             </div> 
           </div>
-
+          
           <br><br><br><h2 id="title">Step 5 - Borrower Information</h2><br>
           <div class="labels">
             <label for="dropdown">Borrower is an</label>
@@ -649,25 +642,10 @@
           <div id="entityBorrowerDetails"></div>
           
           
-          <br><br><br><h2 id="title">Step 6</h2><br>
+          <br><br><br><h2 id="title">Step 6 - UBO Info</h2><br>
+          <!--      <h3 id="subtitle">UBO and Director Info</h3>-->
           
-          <div class="labels">
-            <label id="numberEntitysLabel" for="numberEntitysLabel">Number of Entity UBOs</label>
-          </div>
-          <div class="input-tab">
-            <input class="input-field" type="number" id="totalUboCount" name="totalUboCount" min="1" max="8" placeholder="# of UBOs" style="width: 150px;" required></div>
-          
-          <div class="labels">
-            <label id="numberDirectorsLabel" for="numberDirectorsLabel">Number of Different Entity Directors</label>
-          </div>
-          <div class="input-tab">
-            <input class="input-field" type="number" id="totalDirectorCount" name="totalDirectorCount" min="1" max="8" placeholder="# of Entity Directors" style="width: 150px;" required></div>
-          
-          
-          <br><br><br><h2 id="title">Step 7</h2><br>
-          <h3 id="subtitle">UBO and Director Info</h3>
-
-          <br><br><h3 id="subtitle">Info for UBO 1</h3>
+          <br><h3 id="subtitle">Info for UBO 1</h3>
           
           
           <div class="labels">
@@ -866,8 +844,6 @@
           <div class="input-tab" style="margin-left: 20px;">
             <input type="checkbox" name="declareCheckbox" value="declareCheckbox">I declare that the above information is true and correct.<br>
           </div> 
-
-          
           
           <div class="addUboContainer">
             <div class="btn">
@@ -875,26 +851,18 @@
             </div>
           </div>
           
-<!--      <div class="removeUboContainer">-->
-<!--        <div class="btn">-->
-<!--          <button id="removeUboButton1" type="button">Remove Above UBO</button>-->
-<!--        </div>-->
-<!--      </div>-->
-
-
-
-
-
           <div id="uboInfo"></div>
-        
-        
-        
-        
-        
-          <br><br><br><h2 id="title">Step 9</h2><br>
+          
+          
+          
+          
+          
+          
+          
+          <br><br><br><h2 id="title">Step 7</h2><br>
           <h3 id="subtitle">Bank Account Information</h3>
-
-
+          
+          
           <div class="labels">
             <label id="abaNumberLabel" for="abaNumberLabel">ABA Number</label>
           </div>
@@ -915,7 +883,7 @@
           <div class="input-tab">
             <input class="input-field" type="text" id="bankAddress" name="bankAddress" placeholder="Bank Address" required style="width: 150px;">
           </div>
-
+          
           <div class="labels">
             <label id="bankCityLabel" for="bankCityLabel">Bank City</label>
           </div>
@@ -936,8 +904,8 @@
           <div class="input-tab">
             <input class="input-field" type="text" id="accountNumber" name="accountNumber" placeholder="Account Number" required style="width: 150px;">
           </div>
-
-
+          
+          
           <div class="labels">
             <label for="dropdown">Bank Account Type</label>
           </div>
@@ -972,8 +940,8 @@
           <div class="input-tab">
             <input class="input-field" type="text" id="memo" name="memo" placeholder="Memo" required style="width: 150px;">
           </div>
-
           
+          <br><br><h3>Upload a PDF or Image for Each of the Following</h3>
           
           <div class="labels">
             <label id="bankAcctFileLabel" for="bankAcctFileLabel">Bank Account Statement</label>
@@ -1025,75 +993,35 @@
             <span id="billAddressProofFileNameSpan">Uploaded File: None</span>
           </div>
           
-          
-        
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
           <div class="labels">
-            <label id="name-label" for="name">* Full Name</label></div>
+            <label id="creditCheckFileLabel" for="creditCheckFileLabel">Credit Check/NOSIS</label>
+          </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="name" name="name" placeholder="Enter your name">
+            <label for="creditCheckFile" class="fileUploadButton">Choose File
+              <input id="creditCheckFile" type="file" name="creditCheckFile" style="display:none" onchange="displayFileName('creditCheckFile', 'creditCheckFileNameSpan')">
+            </label>
+            <span id="creditCheckFileNameSpan">Uploaded File: None</span>
           </div>
           
           <div class="labels">
-            <label id="email-label" for="email">* Email</label></div>
+            <label id="worldCheckFileLabel" for="worldCheckFileLabel">World Check</label>
+          </div>
           <div class="input-tab">
-            <input class="input-field" type="email" id="email" name="email" placeholder="email@email.com"></div>
-          
-          <div class="labels">
-            <label id="number-label" for="number">* Age</label></div>
-          <div class="input-tab">
-            <input class="input-field" type="number" id="number" name="number" min="1" max="120" placeholder="15"></div>
-          
-          
-          <div class="labels">
-            <label for="dropdown">How do you watch South Park?</label></div>
-          <div class="input-tab">
-            <select id="dropdown" name="site">
-              <option disabled value selected>Select an option</option>
-              <option value="web">Website</option>
-              <option value="hulu">Hulu</option>
-              <option value="youtube">Youtube</option>
-              <option value="tv">TV</option>
-              <option value="other">Other</option>
-            </select>
+            <label for="worldCheckFile" class="fileUploadButton">Choose File
+              <input id="worldCheckFile" type="file" name="worldCheckFile" style="display:none" onchange="displayFileName('worldCheckFile', 'worldCheckFileNameSpan')">
+            </label>
+            <span id="worldCheckFileNameSpan">Uploaded File: None</span>
           </div>
           
           <div class="labels">
-            <label>How much do you like South Park?</label></div>
-          <div class="input-tab">
-            <input type="radio" name="radio-button" value="love">I love it!<br>
-            <input type="radio" name="radio-button" value="like">I like it<br>
-            <input type="radio" name="radio-button" value="ok">It's ok<br>
-            <input type="radio" name="radio-button" value="nah">Not really<br>
+            <label id="ofacFileLabel" for="ofacFileLabel">OFAC Check</label>
           </div>
-          
-          <div class="labels">
-            <label for="dropdown">How many seasons of South Park have you watched?</label></div>
           <div class="input-tab">
-            <select id="dropdown" name="seasons">
-              <option disabled value selected>Select an option</option>
-              <option value="<=5">0-5</option>
-              <option value="<=10">6-10</option>
-              <option value="<=15">10-15</option>
-              <option value="<=21">15-21</option>
-            </select>
+            <label for="ofacFile" class="fileUploadButton">Choose File
+              <input id="ofacFile" type="file" name="ofacFile" style="display:none" onchange="displayFileName('ofacFile', 'ofacFileNameSpan')">
+            </label>
+            <span id="ofacFileNameSpan">Uploaded File: None</span>
           </div>
-          
-          <div class="labels">
-            <label for="comments">Tell us more about your favorite character(s) or episode(s)</label></div>
-          <div class="input-tab">
-            <textarea class="input-field" id="comments" name="comments" rows="10" cols="40" placeholder="Your comments..."></textarea></div>
-          
           
           <div class="submitButtonContainer">
             <div class="btn">
@@ -1103,16 +1031,12 @@
           
         </form>
       </div>
-      
-      
-
-      
     </main>
     <footer>
       <p id="copyright"></p>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js "></script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script defer src="borrow.js"></script>
   </body>
@@ -1122,14 +1046,11 @@
 if ind -> jump to ubo entry w/o control
 no dir
 
-remove step 6
-add ubo btn to add ubo based on step 6 current format
-
 
 if ubo == dir, keep same info
 if ubo != dir, new  info
 
-on sub btn, save html file as is? print?
+
 
 
 -->

@@ -1,3 +1,8 @@
+// footer
+const currentYear = new Date().getFullYear();
+const copyright = document.getElementById("copyright");
+copyright.innerHTML = "&copy; " + currentYear + " Longline Lending LLC. All rights reserved."
+
 // show other text entry box if other button is clicked for Loan Purpose
 function otherLoanFunction(cbox) {
   if (cbox.checked) {
@@ -324,13 +329,13 @@ function displayFileName(inputId, spanId) {
 // base html for UBO
 const baseHtml = `
 
-  <br><br><h3 id="subtitle">Info for UBO {{index}}</h3>
+  <br><h3 id="subtitle">Info for UBO {{index}}</h3>
 
   <div class="labels">
     <label for="dropdown">Control Person Authorized to Apply for, Take, and Execute, Loan?</label>
   </div>
   <div class="input-tab">
-    <select id="controlPersonAuthDropdown" name="controlPersonAuthDropdown{{index}}" required>
+    <select id="controlPersonAuthDropdown" name="controlPersonAuthDropdown{{index}}">
       <option disabled value selected>Select an option</option>
       <option value="controlPersonAuthYes{{index}}">Yes</option>
       <option value="controlPersonAuthNo{{index}}">No</option>
@@ -341,7 +346,7 @@ const baseHtml = `
     <label for="dropdown">Personal Guarantor?</label>
   </div>
   <div class="input-tab">
-    <select id="personalGuarantorDropdown" name="personalGuarantorDropdown{{index}}" requried>
+    <select id="personalGuarantorDropdown" name="personalGuarantorDropdown{{index}}">
       <option disabled value selected>Select an option</option>
       <option value="personalGuarantorYes{{index}}">Yes</option>
       <option value="personalGuarantorNo{{index}}">No</option>
@@ -352,7 +357,7 @@ const baseHtml = `
     <label for="dropdown">U.S. Citizen or Green Card?</label>
   </div>
   <div class="input-tab">
-    <select id="usCitizenDropdown" name="usCitizenDropdown{{index}}" requried>
+    <select id="usCitizenDropdown" name="usCitizenDropdown{{index}}">
       <option disabled value selected>Select an option</option>
       <option value="usCitizenYes{{index}}">Yes</option>
       <option value="usCitizenYes{{index}}">No</option>
@@ -363,7 +368,7 @@ const baseHtml = `
     <label id="firstName" for="firstName">First Name(s)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="firstName{{index}}" name="firstName{{index}}" placeholder="First Name(s)" style="width: 150px;" required>
+    <input class="input-field" type="text" id="firstName{{index}}" name="firstName{{index}}" placeholder="First Name(s)" style="width: 150px;">
   </div>
 
   <div class="labels">
@@ -377,56 +382,56 @@ const baseHtml = `
     <label id="name-label" for="name">Last Name(s)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="lastName{{index}}" name="lastName{{index}}" placeholder="Last Name(s)" style="width: 150px;" required>
+    <input class="input-field" type="text" id="lastName{{index}}" name="lastName{{index}}" placeholder="Last Name(s)" style="width: 150px;">
   </div>
 
   <div class="labels">
     <label id="homeBankAddressLabel" for="homeBankAddressLabel">Home Address (must match recent bill)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="homeAddress{{index}}" name="homeAddress{{index}}" placeholder="Home Address" style="width: 150px;" required>
+    <input class="input-field" type="text" id="homeAddress{{index}}" name="homeAddress{{index}}" placeholder="Home Address" style="width: 150px;">
   </div>
 
   <div class="labels">
     <label id="homeCountryLabel" for="homeCountryLabel">Home Country</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="homeCountry{{index}}" name="homeCountry{{index}}" placeholder="Home Country" style="width: 150px;" required>
+    <input class="input-field" type="text" id="homeCountry{{index}}" name="homeCountry{{index}}" placeholder="Home Country" style="width: 150px;">
   </div>
 
   <div class="labels">
     <label id="homeStreetAddressLabel" for="homeStreetAddressLabel">Home Street Address</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="homeStreetAddress{{index}}" name="homeStreetAddress{{index}}" placeholder="Home Street Address" style="width: 150px;" required>
+    <input class="input-field" type="text" id="homeStreetAddress{{index}}" name="homeStreetAddress{{index}}" placeholder="Home Street Address" style="width: 150px;">
   </div>
 
   <div class="labels">
     <label id="homeCityLabel" for="homeCityLabel">Home City</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="homeCity{{index}}" name="homeCity{{index}}" placeholder="Home City" style="width: 150px;" required>
+    <input class="input-field" type="text" id="homeCity{{index}}" name="homeCity{{index}}" placeholder="Home City" style="width: 150px;">
   </div>
 
   <div class="labels">
     <label id="homeStateLabel" for="homeStateLabel">Home State or Province</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="homeState{{index}}" name="homeState{{index}}" placeholder="Home State or Province" style="width: 150px;" required>
+    <input class="input-field" type="text" id="homeState{{index}}" name="homeState{{index}}" placeholder="Home State or Province" style="width: 150px;">
   </div>
 
   <div class="labels">
     <label id="homeZipLabel" for="homeZipLabel">Home Zip or Province</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="homeZip{{index}}" name="homeZip{{index}}" placeholder="Home Zip" style="width: 150px;" required>
+    <input class="input-field" type="text" id="homeZip{{index}}" name="homeZip{{index}}" placeholder="Home Zip" style="width: 150px;">
   </div>
 
   <div class="labels">
     <label for="dropdown">Own or Rent?</label>
   </div>
   <div class="input-tab">
-    <select id="ownRentDropdown" name="ownRentDropdown{{index}}" requried>
+    <select id="ownRentDropdown" name="ownRentDropdown{{index}}">
       <option disabled value selected>Select an option</option>
       <option value="own{{index}}">Own</option>
       <option value="rent{{index}}">Rent</option>
@@ -437,21 +442,21 @@ const baseHtml = `
     <label id="mortgageLabel" for="mortgageLabel">Monthly Mortgage or Rent in USD</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="monthlyRent{{index}}" name="monthlyRent{{index}}" placeholder="Monthly Mortgage or Rent" style="width: 150px;" required pattern="[0-9]+" title="Please enter only numbers.">
+    <input class="input-field" type="text" id="monthlyRent{{index}}" name="monthlyRent{{index}}" placeholder="Monthly Mortgage or Rent" style="width: 150px;" pattern="[0-9]+" title="Please enter only numbers.">
   </div>
 
   <div class="labels">
     <label id="passportNumberLabel" for="passportNumberLabel">Passport Number</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="passportNumber{{index}}" name="passportNumber{{index}}" placeholder="Passport Number" style="width: 150px;" required>
+    <input class="input-field" type="text" id="passportNumber{{index}}" name="passportNumber{{index}}" placeholder="Passport Number" style="width: 150px;">
   </div>
 
   <div class="labels">
     <label id="ssnLabel" for="ssnLabel">SSN or ID Number</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="ssn{{index}}" name="ssn{{index}}" placeholder="SSN or ID Number" style="width: 150px;" required>
+    <input class="input-field" type="text" id="ssn{{index}}" name="ssn{{index}}" placeholder="SSN or ID Number" style="width: 150px;">
   </div>
 
   <div class="labels">
@@ -464,28 +469,28 @@ const baseHtml = `
   <div class="labels">
     <label id="emailLabel" for="emailLabel">Email Address</label></div>
   <div class="input-tab">
-    <input class="input-field" type="email" id="email{{index}}" name="email{{index}}" placeholder="email@email.com" style="width: 350px;" required>
+    <input class="input-field" type="email" id="email{{index}}" name="email{{index}}" placeholder="email@email.com" style="width: 350px;">
   </div>
 
   <div class="labels">
     <label id="phoneLabel" for="phoneLabel">Telephone</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="phone{{index}}" name="phone{{index}}" placeholder="Telephone" style="width: 150px;" required>
+    <input class="input-field" type="text" id="phone{{index}}" name="phone{{index}}" placeholder="Telephone" style="width: 150px;">
   </div>
 
   <div class="labels">
     <label id="ficoLabel" for="ficoLabel">FICO or NOSIS Score</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="ficoScore{{index}}" name="ficoScore{{index}}" placeholder="FICO or NOSIS Score" style="width: 150px;" required pattern="[0-9]+" title="Please enter only numbers.">
+    <input class="input-field" type="text" id="ficoScore{{index}}" name="ficoScore{{index}}" placeholder="FICO or NOSIS Score" style="width: 150px;" pattern="[0-9]+" title="Please enter only numbers.">
   </div>
 
   <div class="labels">
     <label id="incomeLabel" for="incomeLabel">Monthly Income in USD</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="income{{index}}" name="income{{index}}" placeholder="Monthly Income in USD" style="width: 150px;" required pattern="[0-9]+" title="Please enter only numbers.">
+    <input class="input-field" type="text" id="income{{index}}" name="income{{index}}" placeholder="Monthly Income in USD" style="width: 150px;" pattern="[0-9]+" title="Please enter only numbers.">
   </div>
 
   <br><br><div style="font-size: 18px; width: 600px; margin-left: 375px;">
@@ -528,23 +533,14 @@ const baseHtml = `
       <button id="addUboButton{{index}}" type="button">Add Another UBO</button>
     </div>
   </div>
-
-  <div class="removeUboContainer">
-    <div class="btn">
-      <button id="removeUboButton{{index}}" type="button">Remove Above UBO</button>
-    </div>
-  </div>
 `;
 
 // Get references to the add button and the div where the HTML will be added
-//const addUboButton = document.getElementById('addUboButton');
 const uboInfoDiv = document.getElementById('uboInfo');
 
-// Define the base HTML that will be added each time the button is clicked
 
 // Define a variable to keep track of the number of times the button has been clicked
-let clickCount = 2;
-
+let uboCount = 2;
 
 function addEventListenersToButtons() {
   for (let i = 1; i <= 9; i++) {
@@ -555,13 +551,13 @@ function addEventListenersToButtons() {
     // Add an event listener to the add button
     addButton.addEventListener('click', function() {
       // Only add HTML if the click count is less than or equal to 8
-      if (clickCount < 9) {
+      if (uboCount < 9) {
         // Add the base HTML to the div
-        const htmlWithIndex = baseHtml.replace(/{{index}}/g, clickCount);
+        const htmlWithIndex = baseHtml.replace(/{{index}}/g, uboCount);
         uboInfoDiv.insertAdjacentHTML('beforeend', htmlWithIndex);
         
         // Increment the click count
-        clickCount++;
+        uboCount++;
         
         // Call the function to add event listeners to the buttons again
         addEventListenersToButtons();
@@ -570,35 +566,12 @@ function addEventListenersToButtons() {
   }
 }
 
-
 // Call the function to add event listeners to the buttons initially
 addEventListenersToButtons();
 
-// Update clickCount here
-clickCount = 3;
+// Update uboCount here
+uboCount = 3;
 addEventListenersToButtons(); // Call the function again to update the event listeners
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // container for bankOtherInputContainer
@@ -654,9 +627,4 @@ submitButton.addEventListener("click", function () {
 //var elementHTML = document.querySelector("#entireForm");
 //});
 
-
-// footer
-const currentYear = new Date().getFullYear();
-const copyright = document.getElementById("copyright");
-copyright.innerHTML = "&copy; " + currentYear + " Longline Lending LLC. All rights reserved."
 
