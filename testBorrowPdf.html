@@ -2,6 +2,8 @@
 <html>
   <head>
     <script src="js/jsPDF/dist/jspdf.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie-edge">
@@ -179,18 +181,7 @@
         width: 150px;
       }   
       
-      #uboControlPersonAuthDropdown {
-        width: 100%;
-        padding: 5px;
-        margin: 20px 0 10px 10px;  
-        border: 1px solid #0000FF;
-        border-radius: 3px;
-        font-family: inherit;
-        font-size: 15px;
-        width: 150px;
-      }   
-  
-      #individualPersonalGuarantorDropdown {
+      #controlPersonAuthDropdown {
         width: 100%;
         padding: 5px;
         margin: 20px 0 10px 10px;  
@@ -201,7 +192,18 @@
         width: 150px;
       }   
       
-      #individualCitizenDropdown {
+      #personalGuarantorDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }   
+      
+      #usCitizenDropdown {
         width: 100%;
         padding: 5px;
         margin: 20px 0 10px 10px;  
@@ -212,83 +214,10 @@
         width: 150px;
       }
       
-      #individualOwnRentDropdown {
+      #ownRentDropdown {
         width: 100%;
         padding: 5px;
         margin: 20px 0 10px 10px;  
-        border: 1px solid #0000FF;
-        border-radius: 3px;
-        font-family: inherit;
-        font-size: 15px;
-        width: 150px;
-      }
-      
-      
-      
-      
-      
-      
-      
-      
-      #uboPersonalGuarantorDropdown {
-        width: 100%;
-        padding: 5px;
-        margin: 20px 0 10px 10px;  
-        border: 1px solid #0000FF;
-        border-radius: 3px;
-        font-family: inherit;
-        font-size: 15px;
-        width: 150px;
-      }  
-      
-      #uboCitizenDropdown {
-        width: 100%;
-        padding: 5px;
-        margin: 20px 0 10px 10px;  
-        border: 1px solid #0000FF;
-        border-radius: 3px;
-        font-family: inherit;
-        font-size: 15px;
-        width: 150px;
-      }
-      
-      #uboOwnRentDropdown {
-        width: 100%;
-        padding: 5px;
-        margin: 20px 0 10px 10px;
-        border: 1px solid #0000FF;
-        border-radius: 3px;
-        font-family: inherit;
-        font-size: 15px;
-        width: 150px;
-      }
-      
-      #directorPersonalGuarantorDropdown {
-        width: 100%;
-        padding: 5px;
-        margin: 20px 0 10px 10px;  
-        border: 1px solid #0000FF;
-        border-radius: 3px;
-        font-family: inherit;
-        font-size: 15px;
-        width: 150px;
-      }  
-      
-      #directorCitizenDropdown {
-        width: 100%;
-        padding: 5px;
-        margin: 20px 0 10px 10px;  
-        border: 1px solid #0000FF;
-        border-radius: 3px;
-        font-family: inherit;
-        font-size: 15px;
-        width: 150px;
-      }
-      
-      #directorOwnRentDropdown {
-        width: 100%;
-        padding: 5px;
-        margin: 20px 0 10px 10px;
         border: 1px solid #0000FF;
         border-radius: 3px;
         font-family: inherit;
@@ -363,17 +292,7 @@
         justify-content: center;
       }
       
-      #addIndividualContainer {
-        display: flex;
-        justify-content: center;
-      }
-      
       #addUboContainer {
-        display: flex;
-        justify-content: center;
-      }
-      
-      #addDirectorContainer {
         display: flex;
         justify-content: center;
       }
@@ -506,13 +425,13 @@
     </header>
     <main>
       <div class="container" id="entireForm">
-        <form id="survey-form" method="GET" required>
-          
+        <form id="survey-form" method="GET" >
+            
           <h2 id="title">Step 1 - Loan Purpose</h2>
           <br>
           <div class="labels">
             <label></label></div>
-          <div class="input-tab" required>
+          <div class="input-tab" >
             <input type="checkbox" name="asset" value="asset">Asset Purchase or Down Payment<br>
             <input type="checkbox" name="industrial" value="ind">Industrial Use<br>
             <input type="checkbox" name="tax" value="tax">Tax Payment<br>
@@ -533,21 +452,21 @@
             <label id="loanAmountLabel" for="loanAmountLabel">Loan Amount USD $</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="loanTotal" name="loanTotal" placeholder="Loan Amount" required autofocus style="width: 150px;" onchange="updateLoanAmount()" >
+            <input class="input-field" type="text" id="loanTotal" name="loanTotal" placeholder="Loan Amount"  autofocus style="width: 150px;" onchange="updateLoanAmount()" >
           </div>
           
           <div class="labels">
             <label id="trancheLabel" for="trancheLabel">Amount per Tranche USD $</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="trancheAmt" name=trancheAmt placeholder="Amount per Tranche" required autofocus style="width: 150px;" onchange="updateLoanAmount()" readonly>
+            <input class="input-field" type="text" id="trancheAmt" name=trancheAmt placeholder="Amount per Tranche"  autofocus style="width: 150px;" onchange="updateLoanAmount()" readonly>
           </div>
           
           <div class="labels">
             <label id="numberOfTranchesLabel" for="numberOfTranchesLabel">Number of Tranches</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="numTranches" name="numTranches" placeholder="Number of Tranches" required autofocus style="width: 150px;" onchange="updateLoanAmount()" pattern="[0-9]+" title="Please enter only numbers.">
+            <input class="input-field" type="text" id="numTranches" name="numTranches" placeholder="Number of Tranches"  autofocus style="width: 150px;" onchange="updateLoanAmount()" pattern="[0-9]+" title="Please enter only numbers.">
           </div>
           
           
@@ -572,28 +491,28 @@
             <label id="collateralLabel" for="collateralLabel">Collateral Specifications</label>
           </div>
           <div class="input-tab">
-            <textarea class="input-field" id="escrowSpec" name="escrowSpec" rows="5" cols="40" placeholder="Collateral Specifications..." required></textarea>
+            <textarea class="input-field" id="escrowSpec" name="escrowSpec" rows="5" cols="40" placeholder="Collateral Specifications..." ></textarea>
           </div>
           
           <div class="labels">
             <label id="collateralValueLabel" for="collateralValueLabel">Collateral Value USD $</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="escrowAmt" name="escrowAmt" placeholder="Escrow Value" required autofocus style="width: 150px;" readonly>
+            <input class="input-field" type="text" id="escrowAmt" name="escrowAmt" placeholder="Escrow Value"  autofocus style="width: 150px;" readonly>
           </div>
           
           <div class="labels">
             <label id="escrowLabel" for="escrowLabel">Escrow Agent</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="escrowAgt" name="escrowAgt" placeholder="Escrow Agent" required autofocus style="width: 150px;">
+            <input class="input-field" type="text" id="escrowAgt" name="escrowAgt" placeholder="Escrow Agent"  autofocus style="width: 150px;">
           </div>
           
           <div class="labels">
             <label id="vaultLabel" for="vaultLabel">Vault Information</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="vaultInfo" name="vaultInfo" placeholder="Vault Information" required autofocus style="width: 150px;">
+            <input class="input-field" type="text" id="vaultInfo" name="vaultInfo" placeholder="Vault Information"  autofocus style="width: 150px;">
           </div>
           
           <br><br>
@@ -613,9 +532,9 @@
             <label id="orgFeeLabel" for="orgFeeLabel">Origination Fee (points)</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="orgFee" name="orgFee" placeholder="Origination Fee (points)" required autofocus style="width: 50px;" readonly>
+            <input class="input-field" type="text" id="orgFee" name="orgFee" placeholder="Origination Fee (points)"  autofocus style="width: 50px;" readonly>
             <label id="usdLabel" for="usdLabel">&nbsp;USD $</label>
-            <input class="input-field" type="text" id="orgFeeUSD" name="orgFeeUSD" placeholder="USD $" required autofocus style="width: 50px;" readonly>
+            <input class="input-field" type="text" id="orgFeeUSD" name="orgFeeUSD" placeholder="USD $"  autofocus style="width: 50px;" readonly>
             
             <div class="input-tab" style="margin-left: 20px;">
               <input type="checkbox" name="agreeOrgFee" value="agreeOrgFee">Agree<br>
@@ -627,9 +546,9 @@
             <label id="intrestLabel" for="intrestLabel">Interest Rate (monthly)</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="interestRate" name="interestRate" placeholder="Interest Rate (weekly)" required autofocus style="width: 50px;" readonly>
+            <input class="input-field" type="text" id="interestRate" name="interestRate" placeholder="Interest Rate (weekly)"  autofocus style="width: 50px;" readonly>
             <label id="aprLabel" for="aprLabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;APR</label>
-            <input class="input-field" type="text" id="apr" name="apr" placeholder="APR" required autofocus style="width: 50px;" readonly>
+            <input class="input-field" type="text" id="apr" name="apr" placeholder="APR"  autofocus style="width: 50px;" readonly>
             
             <div class="input-tab" style="margin-left: 19px;">
               <input type="checkbox" name="agreeAPR" value="agreeAPR">Agree
@@ -677,7 +596,7 @@
             <label id="loanTermLabel" for="loanTermLabel">Loan Term (months)</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="loanTerm" name="loanTerm" placeholder="Loan Term" required autofocus style="width: 50px;" readonly>
+            <input class="input-field" type="text" id="loanTerm" name="loanTerm" placeholder="Loan Term"  autofocus style="width: 50px;" readonly>
             
             <div class="input-tab" style="margin-left: 151px;">
               <input type="checkbox" name="agreeLoanTerm" value="agreeLoanTerm">Agree
@@ -690,7 +609,7 @@
             <label id="loanProceedsLabel" for="loanProceedsLabel">Loan Proceeds Less Points USD $</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="loanProceeds" name="loanProceeds" placeholder="Loan Proceeds" required style="width: 150px;" readonly>
+            <input class="input-field" type="text" id="loanProceeds" name="loanProceeds" placeholder="Loan Proceeds"  style="width: 150px;" readonly>
             <div class="input-tab" style="margin-left: 51px;">
               <input type="checkbox" name="agreeLoanProceeds" value="agreeLoanProceeds">Agree
             </div>
@@ -726,33 +645,18 @@
             <label for="dropdown">Borrower is an</label>
           </div>
           <div class="input-tab">
-            <select id="borrowerDropdown" name="intrestBinaryDropdown" onchange="handleBorrowerSelect()" required>
+            <select id="borrowerDropdown" name="intrestBinaryDropdown" onchange="handleBorrowerSelect()" >
               <option disabled value selected>Select an option</option>
               <option value="individualBorrower">Individual</option>
               <option value="entityBorrower">Entity</option>
             </select>
           </div>
           
-          <div id="borrowerSpecificDetails"></div>
-          
-          
-          
-          
-          
-          
-          
-        <!--
-          
-          
-          
-          
-          
-          
-          
+          <div id="entityBorrowerDetails"></div>
           
           
           <br><br><br><h2 id="title">Step 6 - UBO Info</h2><br>
-          <h3 id="subtitle">UBO and Director Info</h3>
+          <!--      <h3 id="subtitle">UBO and Director Info</h3>-->
           
           <br><h3 id="subtitle">Info for UBO 1</h3>
           
@@ -761,7 +665,7 @@
             <label for="dropdown">Control Person Authorized to Apply for, Take, and Execute, Loan?</label>
           </div>
           <div class="input-tab">
-            <select id="controlPersonAuthDropdown" name="controlPersonAuthDropdown1" required>
+            <select id="controlPersonAuthDropdown" name="controlPersonAuthDropdown1" >
               <option disabled value selected>Select an option</option>
               <option value="controlPersonAuthYes1">Yes</option>
               <option value="controlPersonAuthNo1">No</option>
@@ -772,7 +676,7 @@
             <label for="dropdown">Personal Guarantor?</label>
           </div>
           <div class="input-tab">
-            <select id="personalGuarantorDropdown" name="personalGuarantorDropdown1" required>
+            <select id="personalGuarantorDropdown" name="personalGuarantorDropdown1" >
               <option disabled value selected>Select an option</option>
               <option value="personalGuarantorYes1">Yes</option>
               <option value="personalGuarantorNo1">No</option>
@@ -783,7 +687,7 @@
             <label for="dropdown">U.S. Citizen or Green Card?</label>
           </div>
           <div class="input-tab">
-            <select id="usCitizenDropdown" name="usCitizenDropdown1" required>
+            <select id="usCitizenDropdown" name="usCitizenDropdown1" >
               <option disabled value selected>Select an option</option>
               <option value="usCitizenYes1">Yes</option>
               <option value="usCitizenYes1">No</option>
@@ -794,7 +698,7 @@
             <label id="firstName" for="firstName">First Name(s)</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="firstName1" name="firstName1" placeholder="First Name(s)" style="width: 150px;" required>
+            <input class="input-field" type="text" id="firstName1" name="firstName1" placeholder="First Name(s)" style="width: 150px;" >
           </div>
           
           <div class="labels">
@@ -808,56 +712,56 @@
             <label id="name-label" for="name">Last Name(s)</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="lastName1" name="lastName1" placeholder="Last Name(s)" style="width: 150px;" required>
+            <input class="input-field" type="text" id="lastName1" name="lastName1" placeholder="Last Name(s)" style="width: 150px;" >
           </div>
           
           <div class="labels">
             <label id="homeBankAddressLabel" for="homeBankAddressLabel">Home Address (must match recent bill)</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="homeAddress1" name="homeAddress1" placeholder="Home Address" style="width: 150px;" required>
+            <input class="input-field" type="text" id="homeAddress1" name="homeAddress1" placeholder="Home Address" style="width: 150px;" >
           </div>
           
           <div class="labels">
             <label id="homeCountryLabel" for="homeCountryLabel">Home Country</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="homeCountry1" name="homeCountry1" placeholder="Home Country" style="width: 150px;" required>
+            <input class="input-field" type="text" id="homeCountry1" name="homeCountry1" placeholder="Home Country" style="width: 150px;" >
           </div>
           
           <div class="labels">
             <label id="homeStreetAddressLabel" for="homeStreetAddressLabel">Home Street Address</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="homeStreetAddress1" name="homeStreetAddress1" placeholder="Home Street Address" style="width: 150px;" required>
+            <input class="input-field" type="text" id="homeStreetAddress1" name="homeStreetAddress1" placeholder="Home Street Address" style="width: 150px;" >
           </div>
           
           <div class="labels">
             <label id="homeCityLabel" for="homeCityLabel">Home City</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="homeCity1" name="homeCity1" placeholder="Home City" style="width: 150px;" required>
+            <input class="input-field" type="text" id="homeCity1" name="homeCity1" placeholder="Home City" style="width: 150px;" >
           </div>
           
           <div class="labels">
             <label id="homeStateLabel" for="homeStateLabel">Home State or Province</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="homeState1" name="homeState1" placeholder="Home State or Province" style="width: 150px;" required>
+            <input class="input-field" type="text" id="homeState1" name="homeState1" placeholder="Home State or Province" style="width: 150px;" >
           </div>
           
           <div class="labels">
             <label id="homeZipLabel" for="homeZipLabel">Home Zip or Province</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="homeZip1" name="homeZip1" placeholder="Home Zip" style="width: 150px;" required>
+            <input class="input-field" type="text" id="homeZip1" name="homeZip1" placeholder="Home Zip" style="width: 150px;" >
           </div>
           
           <div class="labels">
             <label for="dropdown">Own or Rent?</label>
           </div>
           <div class="input-tab">
-            <select id="ownRentDropdown" name="ownRentDropdown1" required>
+            <select id="ownRentDropdown" name="ownRentDropdown1" >
               <option disabled value selected>Select an option</option>
               <option value="own1">Own</option>
               <option value="rent1">Rent</option>
@@ -868,21 +772,21 @@
             <label id="mortgageLabel" for="mortgageLabel">Monthly Mortgage or Rent in USD</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="monthlyRent1" name="monthlyRent1" placeholder="Monthly Mortgage or Rent" style="width: 150px;" required pattern="[0-9]+" title="Please enter only numbers.">
+            <input class="input-field" type="text" id="monthlyRent1" name="monthlyRent1" placeholder="Monthly Mortgage or Rent" style="width: 150px;"  pattern="[0-9]+" title="Please enter only numbers.">
           </div>
           
           <div class="labels">
             <label id="passportNumberLabel" for="passportNumberLabel">Passport Number</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="passportNumber1" name="passportNumber1" placeholder="Passport Number" style="width: 150px;" required>
+            <input class="input-field" type="text" id="passportNumber1" name="passportNumber1" placeholder="Passport Number" style="width: 150px;" >
           </div>
           
           <div class="labels">
             <label id="ssnLabel" for="ssnLabel">SSN or ID Number</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="ssn1" name="ssn1" placeholder="SSN or ID Number" style="width: 150px;" required>
+            <input class="input-field" type="text" id="ssn1" name="ssn1" placeholder="SSN or ID Number" style="width: 150px;" >
           </div>
           
           <div class="labels">
@@ -895,28 +799,28 @@
           <div class="labels">
             <label id="emailLabel" for="emailLabel">Email Address</label></div>
           <div class="input-tab">
-            <input class="input-field" type="email" id="email1" name="email1" placeholder="email@email.com" style="width: 350px;" required>
+            <input class="input-field" type="email" id="email1" name="email1" placeholder="email@email.com" style="width: 350px;" >
           </div>
           
           <div class="labels">
             <label id="phoneLabel" for="phoneLabel">Telephone</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="phone1" name="phone1" placeholder="Telephone" style="width: 150px;" required>
+            <input class="input-field" type="text" id="phone1" name="phone1" placeholder="Telephone" style="width: 150px;" >
           </div>
           
           <div class="labels">
             <label id="ficoLabel" for="ficoLabel">FICO or NOSIS Score</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="ficoScore1" name="ficoScore1" placeholder="FICO or NOSIS Score" style="width: 150px;" required pattern="[0-9]+" title="Please enter only numbers.">
+            <input class="input-field" type="text" id="ficoScore1" name="ficoScore1" placeholder="FICO or NOSIS Score" style="width: 150px;"  pattern="[0-9]+" title="Please enter only numbers.">
           </div>
           
           <div class="labels">
             <label id="incomeLabel" for="incomeLabel">Monthly Income in USD</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="income1" name="income1" placeholder="Monthly Income in USD" style="width: 150px;" required pattern="[0-9]+" title="Please enter only numbers.">
+            <input class="input-field" type="text" id="income1" name="income1" placeholder="Monthly Income in USD" style="width: 150px;"  pattern="[0-9]+" title="Please enter only numbers.">
           </div>
           
           <br><br><div style="font-size: 18px; width: 700px; margin-left: 325px; text-align: justify;">
@@ -960,8 +864,6 @@
             </div>
           </div>
           
-          -->
-          
           <div id="uboInfo"></div>
           
           
@@ -978,42 +880,42 @@
             <label id="abaNumberLabel" for="abaNumberLabel">ABA Number</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="abaNumber" name="abaNumber" placeholder="ABA Number" required style="width: 150px;">
+            <input class="input-field" type="text" id="abaNumber" name="abaNumber" placeholder="ABA Number"  style="width: 150px;">
           </div>
           
           <div class="labels">
             <label id="bankNameLabel" for="bankNameLabel">Bank Name</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="bankName" name="bankName" placeholder="Bank Name" required style="width: 150px;">
+            <input class="input-field" type="text" id="bankName" name="bankName" placeholder="Bank Name"  style="width: 150px;">
           </div>
           
           <div class="labels">
             <label id="bankAddressLabel" for="bankAddressLabel">Bank Address</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="bankAddress" name="bankAddress" placeholder="Bank Address" required style="width: 150px;">
+            <input class="input-field" type="text" id="bankAddress" name="bankAddress" placeholder="Bank Address"  style="width: 150px;">
           </div>
           
           <div class="labels">
             <label id="bankCityLabel" for="bankCityLabel">Bank City</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="bankCity" name="bankCity" placeholder="Bank City" required style="width: 150px;">
+            <input class="input-field" type="text" id="bankCity" name="bankCity" placeholder="Bank City"  style="width: 150px;">
           </div>
           
           <div class="labels">
             <label id="bankStateLabel" for="bankStateLabel">Bank State</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="bankState" name="bankState" placeholder="Bank State" required style="width: 150px;">
+            <input class="input-field" type="text" id="bankState" name="bankState" placeholder="Bank State"  style="width: 150px;">
           </div>
           
           <div class="labels">
             <label id="accountNumberLabel" for="accountNumberLabel">Account Number</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="accountNumber" name="accountNumber" placeholder="Account Number" required style="width: 150px;">
+            <input class="input-field" type="text" id="accountNumber" name="accountNumber" placeholder="Account Number"  style="width: 150px;">
           </div>
           
           
@@ -1021,7 +923,7 @@
             <label for="dropdown">Bank Account Type</label>
           </div>
           <div class="input-tab">
-            <select id="bankAccountTypeDropdown" name="bankAccountTypeDropdown" onchange="otherBankAccountType()" required>
+            <select id="bankAccountTypeDropdown" name="bankAccountTypeDropdown" onchange="otherBankAccountType()" >
               <option disabled value selected>Select an option</option>
               <option value="bankChecking">Checking</option>
               <option value="bankSavings">Savings</option>
@@ -1035,21 +937,21 @@
             <label id="ibanLabel" for="ibanLabel">IBAN</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="iban" name="iban" placeholder="IBAN" required style="width: 150px;">
+            <input class="input-field" type="text" id="iban" name="iban" placeholder="IBAN"  style="width: 150px;">
           </div>
           
           <div class="labels">
             <label id="swiftLabel" for="swiftLabel">SWIFT</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="swift" name="swift" placeholder="SWIFT" required style="width: 150px;">
+            <input class="input-field" type="text" id="swift" name="swift" placeholder="SWIFT"  style="width: 150px;">
           </div>
           
           <div class="labels">
             <label id="memoLabel" for="memoLabel">Memo</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="memo" name="memo" placeholder="Memo" required style="width: 150px;">
+            <input class="input-field" type="text" id="memo" name="memo" placeholder="Memo"  style="width: 150px;">
           </div>
           
           <br><br><h3>Upload a PDF or Image for Each of the Following</h3>
@@ -1064,12 +966,76 @@
             <span id="bankAcctFileNameSpan">Uploaded File: None</span>
           </div>
           
+          <div class="labels">
+            <label id="passportFileLabel" for="passportFileLabel">Passport</label>
+          </div>
+          <div class="input-tab">
+            <label for="passportFile" class="fileUploadButton">Choose File
+              <input id="passportFile" type="file" name="passportFile" style="display:none" onchange="displayFileName('passportFile', 'passportFileNameSpan')">
+            </label>
+            <span id="passportFileNameSpan">Uploaded File: None</span>
+          </div>
           
-  
+          <div class="labels">
+            <label id="dniFrontFileLabel" for="dniFrontFileLabel">DNI/Drivers License (Front)</label>
+          </div>
+          <div class="input-tab">
+            <label for="dniFrontFile" class="fileUploadButton">Choose File
+              <input id="dniFrontFile" type="file" name="dniFrontFile" style="display:none" onchange="displayFileName('dniFrontFile', 'dniFrontFileNameSpan')">
+            </label>
+            <span id="dniFrontFileNameSpan">Uploaded File: None</span>
+          </div>
           
+          <div class="labels">
+            <label id="dniReverseFileLabel" for="dniFrontFileLabel">DNI/Drivers License (Reverse)</label>
+          </div>
+          <div class="input-tab">
+            <label for="dniReverseFile" class="fileUploadButton">Choose File
+              <input id="dniReverseFile" type="file" name="dniReverseFile" style="display:none" onchange="displayFileName('dniReverseFile', 'dniReverseFileNameSpan')">
+            </label>
+            <span id="dniReverseFileNameSpan">Uploaded File: None</span>
+          </div>
           
-          <br><br><br><h2 id="title">Step 8</h2><br>
-          <h3 id="subtitle">Loan Officer Certification</h3>
+          <div class="labels">
+            <label id="billAddressProofFileLabel" for="billAddressProofFileLabel">Bill for Proof of Address</label>
+          </div>
+          <div class="input-tab">
+            <label for="billAddressProofFile" class="fileUploadButton">Choose File
+              <input id="billAddressProofFile" type="file" name="billAddressProofFile" style="display:none" onchange="displayFileName('billAddressProofFile', 'billAddressProofFileNameSpan')">
+            </label>
+            <span id="billAddressProofFileNameSpan">Uploaded File: None</span>
+          </div>
+          
+          <div class="labels">
+            <label id="creditCheckFileLabel" for="creditCheckFileLabel">Credit Check/NOSIS</label>
+          </div>
+          <div class="input-tab">
+            <label for="creditCheckFile" class="fileUploadButton">Choose File
+              <input id="creditCheckFile" type="file" name="creditCheckFile" style="display:none" onchange="displayFileName('creditCheckFile', 'creditCheckFileNameSpan')">
+            </label>
+            <span id="creditCheckFileNameSpan">Uploaded File: None</span>
+          </div>
+          
+          <div class="labels">
+            <label id="worldCheckFileLabel" for="worldCheckFileLabel">World Check</label>
+          </div>
+          <div class="input-tab">
+            <label for="worldCheckFile" class="fileUploadButton">Choose File
+              <input id="worldCheckFile" type="file" name="worldCheckFile" style="display:none" onchange="displayFileName('worldCheckFile', 'worldCheckFileNameSpan')">
+            </label>
+            <span id="worldCheckFileNameSpan">Uploaded File: None</span>
+          </div>
+          
+          <div class="labels">
+            <label id="ofacFileLabel" for="ofacFileLabel">OFAC Check</label>
+          </div>
+          <div class="input-tab">
+            <label for="ofacFile" class="fileUploadButton">Choose File
+              <input id="ofacFile" type="file" name="ofacFile" style="display:none" onchange="displayFileName('ofacFile', 'ofacFileNameSpan')">
+            </label>
+            <span id="ofacFileNameSpan">Uploaded File: None</span>
+          </div>
+          
           
           <br><br><div style="font-size: 18px; width: 700px; margin-left: 325px; text-align: justify;">
             I hereby submit my application for credit with Longline Lending LLC directly or via a loan officer
@@ -1094,14 +1060,14 @@
             <label id="loanOfficerNameLabel" for="loanOfficerNameLabel">Loan Officer Name</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="loanOfficerName" name="loanOfficerName" placeholder="Loan Officer Name" style="width: 150px;" required>
+            <input class="input-field" type="text" id="loanOfficerName" name="loanOfficerName" placeholder="Loan Officer Name" style="width: 150px;" >
           </div>
           
           <div class="labels">
             <label for="dropdown">Loan Officer’s Assessment of Borrower’s Ability to Repay</label>
           </div>
           <div class="input-tab">
-            <select id="loanAssementDropdown" name="loanAssementDropdown" required>
+            <select id="loanAssementDropdown" name="loanAssementDropdown" >
               <option disabled value selected>Select an option</option>
               <option value="loanAssementYes">Yes</option>
               <option value="loanAssementNo">No</option>
@@ -1110,19 +1076,20 @@
           
           <div class="submitButtonContainer">
             <div class="btn">
-              <button id="submit" type="submit">Submit</button>
+              <button id="submit" type="submit" onclick="formAsPdf()">Submit</button>
             </div>
           </div>
           
+          
+          
         </form>
       </div>
+
     </main>
     <footer>
       <p id="copyright"></p>
     </footer>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script defer src="borrow.js"></script>
   </body>
 </html>
