@@ -218,7 +218,10 @@ const entityContainer = document.getElementById("borrowerSpecificDetails");
 // base html for individual details
 const htmlForFirstIndividual = `
     
-  <br><br><br><h2 id="title">Step 6 - Individual Info</h2><br>
+  <br><br><br><h2 id="stepSixTitle">Step 6 - Individual Info</h2><br>
+
+  <br><br><h3 id="individualInfoSubtitle1">Info for Individual 1</h3>
+
   
   <div class="labels">
     <label for="dropdown">Personal Guarantor?</label>
@@ -379,7 +382,7 @@ const htmlForFirstIndividual = `
     <label></label>
   </div>
   <div class="input-tab">
-    <label><input type="radio" name="individualPep1" value="individualYesPep1" style="margin-left: 50px;" checked>Yes</label>
+    <label><input type="radio" name="individualPep1" value="individualYesPep1" style="margin-left: 50px;" checked required>Yes</label>
     <label><input type="radio" name="individualPep1" value="individualNoPep1">No</label>
   </div>
   
@@ -391,7 +394,7 @@ const htmlForFirstIndividual = `
     <label></label>
   </div>
   <div class="input-tab">
-    <label><input type="radio" name="individualCrime1" value="individualYesCrime1" style="margin-left: 50px;" checked>Yes</label>
+    <label><input type="radio" name="individualCrime1" value="individualYesCrime1" style="margin-left: 50px;" checked required>Yes</label>
     <label><input type="radio" name="individualCrime1" value="individualNoCrime1">No</label>
   </div>
   
@@ -403,7 +406,7 @@ const htmlForFirstIndividual = `
     <label></label>
   </div>
   <div class="input-tab" style="margin-left: 20px;">
-    <input type="checkbox" name="individualDeclareCheckbox1" value="individualDeclareCheckbox1">I declare that the above information is true and correct.<br>
+    <input type="checkbox" name="individualDeclareCheckbox1" value="individualDeclareCheckbox1" required>I declare that the above information is true and correct.<br>
   </div>
 
   <div class="labels">
@@ -936,6 +939,8 @@ function handleBorrowerSelect() {
   if (option.value == "individualBorrower") {
     entityContainer.innerHTML = htmlForFirstIndividual;
     addIndividualButton.style.display = "block"; // show the button
+    addIndividualButton.style.margin = "0 auto";
+    
   }
   
   if (option.value == "entityBorrower") {
@@ -1228,30 +1233,20 @@ const htmlForAdditionalIndividual = `
 
 `;
 
-//<div class="addIndividualContainer">
-//<div class="btn">
-//<button id="addIndividualButton{{index}}" type="button">Add Another Individual</button>
-//</div>
-//</div>
 
-
-// Get references to the add button and the div where the HTML will be added
+// Get a reference to the div where the HTML will be added
 const additionalIndividualInfoDiv = document.getElementById('additionalIndividualInfo');
 
-// Define a variable to keep track of the number of times the button has been clicked
-let individualCount = 1;
-
 function addEventListenersToAddIndividualButtons() {
+  // Define a variable to keep track of the number of times the button has been clicked
+  let individualCount = 2;
+  
+  // Add an event listener to each button
   for (let i = 1; i < 9; i++) {
-    // Get a reference to the add button for this iteration
     const addIndividualButton = document.getElementById(`addIndividualButton${i}`);
-//  const testButton = document.getElementById('testButton');
-    
-    // Add an event listener to the add button
-//  testButton.addEventListener('click', function() {
     addIndividualButton.addEventListener('click', function() {
       // Only add HTML if the click count is less than or equal to 8
-      if (individualCount < 9) {
+      if (individualCount <= 8) {
         // Add the base HTML to the div
         const htmlForAdditionalIndividualWithIndex = htmlForAdditionalIndividual.replace(/{{index}}/g, individualCount);
         additionalIndividualInfoDiv.insertAdjacentHTML('beforeend', htmlForAdditionalIndividualWithIndex);
@@ -1259,8 +1254,10 @@ function addEventListenersToAddIndividualButtons() {
         // Increment the click count
         individualCount++;
         
-        // Call the function to add event listeners to the buttons again
-        addEventListenersToAddIndividualButtons();
+        if (individualCount === 8) {
+          const addIndividualButton1 = document.getElementById('addIndividualButton1');
+          addIndividualButton1.style.display = 'none';
+        }
       }
     });
   }
@@ -1268,16 +1265,6 @@ function addEventListenersToAddIndividualButtons() {
 
 // Call the function to add event listeners to the buttons initially
 addEventListenersToAddIndividualButtons();
-
-// Update individualCount here
-individualCount = 2;
-
-// Call the function again to update the event listeners
-addEventListenersToAddIndividualButtons();
-
-
-
-
 
 
 
