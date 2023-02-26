@@ -21,7 +21,7 @@ function otherLoanFunction(cbox) {
     input.type = "text";
     input.id = "otherLoanText";
     input.name = "otherLoanText";
-    input.placeholder = "Loan Purpose";
+    input.placeholder = "Other Loan Purpose";
     input.required = true;
     input.autofocus = true;
     input.style.width = "150px";
@@ -42,14 +42,14 @@ function otherLoanFunction(cbox) {
   }
 }
 
-// show other text entry box if other button is clicked for Escrow
-function otherEscrowFucntion(cbox) {
+// show other text entry box if other button is clicked for Collateral
+function otherCollateralFucntion(cbox) {
   if (cbox.checked) {
     var input = document.createElement("input");
     input.type = "text";
-    input.id = "otherEscrowText";
-    input.name = "otherEscrowText";
-    input.placeholder = "Escrow";
+    input.id = "otherCollateralText";
+    input.name = "otherCollateralText";
+    input.placeholder = "Other Collateral";
     input.required = true;
     input.autofocus = true;
     input.style.width = "150px";
@@ -65,7 +65,7 @@ function otherEscrowFucntion(cbox) {
     var div = document.createElement("div");
     div.id = cbox.name;
     div.appendChild(input);
-    document.getElementById("insertOtherEscrow").appendChild(div);
+    document.getElementById("insertOtherCollateral").appendChild(div);
   } else {
     document.getElementById(cbox.name).remove();
   }
@@ -81,15 +81,15 @@ function updateLoanAmount() {
   const numTranches = document.getElementById('numTranches').value;
   // hold variable for Loan Total
   const loanTotalToCopy = document.getElementById("loanTotal");
-  const escrowAmt = document.getElementById("escrowAmt");
-  escrowAmt.value = loanTotalToCopy.value;
-  // local variable for Escrow Amount
-  const localEscrowAmt = loanTotalToCopy.value.replace(",", "");
+  const collateralValue = document.getElementById("collateralValue");
+  collateralValue.value = loanTotalToCopy.value;
+  // local variable for local Collateral Value
+  const localCollateralValue = loanTotalToCopy.value.replace(",", "");
 
   // math for Loan Proceeds
-  const orgFee = document.getElementById("orgFee");
+  const orgFeePoints = document.getElementById("orgFeePoints");
   const loanProceeds = document.getElementById("loanProceeds");
-  loanProceeds.value = ((Number(localEscrowAmt)) - (Number(localEscrowAmt) * (Number(orgFee.value.replace("%", "")))/100)).toLocaleString();
+  loanProceeds.value = ((Number(localCollateralValue)) - (Number(localCollateralValue) * (Number(orgFeePoints.value.replace("%", "")))/100)).toLocaleString();
 
 
   if (isNaN(numTranches)) {
@@ -107,7 +107,7 @@ function updateLoanAmount() {
 
   // math for Origination Fee 
   const orgFeeUSD = document.getElementById("orgFeeUSD");
-  orgFeeUSD.value = (Number(localEscrowAmt) * (Number(orgFee.value.replace("%", "")))/100).toLocaleString();
+  orgFeeUSD.value = (Number(localCollateralValue) * (Number(orgFeePoints.value.replace("%", "")))/100).toLocaleString();
 
 }
 
@@ -186,7 +186,7 @@ trancheAmtInput.addEventListener('input', function() {
 });
 
 // lock 0.6% for Origination Fee
-document.getElementById('orgFee').value = '0.6%';
+document.getElementById('orgFeePoints').value = '0.6%';
 
 // lock 0.5% for Interest Rate
 document.getElementById('interestRate').value = '2%';
@@ -195,9 +195,9 @@ document.getElementById('interestRate').value = '2%';
 document.getElementById('apr').value = '24%';
 
 //lock Interest Rate dropdown as N/A
-const intrestBinaryDropdown = document.getElementById("intrestBinaryDropdownID");
-intrestBinaryDropdown.value = "interestNA";
-intrestBinaryDropdown.disabled = true;
+const intrestDropdown = document.getElementById("intrestDropdownID");
+intrestDropdown.value = "interestNA";
+intrestDropdown.disabled = true;
 
 // lock Interest Payment dropdown as On-Maturity
 const intrestPaymentDropdown = document.getElementById("intrestPaymentDropdownID");
@@ -282,6 +282,17 @@ const htmlForFirstIndividual = `
       <option disabled value selected>Select an option</option>
       <option value="individualCitizenYes1">Yes</option>
       <option value="individualCitizenYes1">No</option>
+    </select>
+  </div>
+
+  <div class="labels">
+    <label for="dropdown">South Dakota Resident?</label>
+  </div>
+  <div class="input-tab">
+    <select id="individualSDResidentDropdown" name="individualSDResidentDropdown1" required>
+      <option disabled value selected>Select an option</option>
+      <option value="individualSDResidentYes1">Yes</option>
+      <option value="individualSDResidentNo1">No</option>
     </select>
   </div>
   
@@ -653,7 +664,18 @@ const htmlForEntity = `
     <select id="uboCitizenDropdown" name="uboCitizenDropdown1" required>
       <option disabled value selected>Select an option</option>
       <option value="uboCitizenYes1">Yes</option>
-      <option value="uboCitizenYes1">No</option>
+      <option value="uboCitizenNo1">No</option>
+    </select>
+  </div>
+
+  <div class="labels">
+    <label for="dropdown">South Dakota Resident?</label>
+  </div>
+  <div class="input-tab">
+    <select id="uboSDResidentDropdown" name="uboSDResidentDropdown1" required>
+      <option disabled value selected>Select an option</option>
+      <option value="uboSDResidentYes1">Yes</option>
+      <option value="uboSDResidentNo1">No</option>
     </select>
   </div>
   
@@ -915,6 +937,17 @@ const htmlForAdditionalIndividual = `
       <option disabled value selected>Select an option</option>
       <option value="individualCitizenYes{{index}}">Yes</option>
       <option value="individualCitizenYes{{index}}">No</option>
+    </select>
+  </div>
+
+  <div class="labels">
+    <label for="dropdown">South Dakota Resident?</label>
+  </div>
+  <div class="input-tab">
+    <select id="individualSDResidentDropdown" name="individualSDResidentDropdown{{index}}" required>
+      <option disabled value selected>Select an option</option>
+      <option value="individualSDResidentYes{{index}}">Yes</option>
+      <option value="individualSDResidentNo{{index}}">No</option>
     </select>
   </div>
   
@@ -1187,7 +1220,18 @@ const htmlForAdditionalUbo = `
     <select id="uboCitizenDropdown" name="uboCitizenDropdown{{index}}">
       <option disabled value selected>Select an option</option>
       <option value="uboCitizenYes{{index}}">Yes</option>
-      <option value="uboCitizenYes{{index}}">No</option>
+      <option value="uboCitizenNo{{index}}">No</option>
+    </select>
+  </div>
+
+  <div class="labels">
+    <label for="dropdown">South Dakota Resident?</label>
+  </div>
+  <div class="input-tab">
+    <select id="uboSDResidentDropdown" name="uboSDResidentDropdown{{index}}" required>
+      <option disabled value selected>Select an option</option>
+      <option value="uboSDResidentYes{{index}}">Yes</option>
+      <option value="uboSDResidentNo{{index}}">No</option>
     </select>
   </div>
   
@@ -1460,7 +1504,18 @@ const htmlForAdditionalUbo = `
     <select id="directorCitizenDropdown" name="directorCitizenDropdown{{index}}">
       <option disabled value selected>Select an option</option>
       <option value="directorCitizenYes{{index}}">Yes</option>
-      <option value="directorCitizenYes{{index}}">No</option>
+      <option value="directorCitizenNo{{index}}">No</option>
+    </select>
+  </div>
+
+  <div class="labels">
+    <label for="dropdown">South Dakota Resident?</label>
+  </div>
+  <div class="input-tab">
+    <select id="directorSDResidentDropdown" name="directorSDResidentDropdown{{index}}">
+      <option disabled value selected>Select an option</option>
+      <option value="directorSDResidentDropdownYes{{index}}">Yes</option>
+      <option value="directorSDResidentDropdownNo{{index}}">No</option>
     </select>
   </div>
   

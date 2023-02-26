@@ -49,17 +49,44 @@ def submit():
     
     loanPurpose = request.form.getlist('loanPurpose')
     otherLoanPurpose = request.form.get('otherLoanText')
-    
-    
     loanTotal = request.form.get('loanTotal')
+    trancheAmt = request.form.get('trancheAmt')
     numTranches = request.form.get('numTranches')
-    
+    collateralInfo = request.form.getlist('collateralInfo')
+    collateralSpec = request.form.get('collateralSpec')
+    collateralValue = request.form.get('collateralValue')
+    escrowAgent = request.form.get('escrowAgent')
+    vaultInfo = request.form.get('vaultInfo')
+    securityCheckbox = request.form.getlist('securityCheckbox')
+    secRecDate = request.form.get('secRecDate')
+    orgFeePoints = request.form.get('orgFeePoints')
+    orgFeeUSD = request.form.get('orgFeeUSD')
+    agreeOrgFee = request.form.get('agreeOrgFee')
+    interestRate = request.form.get('interestRate')
+    apr = request.form.get('apr')
+    agreeAPR = request.form.get('agreeAPR')
+    intrestDropdown = request.form.get('intrestDropdown')
     
     data = {
         'Loan Purpose' : loanPurpose,
         'Loan Purpose (other)': otherLoanPurpose,
         'Loan Total': loanTotal,
-        'Number of Tranches': numTranches
+        'Tranche Amount': trancheAmt,
+        'Number of Tranches': numTranches,
+        'Collateral': collateralInfo,
+        'Collateral Specifications': collateralSpec,
+        'Collateral Value': collateralValue,
+        'Escrow Agent': escrowAgent,
+        'Vault Info': vaultInfo,
+        'Security Received/Guaranteed': securityCheckbox,
+        'Security Received Date': secRecDate,
+        'Origination Fee (points)': orgFeePoints,
+        'Origination Fee (USD)': orgFeeUSD,
+        'Agree Origination Fee': agreeOrgFee,
+        'Interest Rate': interestRate,
+        'APR': apr,
+        'Agree APR': agreeAPR,
+        'Intrest': intrestDropdown
     }
     
     with open('data.json', 'w') as f:

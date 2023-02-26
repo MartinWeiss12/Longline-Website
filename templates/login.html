@@ -8,7 +8,7 @@
     
     <title>Log In</title>
     <style>
-  
+      
       @import url('https://fonts.googleapis.com/css?family=Abel');
       
       body, html {
@@ -67,7 +67,7 @@
         letter-spacing: 2px;
         word-spacing: 5px;
         line-height: 1em;
-/*      font-weight: bold;*/
+        font-weight: bold;
       }
       
       p {
@@ -110,7 +110,7 @@
         display: inline-block;
         text-align: left;
         width: 50%;
-        margin-left: 10px;
+        margin-left: 50px;
       }
       
       .input-field {
@@ -142,15 +142,23 @@
         border-radius: 3px;
         font-family: inherit;
         font-size: 15px;
-      }
+        width: 150px;
+      }      
+      
       .btn {
         width: 100%;
         text-align: center;
         margin: 20px;
       }
       
+      #submitButtonContainer {
+        display: flex;
+        justify-content: center;
+      }
+      
       button {
-        background-color: #e67e22;
+        background-color: #0000FF;
+        margin: 0;
         border-radius: 4px;
         color: white;
         font-size: 1em;
@@ -161,7 +169,7 @@
       }
       
       button:hover {
-        background-color: #bf6516;
+        background-color: #00008B;
       }
       
       footer {
@@ -169,6 +177,7 @@
         font-size: 17px;
         margin: 20px;
       }
+      
       
       header {
         display: flex;
@@ -242,7 +251,6 @@
       textarea {
         resize: none;
       }
-
       
     </style>    
   </head>
@@ -274,140 +282,26 @@
       <div class="container">
         <form id="survey-form" method="GET">
           
-          <h2 id="title">Step 1 - Loan Purpose</h2>
-          <br>
-          <div class="labels">
-            <label></label></div>
-          <div class="input-tab">
-            <input type="checkbox" name="asset" value="asset">Asset Purchase or Down Payment<br>
-            <input type="checkbox" name="industrial" value="ind">Industrial Loan<br>
-            <input type="checkbox" name="tax" value="tax">Tax Payment<br>
-            <input type="checkbox" name="insurance" value="insurance">Insurance Premium<br>
-            <input type="checkbox" name="trade" value="trade">Margin Trading or Investment<br>
-            <input type="checkbox" name="edu" value="edu">Education Expenses<br>
-            <input type="checkbox" name="otherLoan" value="otherLoan" onclick="otherLoanFunction(this)" >Other<br>
-            <p id="insertOtherLoan"></p>
-          </div>   
-          
           <br><br><br>
-          
-          <h2 id="title">Step 2 - Loan Amount Requested</h2>
-          <br>
-          <h3 id="subtitle">In Tranches of USD$ 20,000</h3>
-          <br>
     
           <div class="labels">
-            <label id="name-label" for="name">Loan Amount</label></div>
+            <label id="usernameLabel" for="usernameLabel">Username</label></div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="loanAmt" name="loanAmt" placeholder="Loan Total" required autofocus style="width: 150px;" onchange="updateLoanAmount()" readonly>
+            <input class="input-field" type="username" id="username" name="username" placeholder="Username" required autofocus style="width: 150px;">
           </div>
           
           <div class="labels">
-            <label id="name-label" for="name">Amount per Tranche</label></div>
+            <label id="passwordLabel" for="passwordLabel">Password</label></div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="trancheAmt" name=trancheAmt placeholder="Amount per Tranche" required autofocus style="width: 150px;" onchange="updateLoanAmount()" readonly>
+            <input class="input-field" type="password" id="password" name=password placeholder="Password" required autofocus style="width: 150px;">
           </div>
           
-          <div class="labels">
-            <label id="name-label" for="name">Number of Tranches</label></div>
-          <div class="input-tab">
-            <input class="input-field" type="text" id="numTranches" name="numTranches" placeholder="Number of Tranches" required autofocus style="width: 150px;" onchange="updateLoanAmount()">
-          </div>
-        
-          
-          <br><br><br>
-          
-          <h2 id="title">Step 3 - Escrow Information</h2>
-          <br>
-<!--      <h3 id="subtitle">Escrow Type</h3>-->
-<!--      <br>-->
-          <div class="labels">
-            <label></label></div>
-          <div class="input-tab">
-            <input type="checkbox" name="personalProp" value="personalProp">Personal Property<br>
-            <input type="checkbox" name="realProp" value="realProp">Real Property<br>
-            <input type="checkbox" name="titledProp" value="titledProp">Titled Property<br>
-            <input type="checkbox" name="stock" value="stock">Stock Instruments<br>
-            <input type="checkbox" name="debt" value="debt">Debt Instruments<br>
-            <input type="checkbox" name="negotiable" value="negotiable">Negotiable Instruments<br>
-            <input type="checkbox" name="banknotes" value="banknotes">Banknotes<br>
-            <input type="checkbox" name="otherEscrow" value="otherEscrow" onclick="otherEscrowFucntion(this)" >Other<br>
-            <p id="insertOtherEscrow"></p>
-          </div>   
-
-          <div class="labels">
-            <label id="name-label" for="name">Escrow Specifications</label></div>
-          <div class="input-tab">
-            <textarea class="input-field" id="escrowSpec" name="escrowSpec" rows="5" cols="40" placeholder="Your comments..."></textarea>
+          <div class="submitButtonContainer">
+            <div class="btn">
+              <button id="submit" type="submit">Submit</button>
+            </div>
           </div>
           
-          
-          
-          
-          
-    
-          
-          
-          
-          <div class="labels">
-            <label id="name-label" for="name">* Full Name</label></div>
-          <div class="input-tab">
-            <input class="input-field" type="text" id="name" name="name" placeholder="Enter your name" required autofocus>
-          </div>
-          
-          <div class="labels">
-            <label id="email-label" for="email">* Email</label></div>
-          <div class="input-tab">
-            <input class="input-field" type="email" id="email" name="email" placeholder="email@email.com" required></div>
-          
-          <div class="labels">
-            <label id="number-label" for="number">* Age</label></div>
-          <div class="input-tab">
-            <input class="input-field" type="number" id="number" name="number" min="1" max="120" placeholder="15" required></div>
-          
-          
-          <div class="labels">
-            <label for="dropdown">How do you watch South Park?</label></div>
-          <div class="input-tab">
-            <select id="dropdown" name="site">
-              <option disabled value selected>Select an option</option>
-              <option value="web">Website</option>
-              <option value="hulu">Hulu</option>
-              <option value="youtube">Youtube</option>
-              <option value="tv">TV</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          
-          <div class="labels">
-            <label>How much do you like South Park?</label></div>
-          <div class="input-tab">
-            <input type="radio" name="radio-button" value="love">I love it!<br>
-            <input type="radio" name="radio-button" value="like">I like it<br>
-            <input type="radio" name="radio-button" value="ok">It's ok<br>
-            <input type="radio" name="radio-button" value="nah">Not really<br>
-          </div>
-          
-          <div class="labels">
-            <label for="dropdown">How many seasons of South Park have you watched?</label></div>
-          <div class="input-tab">
-            <select id="dropdown" name="seasons">
-              <option disabled value selected>Select an option</option>
-              <option value="<=5">0-5</option>
-              <option value="<=10">6-10</option>
-              <option value="<=15">10-15</option>
-              <option value="<=21">15-21</option>
-            </select>
-          </div>
-          
-          <div class="labels">
-            <label for="comments">Tell us more about your favorite character(s) or episode(s)</label></div>
-          <div class="input-tab">
-            <textarea class="input-field" id="comments" name="comments" rows="10" cols="40" placeholder="Your comments..."></textarea></div>
-          
-          <div class="btn">
-            <button id="submit" type="submit">Submit</button>
-          </div>
           
         </form>
       </div>
