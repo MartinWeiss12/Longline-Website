@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="js/jsPDF/dist/jspdf.umd.js"></script>
+    <script defer src="{{url_for('static', filename='borrow.js')}}"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie-edge">
@@ -515,8 +515,8 @@
       </div>
     </header>
     <main>
-      <div class="container" id="entireForm">
-        <form id="survey-form" method="POST" required>
+      <div class="container" id="loanForm">
+        <form id="loanForm" method="POST" action="{{ url_for('submit') }}">
           
           <h2 id="title">Step 1 - Loan Purpose</h2>
           <br>
@@ -928,7 +928,6 @@
     </main>
     <footer>
       <p id="copyright"></p>
-    </footer>
-    <script defer src="borrow.js"></script>
+    </footer>    
   </body>
 </html>

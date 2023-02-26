@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-from flask import Flask, render_template, request
+import json
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__, template_folder='templates')
 app.config ['SECRET_KEY'] = 'longline'
@@ -40,7 +41,22 @@ def borrow():
     if request.method == 'GET':
         return render_template('borrow.html', title='Borrow')
     
+    return render_template('borrow.html', title='Borrow')
+
+@app.route('/submit', methods=['POST'])
+def submit():
+    name = request.form.get('loanTotal')
+    email = request.form.get('numTranches')
+    
+    data = {
+        'name': name,
+        'email': email
+    }
+    
+    with open('data.json', 'w') as f:
+        json.dump(data, f)
+        
+    return 'Data saved!'
 
 if __name__ == '__main__':
     app.run(debug=True)
-    
