@@ -7,6 +7,8 @@ from flask import Flask, render_template, request, jsonify
 app = Flask(__name__, template_folder='templates')
 app.config ['SECRET_KEY'] = 'longline'
 
+correct_pin = "1234"
+
 
 @app.route('/')
 def index():
@@ -37,15 +39,21 @@ def login():
     if request.method == 'GET':
         return render_template('login.html', title='Login')
 
-@app.route('/borrow', methods=['GET', 'POST'])
-def borrow():
+@app.route('/borrowLogin', methods=['GET', 'POST'])
+def borrowLogin():
     if request.method == 'GET':
-        return render_template('borrow.html', title='Borrow')
+        return render_template('borrowLogin.html', title='Borrow')
+        
+
+@app.route('/checkUserPin', methods=['POST'])
+def checkUserPin():
+    userPin = request.form.get('userPin')
     
+    if(userPin == correct_pin):
+        return render_template('borrow.html', title='Borrow')
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    
     
     loanPurpose = request.form.getlist('loanPurpose')
     otherLoanPurpose = request.form.get('otherLoanText')

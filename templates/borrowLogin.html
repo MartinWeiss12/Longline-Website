@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script defer src="{{url_for('static', filename='about.js')}}"></script>
+    <script defer src="{{url_for('static', filename='borrowLogin.js')}}"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie-edge">
     
-    <title>About</title>
+    <title>Borrow</title>
     <style>
-  
+      
       @import url('https://fonts.googleapis.com/css?family=Abel');
       
       body, html {
@@ -67,19 +67,18 @@
         letter-spacing: 2px;
         word-spacing: 5px;
         line-height: 1em;
-/*      font-weight: bold;*/
+        font-weight: bold;
       }
       
       p {
         display: block;
-        margin: 0 auto;
+        margin: 0;
         padding: 0;
         text-align: center;
         font-size: 1.2em;
         line-height: 1.2em;
-        max-width: 1000px;
       }
-
+      
       hr {
         width: 70%;
         margin: 10px auto;
@@ -111,7 +110,7 @@
         display: inline-block;
         text-align: left;
         width: 50%;
-        margin-left: 10px;
+        margin-left: 75px;
       }
       
       .input-field {
@@ -135,23 +134,21 @@
         margin: 7px;
       }
       
-      #dropdown {
-        width: 100%;
-        padding: 5px;
-        margin: 20px 0 10px 10px;  
-        border: 1px solid #0000FF;
-        border-radius: 3px;
-        font-family: inherit;
-        font-size: 15px;
-      }
+            
       .btn {
         width: 100%;
         text-align: center;
         margin: 20px;
       }
       
+      #submitButtonContainer {
+        display: flex;
+        justify-content: center;
+      }
+      
       button {
-        background-color: #e67e22;
+        background-color: #0000FF;
+        margin: 0;
         border-radius: 4px;
         color: white;
         font-size: 1em;
@@ -162,7 +159,7 @@
       }
       
       button:hover {
-        background-color: #bf6516;
+        background-color: #00008B;
       }
       
       footer {
@@ -170,6 +167,7 @@
         font-size: 17px;
         margin: 20px;
       }
+      
       
       header {
         display: flex;
@@ -243,7 +241,9 @@
       textarea {
         resize: none;
       }
-
+      
+      
+      
       
     </style>    
   </head>
@@ -269,23 +269,32 @@
     <header>
       <div class="text-box">
         <h1 id="title">LONGLINE LENDING LLC</h1>
+        <h1 id="title">LOAN APPLICATION FORM</h1>
       </div>
     </header>
     <main>
       
-      <h1>About</h1>
-      <br>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore
-        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam
-        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure
-        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
+      
+      <div class="container" id="pinContainer">
+        
+        <br><br><br>
+        <h2 id="title">Please Enter Pin</h2><br>
+        <div class="labels">
+          <label id="pinLabel" for="pinLabel">Enter Pin</label>
+        </div>
+        <div class="input-tab">
+          <form id="pinForm" method="POST" action="{{ url_for('checkUserPin') }}">
+            <input class="input-field" type="password" id="userPin" name="userPin" placeholder="Enter Pin" required autofocus style="width: 150px;">
+            <button id="submitPinButton" type="submit">Submit</button>
+          </form>
+        </div>
+        
+      </div>
 
       
     </main>
     <footer>
       <p id="copyright"></p>
-    </footer>
+    </footer>    
   </body>
 </html>
