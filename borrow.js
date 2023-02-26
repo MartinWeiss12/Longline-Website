@@ -213,8 +213,6 @@ document.getElementById('bankFees').value = '40';
 const entityContainer = document.getElementById("borrowerSpecificDetails");
 
 
-
-
 // base html for individual details
 const htmlForFirstIndividual = `
     
@@ -852,72 +850,6 @@ const htmlForEntity = `
   </div>
 `;
 
-
-
-
-
-
-
-
-
-
-//
-//var addIndividualButton = document.getElementById("addIndividualButton1");
-//addIndividualButton.style.display = "none"; // hide the button by default
-//var addUboButton = document.getElementById("addUboButton1");
-//addUboButton.style.display = "none"; // hide the button by default
-//var addDirectorButton = document.getElementById("addDirectorButton1");
-//addDirectorButton.style.display = "none"; // hide the button by default
-//
-//function handleBorrowerSelect() {
-//var select = document.getElementById("borrowerDropdown");
-//var option = select.options[select.selectedIndex];
-//
-//if (option.value == "individualBorrower") {    
-//  document.getElementById("additionalUboInfo").innerHTML = "";
-//  document.getElementById("additionalDirectorInfo").innerHTML = "";
-//
-//  entityContainer.innerHTML = htmlForFirstIndividual;
-//  addUboButton.style.display = "none"; // hide the button
-//  addDirectorButton.style.display = "none"; // hide the button
-//  addIndividualButton.style.display = "block"; // show the button
-//  addIndividualButton.style.margin = "0 auto";
-//}
-//
-//if (option.value == "entityBorrower") {
-//  document.getElementById("additionalIndividualInfo").innerHTML = "";
-//  entityContainer.innerHTML = htmlForEntity;
-//  addIndividualButton.style.display = "none"; // hide the button
-//  addUboButton.style.display = "block"; // show the button
-//  addUboButton.style.margin = "0 auto";
-//  addDirectorButton.style.display = "block"; // show the button
-//  addDirectorButton.style.margin = "0 auto";
-//  
-//
-//} 
-//}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const htmlForAdditionalIndividual = `
     
   <br><br><h3 id="individualInfoSubtitle{{index}}">Info for Individual {{index}}</h3>
@@ -1178,73 +1110,6 @@ const htmlForAdditionalIndividual = `
     <span id="individualOfacFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
 `;
-
-//
-//// Get a reference to the div where the HTML will be added
-//
-//function addEventListenersToAddIndividualButtons() {
-//
-//const additionalIndividualInfoDiv = document.getElementById('additionalIndividualInfo');
-//
-//let individualCount = 2;
-//// Define a variable to keep track of the number of times the button has been clicked
-//
-//// Add an event listener to each button
-//for (let i = 1; i < 9; i++) {
-//  const addIndividualButton = document.getElementById(`addIndividualButton${i}`);
-//  addIndividualButton.addEventListener('click', function() {
-//    // Only add HTML if the click count is less than or equal to 8
-//    if (individualCount <= 9) {
-//      // Add the base HTML to the div
-//      const htmlForAdditionalIndividualWithIndex = htmlForAdditionalIndividual.replace(/{{index}}/g, individualCount);
-//      additionalIndividualInfoDiv.insertAdjacentHTML('beforeend', htmlForAdditionalIndividualWithIndex);
-//      
-//      // Increment the click count
-//      individualCount++;
-//      
-//      if (individualCount === 9) {
-//        const addIndividualButton1 = document.getElementById('addIndividualButton1');
-//        addIndividualButton1.style.display = 'none';
-//      }
-//    }
-//  });
-//}
-//}
-//
-//// Call the function to add event listeners to the buttons initially
-//addEventListenersToAddIndividualButtons();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // html for additional UBO
 const htmlForAdditionalUbo = `
@@ -1816,8 +1681,6 @@ function addEventListenersToAddButtons(buttonType, additionalInfoDivId, htmlForA
   }
 }
 
-
-
 function addDirectorEventListeners() {
   let count = 1;
   const additionalDirectorInfo = document.getElementById('additionalDirectorInfo');
@@ -1839,24 +1702,6 @@ function addDirectorEventListeners() {
     });
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 var addIndividualButton = document.getElementById("addIndividualButton1");
@@ -1903,144 +1748,6 @@ function handleBorrowerSelect() {
 
 
 addDirectorEventListeners();
-
-
-
-//addEventListenersToAddButtons('Director', 'additionalDirectorInfo', htmlForAdditionalDirector);
-
-//if (addDirectorButton1) {
-//addDirectorButton1.addEventListener('click', () => {
-//  addEventListenersToAddButtons('Director', 'additionalDirectorInfo', htmlForAdditionalDirector);
-//});
-//}
-
-
-
-
-
-
-
-
-
-
-
-
-// Call the function to add event listeners to the buttons initially
-
-
-
-
-  
-  
-  
-  
-  
-
-//
-//
-//function addEventListenersToAddUboButtons() {
-//// Define a variable to keep track of the number of times the button has been clicked
-//let uboCount = 2;
-//
-//// Get a reference to the div where the HTML will be added
-//const additionalUboInfoDiv = document.getElementById('additionalUboInfo');
-//
-//// Add an event listener to each button
-//for (let i = 1; i < 9; i++) {
-//  const addUboButton = document.getElementById(`addUboButton${i}`);
-//  addUboButton.addEventListener('click', function() {
-//    // Only add HTML if the click count is less than or equal to 8
-//    if (uboCount <= 9) {
-//      // Add the base HTML to the div
-//      const htmlForAdditionalUboWithIndex = htmlForAdditionalUbo.replace(/{{index}}/g, uboCount);
-//      additionalUboInfoDiv.insertAdjacentHTML('beforeend', htmlForAdditionalUboWithIndex);
-//      
-//      // Increment the click count
-//      uboCount++;
-//      
-//      if (uboCount === 9) {
-//        const addUboButton1 = document.getElementById('addUboButton1');
-//        addUboButton1.style.display = 'none';
-//      }
-//    }
-//  });
-//}
-//}
-//
-//// Call the function to add event listeners to the buttons initially
-//addEventListenersToAddUboButtons();
-
-  
-  
-  
-  
-  
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // container for bankOtherInputContainer
