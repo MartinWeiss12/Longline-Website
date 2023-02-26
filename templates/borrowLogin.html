@@ -104,13 +104,13 @@
         width: 40%;
         vertical-align: top; 
         margin-top: 20px;
+        margin-left: 60px;
       }
       
       .input-tab {
         display: inline-block;
         text-align: left;
         width: 50%;
-        margin-left: 75px;
       }
       
       .input-field {
@@ -283,7 +283,7 @@
           <label id="pinLabel" for="pinLabel">Enter Pin</label>
         </div>
         <div class="input-tab">
-          <form id="pinForm" method="POST" action="{{ url_for('checkUserPin') }}">
+          <form id="pinForm" method="POST" action="{{ url_for('borrow') }}">
             <input class="input-field" type="password" id="userPin" name="userPin" placeholder="Enter Pin" required autofocus style="width: 150px;">
             <button id="submitPinButton" type="submit">Submit</button>
           </form>
