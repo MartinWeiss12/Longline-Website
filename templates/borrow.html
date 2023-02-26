@@ -516,20 +516,20 @@
     </header>
     <main>
       <div class="container" id="loanForm">
-        <form id="loanForm" method="POST" action="{{ url_for('submit') }}">
+        <form id="loanForm" method="POST" action="{{ url_for('submit') }}" enctype="multipart/form-data">
           
           <h2 id="title">Step 1 - Loan Purpose</h2>
           <br>
           <div class="labels">
             <label></label></div>
           <div class="input-tab" required>
-            <input type="checkbox" name="asset" value="asset">Asset Purchase or Down Payment<br>
-            <input type="checkbox" name="industrial" value="ind">Industrial Use<br>
-            <input type="checkbox" name="tax" value="tax">Tax Payment<br>
-            <input type="checkbox" name="insurance" value="insurance">Insurance Premium<br>
-            <input type="checkbox" name="trade" value="trade">Margin Trading or Investment<br>
-            <input type="checkbox" name="edu" value="edu">Education Expenses<br>
-            <input type="checkbox" name="otherLoan" value="otherLoan" onclick="otherLoanFunction(this)" >Other<br>
+            <input type="checkbox" name="loanPurpose" value="asset">Asset Purchase or Down Payment<br>
+            <input type="checkbox" name="loanPurpose" value="ind">Industrial Use<br>
+            <input type="checkbox" name="loanPurpose" value="tax">Tax Payment<br>
+            <input type="checkbox" name="loanPurpose" value="insurance">Insurance Premium<br>
+            <input type="checkbox" name="loanPurpose" value="trade">Margin Trading or Investment<br>
+            <input type="checkbox" name="loanPurpose" value="edu">Education Expenses<br>
+            <input type="checkbox" name="loanPurpose" value="otherLoan" onclick="otherLoanFunction(this)" >Other<br>
             <p id="insertOtherLoan"></p>
           </div>   
           

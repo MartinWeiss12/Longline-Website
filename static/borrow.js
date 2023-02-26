@@ -31,7 +31,7 @@ function otherLoanFunction(cbox) {
     input.style.fontFamily = "inherit";
     input.style.fontSize = "15px";
     input.style.fontWeight = "bold";
-    input.style.margin = "0 0 0 -410px";
+    input.style.margin = "0 0 0 -600px";
     
     var div = document.createElement("div");
     div.id = cbox.name;
@@ -60,7 +60,7 @@ function otherEscrowFucntion(cbox) {
     input.style.fontFamily = "inherit";
     input.style.fontSize = "15px";
     input.style.fontWeight = "bold";
-    input.style.margin = "0 0 0 -410px";
+    input.style.margin = "0 0 0 -600px";
     
     var div = document.createElement("div");
     div.id = cbox.name;
@@ -210,6 +210,48 @@ document.getElementById('loanTerm').value = '6';
 // lock 40 weeks for Bank Fees
 document.getElementById('bankFees').value = '40';
 
+
+
+
+// container for bankOtherInputContainer
+const bankOtherInputContainer = document.getElementById("bankOtherInputContainer");
+const otherBankAccountHtml = `
+      <div class="labels">
+        <label id="bankAccountOtherText" for="bankAccountOtherText">Please Specify</label>
+      </div>
+      <div class="input-tab">
+        <input class="input-field" type="text" id="bankAccountOther" name="bankAccountOther" placeholder="Other Bank Account Type" required style="width: 150px;">
+      </div>
+    </div>
+    `;
+
+// show above html if other is selected for bank account type
+function otherBankAccountType() {
+  var select = document.getElementById("bankAccountTypeDropdown");
+  var option = select.options[select.selectedIndex];
+  
+  if (option.value == "bankOther") {
+    bankOtherInputContainer.innerHTML = otherBankAccountHtml;
+  } else {
+    bankOtherInputContainer.innerHTML = "";
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const entityContainer = document.getElementById("borrowerSpecificDetails");
 
 
@@ -244,21 +286,21 @@ const htmlForFirstIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualFirstName1" for="individualFirstName1">First Name(s)</label>
+    <label id="individualFirstNameLabel1" for="individualFirstNameLabel1">First Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualFirstName1" name="individualFirstName1" placeholder="First Name(s)" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label id="individualMiddleName1" for="individualMiddleName1">Middle Name(s)</label>
+    <label id="individualMiddleNameLabel1" for="individualMiddleNameLabel1">Middle Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualMiddleName1" name="individualMiddleName1" placeholder="Middle Name(s)" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="individualLastName1" for="individualLastName1">Last Name(s)</label>
+    <label id="individualLastNameLabel1" for="individualLastNameLabel1">Last Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualLastName1" name="lastName1" placeholder="Last Name(s)" style="width: 150px;" required>
@@ -877,21 +919,21 @@ const htmlForAdditionalIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualFirstName{{index}}" for="individualFirstName{{index}}">First Name(s)</label>
+    <label id="individualFirstNameLabel{{index}}" for="individualFirstNameLabel{{index}}">First Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualFirstName{{index}}" name="individualFirstName{{index}}" placeholder="First Name(s)" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="individualMiddleName{{index}}" for="individualMiddleName{{index}}">Middle Name(s)</label>
+    <label id="individualMiddleNameLabel{{index}}" for="individualMiddleNameLabel{{index}}">Middle Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualMiddleName{{index}}" name="individualMiddleName{{index}}" placeholder="Middle Name(s)" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="individualLastName{{index}}" for="individualLastName{{index}}">Last Name(s)</label>
+    <label id="individualLastNameLabel{{index}}" for="individualLastNameLabel{{index}}">Last Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualLastName{{index}}" name="lastName{{index}}" placeholder="Last Name(s)" style="width: 150px;">
@@ -1746,35 +1788,15 @@ function handleBorrowerSelect() {
   }
 }
 
-
 addDirectorEventListeners();
 
 
-// container for bankOtherInputContainer
-const bankOtherInputContainer = document.getElementById("bankOtherInputContainer");
-const otherBankAccountHtml = `
-      <div class="labels">
-        <label id="bankAccountOtherText" for="bankAccountOtherText">Please Specify</label>
-      </div>
-      <div class="input-tab">
-        <input class="input-field" type="text" id="bankAccountOther" name="bankAccountOther" placeholder="Other Bank Account Type" required style="width: 150px;">
-      </div>
-    </div>
-    `;
-
-// show above html if other is selected for bank account type
-function otherBankAccountType() {
-  var select = document.getElementById("bankAccountTypeDropdown");
-  var option = select.options[select.selectedIndex];
-  
-  if (option.value == "bankOther") {
-    bankOtherInputContainer.innerHTML = otherBankAccountHtml;
-  } else {
-    bankOtherInputContainer.innerHTML = "";
-  }
-}
 
 
+
+
+// NO JAVASCRIPT BELOW THIS LINE
+// JAVASCRIPT BREAKS PAST THIS LINE
 
 
 
@@ -1808,7 +1830,3 @@ const submitButton = document.getElementById("submit");
 //  });
 //});
 //}
-
-
-
-  

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import boto3
 
 import json
 from flask import Flask, render_template, request, jsonify
@@ -41,22 +42,40 @@ def borrow():
     if request.method == 'GET':
         return render_template('borrow.html', title='Borrow')
     
-    return render_template('borrow.html', title='Borrow')
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    name = request.form.get('loanTotal')
-    email = request.form.get('numTranches')
+    
+    
+    loanPurpose = request.form.getlist('loanPurpose')
+    otherLoanPurpose = request.form.get('otherLoanText')
+    
+    
+    loanTotal = request.form.get('loanTotal')
+    numTranches = request.form.get('numTranches')
+    
     
     data = {
-        'name': name,
-        'email': email
+        'Loan Purpose' : loanPurpose,
+        'Loan Purpose (other)': otherLoanPurpose,
+        'Loan Total': loanTotal,
+        'Number of Tranches': numTranches
     }
     
     with open('data.json', 'w') as f:
         json.dump(data, f)
         
-    return 'Data saved!'
+    # Upload data.json to S3
+    #s3 = boto3.resource('s3')
+    bucket_name = 'your-bucket-name'
+    object_key = 'data.json'
+    #s3.Object(bucket_name, object_key).put(Body=open('data.json', 'rb'))
+    
+#   return 'Data saved!'
+    return render_template('submitted.html', title='Submitted')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
+    
+    
