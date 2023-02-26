@@ -1743,7 +1743,7 @@ function handleBorrowerSelect() {
     addDirectorButton.style.margin = "0 auto";
     addEventListenersToAddButtons('Ubo', 'additionalUboInfo', htmlForAdditionalUbo);
     
-  } 
+  }
 }
 
 
@@ -1773,6 +1773,11 @@ function otherBankAccountType() {
     bankOtherInputContainer.innerHTML = "";
   }
 }
+
+
+
+
+
 
 
 

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie-edge">
-
-    <title>Invest</title>
+    
+    <title>Log In</title>
     <style>
   
       @import url('https://fonts.googleapis.com/css?family=Abel');
@@ -148,14 +148,8 @@
         margin: 20px;
       }
       
-      #submit-button-container {
-        display: flex;
-        justify-content: center;
-      }
-      
       button {
-        background-color: #0000FF;
-        margin: 0;
+        background-color: #e67e22;
         border-radius: 4px;
         color: white;
         font-size: 1em;
@@ -164,8 +158,9 @@
         padding: 10px 15px;
         border: 1px solid;
       }
+      
       button:hover {
-        background-color: #00008B;
+        background-color: #bf6516;
       }
       
       footer {
@@ -257,13 +252,13 @@
         </div>
         <nav>
           <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="solutions.html">Solutions</a></li>
-            <li><a href="borrow.html">Borrow</a></li>
-            <li><a href="invest.html">Invest</a></li>
-            <li><a href="login.html">Log In</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="about">About</a></li>
+            <li><a href="solutions">Solutions</a></li>
+            <li><a href="borrow">Borrow</a></li>
+            <li><a href="invest">Invest</a></li>
+            <li><a href="login">Log In</a></li>
+            <li><a href="contact">Contact</a></li>
           </ul>
         </nav>
       </header>
@@ -271,8 +266,7 @@
     
     <header>
       <div class="text-box">
-        <h1 id="title">LONGLINE LENDING LLC</h1>
-        <h1 id="title">Invest FORM</h1>
+        <h1 id="title">Log In</h1>
       </div>
     </header>
     <main>
@@ -410,20 +404,17 @@
           <div class="input-tab">
             <textarea class="input-field" id="comments" name="comments" rows="10" cols="40" placeholder="Your comments..."></textarea></div>
           
+          <div class="btn">
+            <button id="submit" type="submit">Submit</button>
+          </div>
+          
         </form>
-      </div>
-      
-      
-      <div class="submit-button-container">
-        <div class="btn">
-          <button id="submit" type="submit">Submit</button>
-        </div>
       </div>
       
     </main>
     <footer>
       <p id="copyright"></p>
     </footer>
-    <script defer src="invest.js"></script>
+    <script defer src="login.js"></script>
   </body>
 </html>

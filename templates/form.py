@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import BooleanField, StringField, SubmitField
 from wtforms.validators import DataRequired
 
-class borrowForm(FlaskForm):
+class BorrowForm(FlaskForm):
     asset = BooleanField('Asset Purchase or Down Payment')
     industrial = BooleanField('Industrial Use')
     tax = BooleanField('Tax Payment')
