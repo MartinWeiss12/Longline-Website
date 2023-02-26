@@ -276,8 +276,6 @@
       
       
       <div class="container" id="pinContainer">
-        
-        <br><br><br>
         <h2 id="title">Please Enter Pin</h2><br>
         <div class="labels">
           <label id="pinLabel" for="pinLabel">Enter Pin</label>
@@ -287,11 +285,13 @@
             <input class="input-field" type="password" id="userPin" name="userPin" placeholder="Enter Pin" required autofocus style="width: 150px;">
             <button id="submitPinButton" type="submit">Submit</button>
           </form>
+          
+          {% if error %}
+          <br><div class="error">{{ error }}</div>
+          {% endif %}
+          
         </div>
-        
       </div>
-
-      
     </main>
     <footer>
       <p id="copyright"></p>

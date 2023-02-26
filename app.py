@@ -50,6 +50,9 @@ def borrow():
     
     if(userPin == flaskBackendPin):
         return render_template('borrow.html', title='Borrow')
+    else:
+        error = 'Incorrect PIN. Please try again.'
+        return render_template('borrowLogin.html', title='Borrow', error=error)
 
 @app.route('/submit', methods=['POST'])
 def submit():
