@@ -581,6 +581,7 @@ const htmlForEntity = `
   </div>
 
   <br><br><br><h2 id="title">Step 6 - UBO and Director Info</h2><br>  
+  <br><h3 id="uboInfoSubtitle1">Please add UBOs THEN Directors</strong></h3><br>
   <br><h3 id="uboInfoSubtitle1">Info for UBO 1</h3>
   
   <div class="labels">
@@ -1518,164 +1519,10 @@ const htmlForAdditionalUbo = `
   </div>
 `;
   
-  
-  
-  
-  
-function addEventListenersToAddButtons(buttonType, additionalInfoDivId, htmlForAdditionalInfo) {
-  count = 2;
-  const additionalInfoDiv = document.getElementById(additionalInfoDivId);
-  
-  for (let i = 1; i < 9; i++) {
-    const addButton = document.getElementById(`add${buttonType}Button${i}`);
-    addButton.addEventListener('click', function() {
-      if (count <= 9) {
-        const htmlForAdditionalWithIndex = htmlForAdditionalInfo.replace(/{{index}}/g, count);
-        additionalInfoDiv.insertAdjacentHTML('beforeend', htmlForAdditionalWithIndex);
-        
-        count++;
-        
-        if (count === 9) {
-          const addButton1 = document.getElementById(`add${buttonType}Button1`);
-          addButton1.style.display = 'none';
-        }
-      }
-    });
-  }
-}
+  // html for additional Director
+  const htmlForAdditionalDirector = `
 
-
-var addIndividualButton = document.getElementById("addIndividualButton1");
-addIndividualButton.style.display = "none"; // hide the button by default
-var addUboButton = document.getElementById("addUboButton1");
-addUboButton.style.display = "none"; // hide the button by default
-var addDirectorButton = document.getElementById("addDirectorButton1");
-addDirectorButton.style.display = "none"; // hide the button by default
-
-function handleBorrowerSelect() {
-  var select = document.getElementById("borrowerDropdown");
-  var option = select.options[select.selectedIndex];
-  
-  if (option.value == "individualBorrower") {    
-    
-    var count = 1;
-    
-    document.getElementById("additionalUboInfo").innerHTML = "";
-    document.getElementById("additionalDirectorInfo").innerHTML = "";
-    entityContainer.innerHTML = htmlForFirstIndividual;
-    addUboButton.style.display = "none"; // hide the button
-    addDirectorButton.style.display = "none"; // hide the button
-    addIndividualButton.style.display = "block"; // show the button
-    addIndividualButton.style.margin = "0 auto";
-    addEventListenersToAddButtons('Individual', 'additionalIndividualInfo', htmlForAdditionalIndividual);
-    
-  }
-  
-  if (option.value == "entityBorrower") {
-    
-    var count = 1;
-    
-    document.getElementById("additionalIndividualInfo").innerHTML = "";
-    entityContainer.innerHTML = htmlForEntity;
-    addIndividualButton.style.display = "none"; // hide the button
-    addUboButton.style.display = "block"; // show the button
-    addUboButton.style.margin = "0 auto";
-    addDirectorButton.style.display = "block"; // show the button
-    addDirectorButton.style.margin = "0 auto";
-    addEventListenersToAddButtons('Ubo', 'additionalUboInfo', htmlForAdditionalUbo);
-    
-  } 
-}
-
-
-
-
-
-
-
-// Call the function to add event listeners to the buttons initially
-
-
-
-
-  
-  
-  
-  
-  
-
-//
-//
-//function addEventListenersToAddUboButtons() {
-//// Define a variable to keep track of the number of times the button has been clicked
-//let uboCount = 2;
-//
-//// Get a reference to the div where the HTML will be added
-//const additionalUboInfoDiv = document.getElementById('additionalUboInfo');
-//
-//// Add an event listener to each button
-//for (let i = 1; i < 9; i++) {
-//  const addUboButton = document.getElementById(`addUboButton${i}`);
-//  addUboButton.addEventListener('click', function() {
-//    // Only add HTML if the click count is less than or equal to 8
-//    if (uboCount <= 9) {
-//      // Add the base HTML to the div
-//      const htmlForAdditionalUboWithIndex = htmlForAdditionalUbo.replace(/{{index}}/g, uboCount);
-//      additionalUboInfoDiv.insertAdjacentHTML('beforeend', htmlForAdditionalUboWithIndex);
-//      
-//      // Increment the click count
-//      uboCount++;
-//      
-//      if (uboCount === 9) {
-//        const addUboButton1 = document.getElementById('addUboButton1');
-//        addUboButton1.style.display = 'none';
-//      }
-//    }
-//  });
-//}
-//}
-//
-//// Call the function to add event listeners to the buttons initially
-//addEventListenersToAddUboButtons();
-
-  
-  
-  
-  
-  
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// html for additional Director
-const htmlForAdditionalDirector = `
-
-  <br><h3 id="directorInfoSubtitle{{index}}">Info for director {{index}}</h3>
+  <br><br><h3 id="directorInfoSubtitle{{index}}">Info for Director {{index}}</h3>
   
   <div class="labels">
     <label for="dropdown">Control Person Authorized to Apply for, Take, and Execute, Loan?</label>
@@ -1944,6 +1791,220 @@ const htmlForAdditionalDirector = `
     <span id="directorOfacFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
 `;
+  
+  
+  
+function addEventListenersToAddButtons(buttonType, additionalInfoDivId, htmlForAdditionalInfo) {
+  count = 2;
+  const additionalInfoDiv = document.getElementById(additionalInfoDivId);
+  
+  for (let i = 1; i < 9; i++) {
+    const addButton = document.getElementById(`add${buttonType}Button${i}`);
+    addButton.addEventListener('click', function() {
+      if (count <= 9) {
+        const htmlForAdditionalWithIndex = htmlForAdditionalInfo.replace(/{{index}}/g, count);
+        additionalInfoDiv.insertAdjacentHTML('beforeend', htmlForAdditionalWithIndex);
+        
+        count++;
+        
+        if (count === 9) {
+          const addButton1 = document.getElementById(`add${buttonType}Button1`);
+          addButton1.style.display = 'none';
+        }
+      }
+    });
+  }
+}
+
+
+
+function addDirectorEventListeners() {
+  let count = 1;
+  const additionalDirectorInfo = document.getElementById('additionalDirectorInfo');
+  
+  for (let i = 1; i < 9; i++) {
+    const addDirectorButton = document.getElementById(`addDirectorButton${i}`);
+    addDirectorButton.addEventListener('click', function() {
+      if (count <= 9) {
+        const htmlForAdditionalWithIndex = htmlForAdditionalDirector.replace(/{{index}}/g, count);
+        additionalDirectorInfo.insertAdjacentHTML('beforeend', htmlForAdditionalWithIndex);
+        
+        count++;
+        
+        if (count === 8) {
+          const addDirectorButton1 = document.getElementById('addDirectorButton1');
+          addDirectorButton1.style.display = 'none';
+        }
+      }
+    });
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var addIndividualButton = document.getElementById("addIndividualButton1");
+addIndividualButton.style.display = "none"; // hide the button by default
+var addUboButton = document.getElementById("addUboButton1");
+addUboButton.style.display = "none"; // hide the button by default
+var addDirectorButton = document.getElementById("addDirectorButton1");
+addDirectorButton.style.display = "none"; // hide the button by default
+
+function handleBorrowerSelect() {
+  var select = document.getElementById("borrowerDropdown");
+  var option = select.options[select.selectedIndex];
+  
+  var count = 2;
+  
+  if (option.value == "individualBorrower") {    
+    
+    document.getElementById("additionalUboInfo").innerHTML = "";
+    document.getElementById("additionalDirectorInfo").innerHTML = "";
+    entityContainer.innerHTML = htmlForFirstIndividual;
+    addUboButton.style.display = "none"; // hide the button
+    addDirectorButton.style.display = "none"; // hide the button
+    addIndividualButton.style.display = "block"; // show the button
+    addIndividualButton.style.margin = "0 auto";
+    addEventListenersToAddButtons('Individual', 'additionalIndividualInfo', htmlForAdditionalIndividual);
+    
+  }
+  
+  if (option.value == "entityBorrower") {
+    
+    var count = 1;
+    
+    document.getElementById("additionalIndividualInfo").innerHTML = "";
+    entityContainer.innerHTML = htmlForEntity;
+    addIndividualButton.style.display = "none"; // hide the button
+    addUboButton.style.display = "block"; // show the button
+    addUboButton.style.margin = "0 auto";
+    addDirectorButton.style.display = "block"; // show the button
+    addDirectorButton.style.margin = "0 auto";
+    addEventListenersToAddButtons('Ubo', 'additionalUboInfo', htmlForAdditionalUbo);
+    
+  } 
+}
+
+
+addDirectorEventListeners();
+
+
+
+//addEventListenersToAddButtons('Director', 'additionalDirectorInfo', htmlForAdditionalDirector);
+
+//if (addDirectorButton1) {
+//addDirectorButton1.addEventListener('click', () => {
+//  addEventListenersToAddButtons('Director', 'additionalDirectorInfo', htmlForAdditionalDirector);
+//});
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+// Call the function to add event listeners to the buttons initially
+
+
+
+
+  
+  
+  
+  
+  
+
+//
+//
+//function addEventListenersToAddUboButtons() {
+//// Define a variable to keep track of the number of times the button has been clicked
+//let uboCount = 2;
+//
+//// Get a reference to the div where the HTML will be added
+//const additionalUboInfoDiv = document.getElementById('additionalUboInfo');
+//
+//// Add an event listener to each button
+//for (let i = 1; i < 9; i++) {
+//  const addUboButton = document.getElementById(`addUboButton${i}`);
+//  addUboButton.addEventListener('click', function() {
+//    // Only add HTML if the click count is less than or equal to 8
+//    if (uboCount <= 9) {
+//      // Add the base HTML to the div
+//      const htmlForAdditionalUboWithIndex = htmlForAdditionalUbo.replace(/{{index}}/g, uboCount);
+//      additionalUboInfoDiv.insertAdjacentHTML('beforeend', htmlForAdditionalUboWithIndex);
+//      
+//      // Increment the click count
+//      uboCount++;
+//      
+//      if (uboCount === 9) {
+//        const addUboButton1 = document.getElementById('addUboButton1');
+//        addUboButton1.style.display = 'none';
+//      }
+//    }
+//  });
+//}
+//}
+//
+//// Call the function to add event listeners to the buttons initially
+//addEventListenersToAddUboButtons();
+
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
