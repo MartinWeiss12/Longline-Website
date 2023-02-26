@@ -548,10 +548,35 @@
       </div>
     </header>
     <main>
-      <div class="container" id="loanForm">
+      
+      
+      <div class="container" id="pinContainer">
+        
+        <br><br><br>
+        <h2 id="title">Please Enter Pin</h2><br>
+        <div class="labels">
+          <label id="pinLabel" for="pinLabel">Enter Pin</label>
+        </div>
+        <div class="input-tab">
+          <form id="pinForm">
+            <input class="input-field" type="password" id="userPin" name="userPin" placeholder="Enter Pin" required autofocus style="width: 150px;">
+          </form>
+        </div>
+        
+        <div class="submitButtonContainer">
+          <div class="btn">
+            <button id="submitPinButton" type="submit">Submit</button>
+          </div>
+        </div>
+      </div>
+      
+      
+      
+      
+      <div class="container" id="loanForm" style="display: none;">
         <form id="loanForm" method="POST" action="{{ url_for('submit') }}" enctype="multipart/form-data">
           
-          <h2 id="title">Step 1 - Loan Purpose</h2>
+          <br><br><h2 id="title">Step 1 - Loan Purpose</h2>
           <br>
           <div class="labels">
             <label></label></div>

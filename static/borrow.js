@@ -3,6 +3,30 @@ const currentYear = new Date().getFullYear();
 const copyright = document.getElementById("copyright");
 copyright.innerHTML = "&copy; " + currentYear + " Longline Lending LLC. All rights reserved."
 
+
+
+const correctPin = "1234"; // replace with your correct pin
+
+const pinContainer = document.getElementById("pinContainer");
+const loanForm = document.getElementById("loanForm");
+const pinForm = document.getElementById("pinForm");
+const submitPinButton = document.getElementById("submitPinButton");
+
+submitPinButton.addEventListener("click", (event) => {
+  event.preventDefault(); // prevent form submission
+  
+  const userPin = document.getElementById("userPin").value;
+  
+  if (userPin === correctPin) {
+    loanForm.style.display = "block"; // show loan form
+    pinContainer.style.display = "none"; // hide pin form
+  } else {
+    alert("Incorrect pin"); // display error message
+  }
+});
+
+
+
 // function to display file name of uploaded file
 function displayFileName(inputId, spanId) {
   var fileInput = document.getElementById(inputId);
