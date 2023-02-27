@@ -1818,10 +1818,9 @@ function addDirectorEventListeners() {
     
     const removeDirectorButton = document.getElementById(`removeDirectorButton${i}`);
     removeDirectorButton.addEventListener('click', function() {
-      if (directorCount >= 1 && directorCount <= 9) {
+      if (directorCount > 2 && directorCount <= 9) {
         const additionalDirectorInfoToRemove = document.getElementById(`additionalDirectorInfo${directorCount-1}`);
         additionalDirectorInfoToRemove.remove();
-        
         
         const replacementDiv = document.createElement("div");
         replacementDiv.setAttribute("id", `additionalDirectorInfo${directorCount-1}`);
@@ -1832,11 +1831,28 @@ function addDirectorEventListeners() {
         parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
         
         directorCount--;
+      }
+      
+      // Check if additionalDirectorInfo1 is present, and if it should be removed
+      const additionalDirectorInfo1Present = document.getElementById("additionalDirectorInfo1");
+      if (additionalDirectorInfo1Present && directorCount === 2) {
+        const additionalDirectorInfoToRemove = additionalDirectorInfo1Present;
+        additionalDirectorInfoToRemove.remove();
         
-        //add blank div
+        const replacementDiv = document.createElement("div");
+        replacementDiv.setAttribute("id", "additionalDirectorInfo1");
+        // Add any content or attributes you need to the replacement div here
         
+        const firstDiv = document.getElementById("additionalDirectorInfo");
+        const parentDiv = firstDiv.parentNode;
+        parentDiv.insertBefore(replacementDiv, firstDiv);
+        
+        directorCount--;
       }
     });
+
+
+
   }
 }
 
@@ -1856,6 +1872,100 @@ function addDirectorEventListeners() {
 //removeDirectorButton.addEventListener('click', function() {
 //if (directorCount > 1) {
 //  directorCount--;
+
+
+
+
+
+// USE THIS CODE FOR IND AND UBO, THE 1ST INDEX DOESNT GET REMOVED!!
+
+/*
+
+
+function addDirectorEventListeners() {
+  directorCount = 1;
+  for (let i = 1; i <= 8; i++) {
+    const addDirectorButton = document.getElementById(`addDirectorButton${i}`);
+    addDirectorButton.addEventListener('click', function() {
+      if (directorCount <= 8) {
+        const additionalDirectorInfoID = 'additionalDirectorInfo' + directorCount;
+        const additionalDirectorInfo = document.getElementById(additionalDirectorInfoID);
+        const htmlForAdditionalDirectorWithIndex = htmlForAdditionalDirector.replace(/{{index}}/g, directorCount);
+        additionalDirectorInfo.insertAdjacentHTML('beforeend', htmlForAdditionalDirectorWithIndex);
+        directorCount++;
+        
+        if (directorCount > 8) {
+          for (let j = 1; j <= 8; j++) {
+            const addDirectorButton = document.getElementById(`addDirectorButton${j}`);
+            addDirectorButton.style.display = 'none';
+          }
+        }
+      }
+    });
+    
+    const removeDirectorButton = document.getElementById(`removeDirectorButton${i}`);
+    removeDirectorButton.addEventListener('click', function() {
+      if (directorCount > 2 && directorCount <= 9) {
+        const additionalDirectorInfoToRemove = document.getElementById(`additionalDirectorInfo${directorCount-1}`);
+        additionalDirectorInfoToRemove.remove();
+        
+        const replacementDiv = document.createElement("div");
+        replacementDiv.setAttribute("id", `additionalDirectorInfo${directorCount-1}`);
+        // Add any content or attributes you need to the replacement div here
+        
+        const divAfterOneJustRemoved = document.getElementById(`additionalDirectorInfo${directorCount}`);
+        const parentDiv = additionalDirectorInfo1.parentNode;
+        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
+        
+        directorCount--;
+      }
+      
+      if (directorCount === 2) {
+        const additionalDirectorInfoToRemove = document.getElementById(`additionalDirectorInfo${directorCount}`);
+        additionalDirectorInfoToRemove.remove();
+        
+        const replacementDiv = document.createElement("div");
+        replacementDiv.setAttribute("id", `additionalDirectorInfo${directorCount}`);
+        // Add any content or attributes you need to the replacement div here
+        
+        const divBeforeOneJustRemoved = document.getElementById(`additionalDirectorInfo${directorCount+1}`);
+        const parentDiv = additionalDirectorInfo1.parentNode;
+        parentDiv.insertBefore(replacementDiv, divBeforeOneJustRemoved);
+        
+        directorCount--;
+      }
+    });
+  }
+}
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
