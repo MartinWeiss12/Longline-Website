@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script defer src="/static/borrow.js"></script>
+    <script defer src="file:///Users/martinweiss/Documents/GitHub/SimonWebsite/templates/static/borrow.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -528,7 +528,7 @@
       </div>
       <nav>
         <ul>
-          <li><a href="/">Home</a></li>
+          <li><a href="file:///Users/martinweiss/Documents/GitHub/SimonWebsite/templates/">Home</a></li>
           <li><a href="about">About</a></li>
           <li><a href="solutions">Solutions</a></li>
           <li><a href="borrowLogin">Borrow</a></li>
@@ -555,13 +555,13 @@
           <div class="labels">
             <label></label></div>
           <div class="input-tab">
-            <input type="checkbox" name="loanPurpose" value="Asset Purchase or Down Payment" onclick="handleLoanPurposeCheckboxes(this)" required>Asset Purchase or Down Payment<br>
-            <input type="checkbox" name="loanPurpose" value="Industrial Use" onclick="handleLoanPurposeCheckboxes(this)" required>Industrial Use<br>
-            <input type="checkbox" name="loanPurpose" value="Tax Payment" onclick="handleLoanPurposeCheckboxes(this)" required>Tax Payment<br>
-            <input type="checkbox" name="loanPurpose" value="Insurance Premium" onclick="handleLoanPurposeCheckboxes(this)" required>Insurance Premium<br>
-            <input type="checkbox" name="loanPurpose" value="Margin Trading or Investment" onclick="handleLoanPurposeCheckboxes(this)" required>Margin Trading or Investment<br>
-            <input type="checkbox" name="loanPurpose" value="Education Expenses" onclick="handleLoanPurposeCheckboxes(this)" required>Education Expenses<br>
-            <input type="checkbox" name="loanPurpose" value="Other" onclick="otherLoanFunction(this); handleLoanPurposeCheckboxes(this)" required>Other<br>
+            <input type="checkbox" name="loanPurpose" value="Asset Purchase or Down Payment">Asset Purchase or Down Payment<br>
+            <input type="checkbox" name="loanPurpose" value="Industrial Use">Industrial Use<br>
+            <input type="checkbox" name="loanPurpose" value="Tax Payment">Tax Payment<br>
+            <input type="checkbox" name="loanPurpose" value="Insurance Premium">Insurance Premium<br>
+            <input type="checkbox" name="loanPurpose" value="Margin Trading or Investment">Margin Trading or Investment<br>
+            <input type="checkbox" name="loanPurpose" value="Education Expenses">Education Expenses<br>
+            <input type="checkbox" name="loanPurpose" value="Other" onclick="otherLoanFunction(this)">Other<br>
             <p id="insertOtherLoan"></p>
           </div>
           
@@ -598,14 +598,14 @@
           <div class="labels">
             <label></label></div>
           <div class="input-tab">
-            <input type="checkbox" name="collateralInfo" value="Personal Property" onclick="handleCollateralCheckboxes(this)" required>Personal Property<br>
-            <input type="checkbox" name="collateralInfo" value="Real Property" onclick="handleCollateralCheckboxes(this)" required>Real Property<br>
-            <input type="checkbox" name="collateralInfo" value="Titled Property" onclick="handleCollateralCheckboxes(this)" required>Titled Property<br>
-            <input type="checkbox" name="collateralInfo" value="Equity Instruments" onclick="handleCollateralCheckboxes(this)" required>Equity Instruments<br>
-            <input type="checkbox" name="collateralInfo" value="Debt Instruments" onclick="handleCollateralCheckboxes(this)" required>Debt Instruments<br>
-            <input type="checkbox" name="collateralInfo" value="Negotiable Instruments" onclick="handleCollateralCheckboxes(this)" required>Negotiable Instruments<br>
-            <input type="checkbox" name="collateralInfo" value="Banknotes" onclick="handleCollateralCheckboxes(this)" required>Banknotes<br>
-            <input type="checkbox" name="collateralInfo" value="Other" onclick="otherCollateralFucntion(this); handleCollateralCheckboxes(this)" required>Other<br>
+            <input type="checkbox" name="collateralInfo" value="Personal Property" required>Personal Property<br>
+            <input type="checkbox" name="collateralInfo" value="Real Property">Real Property<br>
+            <input type="checkbox" name="collateralInfo" value="Titled Property">Titled Property<br>
+            <input type="checkbox" name="collateralInfo" value="Equity Instruments">Equity Instruments<br>
+            <input type="checkbox" name="collateralInfo" value="Debt Instruments">Debt Instruments<br>
+            <input type="checkbox" name="collateralInfo" value="Negotiable Instruments">Negotiable Instruments<br>
+            <input type="checkbox" name="collateralInfo" value="Banknotes">Banknotes<br>
+            <input type="checkbox" name="collateralInfo" value="Other" onclick="otherCollateralFucntion(this)" >Other<br>
             <p id="insertOtherCollateral"></p>
           </div>   
           

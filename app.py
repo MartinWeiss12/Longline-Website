@@ -75,7 +75,10 @@ def submit():
     interestRate = request.form.get('interestRate')
     apr = request.form.get('apr')
     agreeAPR = request.form.get('agreeAPR')
-    intrestDropdown = request.form.get('intrestDropdown')
+    #intrestDropdown = request.form.get('intrestDropdown') uncomment when we unlock intrestDropdown
+    intrestDropdown = 'N/A'
+    #intrestPaymentDropdown = request.form.get('intrestPaymentDropdown') uncomment when we unlock intrestPaymentDropdown
+    intrestPaymentDropdown = 'On-Maturity'
     
     data = {
         'Loan Purpose' : loanPurpose,
@@ -96,7 +99,8 @@ def submit():
         'Interest Rate': interestRate,
         'APR': apr,
         'Agree APR': agreeAPR,
-        'Intrest': intrestDropdown
+        'Interest': intrestDropdown,
+        'Interest Payment': intrestPaymentDropdown
     }
     
     with open('data.json', 'w') as f:

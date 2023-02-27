@@ -15,6 +15,36 @@ function displayFileName(inputId, spanId) {
   }
 }
 
+
+function handleLoanPurposeCheckboxes(checkbox) {
+  // If the checkbox was checked, remove the "required" attribute from all other checkboxes
+  if (checkbox.checked) {
+    const checkboxes = document.getElementsByName('loanPurpose');
+    for (let i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i] !== checkbox) {
+        checkboxes[i].removeAttribute('required');
+      }
+    }
+  }
+}
+
+function handleCollateralCheckboxes(checkbox) {
+  // If the checkbox was checked, remove the "required" attribute from all other checkboxes
+  if (checkbox.checked) {
+    const checkboxes = document.getElementsByName('collateralInfo');
+    for (let i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i] !== checkbox) {
+        checkboxes[i].removeAttribute('required');
+      }
+    }
+  }
+}
+
+
+
+
+
+
 // show other text entry box if other button is clicked for Loan Purpose
 function otherLoanFunction(cbox) {
   if (cbox.checked) {
@@ -24,7 +54,6 @@ function otherLoanFunction(cbox) {
     input.name = "otherLoanText";
     input.placeholder = "Other Loan Purpose";
     input.required = true;
-    input.autofocus = true;
     input.style.width = "150px";
     input.style.padding = "5px";
     input.style.border = "1px solid #0000FF";
@@ -52,7 +81,6 @@ function otherCollateralFucntion(cbox) {
     input.name = "otherCollateralText";
     input.placeholder = "Other Collateral";
     input.required = true;
-    input.autofocus = true;
     input.style.width = "150px";
     input.style.padding = "5px";
     input.style.margin = "18px 0 0 10px";
@@ -196,22 +224,20 @@ document.getElementById('interestRate').value = '2%';
 document.getElementById('apr').value = '24%';
 
 //lock Interest Rate dropdown as N/A
-const intrestDropdown = document.getElementById("intrestDropdownID");
-intrestDropdown.value = "interestNA";
-intrestDropdown.disabled = true;
+const interestDropdown = document.getElementById("interestDropdownID");
+interestDropdown.value = "interestNA";
+interestDropdown.disabled = true;
 
 // lock Interest Payment dropdown as On-Maturity
-const intrestPaymentDropdown = document.getElementById("intrestPaymentDropdownID");
-intrestPaymentDropdown.value = "interestDueMat";
-intrestPaymentDropdown.disabled = true;
+const interestPaymentDropdown = document.getElementById("interestPaymentDropdownID");
+interestPaymentDropdown.value = "interestDueMat";
+interestPaymentDropdown.disabled = true;
 
 // lock 6 months for Loan Term
 document.getElementById('loanTerm').value = '6';
 
 // lock 40 weeks for Bank Fees
 document.getElementById('bankFees').value = '40';
-
-
 
 
 // container for bankOtherInputContainer
@@ -221,7 +247,7 @@ const otherBankAccountHtml = `
         <label id="bankAccountOtherText" for="bankAccountOtherText">Please Specify</label>
       </div>
       <div class="input-tab">
-        <input class="input-field" type="text" id="bankAccountOther" name="bankAccountOther" placeholder="Other Bank Account Type" required style="width: 150px;">
+        <input class="input-field" type="text" id="bankAccountOther" name="bankAccountOther" placeholder="Other Bank Account Type" style="width: 150px;">
       </div>
     </div>
     `;
@@ -240,32 +266,17 @@ function otherBankAccountType() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 const entityContainer = document.getElementById("borrowerSpecificDetails");
-
 
 // base html for individual details
 const htmlForFirstIndividual = `
     
-  <br><br><br><h2 id="stepSixTitle">Step 6 - Individual Info</h2><br>
+  <br><br><br><h2 id="stepSixIndividualSubtitle">Step 6 - Individual Info</h2><br>
 
   <br><br><h3 id="individualInfoSubtitle1">Info for Individual 1</h3>
 
-  
   <div class="labels">
-    <label for="dropdown">Personal Guarantor?</label>
+    <label for="individualPersonalGuarantorDropdown">Personal Guarantor?</label>
   </div>
   <div class="input-tab">
     <select id="individualPersonalGuarantorDropdown" name="individualPersonalGuarantorDropdown1" required>
@@ -276,7 +287,7 @@ const htmlForFirstIndividual = `
   </div>
   
   <div class="labels">
-    <label for="dropdown">U.S. Citizen or Green Card?</label>
+    <label for="individualCitizenDropdown">U.S. Citizen or Green Card?</label>
   </div>
   <div class="input-tab">
     <select id="individualCitizenDropdown" name="individualCitizenDropdown1" required>
@@ -287,7 +298,7 @@ const htmlForFirstIndividual = `
   </div>
 
   <div class="labels">
-    <label for="dropdown">South Dakota Resident?</label>
+    <label for="individualSDResidentDropdown">South Dakota Resident?</label>
   </div>
   <div class="input-tab">
     <select id="individualSDResidentDropdown" name="individualSDResidentDropdown1" required>
@@ -298,70 +309,70 @@ const htmlForFirstIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualFirstNameLabel1" for="individualFirstNameLabel1">First Name(s)</label>
+    <label id="individualFirstNameLabel1" for="individualFirstName1">First Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualFirstName1" name="individualFirstName1" placeholder="First Name(s)" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label id="individualMiddleNameLabel1" for="individualMiddleNameLabel1">Middle Name(s)</label>
+    <label id="individualMiddleNameLabel1" for="individualMiddleName1">Middle Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualMiddleName1" name="individualMiddleName1" placeholder="Middle Name(s)" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="individualLastNameLabel1" for="individualLastNameLabel1">Last Name(s)</label>
+    <label id="individualLastNameLabel1" for="individualLastName1">Last Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualLastName1" name="lastName1" placeholder="Last Name(s)" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label id="homeBankAddressLabel1" for="homeBankAddressLabel1">Home Address (must match recent bill)</label>
+    <label id="individualHomeBankAddressLabel1" for="individualHomeBankAddress1">Home Address (must match recent bill)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="homeAddress1" name="homeAddress1" placeholder="Home Address" style="width: 150px;" required>
+    <input class="input-field" type="text" id="individualHomeBankAddress1" name="individualHomeBankAddress1" placeholder="Home Address" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label id="individualHomeCountryLabel1" for="individualHomeCountryLabel1">Home Country</label>
+    <label id="individualHomeCountryLabel1" for="individualHomeCountry1">Home Country</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualhomeCountry1" name="individualhomeCountry1" placeholder="Home Country" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label id="individualHomeStreetAddressLabel1" for="individualHomeStreetAddressLabel1">Home Street Address</label>
+    <label id="individualHomeStreetAddressLabel1" for="individualHomeStreetAddress1">Home Street Address</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualHomeStreetAddress1" name="individualHomeStreetAddress1" placeholder="Home Street Address" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label id="individualHomeCityLabel1" for="individualHomeCityLabel1">Home City</label>
+    <label id="individualHomeCityLabel1" for="individualHomeCity1">Home City</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualHomeCity1" name="individualHomeCity1" placeholder="Home City" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label id="individualHomeStateLabel1" for="individualHomeStateLabel1">Home State or Province</label>
+    <label id="individualHomeStateLabel1" for="individualHomeState1">Home State or Province</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualHomeState1" name="individualHomeState1" placeholder="Home State or Province" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label id="individualHomeZipLabel1" for="individualHomeZipLabel1">Home Zip or Province</label>
+    <label id="individualHomeZipLabel1" for="individualHomeZip1">Home Zip or Province</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualHomeZip1" name="individualHomeZip1" placeholder="Home Zip" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label for="dropdown">Own or Rent?</label>
+    <label for="individualOwnRentDropdown">Own or Rent?</label>
   </div>
   <div class="input-tab">
     <select id="individualOwnRentDropdown" name="individualOwnRentDropdown1" required>
@@ -372,55 +383,55 @@ const htmlForFirstIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualRentLabel1" for="individualRentLabel1">Monthly Mortgage or Rent in USD</label>
+    <label id="individualRentLabel1" for="individualRent1">Monthly Mortgage or Rent in USD</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualMonthlyRent1" name="individualMonthlyRent1" placeholder="Monthly Mortgage or Rent" style="width: 150px;" required pattern="[0-9]+" title="Please enter only numbers.">
   </div>
   
   <div class="labels">
-    <label id="individualPassportNumberLabel1" for="individualPassportNumberLabel1">Passport Number</label>
+    <label id="individualPassportNumberLabel1" for="individualPassportNumber1">Passport Number</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualPassportNumber1" name="individualPassportNumber1" placeholder="Passport Number" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label id="individualSsnLabel1" for="individualSsnLabel1">SSN or ID Number</label>
+    <label id="individualSsnLabel1" for="individualSsn1">SSN or ID Number</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualSsn1" name="individualSsn1" placeholder="SSN or ID Number" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label id="individualDobLabel1" for="individualDobLabel1">Date of Birth</label>
+    <label id="individualDobLabel1" for="individualDob1">Date of Birth</label>
   </div>
   <div class="input-tab">
     <input type="date" id="individualDob1" name="individualDob1">
   </div>
   
   <div class="labels">
-    <label id="individualEmailLabel1" for="individualEmailLabel1">Email Address</label></div>
+    <label id="individualEmailLabel1" for="individualEmail1">Email Address</label></div>
   <div class="input-tab">
     <input class="input-field" type="email" id="individualEmail1" name="individualEmail1" placeholder="email@email.com" style="width: 350px;" required>
   </div>
   
   <div class="labels">
-    <label id="individualPhoneLabel1" for="individualPhoneLabel1">Telephone</label>
+    <label id="individualPhoneLabel1" for="individualPhone1">Telephone</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualPhone1" name="individualPhone1" placeholder="Telephone" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label id="individualFicoLabel1" for="individualFicoLabel1">FICO or NOSIS Score</label>
+    <label id="individualFicoLabel1" for="individualFico1">FICO or NOSIS Score</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualFico1" name="individualFico1" placeholder="FICO or NOSIS Score" style="width: 150px;" required pattern="[0-9]+" title="Please enter only numbers.">
   </div>
   
   <div class="labels">
-    <label id="individualIncomeLabel1" for="individualIncomeLabel1">Monthly Income in USD</label>
+    <label id="individualIncomeLabel1" for="individualIncome1">Monthly Income in USD</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualIncome1" name="individualIncome1" placeholder="Monthly Income in USD" style="width: 150px;" required pattern="[0-9]+" title="Please enter only numbers.">
@@ -462,7 +473,7 @@ const htmlForFirstIndividual = `
   </div>
 
   <div class="labels">
-    <label id="individualPassportFileLabel1" for="individualPassportFileLabel1" required>Passport</label>
+    <label id="individualPassportFileLabel1" for="individualPassportFile1" required>Passport</label>
   </div>
   <div class="input-tab">
     <label for="individualPassportFile1" class="fileUploadButton">Choose File
@@ -472,7 +483,7 @@ const htmlForFirstIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualDniFrontFileLabel1" for="individualDniFrontFileLabel1" required>DNI/Drivers License (Front)</label>
+    <label id="individualDniFrontFileLabel1" for="individualDniFrontFile1" required>DNI/Drivers License (Front)</label>
   </div>
   <div class="input-tab">
     <label for="individualDniFrontFile1" class="fileUploadButton">Choose File
@@ -482,7 +493,7 @@ const htmlForFirstIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualDniReverseFileLabel1" for="individualDniReverseFileLabel1" required>DNI/Drivers License (Reverse)</label>
+    <label id="individualDniReverseFileLabel1" for="individualDniReverseFile1" required>DNI/Drivers License (Reverse)</label>
   </div>
   <div class="input-tab">
     <label for="individualDniReverseFile1" class="fileUploadButton">Choose File
@@ -492,7 +503,7 @@ const htmlForFirstIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualBillAddressProofFileLabel1" for="individualBillAddressProofFileLabel1" required>Bill for Proof of Address</label>
+    <label id="individualBillAddressProofFileLabel1" for="individualBillAddressProofFile1" required>Bill for Proof of Address</label>
   </div>
   <div class="input-tab">
     <label for="individualBillAddressProofFile1" class="fileUploadButton">Choose File
@@ -502,7 +513,7 @@ const htmlForFirstIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualCreditCheckFileLabel1" for="individualCreditCheckFileLabel1" required>Credit Check/NOSIS</label>
+    <label id="individualCreditCheckFileLabel1" for="individualCreditCheckFile1" required>Credit Check/NOSIS</label>
   </div>
   <div class="input-tab">
     <label for="individualCreditCheckFile1" class="fileUploadButton">Choose File
@@ -512,7 +523,7 @@ const htmlForFirstIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualWorldCheckFileLabel1" for="individualWorldCheckFileLabel1" required>World Check</label>
+    <label id="individualWorldCheckFileLabel1" for="individualWorldCheckFile1" required>World Check</label>
   </div>
   <div class="input-tab">
     <label for="individualWorldCheckFile1" class="fileUploadButton">Choose File
@@ -522,7 +533,7 @@ const htmlForFirstIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualOfacFileLabel1" for="individualOfacFileLabel1" required>OFAC Check</label>
+    <label id="individualOfacFileLabel1" for="individualOfacFile1" required>OFAC Check</label>
   </div>
   <div class="input-tab">
     <label for="individualOfacFile1" class="fileUploadButton">Choose File
@@ -632,9 +643,9 @@ const htmlForEntity = `
     <span id="entityOtherFileNameSpan">Uploaded File: None</span>
   </div>
 
-  <br><br><br><h2 id="title">Step 6 - UBO and Director Info</h2><br>  
+  <br><br><br><h2 id="stepSixUboSubtitle">Step 6 - UBO and Director Info</h2><br>  
   <br><h3 id="uboInfoSubtitle1">Please add UBOs THEN Directors</strong></h3><br>
-  <br><h3 id="uboInfoSubtitle1">Info for UBO 1</h3>
+  <br><h3 id="uboInfoSubtitle2">Info for UBO 1</h3>
   
   <div class="labels">
     <label for="dropdown">Control Person Authorized to Apply for, Take, and Execute, Loan?</label>
@@ -702,42 +713,42 @@ const htmlForEntity = `
   </div>
   
   <div class="labels">
-    <label id="homeBankAddressLabel1" for="homeBankAddressLabel1">Home Address (must match recent bill)</label>
+    <label id="uboHomeBankAddressLabel1" for="uboHomeBankAddress1">Home Address (must match recent bill)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="homeAddress1" name="homeAddress1" placeholder="Home Address" style="width: 150px;" required>
+    <input class="input-field" type="text" id="uboHomeBankAddress1" name="uboHomeBankAddress1" placeholder="Home Address" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label id="uboHomeCountryLabel1" for="uboHomeCountryLabel1">Home Country</label>
+    <label id="uboHomeCountryLabel1" for="uboHomeCountry1">Home Country</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="ubohomeCountry1" name="ubohomeCountry1" placeholder="Home Country" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label id="uboHomeStreetAddressLabel1" for="uboHomeStreetAddressLabel1">Home Street Address</label>
+    <label id="uboHomeStreetAddressLabel1" for="uboHomeStreetAddress1">Home Street Address</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboHomeStreetAddress1" name="uboHomeStreetAddress1" placeholder="Home Street Address" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label id="uboHomeCityLabel1" for="uboHomeCityLabel1">Home City</label>
+    <label id="uboHomeCityLabel1" for="uboHomeCity1">Home City</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboHomeCity1" name="uboHomeCity1" placeholder="Home City" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label id="uboHomeStateLabel1" for="uboHomeStateLabel1">Home State or Province</label>
+    <label id="uboHomeStateLabel1" for="uboHomeState1">Home State or Province</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboHomeState1" name="uboHomeState1" placeholder="Home State or Province" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label id="uboHomeZipLabel1" for="uboHomeZipLabel1">Home Zip or Province</label>
+    <label id="uboHomeZipLabel1" for="uboHomeZip1">Home Zip or Province</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboHomeZip1" name="uboHomeZip1" placeholder="Home Zip" style="width: 150px;" required>
@@ -755,55 +766,55 @@ const htmlForEntity = `
   </div>
   
   <div class="labels">
-    <label id="uboRentLabel1" for="uboRentLabel1">Monthly Mortgage or Rent in USD</label>
+    <label id="uboRentLabel1" for="uboRent1">Monthly Mortgage or Rent in USD</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboMonthlyRent1" name="uboMonthlyRent1" placeholder="Monthly Mortgage or Rent" style="width: 150px;" required pattern="[0-9]+" title="Please enter only numbers.">
   </div>
   
   <div class="labels">
-    <label id="uboPassportNumberLabel1" for="uboPassportNumberLabel1">Passport Number</label>
+    <label id="uboPassportNumberLabel1" for="uboPassportNumber1">Passport Number</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboPassportNumber1" name="uboPassportNumber1" placeholder="Passport Number" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label id="uboSsnLabel1" for="uboSsnLabel1">SSN or ID Number</label>
+    <label id="uboSsnLabel1" for="uboSsn1">SSN or ID Number</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboSsn1" name="uboSsn1" placeholder="SSN or ID Number" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label id="uboDobLabel1" for="uboDobLabel1">Date of Birth</label>
+    <label id="uboDobLabel1" for="uboDob1">Date of Birth</label>
   </div>
   <div class="input-tab">
     <input type="date" id="uboDob1" name="uboDob1">
   </div>
   
   <div class="labels">
-    <label id="uboEmailLabel1" for="uboEmailLabel1">Email Address</label></div>
+    <label id="uboEmailLabel1" for="uboEmail1">Email Address</label></div>
   <div class="input-tab">
     <input class="input-field" type="email" id="uboEmail1" name="uboEmail1" placeholder="email@email.com" style="width: 350px;" required>
   </div>
   
   <div class="labels">
-    <label id="uboPhoneLabel1" for="uboPhoneLabel1">Telephone</label>
+    <label id="uboPhoneLabel1" for="uboPhone1">Telephone</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboPhone1" name="uboPhone1" placeholder="Telephone" style="width: 150px;" required>
   </div>
   
   <div class="labels">
-    <label id="uboFicoLabel1" for="uboFicoLabel1">FICO or NOSIS Score</label>
+    <label id="uboFicoLabel1" for="uboFico1">FICO or NOSIS Score</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboFico1" name="uboFico1" placeholder="FICO or NOSIS Score" style="width: 150px;" required pattern="[0-9]+" title="Please enter only numbers.">
   </div>
   
   <div class="labels">
-    <label id="uboIncomeLabel1" for="uboIncomeLabel1">Monthly Income in USD</label>
+    <label id="uboIncomeLabel1" for="uboIncome1">Monthly Income in USD</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboIncome1" name="uboIncome1" placeholder="Monthly Income in USD" style="width: 150px;" required pattern="[0-9]+" title="Please enter only numbers.">
@@ -845,7 +856,7 @@ const htmlForEntity = `
   </div>
 
   <div class="labels">
-    <label id="uboPassportFileLabel1" for="uboPassportFileLabel1">Passport</label>
+    <label id="uboPassportFileLabel1" for="uboPassportFile1">Passport</label>
   </div>
   <div class="input-tab">
     <label for="uboPassportFile1" class="fileUploadButton">Choose File
@@ -855,7 +866,7 @@ const htmlForEntity = `
   </div>
   
   <div class="labels">
-    <label id="uboDniFrontFileLabel1" for="uboDniFrontFileLabel1">DNI/Drivers License (Front)</label>
+    <label id="uboDniFrontFileLabel1" for="uboDniFrontFile1">DNI/Drivers License (Front)</label>
   </div>
   <div class="input-tab">
     <label for="uboDniFrontFile1" class="fileUploadButton">Choose File
@@ -865,7 +876,7 @@ const htmlForEntity = `
   </div>
   
   <div class="labels">
-    <label id="uboDniReverseFileLabel1" for="uboDniReverseFileLabel1">DNI/Drivers License (Reverse)</label>
+    <label id="uboDniReverseFileLabel1" for="uboDniReverseFile1">DNI/Drivers License (Reverse)</label>
   </div>
   <div class="input-tab">
     <label for="uboDniReverseFile1" class="fileUploadButton">Choose File
@@ -875,7 +886,7 @@ const htmlForEntity = `
   </div>
   
   <div class="labels">
-    <label id="uboBillAddressProofFileLabel1" for="uboBillAddressProofFileLabel1">Bill for Proof of Address</label>
+    <label id="uboBillAddressProofFileLabel1" for="uboBillAddressProofFile1">Bill for Proof of Address</label>
   </div>
   <div class="input-tab">
     <label for="uboBillAddressProofFile1" class="fileUploadButton">Choose File
@@ -885,7 +896,7 @@ const htmlForEntity = `
   </div>
   
   <div class="labels">
-    <label id="uboCreditCheckFileLabel1" for="uboCreditCheckFileLabel1">Credit Check/NOSIS</label>
+    <label id="uboCreditCheckFileLabel1" for="uboCreditCheckFile1">Credit Check/NOSIS</label>
   </div>
   <div class="input-tab">
     <label for="uboCreditCheckFile1" class="fileUploadButton">Choose File
@@ -895,7 +906,7 @@ const htmlForEntity = `
   </div>
   
   <div class="labels">
-    <label id="uboWorldCheckFileLabel1" for="uboWorldCheckFileLabel1">World Check</label>
+    <label id="uboWorldCheckFileLabel1" for="uboWorldCheckFile1">World Check</label>
   </div>
   <div class="input-tab">
     <label for="uboWorldCheckFile1" class="fileUploadButton">Choose File
@@ -905,7 +916,7 @@ const htmlForEntity = `
   </div>
   
   <div class="labels">
-    <label id="uboOfacFileLabel1" for="uboOfacFileLabel1">OFAC Check</label>
+    <label id="uboOfacFileLabel1" for="uboOfacFile1">OFAC Check</label>
   </div>
   <div class="input-tab">
     <label for="uboOfacFile1" class="fileUploadButton">Choose File
@@ -920,7 +931,7 @@ const htmlForAdditionalIndividual = `
   <br><br><h3 id="individualInfoSubtitle{{index}}">Info for Individual {{index}}</h3>
   
   <div class="labels">
-    <label for="dropdown">Personal Guarantor?</label>
+    <label for="individualPersonalGuarantorDropdown">Personal Guarantor?</label>
   </div>
   <div class="input-tab">
     <select id="individualPersonalGuarantorDropdown" name="individualPersonalGuarantorDropdown{{index}}">
@@ -931,7 +942,7 @@ const htmlForAdditionalIndividual = `
   </div>
   
   <div class="labels">
-    <label for="dropdown">U.S. Citizen or Green Card?</label>
+    <label for="individualCitizenDropdown">U.S. Citizen or Green Card?</label>
   </div>
   <div class="input-tab">
     <select id="individualCitizenDropdown" name="individualCitizenDropdown{{index}}">
@@ -942,7 +953,7 @@ const htmlForAdditionalIndividual = `
   </div>
 
   <div class="labels">
-    <label for="dropdown">South Dakota Resident?</label>
+    <label for="individualSDResidentDropdown">South Dakota Resident?</label>
   </div>
   <div class="input-tab">
     <select id="individualSDResidentDropdown" name="individualSDResidentDropdown{{index}}" required>
@@ -953,63 +964,63 @@ const htmlForAdditionalIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualFirstNameLabel{{index}}" for="individualFirstNameLabel{{index}}">First Name(s)</label>
+    <label id="individualFirstNameLabel{{index}}" for="individualFirstName{{index}}">First Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualFirstName{{index}}" name="individualFirstName{{index}}" placeholder="First Name(s)" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="individualMiddleNameLabel{{index}}" for="individualMiddleNameLabel{{index}}">Middle Name(s)</label>
+    <label id="individualMiddleNameLabel{{index}}" for="individualMiddleName{{index}}">Middle Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualMiddleName{{index}}" name="individualMiddleName{{index}}" placeholder="Middle Name(s)" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="individualLastNameLabel{{index}}" for="individualLastNameLabel{{index}}">Last Name(s)</label>
+    <label id="individualLastNameLabel{{index}}" for="individualLastName{{index}}">Last Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualLastName{{index}}" name="lastName{{index}}" placeholder="Last Name(s)" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="homeBankAddressLabel{{index}}" for="homeBankAddressLabel{{index}}">Home Address (must match recent bill)</label>
+    <label id="individualHomeBankAddressLabel{{index}}" for="individualHomeBankAddress{{index}}">Home Address (must match recent bill)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="homeAddress{{index}}" name="homeAddress{{index}}" placeholder="Home Address" style="width: 150px;">
+    <input class="input-field" type="text" id="individualHomeBankAddress{{index}}" name="individualHomeBankAddress{{index}}" placeholder="Home Address" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="individualHomeCountryLabel{{index}}" for="individualHomeCountryLabel{{index}}">Home Country</label>
+    <label id="individualHomeCountryLabel{{index}}" for="individualHomeCountry{{index}}">Home Country</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualhomeCountry{{index}}" name="individualhomeCountry{{index}}" placeholder="Home Country" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="individualHomeStreetAddressLabel{{index}}" for="individualHomeStreetAddressLabel{{index}}">Home Street Address</label>
+    <label id="individualHomeStreetAddressLabel{{index}}" for="individualHomeStreetAddress{{index}}">Home Street Address</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualHomeStreetAddress{{index}}" name="individualHomeStreetAddress{{index}}" placeholder="Home Street Address" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="individualHomeCityLabel{{index}}" for="individualHomeCityLabel{{index}}">Home City</label>
+    <label id="individualHomeCityLabel{{index}}" for="individualHomeCity{{index}}">Home City</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualHomeCity{{index}}" name="individualHomeCity{{index}}" placeholder="Home City" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="individualHomeStateLabel{{index}}" for="individualHomeStateLabel{{index}}">Home State or Province</label>
+    <label id="individualHomeStateLabel{{index}}" for="individualHomeState{{index}}">Home State or Province</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualHomeState{{index}}" name="individualHomeState{{index}}" placeholder="Home State or Province" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="individualHomeZipLabel{{index}}" for="individualHomeZipLabel{{index}}">Home Zip or Province</label>
+    <label id="individualHomeZipLabel{{index}}" for="individualHomeZip{{index}}">Home Zip or Province</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualHomeZip{{index}}" name="individualHomeZip{{index}}" placeholder="Home Zip" style="width: 150px;">
@@ -1027,55 +1038,55 @@ const htmlForAdditionalIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualRentLabel{{index}}" for="individualRentLabel{{index}}">Monthly Mortgage or Rent in USD</label>
+    <label id="individualRentLabel{{index}}" for="individualRent{{index}}">Monthly Mortgage or Rent in USD</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualMonthlyRent{{index}}" name="individualMonthlyRent{{index}}" placeholder="Monthly Mortgage or Rent" style="width: 150px;" pattern="[0-9]+" title="Please enter only numbers.">
   </div>
   
   <div class="labels">
-    <label id="individualPassportNumberLabel{{index}}" for="individualPassportNumberLabel{{index}}">Passport Number</label>
+    <label id="individualPassportNumberLabel{{index}}" for="individualPassportNumber{{index}}">Passport Number</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualPassportNumber{{index}}" name="individualPassportNumber{{index}}" placeholder="Passport Number" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="individualSsnLabel{{index}}" for="individualSsnLabel{{index}}">SSN or ID Number</label>
+    <label id="individualSsnLabel{{index}}" for="individualSsn{{index}}">SSN or ID Number</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualSsn{{index}}" name="individualSsn{{index}}" placeholder="SSN or ID Number" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="individualDobLabel{{index}}" for="individualDobLabel{{index}}">Date of Birth</label>
+    <label id="individualDobLabel{{index}}" for="individualDob{{index}}">Date of Birth</label>
   </div>
   <div class="input-tab">
     <input type="date" id="individualDob{{index}}" name="individualDob{{index}}">
   </div>
   
   <div class="labels">
-    <label id="individualEmailLabel{{index}}" for="individualEmailLabel{{index}}">Email Address</label></div>
+    <label id="individualEmailLabel{{index}}" for="individualEmail{{index}}">Email Address</label></div>
   <div class="input-tab">
     <input class="input-field" type="email" id="individualEmail{{index}}" name="individualEmail{{index}}" placeholder="email@email.com" style="width: 350px;">
   </div>
   
   <div class="labels">
-    <label id="individualPhoneLabel{{index}}" for="individualPhoneLabel{{index}}">Telephone</label>
+    <label id="individualPhoneLabel{{index}}" for="individualPhone{{index}}">Telephone</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualPhone{{index}}" name="individualPhone{{index}}" placeholder="Telephone" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="individualFicoLabel{{index}}" for="individualFicoLabel{{index}}">FICO or NOSIS Score</label>
+    <label id="individualFicoLabel{{index}}" for="individualFico{{index}}">FICO or NOSIS Score</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualFico{{index}}" name="individualFico{{index}}" placeholder="FICO or NOSIS Score" style="width: 150px;" pattern="[0-9]+" title="Please enter only numbers.">
   </div>
   
   <div class="labels">
-    <label id="individualIncomeLabel{{index}}" for="individualIncomeLabel{{index}}">Monthly Income in USD</label>
+    <label id="individualIncomeLabel{{index}}" for="individualIncome{{index}}">Monthly Income in USD</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualIncome{{index}}" name="individualIncome{{index}}" placeholder="Monthly Income in USD" style="width: 150px;" pattern="[0-9]+" title="Please enter only numbers.">
@@ -1117,7 +1128,7 @@ const htmlForAdditionalIndividual = `
   </div>
 
   <div class="labels">
-    <label id="individualPassportFileLabel{{index}}" for="individualPassportFileLabel{{index}}">Passport</label>
+    <label id="individualPassportFileLabel{{index}}" for="individualPassportFile{{index}}">Passport</label>
   </div>
   <div class="input-tab">
     <label for="individualPassportFile{{index}}" class="fileUploadButton">Choose File
@@ -1127,7 +1138,7 @@ const htmlForAdditionalIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualDniFrontFileLabel{{index}}" for="individualDniFrontFileLabel{{index}}">DNI/Drivers License (Front)</label>
+    <label id="individualDniFrontFileLabel{{index}}" for="individualDniFrontFile{{index}}">DNI/Drivers License (Front)</label>
   </div>
   <div class="input-tab">
     <label for="individualDniFrontFile{{index}}" class="fileUploadButton">Choose File
@@ -1137,7 +1148,7 @@ const htmlForAdditionalIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualDniReverseFileLabel{{index}}" for="individualDniReverseFileLabel{{index}}">DNI/Drivers License (Reverse)</label>
+    <label id="individualDniReverseFileLabel{{index}}" for="individualDniReverseFile{{index}}">DNI/Drivers License (Reverse)</label>
   </div>
   <div class="input-tab">
     <label for="individualDniReverseFile{{index}}" class="fileUploadButton">Choose File
@@ -1147,7 +1158,7 @@ const htmlForAdditionalIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualBillAddressProofFileLabel{{index}}" for="individualBillAddressProofFileLabel{{index}}">Bill for Proof of Address</label>
+    <label id="individualBillAddressProofFileLabel{{index}}" for="individualBillAddressProofFile{{index}}">Bill for Proof of Address</label>
   </div>
   <div class="input-tab">
     <label for="individualBillAddressProofFile{{index}}" class="fileUploadButton">Choose File
@@ -1157,7 +1168,7 @@ const htmlForAdditionalIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualCreditCheckFileLabel{{index}}" for="individualCreditCheckFileLabel{{index}}">Credit Check/NOSIS</label>
+    <label id="individualCreditCheckFileLabel{{index}}" for="individualCreditCheckFile{{index}}">Credit Check/NOSIS</label>
   </div>
   <div class="input-tab">
     <label for="individualCreditCheckFile{{index}}" class="fileUploadButton">Choose File
@@ -1167,7 +1178,7 @@ const htmlForAdditionalIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualWorldCheckFileLabel{{index}}" for="individualWorldCheckFileLabel{{index}}">World Check</label>
+    <label id="individualWorldCheckFileLabel{{index}}" for="individualWorldCheckFile{{index}}">World Check</label>
   </div>
   <div class="input-tab">
     <label for="individualWorldCheckFile{{index}}" class="fileUploadButton">Choose File
@@ -1177,7 +1188,7 @@ const htmlForAdditionalIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualOfacFileLabel{{index}}" for="individualOfacFileLabel{{index}}">OFAC Check</label>
+    <label id="individualOfacFileLabel{{index}}" for="individualOfacFile{{index}}">OFAC Check</label>
   </div>
   <div class="input-tab">
     <label for="individualOfacFile{{index}}" class="fileUploadButton">Choose File
@@ -1258,42 +1269,42 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="homeBankAddressLabel{{index}}" for="homeBankAddressLabel{{index}}">Home Address (must match recent bill)</label>
+    <label id="uboHomeBankAddressLabel{{index}}" for="uboHomeBankAddress{{index}}">Home Address (must match recent bill)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="homeAddress{{index}}" name="homeAddress{{index}}" placeholder="Home Address" style="width: 150px;">
+    <input class="input-field" type="text" id="uboHomeBankAddress{{index}}" name="uboHomeBankAddress{{index}}" placeholder="Home Address" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="uboHomeCountryLabel{{index}}" for="uboHomeCountryLabel{{index}}">Home Country</label>
+    <label id="uboHomeCountryLabel{{index}}" for="uboHomeCountry{{index}}">Home Country</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="ubohomeCountry{{index}}" name="ubohomeCountry{{index}}" placeholder="Home Country" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="uboHomeStreetAddressLabel{{index}}" for="uboHomeStreetAddressLabel{{index}}">Home Street Address</label>
+    <label id="uboHomeStreetAddressLabel{{index}}" for="uboHomeStreetAddress{{index}}">Home Street Address</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboHomeStreetAddress{{index}}" name="uboHomeStreetAddress{{index}}" placeholder="Home Street Address" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="uboHomeCityLabel{{index}}" for="uboHomeCityLabel{{index}}">Home City</label>
+    <label id="uboHomeCityLabel{{index}}" for="uboHomeCity{{index}}">Home City</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboHomeCity{{index}}" name="uboHomeCity{{index}}" placeholder="Home City" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="uboHomeStateLabel{{index}}" for="uboHomeStateLabel{{index}}">Home State or Province</label>
+    <label id="uboHomeStateLabel{{index}}" for="uboHomeState{{index}}">Home State or Province</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboHomeState{{index}}" name="uboHomeState{{index}}" placeholder="Home State or Province" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="uboHomeZipLabel{{index}}" for="uboHomeZipLabel{{index}}">Home Zip or Province</label>
+    <label id="uboHomeZipLabel{{index}}" for="uboHomeZip{{index}}">Home Zip or Province</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboHomeZip{{index}}" name="uboHomeZip{{index}}" placeholder="Home Zip" style="width: 150px;">
@@ -1311,55 +1322,55 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="uboRentLabel{{index}}" for="uboRentLabel{{index}}">Monthly Mortgage or Rent in USD</label>
+    <label id="uboRentLabel{{index}}" for="uboRent{{index}}">Monthly Mortgage or Rent in USD</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboMonthlyRent{{index}}" name="uboMonthlyRent{{index}}" placeholder="Monthly Mortgage or Rent" style="width: 150px;" pattern="[0-9]+" title="Please enter only numbers.">
   </div>
   
   <div class="labels">
-    <label id="uboPassportNumberLabel{{index}}" for="uboPassportNumberLabel{{index}}">Passport Number</label>
+    <label id="uboPassportNumberLabel{{index}}" for="uboPassportNumber{{index}}">Passport Number</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboPassportNumber{{index}}" name="uboPassportNumber{{index}}" placeholder="Passport Number" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="uboSsnLabel{{index}}" for="uboSsnLabel{{index}}">SSN or ID Number</label>
+    <label id="uboSsnLabel{{index}}" for="uboSsn{{index}}">SSN or ID Number</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboSsn{{index}}" name="uboSsn{{index}}" placeholder="SSN or ID Number" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="uboDobLabel{{index}}" for="uboDobLabel{{index}}">Date of Birth</label>
+    <label id="uboDobLabel{{index}}" for="uboDob{{index}}">Date of Birth</label>
   </div>
   <div class="input-tab">
     <input type="date" id="uboDob{{index}}" name="uboDob{{index}}">
   </div>
   
   <div class="labels">
-    <label id="uboEmailLabel{{index}}" for="uboEmailLabel{{index}}">Email Address</label></div>
+    <label id="uboEmailLabel{{index}}" for="uboEmail{{index}}">Email Address</label></div>
   <div class="input-tab">
     <input class="input-field" type="email" id="uboEmail{{index}}" name="uboEmail{{index}}" placeholder="email@email.com" style="width: 350px;">
   </div>
   
   <div class="labels">
-    <label id="uboPhoneLabel{{index}}" for="uboPhoneLabel{{index}}">Telephone</label>
+    <label id="uboPhoneLabel{{index}}" for="uboPhone{{index}}">Telephone</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboPhone{{index}}" name="uboPhone{{index}}" placeholder="Telephone" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="uboFicoLabel{{index}}" for="uboFicoLabel{{index}}">FICO or NOSIS Score</label>
+    <label id="uboFicoLabel{{index}}" for="uboFico{{index}}">FICO or NOSIS Score</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboFico{{index}}" name="uboFico{{index}}" placeholder="FICO or NOSIS Score" style="width: 150px;" pattern="[0-9]+" title="Please enter only numbers.">
   </div>
   
   <div class="labels">
-    <label id="uboIncomeLabel{{index}}" for="uboIncomeLabel{{index}}">Monthly Income in USD</label>
+    <label id="uboIncomeLabel{{index}}" for="uboIncome{{index}}">Monthly Income in USD</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboIncome{{index}}" name="uboIncome{{index}}" placeholder="Monthly Income in USD" style="width: 150px;" pattern="[0-9]+" title="Please enter only numbers.">
@@ -1401,7 +1412,7 @@ const htmlForAdditionalUbo = `
   </div>
 
   <div class="labels">
-    <label id="uboPassportFileLabel{{index}}" for="uboPassportFileLabel{{index}}">Passport</label>
+    <label id="uboPassportFileLabel{{index}}" for="uboPassportFile{{index}}">Passport</label>
   </div>
   <div class="input-tab">
     <label for="uboPassportFile{{index}}" class="fileUploadButton">Choose File
@@ -1411,7 +1422,7 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="uboDniFrontFileLabel{{index}}" for="uboDniFrontFileLabel{{index}}">DNI/Drivers License (Front)</label>
+    <label id="uboDniFrontFileLabel{{index}}" for="uboDniFrontFile{{index}}">DNI/Drivers License (Front)</label>
   </div>
   <div class="input-tab">
     <label for="uboDniFrontFile{{index}}" class="fileUploadButton">Choose File
@@ -1421,7 +1432,7 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="uboDniReverseFileLabel{{index}}" for="uboDniReverseFileLabel{{index}}">DNI/Drivers License (Reverse)</label>
+    <label id="uboDniReverseFileLabel{{index}}" for="uboDniReverseFile{{index}}">DNI/Drivers License (Reverse)</label>
   </div>
   <div class="input-tab">
     <label for="uboDniReverseFile{{index}}" class="fileUploadButton">Choose File
@@ -1431,7 +1442,7 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="uboBillAddressProofFileLabel{{index}}" for="uboBillAddressProofFileLabel{{index}}">Bill for Proof of Address</label>
+    <label id="uboBillAddressProofFileLabel{{index}}" for="uboBillAddressProofFile{{index}}">Bill for Proof of Address</label>
   </div>
   <div class="input-tab">
     <label for="uboBillAddressProofFile{{index}}" class="fileUploadButton">Choose File
@@ -1441,7 +1452,7 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="uboCreditCheckFileLabel{{index}}" for="uboCreditCheckFileLabel{{index}}">Credit Check/NOSIS</label>
+    <label id="uboCreditCheckFileLabel{{index}}" for="uboCreditCheckFile{{index}}">Credit Check/NOSIS</label>
   </div>
   <div class="input-tab">
     <label for="uboCreditCheckFile{{index}}" class="fileUploadButton">Choose File
@@ -1451,7 +1462,7 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="uboWorldCheckFileLabel{{index}}" for="uboWorldCheckFileLabel{{index}}">World Check</label>
+    <label id="uboWorldCheckFileLabel{{index}}" for="uboWorldCheckFile{{index}}">World Check</label>
   </div>
   <div class="input-tab">
     <label for="uboWorldCheckFile{{index}}" class="fileUploadButton">Choose File
@@ -1461,7 +1472,7 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="uboOfacFileLabel{{index}}" for="uboOfacFileLabel{{index}}">OFAC Check</label>
+    <label id="uboOfacFileLabel{{index}}" for="uboOfacFile{{index}}">OFAC Check</label>
   </div>
   <div class="input-tab">
     <label for="uboOfacFile{{index}}" class="fileUploadButton">Choose File
@@ -1477,7 +1488,7 @@ const htmlForAdditionalUbo = `
   <br><br><h3 id="directorInfoSubtitle{{index}}">Info for Director {{index}}</h3>
   
   <div class="labels">
-    <label for="dropdown">Control Person Authorized to Apply for, Take, and Execute, Loan?</label>
+    <label for="directorControlPersonAuthDropdown">Control Person Authorized to Apply for, Take, and Execute, Loan?</label>
   </div>
   <div class="input-tab">
     <select id="directorControlPersonAuthDropdown" name="directorControlPersonAuthDropdown{{index}}">
@@ -1488,7 +1499,7 @@ const htmlForAdditionalUbo = `
   </div>
 
   <div class="labels">
-  <label for="dropdown">Personal Guarantor?</label>
+  <label for="directorPersonalGuarantorDropdown">Personal Guarantor?</label>
   </div>
   <div class="input-tab">
     <select id="directorPersonalGuarantorDropdown" name="directorPersonalGuarantorDropdown{{index}}">
@@ -1499,7 +1510,7 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label for="dropdown">U.S. Citizen or Green Card?</label>
+    <label for="directorCitizenDropdown">U.S. Citizen or Green Card?</label>
   </div>
   <div class="input-tab">
     <select id="directorCitizenDropdown" name="directorCitizenDropdown{{index}}">
@@ -1510,7 +1521,7 @@ const htmlForAdditionalUbo = `
   </div>
 
   <div class="labels">
-    <label for="dropdown">South Dakota Resident?</label>
+    <label for="directorSDResidentDropdown">South Dakota Resident?</label>
   </div>
   <div class="input-tab">
     <select id="directorSDResidentDropdown" name="directorSDResidentDropdown{{index}}">
@@ -1542,42 +1553,42 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="homeBankAddressLabel{{index}}" for="homeBankAddressLabel{{index}}">Home Address (must match recent bill)</label>
+    <label id="directorHomeBankAddressLabel{{index}}" for="directorHomeBankAddress{{index}}">Home Address (must match recent bill)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="homeAddress{{index}}" name="homeAddress{{index}}" placeholder="Home Address" style="width: 150px;">
+    <input class="input-field" type="text" id="directorHomeBankAddress{{index}}" name="directorHomeBankAddress{{index}}" placeholder="Home Address" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="directorHomeCountryLabel{{index}}" for="directorHomeCountryLabel{{index}}">Home Country</label>
+    <label id="directorHomeCountryLabel{{index}}" for="directorHomeCountry{{index}}">Home Country</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="directorhomeCountry{{index}}" name="directorhomeCountry{{index}}" placeholder="Home Country" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="directorHomeStreetAddressLabel{{index}}" for="directorHomeStreetAddressLabel{{index}}">Home Street Address</label>
+    <label id="directorHomeStreetAddressLabel{{index}}" for="directorHomeStreetAddress{{index}}">Home Street Address</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="directorHomeStreetAddress{{index}}" name="directorHomeStreetAddress{{index}}" placeholder="Home Street Address" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="directorHomeCityLabel{{index}}" for="directorHomeCityLabel{{index}}">Home City</label>
+    <label id="directorHomeCityLabel{{index}}" for="directorHomeCity{{index}}">Home City</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="directorHomeCity{{index}}" name="directorHomeCity{{index}}" placeholder="Home City" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="directorHomeStateLabel{{index}}" for="directorHomeStateLabel{{index}}">Home State or Province</label>
+    <label id="directorHomeStateLabel{{index}}" for="directorHomeState{{index}}">Home State or Province</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="directorHomeState{{index}}" name="directorHomeState{{index}}" placeholder="Home State or Province" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="directorHomeZipLabel{{index}}" for="directorHomeZipLabel{{index}}">Home Zip or Province</label>
+    <label id="directorHomeZipLabel{{index}}" for="directorHomeZip{{index}}">Home Zip or Province</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="directorHomeZip{{index}}" name="directorHomeZip{{index}}" placeholder="Home Zip" style="width: 150px;">
@@ -1595,55 +1606,55 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="directorRentLabel{{index}}" for="directorRentLabel{{index}}">Monthly Mortgage or Rent in USD</label>
+    <label id="directorRentLabel{{index}}" for="directorRent{{index}}">Monthly Mortgage or Rent in USD</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="directorMonthlyRent{{index}}" name="directorMonthlyRent{{index}}" placeholder="Monthly Mortgage or Rent" style="width: 150px;" pattern="[0-9]+" title="Please enter only numbers.">
   </div>
   
   <div class="labels">
-    <label id="directorPassportNumberLabel{{index}}" for="directorPassportNumberLabel{{index}}">Passport Number</label>
+    <label id="directorPassportNumberLabel{{index}}" for="directorPassportNumber{{index}}">Passport Number</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="directorPassportNumber{{index}}" name="directorPassportNumber{{index}}" placeholder="Passport Number" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="directorSsnLabel{{index}}" for="directorSsnLabel{{index}}">SSN or ID Number</label>
+    <label id="directorSsnLabel{{index}}" for="directorSsn{{index}}">SSN or ID Number</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="directorSsn{{index}}" name="directorSsn{{index}}" placeholder="SSN or ID Number" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="directorDobLabel{{index}}" for="directorDobLabel{{index}}">Date of Birth</label>
+    <label id="directorDobLabel{{index}}" for="directorDob{{index}}">Date of Birth</label>
   </div>
   <div class="input-tab">
     <input type="date" id="directorDob{{index}}" name="directorDob{{index}}">
   </div>
   
   <div class="labels">
-    <label id="directorEmailLabel{{index}}" for="directorEmailLabel{{index}}">Email Address</label></div>
+    <label id="directorEmailLabel{{index}}" for="directorEmail{{index}}">Email Address</label></div>
   <div class="input-tab">
     <input class="input-field" type="email" id="directorEmail{{index}}" name="directorEmail{{index}}" placeholder="email@email.com" style="width: 350px;">
   </div>
   
   <div class="labels">
-    <label id="directorPhoneLabel{{index}}" for="directorPhoneLabel{{index}}">Telephone</label>
+    <label id="directorPhoneLabel{{index}}" for="directorPhone{{index}}">Telephone</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="directorPhone{{index}}" name="directorPhone{{index}}" placeholder="Telephone" style="width: 150px;">
   </div>
   
   <div class="labels">
-    <label id="directorFicoLabel{{index}}" for="directorFicoLabel{{index}}">FICO or NOSIS Score</label>
+    <label id="directorFicoLabel{{index}}" for="directorFico{{index}}">FICO or NOSIS Score</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="directorFico{{index}}" name="directorFico{{index}}" placeholder="FICO or NOSIS Score" style="width: 150px;" pattern="[0-9]+" title="Please enter only numbers.">
   </div>
   
   <div class="labels">
-    <label id="directorIncomeLabel{{index}}" for="directorIncomeLabel{{index}}">Monthly Income in USD</label>
+    <label id="directorIncomeLabel{{index}}" for="directorIncome{{index}}">Monthly Income in USD</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="directorIncome{{index}}" name="directorIncome{{index}}" placeholder="Monthly Income in USD" style="width: 150px;" pattern="[0-9]+" title="Please enter only numbers.">
@@ -1685,7 +1696,7 @@ const htmlForAdditionalUbo = `
   </div>
 
   <div class="labels">
-    <label id="directorPassportFileLabel{{index}}" for="directorPassportFileLabel{{index}}">Passport</label>
+    <label id="directorPassportFileLabel{{index}}" for="directorPassportFile{{index}}">Passport</label>
   </div>
   <div class="input-tab">
     <label for="directorPassportFile{{index}}" class="fileUploadButton">Choose File
@@ -1695,7 +1706,7 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="directorDniFrontFileLabel{{index}}" for="directorDniFrontFileLabel{{index}}">DNI/Drivers License (Front)</label>
+    <label id="directorDniFrontFileLabel{{index}}" for="directorDniFrontFile{{index}}">DNI/Drivers License (Front)</label>
   </div>
   <div class="input-tab">
     <label for="directorDniFrontFile{{index}}" class="fileUploadButton">Choose File
@@ -1705,7 +1716,7 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="directorDniReverseFileLabel{{index}}" for="directorDniReverseFileLabel{{index}}">DNI/Drivers License (Reverse)</label>
+    <label id="directorDniReverseFileLabel{{index}}" for="directorDniReverseFile{{index}}">DNI/Drivers License (Reverse)</label>
   </div>
   <div class="input-tab">
     <label for="directorDniReverseFile{{index}}" class="fileUploadButton">Choose File
@@ -1715,7 +1726,7 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="directorBillAddressProofFileLabel{{index}}" for="directorBillAddressProofFileLabel{{index}}">Bill for Proof of Address</label>
+    <label id="directorBillAddressProofFileLabel{{index}}" for="directorBillAddressProofFile{{index}}">Bill for Proof of Address</label>
   </div>
   <div class="input-tab">
     <label for="directorBillAddressProofFile{{index}}" class="fileUploadButton">Choose File
@@ -1725,7 +1736,7 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="directorCreditCheckFileLabel{{index}}" for="directorCreditCheckFileLabel{{index}}">Credit Check/NOSIS</label>
+    <label id="directorCreditCheckFileLabel{{index}}" for="directorCreditCheckFile{{index}}">Credit Check/NOSIS</label>
   </div>
   <div class="input-tab">
     <label for="directorCreditCheckFile{{index}}" class="fileUploadButton">Choose File
@@ -1735,7 +1746,7 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="directorWorldCheckFileLabel{{index}}" for="directorWorldCheckFileLabel{{index}}">World Check</label>
+    <label id="directorWorldCheckFileLabel{{index}}" for="directorWorldCheckFile{{index}}">World Check</label>
   </div>
   <div class="input-tab">
     <label for="directorWorldCheckFile{{index}}" class="fileUploadButton">Choose File
@@ -1745,7 +1756,7 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="directorOfacFileLabel{{index}}" for="directorOfacFileLabel{{index}}">OFAC Check</label>
+    <label id="directorOfacFileLabel{{index}}" for="directorOfacFile{{index}}">OFAC Check</label>
   </div>
   <div class="input-tab">
     <label for="directorOfacFile{{index}}" class="fileUploadButton">Choose File
