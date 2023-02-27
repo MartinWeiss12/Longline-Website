@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
-import boto3
-
 import json
-from flask import Flask, render_template, request, jsonify
+import boto3
+from flask import Flask, render_template, request, jsonify, session
+from flask_session import Session
 
 app = Flask(__name__, template_folder='templates')
 app.config ['SECRET_KEY'] = 'longline'
+#app.config ['SESSION_PERMANENT'] = False
+#app.config ['SESSION_TYPE'] = 'filesystem'
+#Session(app)
 
 flaskBackendPin = '1234'
 
@@ -46,6 +49,7 @@ def borrowLogin():
 
 @app.route('/borrow', methods=['POST'])
 def borrow():
+    
     userPin = request.form.get('userPin')
     
     if(userPin == flaskBackendPin):
@@ -103,6 +107,8 @@ def submit():
         'Interest Payment': intrestPaymentDropdown
     }
     
+#   fileName = last name + first name + date/loan number?
+    
     with open('data.json', 'w') as f:
         json.dump(data, f)
         
@@ -112,7 +118,6 @@ def submit():
     object_key = 'data.json'
     #s3.Object(bucket_name, object_key).put(Body=open('data.json', 'rb'))
     
-#   return 'Data saved!'
     return render_template('submitted.html', title='Submitted')
 
 

@@ -104,7 +104,7 @@
         width: 40%;
         vertical-align: top; 
         margin-top: 20px;
-        margin-left: 85px;
+        margin-left: 75px;
       }
       
       .input-tab {
@@ -520,6 +520,56 @@
       
       
       
+      
+      
+      
+      input[type="file"] {
+        background-color: #0000FF;
+        margin: 0;
+        border-radius: 4px;
+        color: white;
+        font-size: 1em;
+        font-weight: bold;
+        font-family: inherit;
+        padding: 4px 8px;
+        border: 1px solid;
+        cursor: pointer;
+        display: inline-block;
+        text-align: center;
+        margin: 15px 0 0;
+      }
+      
+      input[type="file"]:hover {
+        background-color: #00008B;
+      }
+      
+      
+      
+      input::-webkit-file-upload-button{
+        background-color: #0000FF;
+        margin: 0;
+        border-radius: 4px;
+        color: white;
+        font-size: 1em;
+        font-weight: bold;
+        font-family: inherit;
+        padding: 4px 8px;
+        border: 1px solid;
+        cursor: pointer;
+/*      display: inline-block;*/
+/*      text-align: center;*/
+/*      margin: 15px 15px 15px 200px;*/
+      }
+      
+
+      
+      
+      
+      
+      
+      
+      
+      
     </style>    
   </head>
   <body>
@@ -545,23 +595,69 @@
         <h1 id="loanApplicationTitle">LOAN APPLICATION FORM</h1>
       </div>
     </header>
-    <main>      
+    <main>
       
       <div class="container" id="loanFormContainer">
         <form id="loanForm" method="POST" action="/submit" enctype="multipart/form-data">
+          
+          
+          
+          
+          
+          
+          
+<!--      <div class="labels">-->
+<!--        <label id="bankAcctFileLabel" for="bankAcctFile">Bank Account Statement</label>-->
+<!--      </div>-->
+<!--      <div class="input-tab">-->
+<!--        <label for="bankAcctFile">-->
+<!--          <input id="bankAcctFile" type="file" name="bankAcctFile" required>-->
+<!--        </label>-->
+<!--      </div>-->
+          
+
+          
+
+          <div class="labels">
+            <label id="bankAcctFileLabel" for="bankAcctFile">Bank Account Statement</label>
+          </div>
+          <div class="input-tab">
+            <label for="bankAcctFile" class="fileUploadButton">Choose File
+              <input id="bankAcctFile" type="file" name="bankAcctFile" style="position:absolute; left:-999999px;" onchange="displayFileName('bankAcctFile', 'bankAcctFileNameSpan')" required>
+            </label>
+            <span id="bankAcctFileNameSpan">Uploaded File: None</span>
+          </div>
+          
+      
+          
+
+
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
           
           <br><br><h2 id="stepOneTitle">Step 1 - Loan Purpose</h2>
           <br>
           <div class="labels">
             <label></label></div>
           <div class="input-tab">
-            <input type="checkbox" name="loanPurpose" value="Asset Purchase or Down Payment">Asset Purchase or Down Payment<br>
-            <input type="checkbox" name="loanPurpose" value="Industrial Use">Industrial Use<br>
-            <input type="checkbox" name="loanPurpose" value="Tax Payment">Tax Payment<br>
-            <input type="checkbox" name="loanPurpose" value="Insurance Premium">Insurance Premium<br>
-            <input type="checkbox" name="loanPurpose" value="Margin Trading or Investment">Margin Trading or Investment<br>
-            <input type="checkbox" name="loanPurpose" value="Education Expenses">Education Expenses<br>
-            <input type="checkbox" name="loanPurpose" value="Other" onclick="otherLoanFunction(this)">Other<br>
+            <input type="checkbox" name="loanPurpose" value="Asset Purchase or Down Payment" onclick="handleLoanPurposeCheckboxes(this)" required>Asset Purchase or Down Payment<br>
+            <input type="checkbox" name="loanPurpose" value="Industrial Use" onclick="handleLoanPurposeCheckboxes(this)" required>Industrial Use<br>
+            <input type="checkbox" name="loanPurpose" value="Tax Payment" onclick="handleLoanPurposeCheckboxes(this)" required>Tax Payment<br>
+            <input type="checkbox" name="loanPurpose" value="Insurance Premium" onclick="handleLoanPurposeCheckboxes(this)" required>Insurance Premium<br>
+            <input type="checkbox" name="loanPurpose" value="Margin Trading or Investment" onclick="handleLoanPurposeCheckboxes(this)" required>Margin Trading or Investment<br>
+            <input type="checkbox" name="loanPurpose" value="Education Expenses" onclick="handleLoanPurposeCheckboxes(this)" required>Education Expenses<br>
+            <input type="checkbox" name="loanPurpose" value="Other" onclick="otherLoanFunction(this); handleLoanPurposeCheckboxes(this)" required>Other<br>
             <p id="insertOtherLoan"></p>
           </div>
           
@@ -592,20 +688,19 @@
           <div class="input-tab">
             <input class="input-field" type="text" id="numTranches" name="numTranches" placeholder="Number of Tranches" required style="width: 150px;" onchange="updateLoanAmount()" pattern="[0-9]+" title="Please enter only numbers.">
           </div>
-          
-          
+
           <br><br><br><h2 id="stepThreeTitle">Step 3 - Collateral Information</h2><br>
           <div class="labels">
             <label></label></div>
           <div class="input-tab">
-            <input type="checkbox" name="collateralInfo" value="Personal Property" required>Personal Property<br>
-            <input type="checkbox" name="collateralInfo" value="Real Property">Real Property<br>
-            <input type="checkbox" name="collateralInfo" value="Titled Property">Titled Property<br>
-            <input type="checkbox" name="collateralInfo" value="Equity Instruments">Equity Instruments<br>
-            <input type="checkbox" name="collateralInfo" value="Debt Instruments">Debt Instruments<br>
-            <input type="checkbox" name="collateralInfo" value="Negotiable Instruments">Negotiable Instruments<br>
-            <input type="checkbox" name="collateralInfo" value="Banknotes">Banknotes<br>
-            <input type="checkbox" name="collateralInfo" value="Other" onclick="otherCollateralFucntion(this)" >Other<br>
+            <input type="checkbox" name="collateralInfo" value="Personal Property" onclick="handleCollateralCheckboxes(this)" required>Personal Property<br>
+            <input type="checkbox" name="collateralInfo" value="Real Property" onclick="handleCollateralCheckboxes(this)" required>Real Property<br>
+            <input type="checkbox" name="collateralInfo" value="Titled Property" onclick="handleCollateralCheckboxes(this)" required>Titled Property<br>
+            <input type="checkbox" name="collateralInfo" value="Equity Instruments" onclick="handleCollateralCheckboxes(this)" required>Equity Instruments<br>
+            <input type="checkbox" name="collateralInfo" value="Debt Instruments" onclick="handleCollateralCheckboxes(this)" required>Debt Instruments<br>
+            <input type="checkbox" name="collateralInfo" value="Negotiable Instruments" onclick="handleCollateralCheckboxes(this)" required>Negotiable Instruments<br>
+            <input type="checkbox" name="collateralInfo" value="Banknotes" onclick="handleCollateralCheckboxes(this)" required>Banknotes<br>
+            <input type="checkbox" name="collateralInfo" value="Other" onclick="otherCollateralFucntion(this); handleCollateralCheckboxes(this)" required>Other<br>
             <p id="insertOtherCollateral"></p>
           </div>   
           
@@ -613,7 +708,7 @@
             <label id="collateralSpecLabel" for="collateralSpec">Collateral Specifications</label>
           </div>
           <div class="input-tab">
-            <textarea class="input-field" id="collateralSpec" name="collateralSpec" rows="4" placeholder="Collateral Specifications..." required style="width: 250px;"></textarea>
+            <textarea class="input-field" id="collateralSpec" name="collateralSpec" rows="4" placeholder="Collateral Specifications" style="width: 250px;"></textarea>
           </div>
           
           <div class="labels">
@@ -638,16 +733,14 @@
           </div>
           
           <br><br>
-          
           <div class="labels">
             <label></label>
           </div>
           <div class="input-tab">
-            <input type="checkbox" name="securityCheckbox" value="Security Received" required>Security Received
+            <input type="checkbox" name="securityCheckbox" value="Security Received">Security Received
             <input type="date" id="secRecDate" name="secRecDate"><br>
-            <input type="checkbox" name="securityCheckbox" value="Security Guaranteed" required>Security Guaranteed<br>
+            <input type="checkbox" name="securityCheckbox" value="Security Guaranteed">Security Guaranteed<br>
           </div>
-          
           
           <br><br><br><h2 id="stepFourTitle">Step 4 - Tentative Loan Terms</h2><br>
           <div class="labels">
@@ -660,8 +753,7 @@
             
             <div class="input-tab" style="margin-left: 20px;">
               <input type="checkbox" name="agreeOrgFee" value="Agree" required>Agree<br>
-            </div>  
-            
+            </div>
           </div>
           
           <div class="labels">
@@ -690,12 +782,9 @@
             </select>
             <input type="hidden" id="interestDropdownInput" name="interestDropdown">
 
-            
-            
             <div class="input-tab" style="margin-left: 63px;">
               <input type="checkbox" name="agreeInterestOnly" value="agreeInterestOnly" required>Agree
-            </div> 
-            
+            </div>
           </div>
           
           <div class="labels">
@@ -711,9 +800,7 @@
             
             <div class="input-tab" style="margin-left: 63px;">
               <input type="checkbox" name="agreeInterestDue" value="agreeInterestDue" required>Agree
-            </div>   
-            
-            
+            </div>
           </div>
           
           <div class="labels">
@@ -721,12 +808,9 @@
           </div>
           <div class="input-tab">
             <input class="input-field" type="text" id="loanTerm" name="loanTerm" placeholder="Loan Term" required style="width: 50px;" readonly>
-            
             <div class="input-tab" style="margin-left: 151px;">
               <input type="checkbox" name="agreeLoanTerm" value="agreeLoanTerm" required>Agree
             </div>   
-            
-            
           </div>
           
           <div class="labels">
@@ -747,10 +831,7 @@
             
             <div class="input-tab" style="margin-left: 151px;">
               <input type="checkbox" name="agreeBankFees" value="agreeBankFees" required>Agree
-            </div> 
-            
-            
-            
+            </div>
           </div>
           
           <div class="labels">
@@ -769,7 +850,7 @@
             <label for="borrowerDropdown">Borrower is an</label>
           </div>
           <div class="input-tab">
-            <select id="borrowerDropdown" name="borrowerDropdown" onchange="handleBorrowerSelect()" required>
+            <select id="borrowerDropdown" name="borrowerDropdown" onchange="handleBorrowerSelect()" style="width: 250px;" readonly>
               <option disabled value selected>Select an option</option>
               <option value="individualBorrower">Individual</option>
               <option value="entityBorrower">Entity</option>
@@ -777,7 +858,6 @@
           </div>
           
           <div id="borrowerSpecificDetails"></div>
-          
           <div id="additionalIndividualInfo"></div>
           <div id="additionalUboInfo"></div>
           <div id="additionalDirectorInfo"></div>
@@ -800,15 +880,14 @@
             </div>
           </div>
           
-          
           <br><br><br><h2 id="stepSevenTitle">Step 7</h2><br>
           <h3 id="stepSevenSubtitle">Bank Account Information</h3>
           
           <div class="labels">
-            <label id="abaNumberLabel" for="abaNumber">ABA Number</label>
+            <label id="beneficiaryNameLabel" for="beneficiaryName">Beneficiary Name</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="abaNumber" name="abaNumber" placeholder="ABA Number" required style="width: 250px;">
+            <input class="input-field" type="text" id="beneficiaryName" name="beneficiaryName" placeholder="Beneficiary Name" required style="width: 250px;">
           </div>
           
           <div class="labels">
@@ -851,7 +930,7 @@
             <label for="bankAccountTypeDropdown">Bank Account Type</label>
           </div>
           <div class="input-tab">
-            <select id="bankAccountTypeDropdown" name="bankAccountTypeDropdown" onchange="otherBankAccountType()" required>
+            <select id="bankAccountTypeDropdown" name="bankAccountTypeDropdown" onchange="otherBankAccountType()" required style="width: 262px;">
               <option disabled value selected>Select an option</option>
               <option value="bankChecking">Checking</option>
               <option value="bankSavings">Savings</option>
@@ -865,21 +944,28 @@
             <label id="ibanLabel" for="iban">IBAN</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="iban" name="iban" placeholder="IBAN" required style="width: 250px;">
+            <input class="input-field" type="text" id="iban" name="iban" placeholder="IBAN" style="width: 250px;">
           </div>
           
           <div class="labels">
             <label id="swiftLabel" for="swift">SWIFT</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="swift" name="swift" placeholder="SWIFT" required style="width: 250px;">
+            <input class="input-field" type="text" id="swift" name="swift" placeholder="SWIFT" style="width: 250px;">
+          </div>
+          
+          <div class="labels">
+            <label id="abaNumberLabel" for="abaNumber">ABA Number</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="abaNumber" name="abaNumber" placeholder="ABA Number" required style="width: 250px;">
           </div>
           
           <div class="labels">
             <label id="memoLabel" for="memo">Memo</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="memo" name="memo" placeholder="Memo" required style="width: 250px;">
+            <input class="input-field" type="text" id="memo" name="memo" placeholder="Memo" style="width: 250px;">
           </div>
           
           <br><br><h3>Upload a PDF or Image for Each of the Following</h3>
@@ -889,13 +975,14 @@
           </div>
           <div class="input-tab">
             <label for="bankAcctFile" class="fileUploadButton">Choose File
-              <input id="bankAcctFile" type="file" name="bankAcctFile" style="display:none" onchange="displayFileName('bankAcctFile', 'bankAcctFileNameSpan')">
+              <input id="bankAcctFile" type="file" name="bankAcctFile" style="display:none" onchange="displayFileName('bankAcctFile', 'bankAcctFileNameSpan')" required>
             </label>
             <span id="bankAcctFileNameSpan">Uploaded File: None</span>
           </div>
           
+          
           <br><br><br><h2 id="stepEightTitle">Step 8</h2><br>
-          <h3 id="stepEightSubtitle">Loan Officer Certification</h3>
+          <h3 id="stepEightSubtitle">Borrower Certification</h3>
           
           <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
             I hereby submit my application for credit with Longline Lending LLC directly or via a loan officer
@@ -917,17 +1004,17 @@
           </div>
           
           <div class="labels">
-            <label id="loanOfficerNameLabel" for="loanOfficerName">Loan Officer Name</label>
+            <label id="loanOfficerNameLabel" for="loanOfficerName">Intake Loan Officer Name</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="loanOfficerName" name="loanOfficerName" placeholder="Loan Officer Name" style="width: 150px;" required>
+            <input class="input-field" type="text" id="loanOfficerName" name="loanOfficerName" placeholder="Loan Officer Name" style="width: 250px;" required>
           </div>
           
           <div class="labels">
             <label for="loanAssementDropdown">Loan Officer’s Assessment of Borrower’s Ability to Repay</label>
           </div>
           <div class="input-tab">
-            <select id="loanAssementDropdown" name="loanAssementDropdown" required>
+            <select id="loanAssementDropdown" name="loanAssementDropdown" style="width: 250px;" required>
               <option disabled value selected>Select an option</option>
               <option value="loanAssementYes">Yes</option>
               <option value="loanAssementNo">No</option>

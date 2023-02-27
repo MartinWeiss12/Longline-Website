@@ -281,7 +281,7 @@
           <label id="pinLabel" for="pinLabel">Enter Pin</label>
         </div>
         <div class="input-tab">
-          <form id="pinForm" method="POST" action="{{ url_for('borrow') }}">
+          <form id="pinForm" method="POST" action="/borrow">
             <input class="input-field" type="password" id="userPin" name="userPin" placeholder="Enter Pin" required autofocus style="width: 150px;">
             <button id="submitPinButton" type="submit">Submit</button>
           </form>

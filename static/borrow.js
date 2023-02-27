@@ -41,10 +41,6 @@ function handleCollateralCheckboxes(checkbox) {
 }
 
 
-
-
-
-
 // show other text entry box if other button is clicked for Loan Purpose
 function otherLoanFunction(cbox) {
   if (cbox.checked) {
@@ -244,7 +240,7 @@ document.getElementById('bankFees').value = '40';
 const bankOtherInputContainer = document.getElementById("bankOtherInputContainer");
 const otherBankAccountHtml = `
       <div class="labels">
-        <label id="bankAccountOtherText" for="bankAccountOtherText">Please Specify</label>
+        <label id="bankAccountOtherTextLabel" for="bankAccountOtherText">Please Specify</label>
       </div>
       <div class="input-tab">
         <input class="input-field" type="text" id="bankAccountOther" name="bankAccountOther" placeholder="Other Bank Account Type" style="width: 150px;">
@@ -368,7 +364,7 @@ const htmlForFirstIndividual = `
     <label id="individualHomeCountryLabel1" for="individualHomeCountry1">Home Country</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="individualhomeCountry1" name="individualhomeCountry1" placeholder="Home Country" style="width: 250px;" required>
+    <input class="input-field" type="text" id="individualHomeCountry1" name="individualHomeCountry1" placeholder="Home Country" style="width: 250px;" required>
   </div>
   
   <div class="labels">
@@ -404,7 +400,7 @@ const htmlForFirstIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualDobLabel1" for="individualDob1" required>Date of Birth</label>
+    <label id="individualDobLabel1" for="individualDob1">Date of Birth</label>
   </div>
   <div class="input-tab">
     <input type="date" id="individualDob1" name="individualDob1" style="width: 250px;" required>
@@ -483,31 +479,31 @@ const htmlForFirstIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualDniFrontFileLabel1" for="individualDniFrontFile1" required>DNI/Drivers License (Front)</label>
+    <label id="individualDniFrontFileLabel1" for="individualDniFrontFile1">DNI/Drivers License (Front)</label>
   </div>
   <div class="input-tab">
     <label for="individualDniFrontFile1" class="fileUploadButton">Choose File
-      <input id="individualDniFrontFile1" type="file" name="individualDniFrontFile1" style="display:none" onchange="displayFileName('individualDniFrontFile1', 'individualDniFrontFileNameSpan1')"required>
+      <input id="individualDniFrontFile1" type="file" name="individualDniFrontFile1" style="display:none" onchange="displayFileName('individualDniFrontFile1', 'individualDniFrontFileNameSpan1')" required>
     </label>
     <span id="individualDniFrontFileNameSpan1">Uploaded File: None</span>
   </div>
   
   <div class="labels">
-    <label id="individualDniReverseFileLabel1" for="individualDniReverseFile1" required>DNI/Drivers License (Reverse)</label>
+    <label id="individualDniReverseFileLabel1" for="individualDniReverseFile1">DNI/Drivers License (Reverse)</label>
   </div>
   <div class="input-tab">
     <label for="individualDniReverseFile1" class="fileUploadButton">Choose File
-      <input id="individualDniReverseFile1" type="file" name="individualDniReverseFile1" style="display:none" onchange="displayFileName('individualDniReverseFile1', 'individualDniReverseFileNameSpan1')"required>
+      <input id="individualDniReverseFile1" type="file" name="individualDniReverseFile1" style="display:none" onchange="displayFileName('individualDniReverseFile1', 'individualDniReverseFileNameSpan1')" required>
     </label>
     <span id="individualDniReverseFileNameSpan1">Uploaded File: None</span>
   </div>
   
   <div class="labels">
-    <label id="individualBillAddressProofFileLabel1" for="individualBillAddressProofFile1" required>Bill for Proof of Address</label>
+    <label id="individualBillAddressProofFileLabel1" for="individualBillAddressProofFile1">Bill for Proof of Address</label>
   </div>
   <div class="input-tab">
     <label for="individualBillAddressProofFile1" class="fileUploadButton">Choose File
-      <input id="individualBillAddressProofFile1" type="file" name="individualBillAddressProofFile1" style="display:none" onchange="displayFileName('individualBillAddressProofFile1', 'individualBillAddressProofFileNameSpan1')"required>
+      <input id="individualBillAddressProofFile1" type="file" name="individualBillAddressProofFile1" style="display:none" onchange="displayFileName('individualBillAddressProofFile1', 'individualBillAddressProofFileNameSpan1')" required>
     </label>
     <span id="individualBillAddressProofFileNameSpan1">Uploaded File: None</span>
   </div>
@@ -517,7 +513,7 @@ const htmlForFirstIndividual = `
   </div>
   <div class="input-tab">
     <label for="individualCreditCheckFile1" class="fileUploadButton">Choose File
-      <input id="individualCreditCheckFile1" type="file" name="individualCreditCheckFile1" style="display:none" onchange="displayFileName('individualCreditCheckFile1', 'individualCreditCheckFileNameSpan1')"required>
+      <input id="individualCreditCheckFile1" type="file" name="individualCreditCheckFile1" style="display:none" onchange="displayFileName('individualCreditCheckFile1', 'individualCreditCheckFileNameSpan1')" required>
     </label>
     <span id="individualCreditCheckFileNameSpan1">Uploaded File: None</span>
   </div>
@@ -533,7 +529,7 @@ const htmlForFirstIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualOfacFileLabel1" for="individualOfacFile1" required>OFAC Check</label>
+    <label id="individualOfacFileLabel1" for="individualOfacFile1">OFAC Check</label>
   </div>
   <div class="input-tab">
     <label for="individualOfacFile1" class="fileUploadButton">Choose File
@@ -644,7 +640,7 @@ const htmlForEntity = `
   </div>
 
   <br><br><br><h2 id="stepSixUboSubtitle">Step 6 - UBO and Director Info</h2><br>  
-  <br><h3 id="uboInfoSubtitle1">Please add UBOs THEN Directors</strong></h3><br>
+  <br><h3 id="uboInfoSubtitle1">Please add UBOs THEN Directors</h3><br>
   <br><h3 id="uboInfoSubtitle2">Info for UBO 1</h3>
   
   <div class="labels">
@@ -692,24 +688,24 @@ const htmlForEntity = `
   </div>
   
   <div class="labels">
-    <label id="uboFirstName1" for="uboFirstName1">First Name(s)</label>
+    <label id="uboFirstNameLabel1" for="uboFirstName1">First Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboFirstName1" name="uboFirstName1" placeholder="First Name(s)" style="width: 250px;" required>
   </div>
   
   <div class="labels">
-    <label id="uboMiddleName1" for="uboMiddleName1">Middle Name(s)</label>
+    <label id="uboMiddleNameLabel1" for="uboMiddleName1">Middle Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboMiddleName1" name="uboMiddleName1" placeholder="Middle Name(s)" style="width: 250px;">
   </div>
   
   <div class="labels">
-    <label id="uboLastName1" for="uboLastName1">Last Name(s)</label>
+    <label id="uboLastNameLabel1" for="uboLastName1">Last Name(s)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="uboLastName1" name="lastName1" placeholder="Last Name(s)" style="width: 250px;" required>
+    <input class="input-field" type="text" id="uboLastName1" name="uboLastName1" placeholder="Last Name(s)" style="width: 250px;" required>
   </div>
   
   <div class="labels">
@@ -880,7 +876,7 @@ const htmlForEntity = `
   </div>
   <div class="input-tab">
     <label for="uboDniReverseFile1" class="fileUploadButton">Choose File
-      <input id="uboDniReverseFile1" type="file" name="uboDniReverseFile1" style="display:none" required onchange="displayFileName('uboDniReverseFile1', 'uboDniReverseFileNameSpan1')" required>
+      <input id="uboDniReverseFile1" type="file" name="uboDniReverseFile1" style="display:none" required onchange="displayFileName('uboDniReverseFile1', 'uboDniReverseFileNameSpan1')">
     </label>
     <span id="uboDniReverseFileNameSpan1">Uploaded File: None</span>
   </div>
@@ -890,7 +886,7 @@ const htmlForEntity = `
   </div>
   <div class="input-tab">
     <label for="uboBillAddressProofFile1" class="fileUploadButton">Choose File
-      <input id="uboBillAddressProofFile1" type="file" name="uboBillAddressProofFile1" style="display:none" required onchange="displayFileName('uboBillAddressProofFile1', 'uboBillAddressProofFileNameSpan1')" required>
+      <input id="uboBillAddressProofFile1" type="file" name="uboBillAddressProofFile1" style="display:none" required onchange="displayFileName('uboBillAddressProofFile1', 'uboBillAddressProofFileNameSpan1')">
     </label>
     <span id="uboBillAddressProofFileNameSpan1">Uploaded File: None</span>
   </div>
@@ -900,7 +896,7 @@ const htmlForEntity = `
   </div>
   <div class="input-tab">
     <label for="uboCreditCheckFile1" class="fileUploadButton">Choose File
-      <input id="uboCreditCheckFile1" type="file" name="uboCreditCheckFile1" style="display:none" required onchange="displayFileName('uboCreditCheckFile1', 'uboCreditCheckFileNameSpan1')" required>
+      <input id="uboCreditCheckFile1" type="file" name="uboCreditCheckFile1" style="display:none" required onchange="displayFileName('uboCreditCheckFile1', 'uboCreditCheckFileNameSpan1')">
     </label>
     <span id="uboCreditCheckFileNameSpan1">Uploaded File: None</span>
   </div>
@@ -910,7 +906,7 @@ const htmlForEntity = `
   </div>
   <div class="input-tab">
     <label for="uboWorldCheckFile1" class="fileUploadButton">Choose File
-      <input id="uboWorldCheckFile1" type="file" name="uboWorldCheckFile1" style="display:none" required onchange="displayFileName('uboWorldCheckFile1', 'uboWorldCheckFileNameSpan1')" required>
+      <input id="uboWorldCheckFile1" type="file" name="uboWorldCheckFile1" style="display:none" required onchange="displayFileName('uboWorldCheckFile1', 'uboWorldCheckFileNameSpan1')">
     </label>
     <span id="uboWorldCheckFileNameSpan1">Uploaded File: None</span>
   </div>
@@ -920,7 +916,7 @@ const htmlForEntity = `
   </div>
   <div class="input-tab">
     <label for="uboOfacFile1" class="fileUploadButton">Choose File
-      <input id="uboOfacFile1" type="file" name="uboOfacFile1" style="display:none" required onchange="displayFileName('uboOfacFile1', 'uboOfacFileNameSpan1')" required>
+      <input id="uboOfacFile1" type="file" name="uboOfacFile1" style="display:none" required onchange="displayFileName('uboOfacFile1', 'uboOfacFileNameSpan1')">
     </label>
     <span id="uboOfacFileNameSpan1">Uploaded File: None</span>
   </div>
