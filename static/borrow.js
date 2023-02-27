@@ -1822,18 +1822,16 @@ function addDirectorEventListeners() {
         const additionalDirectorInfoToRemove = document.getElementById(`additionalDirectorInfo${directorCount-1}`);
         additionalDirectorInfoToRemove.remove();
         
-        const replacementDiv = document.createElement(`additionalDirectorInfo${directorCount}`);
         
+        const replacementDiv = document.createElement("div");
+        replacementDiv.setAttribute("id", `additionalDirectorInfo${directorCount-1}`);
+        // Add any content or attributes you need to the replacement div here
         
         const divAfterOneJustRemoved = document.getElementById(`additionalDirectorInfo${directorCount}`);
         const parentDiv = additionalDirectorInfo1.parentNode;
         parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
         
-        
-        
-        
         directorCount--;
-
         
         //add blank div
         
