@@ -1785,6 +1785,8 @@ function addEventListenersToAddButtons(buttonType, additionalInfoDivId, htmlForA
   }
 }
 
+
+
 function addDirectorEventListeners() {
   directorCount = 1;
   const additionalDirectorInfo = document.getElementById('additionalDirectorInfo');
@@ -1804,8 +1806,39 @@ function addDirectorEventListeners() {
         }
       }
     });
+    
+    const removeDirectorButton = document.getElementById(`removeDirectorButton${i}`);
+    removeDirectorButton.addEventListener('click', function() {
+      if (directorCount >= 1 && directorCount <= 9) {
+        // Loop until there are no more child elements left in additionalDirectorInfo
+        while (additionalDirectorInfo.lastElementChild) {
+          additionalDirectorInfo.removeChild(additionalDirectorInfo.lastElementChild);
+        }
+        
+        directorCount = 1;
+      }
+    });
   }
 }
+
+
+
+
+
+
+
+//
+//const removeDirectorButton = document.getElementById(`removeDirectorButton${i}`);
+//removeDirectorButton.addEventListener('click', function() {
+//if (directorCount > 1) {
+//  directorCount--;
+
+
+
+
+
+
+
 
 
 var addIndividualButton = document.getElementById("addIndividualButton1");
@@ -1814,6 +1847,13 @@ var addUboButton = document.getElementById("addUboButton1");
 addUboButton.style.display = "none"; // hide the button by default
 var addDirectorButton = document.getElementById("addDirectorButton1");
 addDirectorButton.style.display = "none"; // hide the button by default
+
+var removeIndividualButton = document.getElementById("removeIndividualButton1");
+removeIndividualButton.style.display = "none"; // hide the button by default
+var removeUboButton = document.getElementById("removeUboButton1");
+removeUboButton.style.display = "none"; // hide the button by default
+var removeDirectorButton = document.getElementById("removeDirectorButton1");
+removeDirectorButton.style.display = "none"; // hide the button by default
 
 function handleBorrowerSelect() {
   var select = document.getElementById("borrowerDropdown");
@@ -1828,8 +1868,12 @@ function handleBorrowerSelect() {
     entityContainer.innerHTML = htmlForFirstIndividual;
     addUboButton.style.display = "none"; // hide the button
     addDirectorButton.style.display = "none"; // hide the button
+    removeUboButton.style.display = "none"; // hide the button
+    removeDirectorButton.style.display = "none"; // hide the button
     addIndividualButton.style.display = "block"; // show the button
     addIndividualButton.style.margin = "0 auto";
+    removeIndividualButton.style.display = "block"; // show the button
+    removeIndividualButton.style.margin = "0 auto";
     addEventListenersToAddButtons('Individual', 'additionalIndividualInfo', htmlForAdditionalIndividual);
     
   }
@@ -1841,10 +1885,15 @@ function handleBorrowerSelect() {
     document.getElementById("additionalIndividualInfo").innerHTML = "";
     entityContainer.innerHTML = htmlForEntity;
     addIndividualButton.style.display = "none"; // hide the button
+    removeIndividualButton.style.display = "none"; // hide the button
     addUboButton.style.display = "block"; // show the button
     addUboButton.style.margin = "0 auto";
     addDirectorButton.style.display = "block"; // show the button
     addDirectorButton.style.margin = "0 auto";
+    removeUboButton.style.display = "block"; // show the button
+    removeUboButton.style.margin = "0 auto";
+    removeDirectorButton.style.display = "block"; // show the button
+    removeDirectorButton.style.margin = "0 auto";
     addEventListenersToAddButtons('Ubo', 'additionalUboInfo', htmlForAdditionalUbo);
     
   }
