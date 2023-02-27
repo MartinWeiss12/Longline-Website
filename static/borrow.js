@@ -1790,19 +1790,19 @@ function addEventListenersToAddButtons(buttonType, additionalInfoDivId, htmlForA
 }
 
 function addDirectorEventListeners() {
-  let count = 1;
+  directorCount = 1;
   const additionalDirectorInfo = document.getElementById('additionalDirectorInfo');
   
   for (let i = 1; i < 9; i++) {
     const addDirectorButton = document.getElementById(`addDirectorButton${i}`);
     addDirectorButton.addEventListener('click', function() {
-      if (count <= 9) {
-        const htmlForAdditionalWithIndex = htmlForAdditionalDirector.replace(/{{index}}/g, count);
+      if (directorCount <= 9) {
+        const htmlForAdditionalWithIndex = htmlForAdditionalDirector.replace(/{{index}}/g, directorCount);
         additionalDirectorInfo.insertAdjacentHTML('beforeend', htmlForAdditionalWithIndex);
         
-        count++;
+        directorCount++;
         
-        if (count === 8) {
+        if (directorCount === 9) {
           const addDirectorButton1 = document.getElementById('addDirectorButton1');
           addDirectorButton1.style.display = 'none';
         }
@@ -1840,7 +1840,7 @@ function handleBorrowerSelect() {
   
   if (option.value == "entityBorrower") {
     
-    var count = 1;
+    var directorCount = 1;
     
     document.getElementById("additionalIndividualInfo").innerHTML = "";
     entityContainer.innerHTML = htmlForEntity;
@@ -1855,9 +1855,6 @@ function handleBorrowerSelect() {
 }
 
 addDirectorEventListeners();
-
-
-
 
 
 
