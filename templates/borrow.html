@@ -104,7 +104,7 @@
         width: 40%;
         vertical-align: top; 
         margin-top: 20px;
-        margin-left: 85px;
+        margin-left: 75px;
       }
       
       .input-tab {
@@ -613,7 +613,7 @@
             <label id="collateralSpecLabel" for="collateralSpec">Collateral Specifications</label>
           </div>
           <div class="input-tab">
-            <textarea class="input-field" id="collateralSpec" name="collateralSpec" rows="4" placeholder="Collateral Specifications..." required style="width: 250px;"></textarea>
+            <textarea class="input-field" id="collateralSpec" name="collateralSpec" rows="4" placeholder="Collateral Specifications" style="width: 250px;"></textarea>
           </div>
           
           <div class="labels">
@@ -643,9 +643,9 @@
             <label></label>
           </div>
           <div class="input-tab">
-            <input type="checkbox" name="securityCheckbox" value="Security Received" required>Security Received
+            <input type="checkbox" name="securityCheckbox" value="Security Received">Security Received
             <input type="date" id="secRecDate" name="secRecDate"><br>
-            <input type="checkbox" name="securityCheckbox" value="Security Guaranteed" required>Security Guaranteed<br>
+            <input type="checkbox" name="securityCheckbox" value="Security Guaranteed">Security Guaranteed<br>
           </div>
           
           
@@ -769,7 +769,7 @@
             <label for="borrowerDropdown">Borrower is an</label>
           </div>
           <div class="input-tab">
-            <select id="borrowerDropdown" name="borrowerDropdown" onchange="handleBorrowerSelect()" required>
+            <select id="borrowerDropdown" name="borrowerDropdown" onchange="handleBorrowerSelect()" style="width: 250px;" readonly>
               <option disabled value selected>Select an option</option>
               <option value="individualBorrower">Individual</option>
               <option value="entityBorrower">Entity</option>
@@ -805,10 +805,10 @@
           <h3 id="stepSevenSubtitle">Bank Account Information</h3>
           
           <div class="labels">
-            <label id="abaNumberLabel" for="abaNumber">ABA Number</label>
+            <label id="beneficiaryNameLabel" for="beneficiaryName">Beneficiary Name</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="abaNumber" name="abaNumber" placeholder="ABA Number" required style="width: 250px;">
+            <input class="input-field" type="text" id="beneficiaryName" name="beneficiaryName" placeholder="Beneficiary Name" required style="width: 250px;">
           </div>
           
           <div class="labels">
@@ -851,7 +851,7 @@
             <label for="bankAccountTypeDropdown">Bank Account Type</label>
           </div>
           <div class="input-tab">
-            <select id="bankAccountTypeDropdown" name="bankAccountTypeDropdown" onchange="otherBankAccountType()" required>
+            <select id="bankAccountTypeDropdown" name="bankAccountTypeDropdown" onchange="otherBankAccountType()" required style="width: 262px;">
               <option disabled value selected>Select an option</option>
               <option value="bankChecking">Checking</option>
               <option value="bankSavings">Savings</option>
@@ -865,21 +865,28 @@
             <label id="ibanLabel" for="iban">IBAN</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="iban" name="iban" placeholder="IBAN" required style="width: 250px;">
+            <input class="input-field" type="text" id="iban" name="iban" placeholder="IBAN" style="width: 250px;">
           </div>
           
           <div class="labels">
             <label id="swiftLabel" for="swift">SWIFT</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="swift" name="swift" placeholder="SWIFT" required style="width: 250px;">
+            <input class="input-field" type="text" id="swift" name="swift" placeholder="SWIFT" style="width: 250px;">
+          </div>
+          
+          <div class="labels">
+            <label id="abaNumberLabel" for="abaNumber">ABA Number</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="abaNumber" name="abaNumber" placeholder="ABA Number" required style="width: 250px;">
           </div>
           
           <div class="labels">
             <label id="memoLabel" for="memo">Memo</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="memo" name="memo" placeholder="Memo" required style="width: 250px;">
+            <input class="input-field" type="text" id="memo" name="memo" placeholder="Memo" style="width: 250px;">
           </div>
           
           <br><br><h3>Upload a PDF or Image for Each of the Following</h3>
@@ -889,13 +896,13 @@
           </div>
           <div class="input-tab">
             <label for="bankAcctFile" class="fileUploadButton">Choose File
-              <input id="bankAcctFile" type="file" name="bankAcctFile" style="display:none" onchange="displayFileName('bankAcctFile', 'bankAcctFileNameSpan')">
+              <input id="bankAcctFile" type="file" name="bankAcctFile" style="display:none" onchange="displayFileName('bankAcctFile', 'bankAcctFileNameSpan')" required>
             </label>
             <span id="bankAcctFileNameSpan">Uploaded File: None</span>
           </div>
           
           <br><br><br><h2 id="stepEightTitle">Step 8</h2><br>
-          <h3 id="stepEightSubtitle">Loan Officer Certification</h3>
+          <h3 id="stepEightSubtitle">Borrower Certification</h3>
           
           <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
             I hereby submit my application for credit with Longline Lending LLC directly or via a loan officer
@@ -917,17 +924,17 @@
           </div>
           
           <div class="labels">
-            <label id="loanOfficerNameLabel" for="loanOfficerName">Loan Officer Name</label>
+            <label id="loanOfficerNameLabel" for="loanOfficerName">Intake Loan Officer Name</label>
           </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="loanOfficerName" name="loanOfficerName" placeholder="Loan Officer Name" style="width: 150px;" required>
+            <input class="input-field" type="text" id="loanOfficerName" name="loanOfficerName" placeholder="Loan Officer Name" style="width: 250px;" required>
           </div>
           
           <div class="labels">
             <label for="loanAssementDropdown">Loan Officer’s Assessment of Borrower’s Ability to Repay</label>
           </div>
           <div class="input-tab">
-            <select id="loanAssementDropdown" name="loanAssementDropdown" required>
+            <select id="loanAssementDropdown" name="loanAssementDropdown" style="width: 250px;" required>
               <option disabled value selected>Select an option</option>
               <option value="loanAssementYes">Yes</option>
               <option value="loanAssementNo">No</option>
