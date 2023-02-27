@@ -1765,14 +1765,19 @@ const htmlForAdditionalUbo = `
   
 function addEventListenersToAddButtons(buttonType, additionalInfoDivId, htmlForAdditionalInfo) {
   count = 2;
-  const additionalInfoDiv = document.getElementById(additionalInfoDivId);
   
   for (let i = 1; i < 9; i++) {
+    
+    
+    const additionalInfoDiv = document.getElementById(`${additionalInfoDivId}${i}`);
+
+    
+    
     const addButton = document.getElementById(`add${buttonType}Button${i}`);
     addButton.addEventListener('click', function() {
       if (count <= 9) {
-        const htmlForAdditionalWithIndex = htmlForAdditionalInfo.replace(/{{index}}/g, count);
-        additionalInfoDiv.insertAdjacentHTML('beforeend', htmlForAdditionalWithIndex);
+        const htmlForAdditionalDirectorWithIndex = htmlForAdditionalInfo.replace(/{{index}}/g, count);
+        additionalInfoDiv.insertAdjacentHTML('beforeend', htmlForAdditionalDirectorWithIndex);
         
         count++;
         
@@ -1787,22 +1792,26 @@ function addEventListenersToAddButtons(buttonType, additionalInfoDivId, htmlForA
 
 
 
+
+
+
 function addDirectorEventListeners() {
   directorCount = 1;
-  const additionalDirectorInfo = document.getElementById('additionalDirectorInfo');
-  
-  for (let i = 1; i < 9; i++) {
+  for (let i = 1; i <= 8; i++) {
     const addDirectorButton = document.getElementById(`addDirectorButton${i}`);
     addDirectorButton.addEventListener('click', function() {
-      if (directorCount <= 9) {
-        const htmlForAdditionalWithIndex = htmlForAdditionalDirector.replace(/{{index}}/g, directorCount);
-        additionalDirectorInfo.insertAdjacentHTML('beforeend', htmlForAdditionalWithIndex);
-        
+      if (directorCount <= 8) {
+        const additionalDirectorInfoID = 'additionalDirectorInfo' + directorCount;
+        const additionalDirectorInfo = document.getElementById(additionalDirectorInfoID);
+        const htmlForAdditionalDirectorWithIndex = htmlForAdditionalDirector.replace(/{{index}}/g, directorCount);
+        additionalDirectorInfo.insertAdjacentHTML('beforeend', htmlForAdditionalDirectorWithIndex);
         directorCount++;
         
-        if (directorCount === 9) {
-          const addDirectorButton1 = document.getElementById('addDirectorButton1');
-          addDirectorButton1.style.display = 'none';
+        if (directorCount > 8) {
+          for (let j = 1; j <= 8; j++) {
+            const addDirectorButton = document.getElementById(`addDirectorButton${j}`);
+            addDirectorButton.style.display = 'none';
+          }
         }
       }
     });
@@ -1810,18 +1819,35 @@ function addDirectorEventListeners() {
     const removeDirectorButton = document.getElementById(`removeDirectorButton${i}`);
     removeDirectorButton.addEventListener('click', function() {
       if (directorCount >= 1 && directorCount <= 9) {
-        // Loop until there are no more child elements left in additionalDirectorInfo
-        while (additionalDirectorInfo.lastElementChild) {
-          additionalDirectorInfo.removeChild(additionalDirectorInfo.lastElementChild);
-        }
+        const additionalDirectorInfoToRemove = document.getElementById(`additionalDirectorInfo${directorCount-1}`);
+        additionalDirectorInfoToRemove.remove();
         
-        directorCount = 1;
+        const replacementDiv = document.createElement(`additionalDirectorInfo${directorCount}`);
+        
+        
+        const divAfterOneJustRemoved = document.getElementById(`additionalDirectorInfo${directorCount}`);
+        const parentDiv = additionalDirectorInfo1.parentNode;
+        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
+        
+        
+        
+        
+        directorCount--;
+
+        
+        //add blank div
+        
       }
     });
   }
 }
 
 
+//    }
+//  });
+
+
+// remove the div
 
 
 
