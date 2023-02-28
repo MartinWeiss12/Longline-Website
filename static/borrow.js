@@ -641,285 +641,7 @@ const htmlForEntity = `
 
   <br><br><br><h2 id="stepSixUboSubtitle">Step 6 - UBO and Director Info</h2><br>  
   <br><h3 id="uboInfoSubtitle1">Please add UBOs THEN Directors</h3><br>
-  <br><h3 id="uboInfoSubtitle2">Info for UBO 1</h3>
   
-  <div class="labels">
-    <label for="dropdown">Control Person Authorized to Apply for, Take, and Execute, Loan?</label>
-  </div>
-  <div class="input-tab">
-    <select id="uboControlPersonAuthDropdown" name="uboControlPersonAuthDropdown1" required style="width: 262px;">
-      <option disabled value selected>Select an option</option>
-      <option value="controlPersonAuthYes1">Yes</option>
-      <option value="controlPersonAuthNo1">No</option>
-    </select>
-  </div>
-
-  <div class="labels">
-  <label for="dropdown">Personal Guarantor?</label>
-  </div>
-  <div class="input-tab">
-    <select id="uboPersonalGuarantorDropdown" name="uboPersonalGuarantorDropdown1" required style="width: 262px;">
-      <option disabled value selected>Select an option</option>
-      <option value="uboPersonalGuarantorYes1">Yes</option>
-      <option value="uboPersonalGuarantorNo1">No</option>
-    </select>
-  </div>
-  
-  <div class="labels">
-    <label for="dropdown">U.S. Citizen or Green Card?</label>
-  </div>
-  <div class="input-tab">
-    <select id="uboCitizenDropdown" name="uboCitizenDropdown1" required style="width: 262px;">
-      <option disabled value selected>Select an option</option>
-      <option value="uboCitizenYes1">Yes</option>
-      <option value="uboCitizenNo1">No</option>
-    </select>
-  </div>
-
-  <div class="labels">
-    <label for="dropdown">South Dakota Resident?</label>
-  </div>
-  <div class="input-tab">
-    <select id="uboSDResidentDropdown" name="uboSDResidentDropdown1" required style="width: 262px;">
-      <option disabled value selected>Select an option</option>
-      <option value="uboSDResidentYes1">Yes</option>
-      <option value="uboSDResidentNo1">No</option>
-    </select>
-  </div>
-  
-  <div class="labels">
-    <label id="uboFirstNameLabel1" for="uboFirstName1">First Name(s)</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="uboFirstName1" name="uboFirstName1" placeholder="First Name(s)" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label id="uboMiddleNameLabel1" for="uboMiddleName1">Middle Name(s)</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="uboMiddleName1" name="uboMiddleName1" placeholder="Middle Name(s)" style="width: 250px;">
-  </div>
-  
-  <div class="labels">
-    <label id="uboLastNameLabel1" for="uboLastName1">Last Name(s)</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="uboLastName1" name="uboLastName1" placeholder="Last Name(s)" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label id="uboHomeBankAddressLabel1" for="uboHomeBankAddress1">Home Address (must match recent bill)</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="uboHomeBankAddress1" name="uboHomeBankAddress1" placeholder="Home Address" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label id="uboHomeStreetAddressLabel1" for="uboHomeStreetAddress1">Home Street Address</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="uboHomeStreetAddress1" name="uboHomeStreetAddress1" placeholder="Home Street Address" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label id="uboHomeCityLabel1" for="uboHomeCity1">Home City</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="uboHomeCity1" name="uboHomeCity1" placeholder="Home City" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label id="uboHomeStateLabel1" for="uboHomeState1">Home State or Province</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="uboHomeState1" name="uboHomeState1" placeholder="Home State or Province" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label id="uboHomeZipLabel1" for="uboHomeZip1">Home Zip</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="uboHomeZip1" name="uboHomeZip1" placeholder="Home Zip" style="width: 250px;" required>
-  </div>
-
-  <div class="labels">
-    <label id="uboHomeCountryLabel1" for="uboHomeCountry1">Home Country</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="ubohomeCountry1" name="ubohomeCountry1" placeholder="Home Country" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label for="dropdown">Own or Rent?</label>
-  </div>
-  <div class="input-tab">
-    <select id="uboOwnRentDropdown" name="uboOwnRentDropdown1" style="width: 262px;">
-      <option disabled value selected>Select an option</option>
-      <option value="uboOwn1">Own</option>
-      <option value="uboRent1">Rent</option>
-    </select>
-  </div>
-  
-  <div class="labels">
-    <label id="uboRentLabel1" for="uboRent1">Monthly Mortgage or Rent in USD</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="uboMonthlyRent1" name="uboMonthlyRent1" placeholder="Monthly Mortgage or Rent" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
-  </div>
-  
-  <div class="labels">
-    <label id="uboPassportNumberLabel1" for="uboPassportNumber1">Passport Number</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="uboPassportNumber1" name="uboPassportNumber1" placeholder="Passport Number" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label id="uboSsnLabel1" for="uboSsn1">SSN or ID Number</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="uboSsn1" name="uboSsn1" placeholder="SSN or ID Number" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label id="uboDobLabel1" for="uboDob1">Date of Birth</label>
-  </div>
-  <div class="input-tab">
-    <input type="date" id="uboDob1" name="uboDob1" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label id="uboEmailLabel1" for="uboEmail1">Email Address</label></div>
-  <div class="input-tab">
-    <input class="input-field" type="email" id="uboEmail1" name="uboEmail1" placeholder="email@email.com" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label id="uboPhoneLabel1" for="uboPhone1">Telephone</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="uboPhone1" name="uboPhone1" placeholder="Telephone" style="width: 250px;">
-  </div>
-  
-  <div class="labels">
-    <label id="uboFicoLabel1" for="uboFico1">FICO or NOSIS Score</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="uboFico1" name="uboFico1" placeholder="FICO or NOSIS Score" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
-  </div>
-  
-  <div class="labels">
-    <label id="uboIncomeLabel1" for="uboIncome1">Monthly Income in USD</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="uboIncome1" name="uboIncome1" placeholder="Monthly Income in USD" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
-  </div>
-  
-  <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
-    Are you a Politically Exposed Person (PEP) or related to a PEP? <br> A PEP is person who is or has been entrusted with any prominent public function in  the United States of America, a country or territory outside United States of  America, or by an international organization. By “related”, we mean that you are a parent, spouse, sibling or child of a PEP, or closely connected to a PEP either socially  or professionally.
-  </div>
-  
-  <div class="labels">
-    <label></label>
-  </div>
-  <div class="input-tab">
-    <label><input type="radio" name="uboPep1" value="uboYesPep1" style="margin-left: 50px;" required>Yes</label>
-    <label><input type="radio" name="uboPep1" value="uboNoPep1">No</label>
-  </div>
-  
-  <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px;">
-    Have you ever been convicted of a crime involving fraud or dishonesty? 
-  </div>
-  
-  <div class="labels">
-    <label></label>
-  </div>
-  <div class="input-tab">
-    <label><input type="radio" name="uboCrime1" value="uboYesCrime1" style="margin-left: 50px;" required>Yes</label>
-    <label><input type="radio" name="uboCrime1" value="uboNoCrime1">No</label>
-  </div>
-  
-  <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
-    I declare that the above information is true and correct. I am aware that I may be  subject to prosecution and criminal sanction under written law if I am found to have  made any false statement which I know to be false or which I do not believe to be true,  or if I have intentionally suppressed any material fact. 
-  </div><br>
-  
-  <div class="labels">
-    <label></label>
-  </div>
-  <div class="input-tab" style="margin-left: 20px;">
-    <input type="checkbox" name="uboDeclareCheckbox1" value="uboDeclareCheckbox1">I declare that the above information is true and correct.<br>
-  </div>
-
-  <div class="labels">
-    <label id="uboPassportFileLabel1" for="uboPassportFile1">Passport</label>
-  </div>
-  <div class="input-tab">
-    <label for="uboPassportFile1" class="fileUploadButton">Choose File
-      <input id="uboPassportFile1" type="file" name="uboPassportFile1" style="display:none" required onchange="displayFileName('uboPassportFile1', 'uboPassportFileNameSpan1')" required>
-    </label>
-    <span id="uboPassportFileNameSpan1">Uploaded File: None</span>
-  </div>
-  
-  <div class="labels">
-    <label id="uboDniFrontFileLabel1" for="uboDniFrontFile1">DNI/Drivers License (Front)</label>
-  </div>
-  <div class="input-tab">
-    <label for="uboDniFrontFile1" class="fileUploadButton">Choose File
-      <input id="uboDniFrontFile1" type="file" name="uboDniFrontFile1" style="display:none" required onchange="displayFileName('uboDniFrontFile1', 'uboDniFrontFileNameSpan1')" required>
-    </label>
-    <span id="uboDniFrontFileNameSpan1">Uploaded File: None</span>
-  </div>
-  
-  <div class="labels">
-    <label id="uboDniReverseFileLabel1" for="uboDniReverseFile1">DNI/Drivers License (Reverse)</label>
-  </div>
-  <div class="input-tab">
-    <label for="uboDniReverseFile1" class="fileUploadButton">Choose File
-      <input id="uboDniReverseFile1" type="file" name="uboDniReverseFile1" style="display:none" required onchange="displayFileName('uboDniReverseFile1', 'uboDniReverseFileNameSpan1')">
-    </label>
-    <span id="uboDniReverseFileNameSpan1">Uploaded File: None</span>
-  </div>
-  
-  <div class="labels">
-    <label id="uboBillAddressProofFileLabel1" for="uboBillAddressProofFile1">Bill for Proof of Address</label>
-  </div>
-  <div class="input-tab">
-    <label for="uboBillAddressProofFile1" class="fileUploadButton">Choose File
-      <input id="uboBillAddressProofFile1" type="file" name="uboBillAddressProofFile1" style="display:none" required onchange="displayFileName('uboBillAddressProofFile1', 'uboBillAddressProofFileNameSpan1')">
-    </label>
-    <span id="uboBillAddressProofFileNameSpan1">Uploaded File: None</span>
-  </div>
-  
-  <div class="labels">
-    <label id="uboCreditCheckFileLabel1" for="uboCreditCheckFile1">Credit Check/NOSIS</label>
-  </div>
-  <div class="input-tab">
-    <label for="uboCreditCheckFile1" class="fileUploadButton">Choose File
-      <input id="uboCreditCheckFile1" type="file" name="uboCreditCheckFile1" style="display:none" required onchange="displayFileName('uboCreditCheckFile1', 'uboCreditCheckFileNameSpan1')">
-    </label>
-    <span id="uboCreditCheckFileNameSpan1">Uploaded File: None</span>
-  </div>
-  
-  <div class="labels">
-    <label id="uboWorldCheckFileLabel1" for="uboWorldCheckFile1">World Check</label>
-  </div>
-  <div class="input-tab">
-    <label for="uboWorldCheckFile1" class="fileUploadButton">Choose File
-      <input id="uboWorldCheckFile1" type="file" name="uboWorldCheckFile1" style="display:none" required onchange="displayFileName('uboWorldCheckFile1', 'uboWorldCheckFileNameSpan1')">
-    </label>
-    <span id="uboWorldCheckFileNameSpan1">Uploaded File: None</span>
-  </div>
-  
-  <div class="labels">
-    <label id="uboOfacFileLabel1" for="uboOfacFile1">OFAC Check</label>
-  </div>
-  <div class="input-tab">
-    <label for="uboOfacFile1" class="fileUploadButton">Choose File
-      <input id="uboOfacFile1" type="file" name="uboOfacFile1" style="display:none" required onchange="displayFileName('uboOfacFile1', 'uboOfacFileNameSpan1')">
-    </label>
-    <span id="uboOfacFileNameSpan1">Uploaded File: None</span>
-  </div>
 `;
 
 const htmlForAdditionalIndividual = `
@@ -1889,7 +1611,7 @@ function addUboEventListeners() {
       
       // Check if additionalUboInfo1 is present, and if it should be removed
       const additionalUboInfo1Present = document.getElementById("additionalUboInfo1");
-      if (additionalUboInfo1Present && uboCount === 2) {
+      if (additionalUboInfo1Present && uboCount === 1) {
         const additionalUboInfoToRemove = additionalUboInfo1Present;
         additionalUboInfoToRemove.remove();
         
@@ -2151,11 +1873,15 @@ function handleBorrowerSelect() {
   var option = select.options[select.selectedIndex];
   
   var individualCount = 1;
-  var uboCount = 2;
+  var uboCount = 1;
   
   
   if (option.value == "individualBorrower") {    
     
+    
+
+    
+    document.getElementById("borrowerSpecificDetails").innerHTML = "";
     document.getElementById("additionalUboInfo1").innerHTML = "";
     document.getElementById("additionalUboInfo2").innerHTML = "";
     document.getElementById("additionalUboInfo3").innerHTML = "";
