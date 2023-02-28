@@ -1828,7 +1828,7 @@ function addIndividualEventListeners() {
       
       // Check if additionalIndividualInfo1 is present, and if it should be removed
       const additionalIndividualInfo1Present = document.getElementById("additionalIndividualInfo1");
-      if (additionalIndividualInfo1Present && individualCount === 2) {
+      if (additionalIndividualInfo1Present && individualCount === 1) {
         const additionalIndividualInfoToRemove = additionalIndividualInfo1Present;
         additionalIndividualInfoToRemove.remove();
         
@@ -2150,7 +2150,7 @@ function handleBorrowerSelect() {
   var select = document.getElementById("borrowerDropdown");
   var option = select.options[select.selectedIndex];
   
-  var individualCount = 2;
+  var individualCount = 1;
   var uboCount = 2;
   
   
@@ -2190,7 +2190,7 @@ function handleBorrowerSelect() {
     
     
     
-    entityContainer.innerHTML = htmlForFirstIndividual;
+//  entityContainer.innerHTML = htmlForFirstIndividual;
     addUboButton.style.display = "none"; // hide the button
     addDirectorButton.style.display = "none"; // hide the button
     removeUboButton.style.display = "none"; // hide the button
