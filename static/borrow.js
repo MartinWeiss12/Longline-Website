@@ -1788,6 +1788,131 @@ const htmlForAdditionalUbo = `
 //}
 
 
+function addIndividualEventListeners() {
+  individualCount = 1;
+  for (let i = 1; i <= 8; i++) {
+    const addIndividualButton = document.getElementById(`addIndividualButton${i}`);
+    addIndividualButton.addEventListener('click', function() {
+      if (individualCount <= 8) {
+        const additionalIndividualInfoID = 'additionalIndividualInfo' + individualCount;
+        const additionalIndividualInfo = document.getElementById(additionalIndividualInfoID);
+        const htmlForAdditionalIndividualWithIndex = htmlForAdditionalIndividual.replace(/{{index}}/g, individualCount);
+        additionalIndividualInfo.insertAdjacentHTML('beforeend', htmlForAdditionalIndividualWithIndex);
+        individualCount++;
+        
+        if (individualCount > 8) {
+          for (let j = 1; j <= 8; j++) {
+            const addIndividualButton = document.getElementById(`addIndividualButton${j}`);
+            addIndividualButton.style.display = 'none';
+          }
+        }
+      }
+    });
+    
+    const removeIndividualButton = document.getElementById(`removeIndividualButton${i}`);
+    removeIndividualButton.addEventListener('click', function() {
+      if (individualCount > 2 && individualCount <= 9) {
+        const additionalIndividualInfoToRemove = document.getElementById(`additionalIndividualInfo${individualCount-1}`);
+        additionalIndividualInfoToRemove.remove();
+        
+        const replacementDiv = document.createElement("div");
+        replacementDiv.setAttribute("id", `additionalIndividualInfo${individualCount-1}`);
+        // Add any content or attributes you need to the replacement div here
+        
+        const divAfterOneJustRemoved = document.getElementById(`additionalIndividualInfo${individualCount}`);
+        const parentDiv = additionalIndividualInfo1.parentNode;
+        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
+        
+        individualCount--;
+      }
+      
+      // Check if additionalIndividualInfo1 is present, and if it should be removed
+      const additionalIndividualInfo1Present = document.getElementById("additionalIndividualInfo1");
+      if (additionalIndividualInfo1Present && individualCount === 2) {
+        const additionalIndividualInfoToRemove = additionalIndividualInfo1Present;
+        additionalIndividualInfoToRemove.remove();
+        
+        const replacementDiv = document.createElement("div");
+        replacementDiv.setAttribute("id", "additionalIndividualInfo1");
+        // Add any content or attributes you need to the replacement div here
+        
+        const firstDiv = document.getElementById("additionalIndividualInfo");
+        const parentDiv = firstDiv.parentNode;
+        parentDiv.insertBefore(replacementDiv, firstDiv);
+        
+        individualCount--;
+      }
+    });
+  }
+}
+
+
+
+
+function addUboEventListeners() {
+  uboCount = 1;
+  for (let i = 1; i <= 8; i++) {
+    const addUboButton = document.getElementById(`addUboButton${i}`);
+    addUboButton.addEventListener('click', function() {
+      if (uboCount <= 8) {
+        const additionalUboInfoID = 'additionalUboInfo' + uboCount;
+        const additionalUboInfo = document.getElementById(additionalUboInfoID);
+        const htmlForAdditionalUboWithIndex = htmlForAdditionalUbo.replace(/{{index}}/g, uboCount);
+        additionalUboInfo.insertAdjacentHTML('beforeend', htmlForAdditionalUboWithIndex);
+        uboCount++;
+        
+        if (uboCount > 8) {
+          for (let j = 1; j <= 8; j++) {
+            const addUboButton = document.getElementById(`addUboButton${j}`);
+            addUboButton.style.display = 'none';
+          }
+        }
+      }
+    });
+    
+    const removeUboButton = document.getElementById(`removeUboButton${i}`);
+    removeUboButton.addEventListener('click', function() {
+      if (uboCount > 2 && uboCount <= 9) {
+        const additionalUboInfoToRemove = document.getElementById(`additionalUboInfo${uboCount-1}`);
+        additionalUboInfoToRemove.remove();
+        
+        const replacementDiv = document.createElement("div");
+        replacementDiv.setAttribute("id", `additionalUboInfo${uboCount-1}`);
+        // Add any content or attributes you need to the replacement div here
+        
+        const divAfterOneJustRemoved = document.getElementById(`additionalUboInfo${uboCount}`);
+        const parentDiv = additionalUboInfo1.parentNode;
+        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
+        
+        uboCount--;
+      }
+      
+      // Check if additionalUboInfo1 is present, and if it should be removed
+      const additionalUboInfo1Present = document.getElementById("additionalUboInfo1");
+      if (additionalUboInfo1Present && uboCount === 2) {
+        const additionalUboInfoToRemove = additionalUboInfo1Present;
+        additionalUboInfoToRemove.remove();
+        
+        const replacementDiv = document.createElement("div");
+        replacementDiv.setAttribute("id", "additionalUboInfo1");
+        // Add any content or attributes you need to the replacement div here
+        
+        const firstDiv = document.getElementById("additionalUboInfo");
+        const parentDiv = firstDiv.parentNode;
+        parentDiv.insertBefore(replacementDiv, firstDiv);
+        
+        uboCount--;
+      }
+    });
+  }
+}
+
+
+
+
+
+
+
 function addDirectorEventListeners() {
   directorCount = 1;
   for (let i = 1; i <= 8; i++) {
@@ -1916,62 +2041,62 @@ function addEventListenersToAddButtons(buttonType, additionalInfoDivId, htmlForA
 
 */
 
-function addEventListenersToAddButtons(buttonType, additionalInfoDivId, htmlForAdditionalInfo) {
-  count = 2;
-  
-  for (let i = 1; i < 9; i++) {
-    
-    const additionalInfoDiv = document.getElementById(`${additionalInfoDivId}${i}`);
-    
-    const addButton = document.getElementById(`add${buttonType}Button${i}`);
-    addButton.addEventListener('click', function() {
-      if (count <= 9) {
-        const htmlForAdditionalInfoWithIndex = htmlForAdditionalInfo.replace(/{{index}}/g, count);
-        additionalInfoDiv.insertAdjacentHTML('beforeend', htmlForAdditionalInfoWithIndex);
-        
-        count++;
-        
-        if (count === 9) {
-          const addButton1 = document.getElementById(`add${buttonType}Button1`);
-          addButton1.style.display = 'none';
-        }
-      }
-    });
-    
-    const removeButton = document.getElementById(`add${buttonType}Button${i}`);
-    removeButton.addEventListener('click', function() {
-      if (count > 2 && count <= 9) {
-        const additionalInfoToRemove = document.getElementById(`additional${additionalInfoDivId}Info${count-1}`);
-        additionalInfoToRemove.remove();
-        
-        const replacementDiv = document.createElement("div");
-        replacementDiv.setAttribute("id", `additional${additionalInfoDivId}Info${count-1}`);
-        // Add any content or attributes you need to the replacement div here
-        
-        const divAfterOneJustRemoved = document.getElementById(`additional${additionalInfoDivId}Info${count}`);
-        const parentDiv = additionalInfo1.parentNode;
-        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
-        
-        count--;
-      }
-      
-      if (count === 2) {
-        const additionalInfoToRemove = document.getElementById(`additional${additionalInfoDivId}Info${count}`);
-        additionalInfoToRemove.remove();
-        
-        const replacementDiv = document.createElement("div");
-        replacementDiv.setAttribute("id", `additional${additionalInfoDivId}Info${count}`);
-        // Add any content or attributes you need to the replacement div here
-        
-        const divBeforeOneJustRemoved = document.getElementById(`additional${additionalInfoDivId}Info${count+1}`);
-        const parentDiv = additionalInfo1.parentNode;
-        parentDiv.insertBefore(replacementDiv, divBeforeOneJustRemoved);
-        
-        count--;
-      }
-    });
-  }
-}
+//function addEventListenersToAddButtons(buttonType, additionalInfoDivId, htmlForAdditionalInfo) {
+//count = 2;
+//
+//for (let i = 1; i < 9; i++) {
+//  
+//  const additionalInfoDiv = document.getElementById(`${additionalInfoDivId}${i}`);
+//  
+//  const addButton = document.getElementById(`add${buttonType}Button${i}`);
+//  addButton.addEventListener('click', function() {
+//    if (count <= 9) {
+//      const htmlForAdditionalInfoWithIndex = htmlForAdditionalInfo.replace(/{{index}}/g, count);
+//      additionalInfoDiv.insertAdjacentHTML('beforeend', htmlForAdditionalInfoWithIndex);
+//      
+//      count++;
+//      
+//      if (count === 9) {
+//        const addButton1 = document.getElementById(`add${buttonType}Button1`);
+//        addButton1.style.display = 'none';
+//      }
+//    }
+//  });
+//  
+//  const removeButton = document.getElementById(`add${buttonType}Button${i}`);
+//  removeButton.addEventListener('click', function() {
+//    if (count > 2 && count <= 9) {
+//      const additionalInfoToRemove = document.getElementById(`additional${additionalInfoDivId}Info${count-1}`);
+//      additionalInfoToRemove.remove();
+//      
+//      const replacementDiv = document.createElement("div");
+//      replacementDiv.setAttribute("id", `additional${additionalInfoDivId}Info${count-1}`);
+//      // Add any content or attributes you need to the replacement div here
+//      
+//      const divAfterOneJustRemoved = document.getElementById(`additional${additionalInfoDivId}Info${count}`);
+//      const parentDiv = additionalInfo1.parentNode;
+//      parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
+//      
+//      count--;
+//    }
+//    
+//    if (count === 2) {
+//      const additionalInfoToRemove = document.getElementById(`additional${additionalInfoDivId}Info${count}`);
+//      additionalInfoToRemove.remove();
+//      
+//      const replacementDiv = document.createElement("div");
+//      replacementDiv.setAttribute("id", `additional${additionalInfoDivId}Info${count}`);
+//      // Add any content or attributes you need to the replacement div here
+//      
+//      const divBeforeOneJustRemoved = document.getElementById(`additional${additionalInfoDivId}Info${count+1}`);
+//      const parentDiv = additionalInfo1.parentNode;
+//      parentDiv.insertBefore(replacementDiv, divBeforeOneJustRemoved);
+//      
+//      count--;
+//    }
+//  });
+//}
+//}
 
 
 
@@ -2025,7 +2150,9 @@ function handleBorrowerSelect() {
   var select = document.getElementById("borrowerDropdown");
   var option = select.options[select.selectedIndex];
   
-  var count = 2;
+  var individualCount = 2;
+  var uboCount = 2;
+  
   
   if (option.value == "individualBorrower") {    
     
@@ -2072,7 +2199,7 @@ function handleBorrowerSelect() {
     addIndividualButton.style.margin = "0 auto";
     removeIndividualButton.style.display = "block"; // show the button
     removeIndividualButton.style.margin = "0 auto";
-    addEventListenersToAddButtons('Individual', 'additionalIndividualInfo', htmlForAdditionalIndividual);
+    addIndividualEventListeners();
     
     
     additionalUboInfo1.style.display = 'none';
@@ -2137,8 +2264,7 @@ function handleBorrowerSelect() {
     removeUboButton.style.margin = "0 auto";
     removeDirectorButton.style.display = "block"; // show the button
     removeDirectorButton.style.margin = "0 auto";
-    addEventListenersToAddButtons('Ubo', 'additionalUboInfo', htmlForAdditionalUbo);
-    
+    addUboEventListeners();    
     
     
 
