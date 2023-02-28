@@ -1218,9 +1218,9 @@ const htmlForAdditionalUbo = `
   </div>
 `;
 
-
 function addIndividualEventListeners() {
   individualCount = 1;
+
   for (let i = 1; i <= 8; i++) {
     const addIndividualButton = document.getElementById(`addIndividualButton${i}`);
     addIndividualButton.addEventListener('click', function() {
@@ -1231,7 +1231,7 @@ function addIndividualEventListeners() {
         additionalIndividualInfo.insertAdjacentHTML('beforeend', htmlForAdditionalIndividualWithIndex);
         individualCount++;
         
-        if (individualCount > 8) {
+        if (individualCount > 9) {
           for (let j = 1; j <= 8; j++) {
             const addIndividualButton = document.getElementById(`addIndividualButton${j}`);
             addIndividualButton.style.display = 'none';
@@ -1239,41 +1239,42 @@ function addIndividualEventListeners() {
         }
       }
     });
-    
-    const removeIndividualButton = document.getElementById(`removeIndividualButton${i}`);
-    removeIndividualButton.addEventListener('click', function() {
-      if (individualCount > 2 && individualCount <= 9) {
-        const additionalIndividualInfoToRemove = document.getElementById(`additionalIndividualInfo${individualCount-1}`);
-        additionalIndividualInfoToRemove.remove();
-        
-        const replacementDiv = document.createElement("div");
-        replacementDiv.setAttribute("id", `additionalIndividualInfo${individualCount-1}`);
-        // Add any content or attributes you need to the replacement div here
-        
-        const divAfterOneJustRemoved = document.getElementById(`additionalIndividualInfo${individualCount}`);
-        const parentDiv = additionalIndividualInfo1.parentNode;
-        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
-        
-        individualCount--;
-      }
+  
       
-      // Check if additionalIndividualInfo1 is present, and if it should be removed
-      const additionalIndividualInfo1Present = document.getElementById("additionalIndividualInfo1");
-      if (additionalIndividualInfo1Present && individualCount === 1) {
-        const additionalIndividualInfoToRemove = additionalIndividualInfo1Present;
-        additionalIndividualInfoToRemove.remove();
+      const removeIndividualButton = document.getElementById(`removeIndividualButton${i}`);
+      removeIndividualButton.addEventListener('click', function() {
+        if (individualCount > 2 && individualCount <= 9) {
+          const additionalIndividualInfoToRemove = document.getElementById(`additionalIndividualInfo${individualCount-1}`);
+          additionalIndividualInfoToRemove.remove();
+          
+          const replacementDiv = document.createElement("div");
+          replacementDiv.setAttribute("id", `additionalIndividualInfo${individualCount-1}`);
+          // Add any content or attributes you need to the replacement div here
+          
+          const divAfterOneJustRemoved = document.getElementById(`additionalIndividualInfo${individualCount}`);
+          const parentDiv = additionalIndividualInfo1.parentNode;
+          parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
+          
+          individualCount--;
+        }
         
-        const replacementDiv = document.createElement("div");
-        replacementDiv.setAttribute("id", "additionalIndividualInfo1");
-        // Add any content or attributes you need to the replacement div here
-        
-        const firstDiv = document.getElementById("additionalIndividualInfo");
-        const parentDiv = firstDiv.parentNode;
-        parentDiv.insertBefore(replacementDiv, firstDiv);
-        
-        individualCount--;
-      }
-    });
+        // Check if additionalIndividualInfo1 is present, and if it should be removed
+        const additionalIndividualInfo1Present = document.getElementById("additionalIndividualInfo1");
+        if (additionalIndividualInfo1Present && individualCount === 1) {
+          const additionalIndividualInfoToRemove = additionalIndividualInfo1Present;
+          additionalIndividualInfoToRemove.remove();
+          
+          const replacementDiv = document.createElement("div");
+          replacementDiv.setAttribute("id", "additionalIndividualInfo1");
+          // Add any content or attributes you need to the replacement div here
+          
+          const firstDiv = document.getElementById("additionalIndividualInfo");
+          const parentDiv = firstDiv.parentNode;
+          parentDiv.insertBefore(replacementDiv, firstDiv);
+          
+          individualCount--;
+        }
+      });
   }
 }
 
@@ -1289,7 +1290,7 @@ function addUboEventListeners() {
         additionalUboInfo.insertAdjacentHTML('beforeend', htmlForAdditionalUboWithIndex);
         uboCount++;
         
-        if (uboCount > 8) {
+        if (uboCount > 9) {
           for (let j = 1; j <= 8; j++) {
             const addUboButton = document.getElementById(`addUboButton${j}`);
             addUboButton.style.display = 'none';
@@ -1347,7 +1348,7 @@ function addDirectorEventListeners() {
         additionalDirectorInfo.insertAdjacentHTML('beforeend', htmlForAdditionalDirectorWithIndex);
         directorCount++;
         
-        if (directorCount > 8) {
+        if (directorCount > 9) {
           for (let j = 1; j <= 8; j++) {
             const addDirectorButton = document.getElementById(`addDirectorButton${j}`);
             addDirectorButton.style.display = 'none';
@@ -1413,9 +1414,8 @@ function handleBorrowerSelect() {
   var individualCount = 1;
   var uboCount = 1;
   submitButton.disabled = true;
-  canSubmit();
-  
-  if (option.value == "individualBorrower") {
+    
+  if (option.value == "individualBorrower") {   
     
     submitButton.disabled = true;
 
@@ -1476,8 +1476,6 @@ function handleBorrowerSelect() {
     additionalIndividualInfo6.style.display = 'block';
     additionalIndividualInfo7.style.display = 'block';
     additionalIndividualInfo8.style.display = 'block';
-    
-    canSubmit()
 
   }
   
@@ -1526,40 +1524,58 @@ function handleBorrowerSelect() {
     additionalDirectorInfo7.style.display = 'block';
     additionalDirectorInfo8.style.display = 'block';
     
-    canSubmit();
   }
 }
 
 
-function canSubmit() {
-  
-  // Get the button element and store it in a variable
-  
-  // Get references to the addIndividualButton1 and addUboButton1 buttons
-  const addIndividualButton1ForBoolean = document.getElementById("addIndividualButton1");
-  const addUboButton1ForBoolean = document.getElementById("addUboButton1");
-  
-  // Add event listeners to the buttons to set buttonsClicked to true when clicked
-  addIndividualButton1ForBoolean.addEventListener("click", function() {
-    buttonsClicked = true;
-    if (buttonsClicked) {
-      // Enable the submit button
-      submitButton.disabled = false;
-    }
-  });
-  
-  addUboButton1ForBoolean.addEventListener("click", function() {
-    buttonsClicked = true;
-    if (buttonsClicked) {
-      // Enable the submit button
-      submitButton.disabled = false;
-    }
-  });
-  buttonsClicked = false;
-}
+//const removeIndividualButton = document.getElementById("removeIndividualButton1");
+//
+//if (individualCount > 1) {
+//removeIndividualButton.style.display = "block";
+//} else {
+//removeIndividualButton.style.display = "none";
+//}
 
-var borrowerDropdown = document.getElementById("borrowerDropdown");
-borrowerDropdown.addEventListener("change", canSubmit);
+
+
+
+
+
+
+
+
+
+// Get references to the addIndividualButton1 and addUboButton1 buttons
+const addIndividualButton1ForBoolean = document.getElementById("addIndividualButton1");
+const addUboButton1ForBoolean = document.getElementById("addUboButton1");
+
+const removeIndividualButton1ForBoolean = document.getElementById("removeIndividualButton1");
+const removeUboButton1ForBoolean = document.getElementById("removeUboButton1");
+const removeDirectorButton1ForBoolean = document.getElementById("removeDirectorButton1");
+
+// Add event listeners to the buttons to set buttonsClicked to true when clicked
+addIndividualButton1ForBoolean.addEventListener("click", function() {
+  buttonsClicked = true;
+  if (buttonsClicked) {
+    // Enable the submit button
+    removeIndividualButton1ForBoolean.disabled = false;
+    submitButton.disabled = false;
+  }
+});
+
+addUboButton1ForBoolean.addEventListener("click", function() {
+  buttonsClicked = true;
+  if (buttonsClicked) {
+    // Enable the submit button
+    removeUboButton1ForBoolean.disabled = false;
+    removeDirectorButton1ForBoolean.disabled = false;
+    submitButton.disabled = false;
+  }
+});
+buttonsClicked = false;
+
+
+
 
 
 
