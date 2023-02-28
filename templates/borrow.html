@@ -531,60 +531,7 @@
       textarea {
         resize: none;
       }
-      
-      
-      
-      
-      
-      
-      
-      input[type="file"] {
-        background-color: #0000FF;
-        margin: 0;
-        border-radius: 4px;
-        color: white;
-        font-size: 1em;
-        font-weight: bold;
-        font-family: inherit;
-        padding: 4px 8px;
-        border: 1px solid;
-        cursor: pointer;
-        display: inline-block;
-        text-align: center;
-        margin: 15px 0 0;
-      }
-      
-      input[type="file"]:hover {
-        background-color: #00008B;
-      }
-      
-      
-      
-/*    input::-webkit-file-upload-button{*/
-/*      background-color: #0000FF;*/
-/*      margin: 0;*/
-/*      border-radius: 4px;*/
-/*      color: white;*/
-/*      font-size: 1em;*/
-/*      font-weight: bold;*/
-/*      font-family: inherit;*/
-/*      padding: 4px 8px;*/
-/*      border: 1px solid;*/
-/*      cursor: pointer;*/
-/*/*      display: inline-block;*/*/
-/*/*      text-align: center;*/*/
-/*/*      margin: 15px 15px 15px 200px;*/*/
-/*    }*/
-/*    */
 
-      
-      
-      
-      
-      
-      
-      
-      
     </style>    
   </head>
   <body>
@@ -614,52 +561,6 @@
       
       <div class="container" id="loanFormContainer">
         <form id="loanForm" method="POST" action="/submit" enctype="multipart/form-data">
-          
-          
-          
-          
-          
-          
-          
-<!--      <div class="labels">-->
-<!--        <label id="bankAcctFileLabel" for="bankAcctFile">Bank Account Statement</label>-->
-<!--      </div>-->
-<!--      <div class="input-tab">-->
-<!--        <label for="bankAcctFile">-->
-<!--          <input id="bankAcctFile" type="file" name="bankAcctFile" required>-->
-<!--        </label>-->
-<!--      </div>-->
-          
-
-          
-
-          <div class="labels">
-            <label id="bankAcctFileLabel" for="bankAcctFile">Bank Account Statement</label>
-          </div>
-          <div class="input-tab">
-            <label for="bankAcctFile" class="fileUploadButton">Choose File
-              <input id="bankAcctFile" type="file" name="bankAcctFile" style="position:absolute; left:-999999px;" onchange="displayFileName('bankAcctFile', 'bankAcctFileNameSpan')" required>
-            </label>
-            <span id="bankAcctFileNameSpan">Uploaded File: None</span>
-          </div>
-          
-      
-          
-
-
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
           
           <br><br><h2 id="stepOneTitle">Step 1 - Loan Purpose</h2>
           <br>
@@ -1038,7 +939,7 @@
           </div>
           <div class="input-tab">
             <label for="bankAcctFile" class="fileUploadButton">Choose File
-              <input id="bankAcctFile" type="file" name="bankAcctFile" style="display:none" onchange="displayFileName('bankAcctFile', 'bankAcctFileNameSpan')" required>
+              <input id="bankAcctFile" type="file" name="bankAcctFile" style="position:absolute; left:-999999px;" onchange="displayFileName('bankAcctFile', 'bankAcctFileNameSpan')" required>
             </label>
             <span id="bankAcctFileNameSpan">Uploaded File: None</span>
           </div>

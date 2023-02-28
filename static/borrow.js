@@ -337,7 +337,7 @@ const htmlForEntity = `
   </div>
   <div class="input-tab">
     <label for="entityArticlesFile" class="fileUploadButton">Choose File
-    <input id="entityArticlesFile" type="file" name="entityArticlesFile" style="display:none" onchange="displayFileName('entityArticlesFile', 'entityArticlesFileNameSpan')" required>
+    <input id="entityArticlesFile" type="file" name="entityArticlesFile" style="position:absolute; left:-999999px;" onchange="displayFileName('entityArticlesFile', 'entityArticlesFileNameSpan')" required>
   </label>
     <span id="entityArticlesFileNameSpan">Uploaded File: None</span>
   </div>
@@ -347,7 +347,7 @@ const htmlForEntity = `
   </div>
   <div class="input-tab">
     <label for="entityCertFile" class="fileUploadButton">Choose File
-    <input id="entityCertFile" type="file" name="entityCertFile" style="display:none" required onchange="displayFileName('entityCertFile', 'entityCertFileNameSpan')" required>
+    <input id="entityCertFile" type="file" name="entityCertFile" style="position:absolute; left:-999999px;" required onchange="displayFileName('entityCertFile', 'entityCertFileNameSpan')" required>
   </label>
     <span id="entityCertFileNameSpan">Uploaded File: None</span>
   </div>
@@ -357,7 +357,7 @@ const htmlForEntity = `
   </div>
   <div class="input-tab">
     <label for="entityEinFile" class="fileUploadButton">Choose File
-      <input id="entityEinFile" type="file" name="entityEinFile" style="display:none" onchange="displayFileName('entityEinFile', 'entityEinFileNameSpan')">
+      <input id="entityEinFile" type="file" name="entityEinFile" style="position:absolute; left:-999999px;" onchange="displayFileName('entityEinFile', 'entityEinFileNameSpan')">
     </label>
     <span id="entityEinFileNameSpan">Uploaded File: None</span>
   </div>
@@ -367,7 +367,7 @@ const htmlForEntity = `
   </div>
   <div class="input-tab">
     <label for="entityOtherFile" class="fileUploadButton">Choose File
-      <input id="entityOtherFile" type="file" name="entityOtherFile" style="display:none" onchange="displayFileName('entityOtherFile', 'entityOtherFileNameSpan')">
+      <input id="entityOtherFile" type="file" name="entityOtherFile" style="position:absolute; left:-999999px;" onchange="displayFileName('entityOtherFile', 'entityOtherFileNameSpan')">
     </label>
     <span id="entityOtherFileNameSpan">Uploaded File: None</span>
   </div>
@@ -419,7 +419,7 @@ const htmlForAdditionalIndividual = `
     <label id="individualFirstNameLabel{{index}}" for="individualFirstName{{index}}">First Name(s)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="individualFirstName{{index}}" name="individualFirstName{{index}}" placeholder="First Name(s)" style="width: 250px;">
+    <input class="input-field" type="text" id="individualFirstName{{index}}" name="individualFirstName{{index}}" placeholder="First Name(s)" required style="width: 250px;">
   </div>
   
   <div class="labels">
@@ -433,14 +433,14 @@ const htmlForAdditionalIndividual = `
     <label id="individualLastNameLabel{{index}}" for="individualLastName{{index}}">Last Name(s)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="individualLastName{{index}}" name="lastName{{index}}" placeholder="Last Name(s)" style="width: 250px;">
+    <input class="input-field" type="text" id="individualLastName{{index}}" name="lastName{{index}}" placeholder="Last Name(s)" required style="width: 250px;">
   </div>
   
   <div class="labels">
     <label id="individualHomeBankAddressLabel{{index}}" for="individualHomeBankAddress{{index}}">Home Address (must match recent bill)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="individualHomeBankAddress{{index}}" name="individualHomeBankAddress{{index}}" placeholder="Home Address" style="width: 250px;">
+    <input class="input-field" type="text" id="individualHomeBankAddress{{index}}" name="individualHomeBankAddress{{index}}" placeholder="Home Address" required style="width: 250px;">
   </div>
   
   <div class="labels">
@@ -454,28 +454,28 @@ const htmlForAdditionalIndividual = `
     <label id="individualHomeCityLabel{{index}}" for="individualHomeCity{{index}}">Home City</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="individualHomeCity{{index}}" name="individualHomeCity{{index}}" placeholder="Home City" style="width: 250px;">
+    <input class="input-field" type="text" id="individualHomeCity{{index}}" name="individualHomeCity{{index}}" placeholder="Home City" required style="width: 250px;">
   </div>
   
   <div class="labels">
     <label id="individualHomeStateLabel{{index}}" for="individualHomeState{{index}}">Home State or Province</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="individualHomeState{{index}}" name="individualHomeState{{index}}" placeholder="Home State or Province" style="width: 250px;">
+    <input class="input-field" type="text" id="individualHomeState{{index}}" name="individualHomeState{{index}}" placeholder="Home State or Province" required style="width: 250px;">
   </div>
   
   <div class="labels">
     <label id="individualHomeZipLabel{{index}}" for="individualHomeZip{{index}}">Home Zip or Province</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="individualHomeZip{{index}}" name="individualHomeZip{{index}}" placeholder="Home Zip" style="width: 250px;">
+    <input class="input-field" type="text" id="individualHomeZip{{index}}" name="individualHomeZip{{index}}" placeholder="Home Zip" required style="width: 250px;">
   </div>
 
   <div class="labels">
     <label id="individualHomeCountryLabel{{index}}" for="individualHomeCountry{{index}}">Home Country</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="individualhomeCountry{{index}}" name="individualhomeCountry{{index}}" placeholder="Home Country" style="width: 250px;">
+    <input class="input-field" type="text" id="individualhomeCountry{{index}}" name="individualhomeCountry{{index}}" placeholder="Home Country" required style="width: 250px;">
   </div>
   
   <div class="labels">
@@ -500,27 +500,27 @@ const htmlForAdditionalIndividual = `
     <label id="individualPassportNumberLabel{{index}}" for="individualPassportNumber{{index}}">Passport Number</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="individualPassportNumber{{index}}" name="individualPassportNumber{{index}}" placeholder="Passport Number" style="width: 250px;">
+    <input class="input-field" type="text" id="individualPassportNumber{{index}}" name="individualPassportNumber{{index}}" placeholder="Passport Number" required style="width: 250px;">
   </div>
   
   <div class="labels">
     <label id="individualSsnLabel{{index}}" for="individualSsn{{index}}">SSN or ID Number</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="individualSsn{{index}}" name="individualSsn{{index}}" placeholder="SSN or ID Number" style="width: 250px;">
+    <input class="input-field" type="text" id="individualSsn{{index}}" name="individualSsn{{index}}" placeholder="SSN or ID Number" required style="width: 250px;">
   </div>
   
   <div class="labels">
     <label id="individualDobLabel{{index}}" for="individualDob{{index}}">Date of Birth</label>
   </div>
   <div class="input-tab">
-    <input type="date" id="individualDob{{index}}" name="individualDob{{index}}" style="width: 250px;">
+    <input type="date" id="individualDob{{index}}" name="individualDob{{index}}" required style="width: 250px;">
   </div>
   
   <div class="labels">
     <label id="individualEmailLabel{{index}}" for="individualEmail{{index}}">Email Address</label></div>
   <div class="input-tab">
-    <input class="input-field" type="email" id="individualEmail{{index}}" name="individualEmail{{index}}" placeholder="email@email.com" style="width: 250px;">
+    <input class="input-field" type="email" id="individualEmail{{index}}" name="individualEmail{{index}}" placeholder="email@email.com" required style="width: 250px;">
   </div>
   
   <div class="labels">
@@ -552,7 +552,7 @@ const htmlForAdditionalIndividual = `
     <label></label>
   </div>
   <div class="input-tab">
-    <label><input type="radio" name="individualPep{{index}}" value="individualYesPep{{index}}" style="margin-left: 50px;" checked>Yes</label>
+    <label><input type="radio" name="individualPep{{index}}" value="individualYesPep{{index}}" style="margin-left: 50px;" required>Yes</label>
     <label><input type="radio" name="individualPep{{index}}" value="individualNoPep{{index}}">No</label>
   </div>
   
@@ -564,7 +564,7 @@ const htmlForAdditionalIndividual = `
     <label></label>
   </div>
   <div class="input-tab">
-    <label><input type="radio" name="individualCrime{{index}}" value="individualYesCrime{{index}}" style="margin-left: 50px;" checked>Yes</label>
+    <label><input type="radio" name="individualCrime{{index}}" value="individualYesCrime{{index}}" style="margin-left: 50px;" required>Yes</label>
     <label><input type="radio" name="individualCrime{{index}}" value="individualNoCrime{{index}}">No</label>
   </div>
   
@@ -576,7 +576,7 @@ const htmlForAdditionalIndividual = `
     <label></label>
   </div>
   <div class="input-tab" style="margin-left: 20px;">
-    <input type="checkbox" name="individualDeclareCheckbox{{index}}" value="individualDeclareCheckbox{{index}}">I declare that the above information is true and correct.<br>
+    <input type="checkbox" name="individualDeclareCheckbox{{index}}" value="individualDeclareCheckbox{{index}}" required>I declare that the above information is true and correct.<br>
   </div>
 
   <div class="labels">
@@ -584,7 +584,7 @@ const htmlForAdditionalIndividual = `
   </div>
   <div class="input-tab">
     <label for="individualPassportFile{{index}}" class="fileUploadButton">Choose File
-      <input id="individualPassportFile{{index}}" type="file" name="individualPassportFile{{index}}" style="display:none" onchange="displayFileName('individualPassportFile{{index}}', 'individualPassportFileNameSpan{{index}}')">
+      <input id="individualPassportFile{{index}}" type="file" name="individualPassportFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('individualPassportFile{{index}}', 'individualPassportFileNameSpan{{index}}')" required>
     </label>
     <span id="individualPassportFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -594,7 +594,7 @@ const htmlForAdditionalIndividual = `
   </div>
   <div class="input-tab">
     <label for="individualDniFrontFile{{index}}" class="fileUploadButton">Choose File
-      <input id="individualDniFrontFile{{index}}" type="file" name="individualDniFrontFile{{index}}" style="display:none" onchange="displayFileName('individualDniFrontFile{{index}}', 'individualDniFrontFileNameSpan{{index}}')">
+      <input id="individualDniFrontFile{{index}}" type="file" name="individualDniFrontFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('individualDniFrontFile{{index}}', 'individualDniFrontFileNameSpan{{index}}')" required>
     </label>
     <span id="individualDniFrontFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -604,7 +604,7 @@ const htmlForAdditionalIndividual = `
   </div>
   <div class="input-tab">
     <label for="individualDniReverseFile{{index}}" class="fileUploadButton">Choose File
-      <input id="individualDniReverseFile{{index}}" type="file" name="individualDniReverseFile{{index}}" style="display:none" onchange="displayFileName('individualDniReverseFile{{index}}', 'individualDniReverseFileNameSpan{{index}}')">
+      <input id="individualDniReverseFile{{index}}" type="file" name="individualDniReverseFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('individualDniReverseFile{{index}}', 'individualDniReverseFileNameSpan{{index}}')" required>
     </label>
     <span id="individualDniReverseFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -614,7 +614,7 @@ const htmlForAdditionalIndividual = `
   </div>
   <div class="input-tab">
     <label for="individualBillAddressProofFile{{index}}" class="fileUploadButton">Choose File
-      <input id="individualBillAddressProofFile{{index}}" type="file" name="individualBillAddressProofFile{{index}}" style="display:none" onchange="displayFileName('individualBillAddressProofFile{{index}}', 'individualBillAddressProofFileNameSpan{{index}}')">
+      <input id="individualBillAddressProofFile{{index}}" type="file" name="individualBillAddressProofFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('individualBillAddressProofFile{{index}}', 'individualBillAddressProofFileNameSpan{{index}}')" required>
     </label>
     <span id="individualBillAddressProofFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -624,7 +624,7 @@ const htmlForAdditionalIndividual = `
   </div>
   <div class="input-tab">
     <label for="individualCreditCheckFile{{index}}" class="fileUploadButton">Choose File
-      <input id="individualCreditCheckFile{{index}}" type="file" name="individualCreditCheckFile{{index}}" style="display:none" onchange="displayFileName('individualCreditCheckFile{{index}}', 'individualCreditCheckFileNameSpan{{index}}')">
+      <input id="individualCreditCheckFile{{index}}" type="file" name="individualCreditCheckFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('individualCreditCheckFile{{index}}', 'individualCreditCheckFileNameSpan{{index}}')" required>
     </label>
     <span id="individualCreditCheckFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -634,7 +634,7 @@ const htmlForAdditionalIndividual = `
   </div>
   <div class="input-tab">
     <label for="individualWorldCheckFile{{index}}" class="fileUploadButton">Choose File
-      <input id="individualWorldCheckFile{{index}}" type="file" name="individualWorldCheckFile{{index}}" style="display:none" onchange="displayFileName('individualWorldCheckFile{{index}}', 'individualWorldCheckFileNameSpan{{index}}')">
+      <input id="individualWorldCheckFile{{index}}" type="file" name="individualWorldCheckFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('individualWorldCheckFile{{index}}', 'individualWorldCheckFileNameSpan{{index}}')" required>
     </label>
     <span id="individualWorldCheckFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -644,7 +644,7 @@ const htmlForAdditionalIndividual = `
   </div>
   <div class="input-tab">
     <label for="individualOfacFile{{index}}" class="fileUploadButton">Choose File
-      <input id="individualOfacFile{{index}}" type="file" name="individualOfacFile{{index}}" style="display:none" onchange="displayFileName('individualOfacFile{{index}}', 'individualOfacFileNameSpan{{index}}')">
+      <input id="individualOfacFile{{index}}" type="file" name="individualOfacFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('individualOfacFile{{index}}', 'individualOfacFileNameSpan{{index}}')" required>
     </label>
     <span id="individualOfacFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -868,7 +868,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="uboPassportFile{{index}}" class="fileUploadButton">Choose File
-      <input id="uboPassportFile{{index}}" type="file" name="uboPassportFile{{index}}" style="display:none" onchange="displayFileName('uboPassportFile{{index}}', 'uboPassportFileNameSpan{{index}}')">
+      <input id="uboPassportFile{{index}}" type="file" name="uboPassportFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboPassportFile{{index}}', 'uboPassportFileNameSpan{{index}}')">
     </label>
     <span id="uboPassportFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -878,7 +878,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="uboDniFrontFile{{index}}" class="fileUploadButton">Choose File
-      <input id="uboDniFrontFile{{index}}" type="file" name="uboDniFrontFile{{index}}" style="display:none" onchange="displayFileName('uboDniFrontFile{{index}}', 'uboDniFrontFileNameSpan{{index}}')">
+      <input id="uboDniFrontFile{{index}}" type="file" name="uboDniFrontFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboDniFrontFile{{index}}', 'uboDniFrontFileNameSpan{{index}}')">
     </label>
     <span id="uboDniFrontFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -888,7 +888,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="uboDniReverseFile{{index}}" class="fileUploadButton">Choose File
-      <input id="uboDniReverseFile{{index}}" type="file" name="uboDniReverseFile{{index}}" style="display:none" onchange="displayFileName('uboDniReverseFile{{index}}', 'uboDniReverseFileNameSpan{{index}}')">
+      <input id="uboDniReverseFile{{index}}" type="file" name="uboDniReverseFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboDniReverseFile{{index}}', 'uboDniReverseFileNameSpan{{index}}')">
     </label>
     <span id="uboDniReverseFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -898,7 +898,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="uboBillAddressProofFile{{index}}" class="fileUploadButton">Choose File
-      <input id="uboBillAddressProofFile{{index}}" type="file" name="uboBillAddressProofFile{{index}}" style="display:none" onchange="displayFileName('uboBillAddressProofFile{{index}}', 'uboBillAddressProofFileNameSpan{{index}}')">
+      <input id="uboBillAddressProofFile{{index}}" type="file" name="uboBillAddressProofFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboBillAddressProofFile{{index}}', 'uboBillAddressProofFileNameSpan{{index}}')">
     </label>
     <span id="uboBillAddressProofFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -908,7 +908,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="uboCreditCheckFile{{index}}" class="fileUploadButton">Choose File
-      <input id="uboCreditCheckFile{{index}}" type="file" name="uboCreditCheckFile{{index}}" style="display:none" onchange="displayFileName('uboCreditCheckFile{{index}}', 'uboCreditCheckFileNameSpan{{index}}')">
+      <input id="uboCreditCheckFile{{index}}" type="file" name="uboCreditCheckFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboCreditCheckFile{{index}}', 'uboCreditCheckFileNameSpan{{index}}')">
     </label>
     <span id="uboCreditCheckFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -918,7 +918,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="uboWorldCheckFile{{index}}" class="fileUploadButton">Choose File
-      <input id="uboWorldCheckFile{{index}}" type="file" name="uboWorldCheckFile{{index}}" style="display:none" onchange="displayFileName('uboWorldCheckFile{{index}}', 'uboWorldCheckFileNameSpan{{index}}')">
+      <input id="uboWorldCheckFile{{index}}" type="file" name="uboWorldCheckFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboWorldCheckFile{{index}}', 'uboWorldCheckFileNameSpan{{index}}')">
     </label>
     <span id="uboWorldCheckFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -928,7 +928,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="uboOfacFile{{index}}" class="fileUploadButton">Choose File
-      <input id="uboOfacFile{{index}}" type="file" name="uboOfacFile{{index}}" style="display:none" onchange="displayFileName('uboOfacFile{{index}}', 'uboOfacFileNameSpan{{index}}')">
+      <input id="uboOfacFile{{index}}" type="file" name="uboOfacFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboOfacFile{{index}}', 'uboOfacFileNameSpan{{index}}')">
     </label>
     <span id="uboOfacFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -1152,7 +1152,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="directorPassportFile{{index}}" class="fileUploadButton">Choose File
-      <input id="directorPassportFile{{index}}" type="file" name="directorPassportFile{{index}}" style="display:none" onchange="displayFileName('directorPassportFile{{index}}', 'directorPassportFileNameSpan{{index}}')">
+      <input id="directorPassportFile{{index}}" type="file" name="directorPassportFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorPassportFile{{index}}', 'directorPassportFileNameSpan{{index}}')">
     </label>
     <span id="directorPassportFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -1162,7 +1162,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="directorDniFrontFile{{index}}" class="fileUploadButton">Choose File
-      <input id="directorDniFrontFile{{index}}" type="file" name="directorDniFrontFile{{index}}" style="display:none" onchange="displayFileName('directorDniFrontFile{{index}}', 'directorDniFrontFileNameSpan{{index}}')">
+      <input id="directorDniFrontFile{{index}}" type="file" name="directorDniFrontFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorDniFrontFile{{index}}', 'directorDniFrontFileNameSpan{{index}}')">
     </label>
     <span id="directorDniFrontFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -1172,7 +1172,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="directorDniReverseFile{{index}}" class="fileUploadButton">Choose File
-      <input id="directorDniReverseFile{{index}}" type="file" name="directorDniReverseFile{{index}}" style="display:none" onchange="displayFileName('directorDniReverseFile{{index}}', 'directorDniReverseFileNameSpan{{index}}')">
+      <input id="directorDniReverseFile{{index}}" type="file" name="directorDniReverseFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorDniReverseFile{{index}}', 'directorDniReverseFileNameSpan{{index}}')">
     </label>
     <span id="directorDniReverseFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -1182,7 +1182,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="directorBillAddressProofFile{{index}}" class="fileUploadButton">Choose File
-      <input id="directorBillAddressProofFile{{index}}" type="file" name="directorBillAddressProofFile{{index}}" style="display:none" onchange="displayFileName('directorBillAddressProofFile{{index}}', 'directorBillAddressProofFileNameSpan{{index}}')">
+      <input id="directorBillAddressProofFile{{index}}" type="file" name="directorBillAddressProofFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorBillAddressProofFile{{index}}', 'directorBillAddressProofFileNameSpan{{index}}')">
     </label>
     <span id="directorBillAddressProofFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -1192,7 +1192,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="directorCreditCheckFile{{index}}" class="fileUploadButton">Choose File
-      <input id="directorCreditCheckFile{{index}}" type="file" name="directorCreditCheckFile{{index}}" style="display:none" onchange="displayFileName('directorCreditCheckFile{{index}}', 'directorCreditCheckFileNameSpan{{index}}')">
+      <input id="directorCreditCheckFile{{index}}" type="file" name="directorCreditCheckFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorCreditCheckFile{{index}}', 'directorCreditCheckFileNameSpan{{index}}')">
     </label>
     <span id="directorCreditCheckFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -1202,7 +1202,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="directorWorldCheckFile{{index}}" class="fileUploadButton">Choose File
-      <input id="directorWorldCheckFile{{index}}" type="file" name="directorWorldCheckFile{{index}}" style="display:none" onchange="displayFileName('directorWorldCheckFile{{index}}', 'directorWorldCheckFileNameSpan{{index}}')">
+      <input id="directorWorldCheckFile{{index}}" type="file" name="directorWorldCheckFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorWorldCheckFile{{index}}', 'directorWorldCheckFileNameSpan{{index}}')">
     </label>
     <span id="directorWorldCheckFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -1212,7 +1212,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="directorOfacFile{{index}}" class="fileUploadButton">Choose File
-      <input id="directorOfacFile{{index}}" type="file" name="directorOfacFile{{index}}" style="display:none" onchange="displayFileName('directorOfacFile{{index}}', 'directorOfacFileNameSpan{{index}}')">
+      <input id="directorOfacFile{{index}}" type="file" name="directorOfacFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorOfacFile{{index}}', 'directorOfacFileNameSpan{{index}}')">
     </label>
     <span id="directorOfacFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -1527,24 +1527,6 @@ function handleBorrowerSelect() {
   }
 }
 
-
-//const removeIndividualButton = document.getElementById("removeIndividualButton1");
-//
-//if (individualCount > 1) {
-//removeIndividualButton.style.display = "block";
-//} else {
-//removeIndividualButton.style.display = "none";
-//}
-
-
-
-
-
-
-
-
-
-
 // Get references to the addIndividualButton1 and addUboButton1 buttons
 const addIndividualButton1ForBoolean = document.getElementById("addIndividualButton1");
 const addUboButton1ForBoolean = document.getElementById("addUboButton1");
@@ -1573,13 +1555,6 @@ addUboButton1ForBoolean.addEventListener("click", function() {
   }
 });
 buttonsClicked = false;
-
-
-
-
-
-
-
 
 
 addDirectorEventListeners();
