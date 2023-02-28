@@ -3,7 +3,6 @@ const currentYear = new Date().getFullYear();
 const copyright = document.getElementById("copyright");
 copyright.innerHTML = "&copy; " + currentYear + " Longline Lending LLC. All rights reserved."
 
-
 // function to display file name of uploaded file
 function displayFileName(inputId, spanId) {
   var fileInput = document.getElementById(inputId);
@@ -14,6 +13,9 @@ function displayFileName(inputId, spanId) {
     fileNameSpan.innerHTML = 'Uploaded File: None';
   }
 }
+
+
+const submitButton = document.getElementById("submit");
 
 
 function handleLoanPurposeCheckboxes(checkbox) {
@@ -260,283 +262,14 @@ function otherBankAccountType() {
   }
 }
 
-
-
 const entityContainer = document.getElementById("borrowerSpecificDetails");
 
-// base html for individual details
-const htmlForFirstIndividual = `
+// html for individual Step 6 title
+const htmlForIndividualStepTitle = `
     
-  <br><br><br><h2 id="stepSixIndividualSubtitle">Step 6 - Individual Info</h2><br>
+  <br><br><br><h2 id="stepSixIndividualTitle">Step 6 - Individual Info</h2><br>
+  <br><br><h2 id="stepSixIndividualSubtitle"> At Least ONE Individual is Required</h2><br>
 
-  <br><br><h3 id="individualInfoSubtitle1">Info for Individual 1</h3>
-
-  <div class="labels">
-    <label for="individualPersonalGuarantorDropdown">Personal Guarantor?</label>
-  </div>
-  <div class="input-tab">
-    <select id="individualPersonalGuarantorDropdown" name="individualPersonalGuarantorDropdown1" required style="width: 262px;">
-      <option disabled value selected>Select an option</option>
-      <option value="individualPersonalGuarantorYes1">Yes</option>
-      <option value="individualPersonalGuarantorNo1">No</option>
-    </select>
-  </div>
-  
-  <div class="labels">
-    <label for="individualCitizenDropdown">U.S. Citizen or Green Card?</label>
-  </div>
-  <div class="input-tab">
-    <select id="individualCitizenDropdown" name="individualCitizenDropdown1" required style="width: 262px;">
-      <option disabled value selected>Select an option</option>
-      <option value="individualCitizenYes1">Yes</option>
-      <option value="individualCitizenYes1">No</option>
-    </select>
-  </div>
-
-  <div class="labels">
-    <label for="individualSDResidentDropdown">South Dakota Resident?</label>
-  </div>
-  <div class="input-tab">
-    <select id="individualSDResidentDropdown" name="individualSDResidentDropdown1" required style="width: 262px;">
-      <option disabled value selected>Select an option</option>
-      <option value="individualSDResidentYes1">Yes</option>
-      <option value="individualSDResidentNo1">No</option>
-    </select>
-  </div>
-  
-  <div class="labels">
-    <label id="individualFirstNameLabel1" for="individualFirstName1">First Name(s)</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="individualFirstName1" name="individualFirstName1" placeholder="First Name(s)" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label id="individualMiddleNameLabel1" for="individualMiddleName1">Middle Name(s)</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="individualMiddleName1" name="individualMiddleName1" placeholder="Middle Name(s)" style="width: 250px;">
-  </div>
-  
-  <div class="labels">
-    <label id="individualLastNameLabel1" for="individualLastName1">Last Name(s)</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="individualLastName1" name="lastName1" placeholder="Last Name(s)" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label id="individualHomeBankAddressLabel1" for="individualHomeBankAddress1">Home Address (must match recent bill)</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="individualHomeBankAddress1" name="individualHomeBankAddress1" placeholder="Home Address" style="width: 250px;">
-  </div>
-  
-  <div class="labels">
-    <label id="individualHomeStreetAddressLabel1" for="individualHomeStreetAddress1">Home Street Address</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="individualHomeStreetAddress1" name="individualHomeStreetAddress1" placeholder="Home Street Address" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label id="individualHomeCityLabel1" for="individualHomeCity1">Home City</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="individualHomeCity1" name="individualHomeCity1" placeholder="Home City" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label id="individualHomeStateLabel1" for="individualHomeState1">Home State or Province</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="individualHomeState1" name="individualHomeState1" placeholder="Home State or Province" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label id="individualHomeZipLabel1" for="individualHomeZip1">Home Zip or Province</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="individualHomeZip1" name="individualHomeZip1" placeholder="Home Zip" style="width: 250px;" required>
-  </div>
-
-  <div class="labels">
-    <label id="individualHomeCountryLabel1" for="individualHomeCountry1">Home Country</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="individualHomeCountry1" name="individualHomeCountry1" placeholder="Home Country" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label for="individualOwnRentDropdown">Own or Rent?</label>
-  </div>
-  <div class="input-tab">
-    <select id="individualOwnRentDropdown" name="individualOwnRentDropdown1" style="width: 262px;">
-      <option disabled value selected>Select an option</option>
-      <option value="individualOwn1">Own</option>
-      <option value="individualRent1">Rent</option>
-    </select>
-  </div>
-  
-  <div class="labels">
-    <label id="individualRentLabel1" for="individualRent1">Monthly Mortgage or Rent in USD</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="individualMonthlyRent1" name="individualMonthlyRent1" placeholder="Monthly Mortgage or Rent" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
-  </div>
-  
-  <div class="labels">
-    <label id="individualPassportNumberLabel1" for="individualPassportNumber1">Passport Number</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="individualPassportNumber1" name="individualPassportNumber1" placeholder="Passport Number" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label id="individualSsnLabel1" for="individualSsn1">SSN or ID Number</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="individualSsn1" name="individualSsn1" placeholder="SSN or ID Number" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label id="individualDobLabel1" for="individualDob1">Date of Birth</label>
-  </div>
-  <div class="input-tab">
-    <input type="date" id="individualDob1" name="individualDob1" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label id="individualEmailLabel1" for="individualEmail1">Email Address</label></div>
-  <div class="input-tab">
-    <input class="input-field" type="email" id="individualEmail1" name="individualEmail1" placeholder="email@email.com" style="width: 250px;" required>
-  </div>
-  
-  <div class="labels">
-    <label id="individualPhoneLabel1" for="individualPhone1">Telephone</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="individualPhone1" name="individualPhone1" placeholder="Telephone" style="width: 250px;">
-  </div>
-  
-  <div class="labels">
-    <label id="individualFicoLabel1" for="individualFico1">FICO or NOSIS Score</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="individualFico1" name="individualFico1" placeholder="FICO or NOSIS Score" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
-  </div>
-  
-  <div class="labels">
-    <label id="individualIncomeLabel1" for="individualIncome1">Monthly Income in USD</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="individualIncome1" name="individualIncome1" placeholder="Monthly Income in USD" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
-  </div>
-  
-  <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
-    Are you a Politically Exposed Person (PEP) or related to a PEP? <br> A PEP is person who is or has been entrusted with any prominent public function in  the United States of America, a country or territory outside United States of  America, or by an international organization. By “related”, we mean that you are a parent, spouse, sibling or child of a PEP, or closely connected to a PEP either socially  or professionally.
-  </div>
-  
-  <div class="labels">
-    <label></label>
-  </div>
-  <div class="input-tab">
-    <label><input type="radio" name="individualPep1" value="individualYesPep1" style="margin-left: 50px;" required>Yes</label>
-    <label><input type="radio" name="individualPep1" value="individualNoPep1">No</label>
-  </div>
-  
-  <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px;">
-    Have you ever been convicted of a crime involving fraud or dishonesty?
-  </div>
-  
-  <div class="labels">
-    <label></label>
-  </div>
-  <div class="input-tab">
-    <label><input type="radio" name="individualCrime1" value="individualYesCrime1" style="margin-left: 50px;" required>Yes</label>
-    <label><input type="radio" name="individualCrime1" value="individualNoCrime1">No</label>
-  </div>
-  
-  <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
-    I declare that the above information is true and correct. I am aware that I may be  subject to prosecution and criminal sanction under written law if I am found to have  made any false statement which I know to be false or which I do not believe to be true,  or if I have intentionally suppressed any material fact. 
-  </div><br>
-  
-  <div class="labels">
-    <label></label>
-  </div>
-  <div class="input-tab" style="margin-left: 20px;">
-    <input type="checkbox" name="individualDeclareCheckbox1" value="individualDeclareCheckbox1" required>I declare that the above information is true and correct.<br>
-  </div>
-
-  <div class="labels">
-    <label id="individualPassportFileLabel1" for="individualPassportFile1">Passport</label>
-  </div>
-  <div class="input-tab">
-    <label for="individualPassportFile1" class="fileUploadButton">Choose File
-      <input id="individualPassportFile1" type="file" name="individualPassportFile1" style="display:none" onchange="displayFileName('individualPassportFile1', 'individualPassportFileNameSpan1')" required>
-    </label>
-    <span id="individualPassportFileNameSpan1">Uploaded File: None</span>
-  </div>
-  
-  <div class="labels">
-    <label id="individualDniFrontFileLabel1" for="individualDniFrontFile1">DNI/Drivers License (Front)</label>
-  </div>
-  <div class="input-tab">
-    <label for="individualDniFrontFile1" class="fileUploadButton">Choose File
-      <input id="individualDniFrontFile1" type="file" name="individualDniFrontFile1" style="display:none" onchange="displayFileName('individualDniFrontFile1', 'individualDniFrontFileNameSpan1')" required>
-    </label>
-    <span id="individualDniFrontFileNameSpan1">Uploaded File: None</span>
-  </div>
-  
-  <div class="labels">
-    <label id="individualDniReverseFileLabel1" for="individualDniReverseFile1">DNI/Drivers License (Reverse)</label>
-  </div>
-  <div class="input-tab">
-    <label for="individualDniReverseFile1" class="fileUploadButton">Choose File
-      <input id="individualDniReverseFile1" type="file" name="individualDniReverseFile1" style="display:none" onchange="displayFileName('individualDniReverseFile1', 'individualDniReverseFileNameSpan1')" required>
-    </label>
-    <span id="individualDniReverseFileNameSpan1">Uploaded File: None</span>
-  </div>
-  
-  <div class="labels">
-    <label id="individualBillAddressProofFileLabel1" for="individualBillAddressProofFile1">Bill for Proof of Address</label>
-  </div>
-  <div class="input-tab">
-    <label for="individualBillAddressProofFile1" class="fileUploadButton">Choose File
-      <input id="individualBillAddressProofFile1" type="file" name="individualBillAddressProofFile1" style="display:none" onchange="displayFileName('individualBillAddressProofFile1', 'individualBillAddressProofFileNameSpan1')" required>
-    </label>
-    <span id="individualBillAddressProofFileNameSpan1">Uploaded File: None</span>
-  </div>
-  
-  <div class="labels">
-    <label id="individualCreditCheckFileLabel1" for="individualCreditCheckFile1">Credit Check/NOSIS</label>
-  </div>
-  <div class="input-tab">
-    <label for="individualCreditCheckFile1" class="fileUploadButton">Choose File
-      <input id="individualCreditCheckFile1" type="file" name="individualCreditCheckFile1" style="display:none" onchange="displayFileName('individualCreditCheckFile1', 'individualCreditCheckFileNameSpan1')" required>
-    </label>
-    <span id="individualCreditCheckFileNameSpan1">Uploaded File: None</span>
-  </div>
-  
-  <div class="labels">
-    <label id="individualWorldCheckFileLabel1" for="individualWorldCheckFile1">World Check</label>
-  </div>
-  <div class="input-tab">
-    <label for="individualWorldCheckFile1" class="fileUploadButton">Choose File
-      <input id="individualWorldCheckFile1" type="file" name="individualWorldCheckFile1" style="display:none" onchange="displayFileName('individualWorldCheckFile1', 'individualWorldCheckFileNameSpan1')" required>
-    </label>
-    <span id="individualWorldCheckFileNameSpan1">Uploaded File: None</span>
-  </div>
-  
-  <div class="labels">
-    <label id="individualOfacFileLabel1" for="individualOfacFile1">OFAC Check</label>
-  </div>
-  <div class="input-tab">
-    <label for="individualOfacFile1" class="fileUploadButton">Choose File
-      <input id="individualOfacFile1" type="file" name="individualOfacFile1" style="display:none" onchange="displayFileName('individualOfacFile1', 'individualOfacFileNameSpan1')" required>
-    </label>
-    <span id="individualOfacFileNameSpan1">Uploaded File: None</span>
-  </div>
 `;
   
 // base html for entity details
@@ -639,8 +372,9 @@ const htmlForEntity = `
     <span id="entityOtherFileNameSpan">Uploaded File: None</span>
   </div>
 
-  <br><br><br><h2 id="stepSixUboSubtitle">Step 6 - UBO and Director Info</h2><br>  
-  <br><h3 id="uboInfoSubtitle1">Please add UBOs THEN Directors</h3><br>
+  <br><br><br><h2 id="stepSixUboTitle">Step 6 - UBO and Director Info</h2><br>  
+  <br><br><h2 id="stepSixUboSubtitle"> At Least ONE UBO is Required</h2><br>
+  <br><h3 id="uboInfoSubtitle1">Please add UBOs THEN Directors</h3>
   
 `;
 
@@ -652,7 +386,7 @@ const htmlForAdditionalIndividual = `
     <label for="individualPersonalGuarantorDropdown">Personal Guarantor?</label>
   </div>
   <div class="input-tab">
-    <select id="individualPersonalGuarantorDropdown" name="individualPersonalGuarantorDropdown{{index}}" style="width: 262px;">
+    <select id="individualPersonalGuarantorDropdown" name="individualPersonalGuarantorDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
       <option value="individualPersonalGuarantorYes{{index}}">Yes</option>
       <option value="individualPersonalGuarantorNo{{index}}">No</option>
@@ -663,7 +397,7 @@ const htmlForAdditionalIndividual = `
     <label for="individualCitizenDropdown">U.S. Citizen or Green Card?</label>
   </div>
   <div class="input-tab">
-    <select id="individualCitizenDropdown" name="individualCitizenDropdown{{index}}" style="width: 262px;">
+    <select id="individualCitizenDropdown" name="individualCitizenDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
       <option value="individualCitizenYes{{index}}">Yes</option>
       <option value="individualCitizenYes{{index}}">No</option>
@@ -674,7 +408,7 @@ const htmlForAdditionalIndividual = `
     <label for="individualSDResidentDropdown">South Dakota Resident?</label>
   </div>
   <div class="input-tab">
-    <select id="individualSDResidentDropdown" name="individualSDResidentDropdown{{index}}" style="width: 262px;">
+    <select id="individualSDResidentDropdown" name="individualSDResidentDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
       <option value="individualSDResidentYes{{index}}">Yes</option>
       <option value="individualSDResidentNo{{index}}">No</option>
@@ -1484,31 +1218,6 @@ const htmlForAdditionalUbo = `
   </div>
 `;
 
-  
-//function addEventListenersToAddButtons(buttonType, additionalInfoDivId, htmlForAdditionalInfo) {
-//count = 2;
-//
-//for (let i = 1; i < 9; i++) {
-//  
-//  const additionalInfoDiv = document.getElementById(`${additionalInfoDivId}${i}`);
-//
-//  const addButton = document.getElementById(`add${buttonType}Button${i}`);
-//  addButton.addEventListener('click', function() {
-//    if (count <= 9) {
-//      const htmlForAdditionalDirectorWithIndex = htmlForAdditionalInfo.replace(/{{index}}/g, count);
-//      additionalInfoDiv.insertAdjacentHTML('beforeend', htmlForAdditionalDirectorWithIndex);
-//      
-//      count++;
-//      
-//      if (count === 9) {
-//        const addButton1 = document.getElementById(`add${buttonType}Button1`);
-//        addButton1.style.display = 'none';
-//      }
-//    }
-//  });
-//}
-//}
-
 
 function addIndividualEventListeners() {
   individualCount = 1;
@@ -1568,9 +1277,6 @@ function addIndividualEventListeners() {
   }
 }
 
-
-
-
 function addUboEventListeners() {
   uboCount = 1;
   for (let i = 1; i <= 8; i++) {
@@ -1628,12 +1334,6 @@ function addUboEventListeners() {
     });
   }
 }
-
-
-
-
-
-
 
 function addDirectorEventListeners() {
   directorCount = 1;
@@ -1693,167 +1393,6 @@ function addDirectorEventListeners() {
   }
 }
 
-
-
-
-
-
-
-
-// USE THIS CODE FOR IND AND UBO, THE 1ST INDEX DOESNT GET REMOVED!!
-
-/*
-
-
-function addEventListenersToAddButtons(buttonType, additionalInfoDivId, htmlForAdditionalInfo) {
-  directorCount = 1;
-  for (let i = 1; i <= 8; i++) {
-    const addDirectorButton = document.getElementById(`addDirectorButton${i}`);
-    addDirectorButton.addEventListener('click', function() {
-      if (directorCount <= 8) {
-        const additionalDirectorInfoID = 'additionalDirectorInfo' + directorCount;
-        const additionalDirectorInfo = document.getElementById(additionalDirectorInfoID);
-        const htmlForAdditionalDirectorWithIndex = htmlForAdditionalDirector.replace(/{{index}}/g, directorCount);
-        additionalDirectorInfo.insertAdjacentHTML('beforeend', htmlForAdditionalDirectorWithIndex);
-        directorCount++;
-        
-        if (directorCount > 8) {
-          for (let j = 1; j <= 8; j++) {
-            const addDirectorButton = document.getElementById(`addDirectorButton${j}`);
-            addDirectorButton.style.display = 'none';
-          }
-        }
-      }
-    });
-    
-    const removeDirectorButton = document.getElementById(`removeDirectorButton${i}`);
-    removeDirectorButton.addEventListener('click', function() {
-      if (directorCount > 2 && directorCount <= 9) {
-        const additionalDirectorInfoToRemove = document.getElementById(`additionalDirectorInfo${directorCount-1}`);
-        additionalDirectorInfoToRemove.remove();
-        
-        const replacementDiv = document.createElement("div");
-        replacementDiv.setAttribute("id", `additionalDirectorInfo${directorCount-1}`);
-        // Add any content or attributes you need to the replacement div here
-        
-        const divAfterOneJustRemoved = document.getElementById(`additionalDirectorInfo${directorCount}`);
-        const parentDiv = additionalDirectorInfo1.parentNode;
-        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
-        
-        directorCount--;
-      }
-      
-      if (directorCount === 2) {
-        const additionalDirectorInfoToRemove = document.getElementById(`additionalDirectorInfo${directorCount}`);
-        additionalDirectorInfoToRemove.remove();
-        
-        const replacementDiv = document.createElement("div");
-        replacementDiv.setAttribute("id", `additionalDirectorInfo${directorCount}`);
-        // Add any content or attributes you need to the replacement div here
-        
-        const divBeforeOneJustRemoved = document.getElementById(`additionalDirectorInfo${directorCount+1}`);
-        const parentDiv = additionalDirectorInfo1.parentNode;
-        parentDiv.insertBefore(replacementDiv, divBeforeOneJustRemoved);
-        
-        directorCount--;
-      }
-    });
-  }
-}
-
-*/
-
-//function addEventListenersToAddButtons(buttonType, additionalInfoDivId, htmlForAdditionalInfo) {
-//count = 2;
-//
-//for (let i = 1; i < 9; i++) {
-//  
-//  const additionalInfoDiv = document.getElementById(`${additionalInfoDivId}${i}`);
-//  
-//  const addButton = document.getElementById(`add${buttonType}Button${i}`);
-//  addButton.addEventListener('click', function() {
-//    if (count <= 9) {
-//      const htmlForAdditionalInfoWithIndex = htmlForAdditionalInfo.replace(/{{index}}/g, count);
-//      additionalInfoDiv.insertAdjacentHTML('beforeend', htmlForAdditionalInfoWithIndex);
-//      
-//      count++;
-//      
-//      if (count === 9) {
-//        const addButton1 = document.getElementById(`add${buttonType}Button1`);
-//        addButton1.style.display = 'none';
-//      }
-//    }
-//  });
-//  
-//  const removeButton = document.getElementById(`add${buttonType}Button${i}`);
-//  removeButton.addEventListener('click', function() {
-//    if (count > 2 && count <= 9) {
-//      const additionalInfoToRemove = document.getElementById(`additional${additionalInfoDivId}Info${count-1}`);
-//      additionalInfoToRemove.remove();
-//      
-//      const replacementDiv = document.createElement("div");
-//      replacementDiv.setAttribute("id", `additional${additionalInfoDivId}Info${count-1}`);
-//      // Add any content or attributes you need to the replacement div here
-//      
-//      const divAfterOneJustRemoved = document.getElementById(`additional${additionalInfoDivId}Info${count}`);
-//      const parentDiv = additionalInfo1.parentNode;
-//      parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
-//      
-//      count--;
-//    }
-//    
-//    if (count === 2) {
-//      const additionalInfoToRemove = document.getElementById(`additional${additionalInfoDivId}Info${count}`);
-//      additionalInfoToRemove.remove();
-//      
-//      const replacementDiv = document.createElement("div");
-//      replacementDiv.setAttribute("id", `additional${additionalInfoDivId}Info${count}`);
-//      // Add any content or attributes you need to the replacement div here
-//      
-//      const divBeforeOneJustRemoved = document.getElementById(`additional${additionalInfoDivId}Info${count+1}`);
-//      const parentDiv = additionalInfo1.parentNode;
-//      parentDiv.insertBefore(replacementDiv, divBeforeOneJustRemoved);
-//      
-//      count--;
-//    }
-//  });
-//}
-//}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var addIndividualButton = document.getElementById("addIndividualButton1");
 addIndividualButton.style.display = "none"; // hide the button by default
 var addUboButton = document.getElementById("addUboButton1");
@@ -1871,16 +1410,15 @@ removeDirectorButton.style.display = "none"; // hide the button by default
 function handleBorrowerSelect() {
   var select = document.getElementById("borrowerDropdown");
   var option = select.options[select.selectedIndex];
-  
   var individualCount = 1;
   var uboCount = 1;
+  submitButton.disabled = true;
+  canSubmit();
   
-  
-  if (option.value == "individualBorrower") {    
+  if (option.value == "individualBorrower") {
     
-    
+    submitButton.disabled = true;
 
-    
     document.getElementById("borrowerSpecificDetails").innerHTML = "";
     document.getElementById("additionalUboInfo1").innerHTML = "";
     document.getElementById("additionalUboInfo2").innerHTML = "";
@@ -1891,13 +1429,6 @@ function handleBorrowerSelect() {
     document.getElementById("additionalUboInfo7").innerHTML = "";
     document.getElementById("additionalUboInfo8").innerHTML = "";
     
-    
-    
-    
-    
-    
-    
-    
     document.getElementById("additionalDirectorInfo1").innerHTML = "";
     document.getElementById("additionalDirectorInfo2").innerHTML = "";
     document.getElementById("additionalDirectorInfo3").innerHTML = "";
@@ -1907,16 +1438,7 @@ function handleBorrowerSelect() {
     document.getElementById("additionalDirectorInfo7").innerHTML = "";
     document.getElementById("additionalDirectorInfo8").innerHTML = "";
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//  entityContainer.innerHTML = htmlForFirstIndividual;
+    entityContainer.innerHTML = htmlForIndividualStepTitle;
     addUboButton.style.display = "none"; // hide the button
     addDirectorButton.style.display = "none"; // hide the button
     removeUboButton.style.display = "none"; // hide the button
@@ -1926,7 +1448,6 @@ function handleBorrowerSelect() {
     removeIndividualButton.style.display = "block"; // show the button
     removeIndividualButton.style.margin = "0 auto";
     addIndividualEventListeners();
-    
     
     additionalUboInfo1.style.display = 'none';
     additionalUboInfo1.style.display = 'none';
@@ -1955,18 +1476,14 @@ function handleBorrowerSelect() {
     additionalIndividualInfo6.style.display = 'block';
     additionalIndividualInfo7.style.display = 'block';
     additionalIndividualInfo8.style.display = 'block';
+    
+    canSubmit()
 
-    
-    
-    
-    
-    
-    
-    
   }
   
   if (option.value == "entityBorrower") {
     
+    submitButton.disabled = true;
     var directorCount = 1;
     
     document.getElementById("additionalIndividualInfo1").innerHTML = "";
@@ -1977,7 +1494,6 @@ function handleBorrowerSelect() {
     document.getElementById("additionalIndividualInfo6").innerHTML = "";
     document.getElementById("additionalIndividualInfo7").innerHTML = "";
     document.getElementById("additionalIndividualInfo8").innerHTML = "";
-    
     
     entityContainer.innerHTML = htmlForEntity;
     addIndividualButton.style.display = "none"; // hide the button
@@ -1990,12 +1506,8 @@ function handleBorrowerSelect() {
     removeUboButton.style.margin = "0 auto";
     removeDirectorButton.style.display = "block"; // show the button
     removeDirectorButton.style.margin = "0 auto";
-    addUboEventListeners();    
-    
-    
+    addUboEventListeners();
 
-    
-    
     additionalUboInfo1.style.display = 'block';
     additionalUboInfo2.style.display = 'block';
     additionalUboInfo3.style.display = 'block';
@@ -2014,52 +1526,46 @@ function handleBorrowerSelect() {
     additionalDirectorInfo7.style.display = 'block';
     additionalDirectorInfo8.style.display = 'block';
     
-    
-    
-    
-    
-    
-    
-    
+    canSubmit();
   }
 }
 
+
+function canSubmit() {
+  
+  // Get the button element and store it in a variable
+  
+  // Get references to the addIndividualButton1 and addUboButton1 buttons
+  const addIndividualButton1ForBoolean = document.getElementById("addIndividualButton1");
+  const addUboButton1ForBoolean = document.getElementById("addUboButton1");
+  
+  // Add event listeners to the buttons to set buttonsClicked to true when clicked
+  addIndividualButton1ForBoolean.addEventListener("click", function() {
+    buttonsClicked = true;
+    if (buttonsClicked) {
+      // Enable the submit button
+      submitButton.disabled = false;
+    }
+  });
+  
+  addUboButton1ForBoolean.addEventListener("click", function() {
+    buttonsClicked = true;
+    if (buttonsClicked) {
+      // Enable the submit button
+      submitButton.disabled = false;
+    }
+  });
+  buttonsClicked = false;
+}
+
+var borrowerDropdown = document.getElementById("borrowerDropdown");
+borrowerDropdown.addEventListener("change", canSubmit);
+
+
+
+
+
+
 addDirectorEventListeners();
-
-
-
 // NO JAVASCRIPT BELOW THIS LINE
 // JAVASCRIPT BREAKS PAST THIS LINE
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const submitButton = document.getElementById("submit");
-
-//function formAsPdf() {
-//submitButton.addEventListener("click", function () {
-//  window.jsPDF = window.jspdf.jsPDF;
-//  var docPDF = new jsPDF();
-//  var elementHTML = document.querySelector("#entireForm");
-//  docPDF.fromHTML(elementHTML, function() {
-//    const currentDate = new Date().toISOString().slice(0, 10); // get current date in YYYY-MM-DD format
-////    const filename = `${firstName1.value}_${lastName1.value}_${currentDate}.pdf`; // create filename using values from the form and the current date
-//    const filename = `${currentDate}.pdf`; // create filename using values from the form and the current date
-//    docPDF.save(filename); // save the file with the generated filename
-//  });
-//});
-//}

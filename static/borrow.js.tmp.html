@@ -865,7 +865,7 @@
             <label for="borrowerDropdown">Borrower is an</label>
           </div>
           <div class="input-tab">
-            <select id="borrowerDropdown" name="borrowerDropdown" onchange="handleBorrowerSelect()" style="width: 250px;" readonly>
+            <select id="borrowerDropdown" name="borrowerDropdown" onchange="handleBorrowerSelect()" style="width: 250px;" required>
               <option disabled value selected>Select an option</option>
               <option value="individualBorrower">Individual</option>
               <option value="entityBorrower">Entity</option>
@@ -907,13 +907,13 @@
           
           <div class="addIndividualContainer">
             <div class="btn">
-              <button id="addIndividualButton1" type="button">Add another Individual</button>
+              <button id="addIndividualButton1" type="button">Add Individual</button>
             </div>
           </div>
           
           <div class="addUboContainer">
             <div class="btn">
-              <button id="addUboButton1" type="button">Add another UBO</button>
+              <button id="addUboButton1" type="button">Add UBO</button>
             </div>
           </div>
           
@@ -1086,7 +1086,7 @@
           
           <div class="submitButtonContainer">
             <div class="btn">
-              <button id="submit" type="submit">Submit</button>
+              <button id="submit" type="submit" disabled>Submit</button>
             </div>
           </div>
           
