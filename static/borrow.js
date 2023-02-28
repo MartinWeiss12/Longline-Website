@@ -1763,36 +1763,29 @@ const htmlForAdditionalUbo = `
 `;
 
   
-function addEventListenersToAddButtons(buttonType, additionalInfoDivId, htmlForAdditionalInfo) {
-  count = 2;
-  
-  for (let i = 1; i < 9; i++) {
-    
-    
-    const additionalInfoDiv = document.getElementById(`${additionalInfoDivId}${i}`);
-
-    
-    
-    const addButton = document.getElementById(`add${buttonType}Button${i}`);
-    addButton.addEventListener('click', function() {
-      if (count <= 9) {
-        const htmlForAdditionalDirectorWithIndex = htmlForAdditionalInfo.replace(/{{index}}/g, count);
-        additionalInfoDiv.insertAdjacentHTML('beforeend', htmlForAdditionalDirectorWithIndex);
-        
-        count++;
-        
-        if (count === 9) {
-          const addButton1 = document.getElementById(`add${buttonType}Button1`);
-          addButton1.style.display = 'none';
-        }
-      }
-    });
-  }
-}
-
-
-
-
+//function addEventListenersToAddButtons(buttonType, additionalInfoDivId, htmlForAdditionalInfo) {
+//count = 2;
+//
+//for (let i = 1; i < 9; i++) {
+//  
+//  const additionalInfoDiv = document.getElementById(`${additionalInfoDivId}${i}`);
+//
+//  const addButton = document.getElementById(`add${buttonType}Button${i}`);
+//  addButton.addEventListener('click', function() {
+//    if (count <= 9) {
+//      const htmlForAdditionalDirectorWithIndex = htmlForAdditionalInfo.replace(/{{index}}/g, count);
+//      additionalInfoDiv.insertAdjacentHTML('beforeend', htmlForAdditionalDirectorWithIndex);
+//      
+//      count++;
+//      
+//      if (count === 9) {
+//        const addButton1 = document.getElementById(`add${buttonType}Button1`);
+//        addButton1.style.display = 'none';
+//      }
+//    }
+//  });
+//}
+//}
 
 
 function addDirectorEventListeners() {
@@ -1850,28 +1843,11 @@ function addDirectorEventListeners() {
         directorCount--;
       }
     });
-
-
-
   }
 }
 
 
-//    }
-//  });
 
-
-// remove the div
-
-
-
-
-
-//
-//const removeDirectorButton = document.getElementById(`removeDirectorButton${i}`);
-//removeDirectorButton.addEventListener('click', function() {
-//if (directorCount > 1) {
-//  directorCount--;
 
 
 
@@ -1882,7 +1858,7 @@ function addDirectorEventListeners() {
 /*
 
 
-function addDirectorEventListeners() {
+function addEventListenersToAddButtons(buttonType, additionalInfoDivId, htmlForAdditionalInfo) {
   directorCount = 1;
   for (let i = 1; i <= 8; i++) {
     const addDirectorButton = document.getElementById(`addDirectorButton${i}`);
@@ -1940,6 +1916,62 @@ function addDirectorEventListeners() {
 
 */
 
+function addEventListenersToAddButtons(buttonType, additionalInfoDivId, htmlForAdditionalInfo) {
+  count = 2;
+  
+  for (let i = 1; i < 9; i++) {
+    
+    const additionalInfoDiv = document.getElementById(`${additionalInfoDivId}${i}`);
+    
+    const addButton = document.getElementById(`add${buttonType}Button${i}`);
+    addButton.addEventListener('click', function() {
+      if (count <= 9) {
+        const htmlForAdditionalInfoWithIndex = htmlForAdditionalInfo.replace(/{{index}}/g, count);
+        additionalInfoDiv.insertAdjacentHTML('beforeend', htmlForAdditionalInfoWithIndex);
+        
+        count++;
+        
+        if (count === 9) {
+          const addButton1 = document.getElementById(`add${buttonType}Button1`);
+          addButton1.style.display = 'none';
+        }
+      }
+    });
+    
+    const removeButton = document.getElementById(`add${buttonType}Button${i}`);
+    removeButton.addEventListener('click', function() {
+      if (count > 2 && count <= 9) {
+        const additionalInfoToRemove = document.getElementById(`additional${additionalInfoDivId}Info${count-1}`);
+        additionalInfoToRemove.remove();
+        
+        const replacementDiv = document.createElement("div");
+        replacementDiv.setAttribute("id", `additional${additionalInfoDivId}Info${count-1}`);
+        // Add any content or attributes you need to the replacement div here
+        
+        const divAfterOneJustRemoved = document.getElementById(`additional${additionalInfoDivId}Info${count}`);
+        const parentDiv = additionalInfo1.parentNode;
+        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
+        
+        count--;
+      }
+      
+      if (count === 2) {
+        const additionalInfoToRemove = document.getElementById(`additional${additionalInfoDivId}Info${count}`);
+        additionalInfoToRemove.remove();
+        
+        const replacementDiv = document.createElement("div");
+        replacementDiv.setAttribute("id", `additional${additionalInfoDivId}Info${count}`);
+        // Add any content or attributes you need to the replacement div here
+        
+        const divBeforeOneJustRemoved = document.getElementById(`additional${additionalInfoDivId}Info${count+1}`);
+        const parentDiv = additionalInfo1.parentNode;
+        parentDiv.insertBefore(replacementDiv, divBeforeOneJustRemoved);
+        
+        count--;
+      }
+    });
+  }
+}
 
 
 
@@ -1997,8 +2029,40 @@ function handleBorrowerSelect() {
   
   if (option.value == "individualBorrower") {    
     
-    document.getElementById("additionalUboInfo").innerHTML = "";
-    document.getElementById("additionalDirectorInfo").innerHTML = "";
+    document.getElementById("additionalUboInfo1").innerHTML = "";
+    document.getElementById("additionalUboInfo2").innerHTML = "";
+    document.getElementById("additionalUboInfo3").innerHTML = "";
+    document.getElementById("additionalUboInfo4").innerHTML = "";
+    document.getElementById("additionalUboInfo5").innerHTML = "";
+    document.getElementById("additionalUboInfo6").innerHTML = "";
+    document.getElementById("additionalUboInfo7").innerHTML = "";
+    document.getElementById("additionalUboInfo8").innerHTML = "";
+    
+    
+    
+    
+    
+    
+    
+    
+    document.getElementById("additionalDirectorInfo1").innerHTML = "";
+    document.getElementById("additionalDirectorInfo2").innerHTML = "";
+    document.getElementById("additionalDirectorInfo3").innerHTML = "";
+    document.getElementById("additionalDirectorInfo4").innerHTML = "";
+    document.getElementById("additionalDirectorInfo5").innerHTML = "";
+    document.getElementById("additionalDirectorInfo6").innerHTML = "";
+    document.getElementById("additionalDirectorInfo7").innerHTML = "";
+    document.getElementById("additionalDirectorInfo8").innerHTML = "";
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
     entityContainer.innerHTML = htmlForFirstIndividual;
     addUboButton.style.display = "none"; // hide the button
     addDirectorButton.style.display = "none"; // hide the button
@@ -2010,13 +2074,58 @@ function handleBorrowerSelect() {
     removeIndividualButton.style.margin = "0 auto";
     addEventListenersToAddButtons('Individual', 'additionalIndividualInfo', htmlForAdditionalIndividual);
     
+    
+    additionalUboInfo1.style.display = 'none';
+    additionalUboInfo1.style.display = 'none';
+    additionalUboInfo2.style.display = 'none';
+    additionalUboInfo3.style.display = 'none';
+    additionalUboInfo4.style.display = 'none';
+    additionalUboInfo5.style.display = 'none';
+    additionalUboInfo6.style.display = 'none';
+    additionalUboInfo7.style.display = 'none';
+    additionalUboInfo8.style.display = 'none';
+    
+    additionalDirectorInfo1.style.display = 'none';
+    additionalDirectorInfo2.style.display = 'none';
+    additionalDirectorInfo3.style.display = 'none';
+    additionalDirectorInfo4.style.display = 'none';
+    additionalDirectorInfo5.style.display = 'none';
+    additionalDirectorInfo6.style.display = 'none';
+    additionalDirectorInfo7.style.display = 'none';
+    additionalDirectorInfo8.style.display = 'none';
+    
+    additionalIndividualInfo1.style.display = 'block';
+    additionalIndividualInfo2.style.display = 'block';
+    additionalIndividualInfo3.style.display = 'block';
+    additionalIndividualInfo4.style.display = 'block';
+    additionalIndividualInfo5.style.display = 'block';
+    additionalIndividualInfo6.style.display = 'block';
+    additionalIndividualInfo7.style.display = 'block';
+    additionalIndividualInfo8.style.display = 'block';
+
+    
+    
+    
+    
+    
+    
+    
   }
   
   if (option.value == "entityBorrower") {
     
     var directorCount = 1;
     
-    document.getElementById("additionalIndividualInfo").innerHTML = "";
+    document.getElementById("additionalIndividualInfo1").innerHTML = "";
+    document.getElementById("additionalIndividualInfo2").innerHTML = "";
+    document.getElementById("additionalIndividualInfo3").innerHTML = "";
+    document.getElementById("additionalIndividualInfo4").innerHTML = "";
+    document.getElementById("additionalIndividualInfo5").innerHTML = "";
+    document.getElementById("additionalIndividualInfo6").innerHTML = "";
+    document.getElementById("additionalIndividualInfo7").innerHTML = "";
+    document.getElementById("additionalIndividualInfo8").innerHTML = "";
+    
+    
     entityContainer.innerHTML = htmlForEntity;
     addIndividualButton.style.display = "none"; // hide the button
     removeIndividualButton.style.display = "none"; // hide the button
@@ -2029,6 +2138,36 @@ function handleBorrowerSelect() {
     removeDirectorButton.style.display = "block"; // show the button
     removeDirectorButton.style.margin = "0 auto";
     addEventListenersToAddButtons('Ubo', 'additionalUboInfo', htmlForAdditionalUbo);
+    
+    
+    
+
+    
+    
+    additionalUboInfo1.style.display = 'block';
+    additionalUboInfo2.style.display = 'block';
+    additionalUboInfo3.style.display = 'block';
+    additionalUboInfo4.style.display = 'block';
+    additionalUboInfo5.style.display = 'block';
+    additionalUboInfo6.style.display = 'block';
+    additionalUboInfo7.style.display = 'block';
+    additionalUboInfo8.style.display = 'block';
+    
+    additionalDirectorInfo1.style.display = 'block';
+    additionalDirectorInfo2.style.display = 'block';
+    additionalDirectorInfo3.style.display = 'block';
+    additionalDirectorInfo4.style.display = 'block';
+    additionalDirectorInfo5.style.display = 'block';
+    additionalDirectorInfo6.style.display = 'block';
+    additionalDirectorInfo7.style.display = 'block';
+    additionalDirectorInfo8.style.display = 'block';
+    
+    
+    
+    
+    
+    
+    
     
   }
 }
