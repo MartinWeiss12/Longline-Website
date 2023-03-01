@@ -79,13 +79,25 @@ def submit():
     interestRate = request.form.get('interestRate')
     apr = request.form.get('apr')
     agreeAPR = request.form.get('agreeAPR')
-    #intrestDropdown = request.form.get('intrestDropdown') uncomment when we unlock intrestDropdown
-    intrestDropdown = 'N/A'
-    #intrestPaymentDropdown = request.form.get('intrestPaymentDropdown') uncomment when we unlock intrestPaymentDropdown
-    intrestPaymentDropdown = 'On-Maturity'
+    #interestDropdown = request.form.get('interestDropdown') uncomment when we unlock interestDropdown
+    interestDropdown = 'N/A'
+    agreeInterest = request.form.get('agreeInterestOnly')
+    #interestPaymentDropdown = request.form.get('interestPaymentDropdown') uncomment when we unlock interestPaymentDropdown
+    interestPaymentDropdown = 'On-Maturity'
+    loanTerm = request.form.get('loanTerm')
+    agreeLoanTerm = request.form.get('agreeLoanTerm')
+    loanProceeds = request.form.get('loanProceeds')
+    agreeLoanProceeds = request.form.get('agreeLoanProceeds')
+    bankFees = request.form.get('bankFees')
+    agreeBankFees = request.form.get('agreeBankFees')
+    disbursedTotal = request.form.get('disbursedTotal')
+    agreeDisbursedTotal = request.form.get('agreeDisbursedTotal')
+    borrowerDropdown = request.form.get('borrowerDropdown')
+    individualPersonalGuarantorDropdown1 = request.form.get('individualPersonalGuarantorDropdown1')
+    
     
     data = {
-        'Loan Purpose' : loanPurpose,
+        'Loan Purpose': loanPurpose,
         'Loan Purpose (other)': otherLoanPurpose,
         'Loan Total': loanTotal,
         'Tranche Amount': trancheAmt,
@@ -103,8 +115,19 @@ def submit():
         'Interest Rate': interestRate,
         'APR': apr,
         'Agree APR': agreeAPR,
-        'Interest': intrestDropdown,
-        'Interest Payment': intrestPaymentDropdown
+        'Interest': interestDropdown,
+        'Agree Interest': agreeInterest,
+        'Interest Payment': interestPaymentDropdown,
+        'Loan Term': loanTerm,
+        'Agree Loan Term': agreeLoanTerm,
+        'Loan Proceeds': loanProceeds,
+        'Agree Loan Proceeds': agreeLoanProceeds,
+        'Bank Fees': bankFees,
+        'Agree Bank Fees': agreeBankFees,
+        'Disbursed Total': disbursedTotal,
+        'Agree Disbursed Total': agreeDisbursedTotal,
+        'Borrower is an': borrowerDropdown,
+        'Individual 1 Personal Guarantor': individualPersonalGuarantorDropdown1
     }
     
 #   fileName = last name + first name + date/loan number?

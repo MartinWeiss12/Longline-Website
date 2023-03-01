@@ -388,8 +388,8 @@ const htmlForAdditionalIndividual = `
   <div class="input-tab">
     <select id="individualPersonalGuarantorDropdown" name="individualPersonalGuarantorDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
-      <option value="individualPersonalGuarantorYes{{index}}">Yes</option>
-      <option value="individualPersonalGuarantorNo{{index}}">No</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
     </select>
   </div>
   
@@ -399,8 +399,8 @@ const htmlForAdditionalIndividual = `
   <div class="input-tab">
     <select id="individualCitizenDropdown" name="individualCitizenDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
-      <option value="individualCitizenYes{{index}}">Yes</option>
-      <option value="individualCitizenYes{{index}}">No</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
     </select>
   </div>
 
@@ -410,8 +410,8 @@ const htmlForAdditionalIndividual = `
   <div class="input-tab">
     <select id="individualSDResidentDropdown" name="individualSDResidentDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
-      <option value="individualSDResidentYes{{index}}">Yes</option>
-      <option value="individualSDResidentNo{{index}}">No</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
     </select>
   </div>
   
@@ -484,8 +484,8 @@ const htmlForAdditionalIndividual = `
   <div class="input-tab">
     <select id="individualOwnRentDropdown" name="individualOwnRentDropdown{{index}}" style="width: 262px;">
       <option disabled value selected>Select an option</option>
-      <option value="individualOwn{{index}}">Own</option>
-      <option value="individualRent{{index}}">Rent</option>
+      <option value="Own">Own</option>
+      <option value="Rent">Rent</option>
     </select>
   </div>
   
@@ -661,8 +661,8 @@ const htmlForAdditionalUbo = `
   <div class="input-tab">
     <select id="uboControlPersonAuthDropdown" name="uboControlPersonAuthDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
-      <option value="controlPersonAuthYes{{index}}">Yes</option>
-      <option value="controlPersonAuthNo{{index}}">No</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
     </select>
   </div>
 
@@ -672,8 +672,8 @@ const htmlForAdditionalUbo = `
   <div class="input-tab">
     <select id="uboPersonalGuarantorDropdown" name="uboPersonalGuarantorDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
-      <option value="uboPersonalGuarantorYes{{index}}">Yes</option>
-      <option value="uboPersonalGuarantorNo{{index}}">No</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
     </select>
   </div>
   
@@ -683,8 +683,8 @@ const htmlForAdditionalUbo = `
   <div class="input-tab">
     <select id="uboCitizenDropdown" name="uboCitizenDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
-      <option value="uboCitizenYes{{index}}">Yes</option>
-      <option value="uboCitizenNo{{index}}">No</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
     </select>
   </div>
 
@@ -694,8 +694,8 @@ const htmlForAdditionalUbo = `
   <div class="input-tab">
     <select id="uboSDResidentDropdown" name="uboSDResidentDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
-      <option value="uboSDResidentYes{{index}}">Yes</option>
-      <option value="uboSDResidentNo{{index}}">No</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
     </select>
   </div>
   
@@ -768,8 +768,8 @@ const htmlForAdditionalUbo = `
   <div class="input-tab">
     <select id="uboOwnRentDropdown" name="uboOwnRentDropdown{{index}}" style="width: 262px;">
       <option disabled value selected>Select an option</option>
-      <option value="uboOwn{{index}}">Own</option>
-      <option value="uboRent{{index}}">Rent</option>
+      <option value="Own">Own</option>
+      <option value="Rent">Rent</option>
     </select>
   </div>
   
@@ -945,8 +945,8 @@ const htmlForAdditionalUbo = `
   <div class="input-tab">
     <select id="directorControlPersonAuthDropdown" name="directorControlPersonAuthDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
-      <option value="controlPersonAuthYes{{index}}">Yes</option>
-      <option value="controlPersonAuthNo{{index}}">No</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
     </select>
   </div>
 
@@ -956,8 +956,8 @@ const htmlForAdditionalUbo = `
   <div class="input-tab">
     <select id="directorPersonalGuarantorDropdown" name="directorPersonalGuarantorDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
-      <option value="directorPersonalGuarantorYes{{index}}">Yes</option>
-      <option value="directorPersonalGuarantorNo{{index}}">No</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
     </select>
   </div>
   
@@ -967,8 +967,8 @@ const htmlForAdditionalUbo = `
   <div class="input-tab">
     <select id="directorCitizenDropdown" name="directorCitizenDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
-      <option value="directorCitizenYes{{index}}">Yes</option>
-      <option value="directorCitizenNo{{index}}">No</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
     </select>
   </div>
 
@@ -978,8 +978,8 @@ const htmlForAdditionalUbo = `
   <div class="input-tab">
     <select id="directorSDResidentDropdown" name="directorSDResidentDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
-      <option value="directorSDResidentDropdownYes{{index}}">Yes</option>
-      <option value="directorSDResidentDropdownNo{{index}}">No</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
     </select>
   </div>
   

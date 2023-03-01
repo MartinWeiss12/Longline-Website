@@ -145,7 +145,6 @@
         width: 150px;
       }      
       
-      
       #interestDropdownID {
         width: 100%;
         padding: 5px;
@@ -223,9 +222,6 @@
         width: 150px;
       }
       
-      
-      
-      
       #uboControlPersonAuthDropdown {
         width: 100%;
         padding: 5px;
@@ -280,9 +276,6 @@
         font-size: 15px;
         width: 150px;
       }
-      
-      
-      
       
       #directorControlPersonAuthDropdown {
         width: 100%;
@@ -421,6 +414,21 @@
         justify-content: center;
       }
       
+      #removeIndividualContainer {
+        display: flex;
+        justify-content: center;
+      }
+      
+      #removeUboContainer {
+        display: flex;
+        justify-content: center;
+      }
+      
+      #removeDirectorContainer {
+        display: flex;
+        justify-content: center;
+      }
+      
       button {
         background-color: #0000FF;
         margin: 0;
@@ -442,7 +450,6 @@
         font-size: 17px;
         margin: 20px;
       }
-      
       
       header {
         display: flex;
@@ -516,60 +523,7 @@
       textarea {
         resize: none;
       }
-      
-      
-      
-      
-      
-      
-      
-      input[type="file"] {
-        background-color: #0000FF;
-        margin: 0;
-        border-radius: 4px;
-        color: white;
-        font-size: 1em;
-        font-weight: bold;
-        font-family: inherit;
-        padding: 4px 8px;
-        border: 1px solid;
-        cursor: pointer;
-        display: inline-block;
-        text-align: center;
-        margin: 15px 0 0;
-      }
-      
-      input[type="file"]:hover {
-        background-color: #00008B;
-      }
-      
-      
-      
-      input::-webkit-file-upload-button{
-        background-color: #0000FF;
-        margin: 0;
-        border-radius: 4px;
-        color: white;
-        font-size: 1em;
-        font-weight: bold;
-        font-family: inherit;
-        padding: 4px 8px;
-        border: 1px solid;
-        cursor: pointer;
-/*      display: inline-block;*/
-/*      text-align: center;*/
-/*      margin: 15px 15px 15px 200px;*/
-      }
-      
 
-      
-      
-      
-      
-      
-      
-      
-      
     </style>    
   </head>
   <body>
@@ -600,53 +554,8 @@
       <div class="container" id="loanFormContainer">
         <form id="loanForm" method="POST" action="/submit" enctype="multipart/form-data">
           
-          
-          
-          
-          
-          
-          
-<!--      <div class="labels">-->
-<!--        <label id="bankAcctFileLabel" for="bankAcctFile">Bank Account Statement</label>-->
-<!--      </div>-->
-<!--      <div class="input-tab">-->
-<!--        <label for="bankAcctFile">-->
-<!--          <input id="bankAcctFile" type="file" name="bankAcctFile" required>-->
-<!--        </label>-->
-<!--      </div>-->
-          
-
-          
-
-          <div class="labels">
-            <label id="bankAcctFileLabel" for="bankAcctFile">Bank Account Statement</label>
-          </div>
-          <div class="input-tab">
-            <label for="bankAcctFile" class="fileUploadButton">Choose File
-              <input id="bankAcctFile" type="file" name="bankAcctFile" style="position:absolute; left:-999999px;" onchange="displayFileName('bankAcctFile', 'bankAcctFileNameSpan')" required>
-            </label>
-            <span id="bankAcctFileNameSpan">Uploaded File: None</span>
-          </div>
-          
-      
-          
-
-
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
           <br><br><h2 id="stepOneTitle">Step 1 - Loan Purpose</h2>
+          <br><h3 id="stepOneSubtitle">Select One or More of the Following</h3>
           <br>
           <div class="labels">
             <label></label></div>
@@ -660,8 +569,6 @@
             <input type="checkbox" name="loanPurpose" value="Other" onclick="otherLoanFunction(this); handleLoanPurposeCheckboxes(this)" required>Other<br>
             <p id="insertOtherLoan"></p>
           </div>
-          
-          
           
           <br><br><br><h2 id="stepTwoTitle">Step 2 - Loan Amount Requested</h2>
           <br>
@@ -689,7 +596,8 @@
             <input class="input-field" type="text" id="numTranches" name="numTranches" placeholder="Number of Tranches" required style="width: 150px;" onchange="updateLoanAmount()" pattern="[0-9]+" title="Please enter only numbers.">
           </div>
 
-          <br><br><br><h2 id="stepThreeTitle">Step 3 - Collateral Information</h2><br>
+          <br><br><br><h2 id="stepThreeTitle">Step 3 - Collateral Information</h2>
+          <br><h3 id="stepTwoSubtitle">Select One or More of the Following</h3><br>
           <div class="labels">
             <label></label></div>
           <div class="input-tab">
@@ -766,8 +674,7 @@
             
             <div class="input-tab" style="margin-left: 19px;">
               <input type="checkbox" name="agreeAPR" value="Agree" required>Agree
-            </div>   
-            
+            </div>
           </div>
           
           <div class="labels">
@@ -776,9 +683,9 @@
           <div class="input-tab">
             <select id="interestDropdownID" name="interestDropdown">
               <option disabled value selected>Select an option</option>
-              <option value="interestYes">Yes</option>
-              <option value="interestNo">No</option>
-              <option value="interestNA">N/A</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+              <option value="N/A">N/A</option>
             </select>
             <input type="hidden" id="interestDropdownInput" name="interestDropdown">
 
@@ -850,7 +757,7 @@
             <label for="borrowerDropdown">Borrower is an</label>
           </div>
           <div class="input-tab">
-            <select id="borrowerDropdown" name="borrowerDropdown" onchange="handleBorrowerSelect()" style="width: 250px;" readonly>
+            <select id="borrowerDropdown" name="borrowerDropdown" onchange="handleBorrowerSelect()" style="width: 250px;" required>
               <option disabled value selected>Select an option</option>
               <option value="individualBorrower">Individual</option>
               <option value="entityBorrower">Entity</option>
@@ -858,25 +765,69 @@
           </div>
           
           <div id="borrowerSpecificDetails"></div>
+          <div id="additionalIndividualInfo1"></div>
           <div id="additionalIndividualInfo"></div>
+          <div id="additionalIndividualInfo2"></div>
+          <div id="additionalIndividualInfo3"></div>
+          <div id="additionalIndividualInfo4"></div>
+          <div id="additionalIndividualInfo5"></div>
+          <div id="additionalIndividualInfo6"></div>
+          <div id="additionalIndividualInfo7"></div>
+          <div id="additionalIndividualInfo8"></div>
+          
           <div id="additionalUboInfo"></div>
+          <div id="additionalUboInfo1"></div>
+          <div id="additionalUboInfo2"></div>
+          <div id="additionalUboInfo3"></div>
+          <div id="additionalUboInfo4"></div>
+          <div id="additionalUboInfo5"></div>
+          <div id="additionalUboInfo6"></div>
+          <div id="additionalUboInfo7"></div>
+          <div id="additionalUboInfo8"></div>
+          
           <div id="additionalDirectorInfo"></div>
+          <div id="additionalDirectorInfo1"></div>
+          <div id="additionalDirectorInfo2"></div>
+          <div id="additionalDirectorInfo3"></div>
+          <div id="additionalDirectorInfo4"></div>
+          <div id="additionalDirectorInfo5"></div>
+          <div id="additionalDirectorInfo6"></div>
+          <div id="additionalDirectorInfo7"></div>
+          <div id="additionalDirectorInfo8"></div>
           
           <div class="addIndividualContainer">
             <div class="btn">
-              <button id="addIndividualButton1" type="button">Add another Individual</button>
+              <button id="addIndividualButton1" type="button">Add Individual</button>
             </div>
           </div>
           
           <div class="addUboContainer">
             <div class="btn">
-              <button id="addUboButton1" type="button">Add another UBO</button>
+              <button id="addUboButton1" type="button">Add UBO</button>
             </div>
           </div>
           
           <div class="addDirectorContainer">
             <div class="btn">
               <button id="addDirectorButton1" type="button">Add an Entity Director who is not a UBO</button>
+            </div>
+          </div>
+          
+          <div class="removeIndividualContainer">
+            <div class="btn">
+              <button id="removeIndividualButton1" type="button" disabled>Remove above Individual</button>
+            </div>
+          </div>
+          
+          <div class="removeUboContainer">
+            <div class="btn">
+              <button id="removeUboButton1" type="button" disabled>Remove above UBO</button>
+            </div>
+          </div>
+          
+          <div class="removeDirectorContainer">
+            <div class="btn">
+              <button id="removeDirectorButton1" type="button" disabled>Remove above Director</button>
             </div>
           </div>
           
@@ -924,7 +875,6 @@
           <div class="input-tab">
             <input class="input-field" type="text" id="accountNumber" name="accountNumber" placeholder="Account Number" required style="width: 250px;">
           </div>
-          
           
           <div class="labels">
             <label for="bankAccountTypeDropdown">Bank Account Type</label>
@@ -975,11 +925,10 @@
           </div>
           <div class="input-tab">
             <label for="bankAcctFile" class="fileUploadButton">Choose File
-              <input id="bankAcctFile" type="file" name="bankAcctFile" style="display:none" onchange="displayFileName('bankAcctFile', 'bankAcctFileNameSpan')" required>
+              <input id="bankAcctFile" type="file" name="bankAcctFile" style="position:absolute; left:-999999px;" onchange="displayFileName('bankAcctFile', 'bankAcctFileNameSpan')" required>
             </label>
             <span id="bankAcctFileNameSpan">Uploaded File: None</span>
           </div>
-          
           
           <br><br><br><h2 id="stepEightTitle">Step 8</h2><br>
           <h3 id="stepEightSubtitle">Borrower Certification</h3>
@@ -1023,7 +972,7 @@
           
           <div class="submitButtonContainer">
             <div class="btn">
-              <button id="submit" type="submit">Submit</button>
+              <button id="submit" type="submit" disabled>Submit</button>
             </div>
           </div>
           

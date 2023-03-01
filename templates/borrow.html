@@ -145,7 +145,6 @@
         width: 150px;
       }      
       
-      
       #interestDropdownID {
         width: 100%;
         padding: 5px;
@@ -223,9 +222,6 @@
         width: 150px;
       }
       
-      
-      
-      
       #uboControlPersonAuthDropdown {
         width: 100%;
         padding: 5px;
@@ -280,9 +276,6 @@
         font-size: 15px;
         width: 150px;
       }
-      
-      
-      
       
       #directorControlPersonAuthDropdown {
         width: 100%;
@@ -458,7 +451,6 @@
         margin: 20px;
       }
       
-      
       header {
         display: flex;
         justify-content: center;
@@ -563,6 +555,7 @@
         <form id="loanForm" method="POST" action="/submit" enctype="multipart/form-data">
           
           <br><br><h2 id="stepOneTitle">Step 1 - Loan Purpose</h2>
+          <br><h3 id="stepOneSubtitle">Select One or More of the Following</h3>
           <br>
           <div class="labels">
             <label></label></div>
@@ -576,8 +569,6 @@
             <input type="checkbox" name="loanPurpose" value="Other" onclick="otherLoanFunction(this); handleLoanPurposeCheckboxes(this)" required>Other<br>
             <p id="insertOtherLoan"></p>
           </div>
-          
-          
           
           <br><br><br><h2 id="stepTwoTitle">Step 2 - Loan Amount Requested</h2>
           <br>
@@ -605,7 +596,8 @@
             <input class="input-field" type="text" id="numTranches" name="numTranches" placeholder="Number of Tranches" required style="width: 150px;" onchange="updateLoanAmount()" pattern="[0-9]+" title="Please enter only numbers.">
           </div>
 
-          <br><br><br><h2 id="stepThreeTitle">Step 3 - Collateral Information</h2><br>
+          <br><br><br><h2 id="stepThreeTitle">Step 3 - Collateral Information</h2>
+          <br><h3 id="stepTwoSubtitle">Select One or More of the Following</h3><br>
           <div class="labels">
             <label></label></div>
           <div class="input-tab">
@@ -682,8 +674,7 @@
             
             <div class="input-tab" style="margin-left: 19px;">
               <input type="checkbox" name="agreeAPR" value="Agree" required>Agree
-            </div>   
-            
+            </div>
           </div>
           
           <div class="labels">
@@ -692,9 +683,9 @@
           <div class="input-tab">
             <select id="interestDropdownID" name="interestDropdown">
               <option disabled value selected>Select an option</option>
-              <option value="interestYes">Yes</option>
-              <option value="interestNo">No</option>
-              <option value="interestNA">N/A</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+              <option value="N/A">N/A</option>
             </select>
             <input type="hidden" id="interestDropdownInput" name="interestDropdown">
 
@@ -709,9 +700,9 @@
           <div class="input-tab">
             <select id="interestPaymentDropdownID" name="interestPaymentDropdown">
               <option disabled value selected>Select an option</option>
-              <option value="interestDueWeekly">Weekly</option>
-              <option value="interestDueMonthly">Monthly</option>
-              <option value="interestDueMat">On-Maturity</option>
+              <option value="Weekly">Weekly</option>
+              <option value="Monthly">Monthly</option>
+              <option value="On-Maturity">On-Maturity</option>
             </select>
             
             <div class="input-tab" style="margin-left: 63px;">
@@ -768,8 +759,8 @@
           <div class="input-tab">
             <select id="borrowerDropdown" name="borrowerDropdown" onchange="handleBorrowerSelect()" style="width: 250px;" required>
               <option disabled value selected>Select an option</option>
-              <option value="individualBorrower">Individual</option>
-              <option value="entityBorrower">Entity</option>
+              <option value="Individual">Individual</option>
+              <option value="Entity">Entity</option>
             </select>
           </div>
           
@@ -784,7 +775,6 @@
           <div id="additionalIndividualInfo7"></div>
           <div id="additionalIndividualInfo8"></div>
           
-          
           <div id="additionalUboInfo"></div>
           <div id="additionalUboInfo1"></div>
           <div id="additionalUboInfo2"></div>
@@ -794,7 +784,6 @@
           <div id="additionalUboInfo6"></div>
           <div id="additionalUboInfo7"></div>
           <div id="additionalUboInfo8"></div>
-          
           
           <div id="additionalDirectorInfo"></div>
           <div id="additionalDirectorInfo1"></div>
@@ -842,8 +831,6 @@
             </div>
           </div>
           
-
-          
           <br><br><br><h2 id="stepSevenTitle">Step 7</h2><br>
           <h3 id="stepSevenSubtitle">Bank Account Information</h3>
           
@@ -889,17 +876,16 @@
             <input class="input-field" type="text" id="accountNumber" name="accountNumber" placeholder="Account Number" required style="width: 250px;">
           </div>
           
-          
           <div class="labels">
             <label for="bankAccountTypeDropdown">Bank Account Type</label>
           </div>
           <div class="input-tab">
             <select id="bankAccountTypeDropdown" name="bankAccountTypeDropdown" onchange="otherBankAccountType()" required style="width: 262px;">
               <option disabled value selected>Select an option</option>
-              <option value="bankChecking">Checking</option>
-              <option value="bankSavings">Savings</option>
-              <option value="bankInvestment">Investment</option>
-              <option value="bankOther">Other</option>
+              <option value="Checking">Checking</option>
+              <option value="Savings">Savings</option>
+              <option value="Investment">Investment</option>
+              <option value="Other">Other</option>
             </select>
           </div>
           <div id="bankOtherInputContainer"></div>
@@ -944,7 +930,6 @@
             <span id="bankAcctFileNameSpan">Uploaded File: None</span>
           </div>
           
-          
           <br><br><br><h2 id="stepEightTitle">Step 8</h2><br>
           <h3 id="stepEightSubtitle">Borrower Certification</h3>
           
@@ -980,8 +965,8 @@
           <div class="input-tab">
             <select id="loanAssementDropdown" name="loanAssementDropdown" style="width: 250px;" required>
               <option disabled value selected>Select an option</option>
-              <option value="loanAssementYes">Yes</option>
-              <option value="loanAssementNo">No</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
             </select>
           </div>
           
