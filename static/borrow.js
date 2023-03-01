@@ -1415,7 +1415,7 @@ function handleBorrowerSelect() {
   var uboCount = 1;
   submitButton.disabled = true;
     
-  if (option.value == "individualBorrower") {   
+  if (option.value == "Individual") {   
     
     submitButton.disabled = true;
 
@@ -1479,7 +1479,7 @@ function handleBorrowerSelect() {
 
   }
   
-  if (option.value == "entityBorrower") {
+  if (option.value == "Entity") {
     
     submitButton.disabled = true;
     var directorCount = 1;
