@@ -223,12 +223,12 @@ document.getElementById('apr').value = '24%';
 
 //lock Interest Rate dropdown as N/A
 const interestDropdown = document.getElementById("interestDropdownID");
-interestDropdown.value = "interestNA";
+interestDropdown.value = "N/A";
 interestDropdown.disabled = true;
 
 // lock Interest Payment dropdown as On-Maturity
 const interestPaymentDropdown = document.getElementById("interestPaymentDropdownID");
-interestPaymentDropdown.value = "interestDueMat";
+interestPaymentDropdown.value = "On-Maturity";
 interestPaymentDropdown.disabled = true;
 
 // lock 6 months for Loan Term
