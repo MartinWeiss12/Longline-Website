@@ -659,7 +659,7 @@ const htmlForAdditionalUbo = `
     <label for="dropdown">Control Person Authorized to Apply for, Take, and Execute, Loan?</label>
   </div>
   <div class="input-tab">
-    <select id="uboControlPersonAuthDropdown" name="uboControlPersonAuthDropdown{{index}}" style="width: 262px;">
+    <select id="uboControlPersonAuthDropdown" name="uboControlPersonAuthDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
       <option value="controlPersonAuthYes{{index}}">Yes</option>
       <option value="controlPersonAuthNo{{index}}">No</option>
@@ -670,7 +670,7 @@ const htmlForAdditionalUbo = `
   <label for="dropdown">Personal Guarantor?</label>
   </div>
   <div class="input-tab">
-    <select id="uboPersonalGuarantorDropdown" name="uboPersonalGuarantorDropdown{{index}}" style="width: 262px;">
+    <select id="uboPersonalGuarantorDropdown" name="uboPersonalGuarantorDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
       <option value="uboPersonalGuarantorYes{{index}}">Yes</option>
       <option value="uboPersonalGuarantorNo{{index}}">No</option>
@@ -681,7 +681,7 @@ const htmlForAdditionalUbo = `
     <label for="dropdown">U.S. Citizen or Green Card?</label>
   </div>
   <div class="input-tab">
-    <select id="uboCitizenDropdown" name="uboCitizenDropdown{{index}}" style="width: 262px;">
+    <select id="uboCitizenDropdown" name="uboCitizenDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
       <option value="uboCitizenYes{{index}}">Yes</option>
       <option value="uboCitizenNo{{index}}">No</option>
@@ -692,7 +692,7 @@ const htmlForAdditionalUbo = `
     <label for="dropdown">South Dakota Resident?</label>
   </div>
   <div class="input-tab">
-    <select id="uboSDResidentDropdown" name="uboSDResidentDropdown{{index}}" style="width: 262px;">
+    <select id="uboSDResidentDropdown" name="uboSDResidentDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
       <option value="uboSDResidentYes{{index}}">Yes</option>
       <option value="uboSDResidentNo{{index}}">No</option>
@@ -703,7 +703,7 @@ const htmlForAdditionalUbo = `
     <label id="uboFirstName{{index}}" for="uboFirstName{{index}}">First Name(s)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="uboFirstName{{index}}" name="uboFirstName{{index}}" placeholder="First Name(s)" style="width: 250px;">
+    <input class="input-field" type="text" id="uboFirstName{{index}}" name="uboFirstName{{index}}" placeholder="First Name(s)" style="width: 250px;" required>
   </div>
   
   <div class="labels">
@@ -717,14 +717,14 @@ const htmlForAdditionalUbo = `
     <label id="uboLastName{{index}}" for="uboLastName{{index}}">Last Name(s)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="uboLastName{{index}}" name="lastName{{index}}" placeholder="Last Name(s)" style="width: 250px;">
+    <input class="input-field" type="text" id="uboLastName{{index}}" name="lastName{{index}}" placeholder="Last Name(s)" style="width: 250px;" required>
   </div>
   
   <div class="labels">
     <label id="uboHomeBankAddressLabel{{index}}" for="uboHomeBankAddress{{index}}">Home Address (must match recent bill)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="uboHomeBankAddress{{index}}" name="uboHomeBankAddress{{index}}" placeholder="Home Address" style="width: 250px;">
+    <input class="input-field" type="text" id="uboHomeBankAddress{{index}}" name="uboHomeBankAddress{{index}}" placeholder="Home Address" style="width: 250px;" required>
   </div>
   
   <div class="labels">
@@ -738,28 +738,28 @@ const htmlForAdditionalUbo = `
     <label id="uboHomeCityLabel{{index}}" for="uboHomeCity{{index}}">Home City</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="uboHomeCity{{index}}" name="uboHomeCity{{index}}" placeholder="Home City" style="width: 250px;">
+    <input class="input-field" type="text" id="uboHomeCity{{index}}" name="uboHomeCity{{index}}" placeholder="Home City" style="width: 250px;" required>
   </div>
   
   <div class="labels">
     <label id="uboHomeStateLabel{{index}}" for="uboHomeState{{index}}">Home State or Province</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="uboHomeState{{index}}" name="uboHomeState{{index}}" placeholder="Home State or Province" style="width: 250px;">
+    <input class="input-field" type="text" id="uboHomeState{{index}}" name="uboHomeState{{index}}" placeholder="Home State or Province" style="width: 250px;" required>
   </div>
   
   <div class="labels">
     <label id="uboHomeZipLabel{{index}}" for="uboHomeZip{{index}}">Home Zip or Province</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="uboHomeZip{{index}}" name="uboHomeZip{{index}}" placeholder="Home Zip" style="width: 250px;">
+    <input class="input-field" type="text" id="uboHomeZip{{index}}" name="uboHomeZip{{index}}" placeholder="Home Zip" style="width: 250px;" required>
   </div>
 
   <div class="labels">
     <label id="uboHomeCountryLabel{{index}}" for="uboHomeCountry{{index}}">Home Country</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="ubohomeCountry{{index}}" name="ubohomeCountry{{index}}" placeholder="Home Country" style="width: 250px;">
+    <input class="input-field" type="text" id="ubohomeCountry{{index}}" name="ubohomeCountry{{index}}" placeholder="Home Country" style="width: 250px;" required>
   </div>
   
   <div class="labels">
@@ -784,27 +784,27 @@ const htmlForAdditionalUbo = `
     <label id="uboPassportNumberLabel{{index}}" for="uboPassportNumber{{index}}">Passport Number</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="uboPassportNumber{{index}}" name="uboPassportNumber{{index}}" placeholder="Passport Number" style="width: 250px;">
+    <input class="input-field" type="text" id="uboPassportNumber{{index}}" name="uboPassportNumber{{index}}" placeholder="Passport Number" style="width: 250px;" required>
   </div>
   
   <div class="labels">
     <label id="uboSsnLabel{{index}}" for="uboSsn{{index}}">SSN or ID Number</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="uboSsn{{index}}" name="uboSsn{{index}}" placeholder="SSN or ID Number" style="width: 250px;">
+    <input class="input-field" type="text" id="uboSsn{{index}}" name="uboSsn{{index}}" placeholder="SSN or ID Number" style="width: 250px;" required>
   </div>
   
   <div class="labels">
     <label id="uboDobLabel{{index}}" for="uboDob{{index}}">Date of Birth</label>
   </div>
   <div class="input-tab">
-    <input type="date" id="uboDob{{index}}" name="uboDob{{index}}" style="width: 250px;">
+    <input type="date" id="uboDob{{index}}" name="uboDob{{index}}" style="width: 250px;" required>
   </div>
   
   <div class="labels">
     <label id="uboEmailLabel{{index}}" for="uboEmail{{index}}">Email Address</label></div>
   <div class="input-tab">
-    <input class="input-field" type="email" id="uboEmail{{index}}" name="uboEmail{{index}}" placeholder="email@email.com" style="width: 250px;">
+    <input class="input-field" type="email" id="uboEmail{{index}}" name="uboEmail{{index}}" placeholder="email@email.com" style="width: 250px;" required>
   </div>
   
   <div class="labels">
@@ -836,7 +836,7 @@ const htmlForAdditionalUbo = `
     <label></label>
   </div>
   <div class="input-tab">
-    <label><input type="radio" name="uboPep{{index}}" value="uboYesPep{{index}}" style="margin-left: 50px;">Yes</label>
+    <label><input type="radio" name="uboPep{{index}}" value="uboYesPep{{index}}" style="margin-left: 50px;" required>Yes</label>
     <label><input type="radio" name="uboPep{{index}}" value="uboNoPep{{index}}">No</label>
   </div>
   
@@ -848,19 +848,19 @@ const htmlForAdditionalUbo = `
     <label></label>
   </div>
   <div class="input-tab">
-    <label><input type="radio" name="uboCrime{{index}}" value="uboYesCrime{{index}}" style="margin-left: 50px;">Yes</label>
+    <label><input type="radio" name="uboCrime{{index}}" value="uboYesCrime{{index}}" style="margin-left: 50px;" required>Yes</label>
     <label><input type="radio" name="uboCrime{{index}}" value="uboNoCrime{{index}}">No</label>
   </div>
   
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
-    I declare that the above information is true and correct. I am aware that I may be  subject to prosecution and criminal sanction under written law if I am found to have  made any false statement which I know to be false or which I do not believe to be true,  or if I have intentionally suppressed any material fact. 
+    I declare that the above information is true and correct. I am aware that I may be  subject to prosecution and criminal sanction under written law if I am found to have  made any false statement which I know to be false or which I do not believe to be true,  or if I have intentionally suppressed any material fact.
   </div><br>
   
   <div class="labels">
     <label></label>
   </div>
   <div class="input-tab" style="margin-left: 20px;">
-    <input type="checkbox" name="uboDeclareCheckbox{{index}}" value="uboDeclareCheckbox{{index}}">I declare that the above information is true and correct.<br>
+    <input type="checkbox" name="uboDeclareCheckbox{{index}}" value="uboDeclareCheckbox{{index}}" required>I declare that the above information is true and correct.<br>
   </div>
 
   <div class="labels">
@@ -868,7 +868,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="uboPassportFile{{index}}" class="fileUploadButton">Choose File
-      <input id="uboPassportFile{{index}}" type="file" name="uboPassportFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboPassportFile{{index}}', 'uboPassportFileNameSpan{{index}}')">
+      <input id="uboPassportFile{{index}}" type="file" name="uboPassportFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboPassportFile{{index}}', 'uboPassportFileNameSpan{{index}}')" required>
     </label>
     <span id="uboPassportFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -878,7 +878,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="uboDniFrontFile{{index}}" class="fileUploadButton">Choose File
-      <input id="uboDniFrontFile{{index}}" type="file" name="uboDniFrontFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboDniFrontFile{{index}}', 'uboDniFrontFileNameSpan{{index}}')">
+      <input id="uboDniFrontFile{{index}}" type="file" name="uboDniFrontFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboDniFrontFile{{index}}', 'uboDniFrontFileNameSpan{{index}}')" required>
     </label>
     <span id="uboDniFrontFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -888,7 +888,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="uboDniReverseFile{{index}}" class="fileUploadButton">Choose File
-      <input id="uboDniReverseFile{{index}}" type="file" name="uboDniReverseFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboDniReverseFile{{index}}', 'uboDniReverseFileNameSpan{{index}}')">
+      <input id="uboDniReverseFile{{index}}" type="file" name="uboDniReverseFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboDniReverseFile{{index}}', 'uboDniReverseFileNameSpan{{index}}')" required>
     </label>
     <span id="uboDniReverseFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -898,7 +898,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="uboBillAddressProofFile{{index}}" class="fileUploadButton">Choose File
-      <input id="uboBillAddressProofFile{{index}}" type="file" name="uboBillAddressProofFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboBillAddressProofFile{{index}}', 'uboBillAddressProofFileNameSpan{{index}}')">
+      <input id="uboBillAddressProofFile{{index}}" type="file" name="uboBillAddressProofFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboBillAddressProofFile{{index}}', 'uboBillAddressProofFileNameSpan{{index}}')" required>
     </label>
     <span id="uboBillAddressProofFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -908,7 +908,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="uboCreditCheckFile{{index}}" class="fileUploadButton">Choose File
-      <input id="uboCreditCheckFile{{index}}" type="file" name="uboCreditCheckFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboCreditCheckFile{{index}}', 'uboCreditCheckFileNameSpan{{index}}')">
+      <input id="uboCreditCheckFile{{index}}" type="file" name="uboCreditCheckFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboCreditCheckFile{{index}}', 'uboCreditCheckFileNameSpan{{index}}')" required>
     </label>
     <span id="uboCreditCheckFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -918,7 +918,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="uboWorldCheckFile{{index}}" class="fileUploadButton">Choose File
-      <input id="uboWorldCheckFile{{index}}" type="file" name="uboWorldCheckFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboWorldCheckFile{{index}}', 'uboWorldCheckFileNameSpan{{index}}')">
+      <input id="uboWorldCheckFile{{index}}" type="file" name="uboWorldCheckFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboWorldCheckFile{{index}}', 'uboWorldCheckFileNameSpan{{index}}')" required>
     </label>
     <span id="uboWorldCheckFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -928,7 +928,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="uboOfacFile{{index}}" class="fileUploadButton">Choose File
-      <input id="uboOfacFile{{index}}" type="file" name="uboOfacFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboOfacFile{{index}}', 'uboOfacFileNameSpan{{index}}')">
+      <input id="uboOfacFile{{index}}" type="file" name="uboOfacFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('uboOfacFile{{index}}', 'uboOfacFileNameSpan{{index}}')" required>
     </label>
     <span id="uboOfacFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -943,7 +943,7 @@ const htmlForAdditionalUbo = `
     <label for="directorControlPersonAuthDropdown">Control Person Authorized to Apply for, Take, and Execute, Loan?</label>
   </div>
   <div class="input-tab">
-    <select id="directorControlPersonAuthDropdown" name="directorControlPersonAuthDropdown{{index}}" style="width: 262px;">
+    <select id="directorControlPersonAuthDropdown" name="directorControlPersonAuthDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
       <option value="controlPersonAuthYes{{index}}">Yes</option>
       <option value="controlPersonAuthNo{{index}}">No</option>
@@ -954,7 +954,7 @@ const htmlForAdditionalUbo = `
   <label for="directorPersonalGuarantorDropdown">Personal Guarantor?</label>
   </div>
   <div class="input-tab">
-    <select id="directorPersonalGuarantorDropdown" name="directorPersonalGuarantorDropdown{{index}}" style="width: 262px;">
+    <select id="directorPersonalGuarantorDropdown" name="directorPersonalGuarantorDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
       <option value="directorPersonalGuarantorYes{{index}}">Yes</option>
       <option value="directorPersonalGuarantorNo{{index}}">No</option>
@@ -965,7 +965,7 @@ const htmlForAdditionalUbo = `
     <label for="directorCitizenDropdown">U.S. Citizen or Green Card?</label>
   </div>
   <div class="input-tab">
-    <select id="directorCitizenDropdown" name="directorCitizenDropdown{{index}}" style="width: 262px;">
+    <select id="directorCitizenDropdown" name="directorCitizenDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
       <option value="directorCitizenYes{{index}}">Yes</option>
       <option value="directorCitizenNo{{index}}">No</option>
@@ -976,7 +976,7 @@ const htmlForAdditionalUbo = `
     <label for="directorSDResidentDropdown">South Dakota Resident?</label>
   </div>
   <div class="input-tab">
-    <select id="directorSDResidentDropdown" name="directorSDResidentDropdown{{index}}" style="width: 262px;">
+    <select id="directorSDResidentDropdown" name="directorSDResidentDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
       <option value="directorSDResidentDropdownYes{{index}}">Yes</option>
       <option value="directorSDResidentDropdownNo{{index}}">No</option>
@@ -987,7 +987,7 @@ const htmlForAdditionalUbo = `
     <label id="directorFirstName{{index}}" for="directorFirstName{{index}}">First Name(s)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="directorFirstName{{index}}" name="directorFirstName{{index}}" placeholder="First Name(s)" style="width: 250px;">
+    <input class="input-field" type="text" id="directorFirstName{{index}}" name="directorFirstName{{index}}" placeholder="First Name(s)" style="width: 250px;" required>
   </div>
   
   <div class="labels">
@@ -1001,35 +1001,35 @@ const htmlForAdditionalUbo = `
     <label id="directorLastName{{index}}" for="directorLastName{{index}}">Last Name(s)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="directorLastName{{index}}" name="lastName{{index}}" placeholder="Last Name(s)" style="width: 250px;">
+    <input class="input-field" type="text" id="directorLastName{{index}}" name="lastName{{index}}" placeholder="Last Name(s)" style="width: 250px;" required>
   </div>
   
   <div class="labels">
     <label id="directorHomeBankAddressLabel{{index}}" for="directorHomeBankAddress{{index}}">Home Address (must match recent bill)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="directorHomeBankAddress{{index}}" name="directorHomeBankAddress{{index}}" placeholder="Home Address" style="width: 250px;">
+    <input class="input-field" type="text" id="directorHomeBankAddress{{index}}" name="directorHomeBankAddress{{index}}" placeholder="Home Address" style="width: 250px;" required>
   </div>
   
   <div class="labels">
     <label id="directorHomeStreetAddressLabel{{index}}" for="directorHomeStreetAddress{{index}}">Home Street Address</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="directorHomeStreetAddress{{index}}" name="directorHomeStreetAddress{{index}}" placeholder="Home Street Address" style="width: 250px;">
+    <input class="input-field" type="text" id="directorHomeStreetAddress{{index}}" name="directorHomeStreetAddress{{index}}" placeholder="Home Street Address" style="width: 250px;" required>
   </div>
   
   <div class="labels">
     <label id="directorHomeCityLabel{{index}}" for="directorHomeCity{{index}}">Home City</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="directorHomeCity{{index}}" name="directorHomeCity{{index}}" placeholder="Home City" style="width: 250px;">
+    <input class="input-field" type="text" id="directorHomeCity{{index}}" name="directorHomeCity{{index}}" placeholder="Home City" style="width: 250px;" required>
   </div>
   
   <div class="labels">
     <label id="directorHomeStateLabel{{index}}" for="directorHomeState{{index}}">Home State or Province</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="directorHomeState{{index}}" name="directorHomeState{{index}}" placeholder="Home State or Province" style="width: 250px;">
+    <input class="input-field" type="text" id="directorHomeState{{index}}" name="directorHomeState{{index}}" placeholder="Home State or Province" style="width: 250px;" required>
   </div>
   
   <div class="labels">
@@ -1043,7 +1043,7 @@ const htmlForAdditionalUbo = `
     <label id="directorHomeCountryLabel{{index}}" for="directorHomeCountry{{index}}">Home Country</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="directorhomeCountry{{index}}" name="directorhomeCountry{{index}}" placeholder="Home Country" style="width: 250px;">
+    <input class="input-field" type="text" id="directorhomeCountry{{index}}" name="directorhomeCountry{{index}}" placeholder="Home Country" style="width: 250px;" required>
   </div>
   
   <div class="labels">
@@ -1068,34 +1068,34 @@ const htmlForAdditionalUbo = `
     <label id="directorPassportNumberLabel{{index}}" for="directorPassportNumber{{index}}">Passport Number</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="directorPassportNumber{{index}}" name="directorPassportNumber{{index}}" placeholder="Passport Number" style="width: 250px;">
+    <input class="input-field" type="text" id="directorPassportNumber{{index}}" name="directorPassportNumber{{index}}" placeholder="Passport Number" style="width: 250px;" required>
   </div>
   
   <div class="labels">
     <label id="directorSsnLabel{{index}}" for="directorSsn{{index}}">SSN or ID Number</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="directorSsn{{index}}" name="directorSsn{{index}}" placeholder="SSN or ID Number" style="width: 250px;">
+    <input class="input-field" type="text" id="directorSsn{{index}}" name="directorSsn{{index}}" placeholder="SSN or ID Number" style="width: 250px;" required>
   </div>
   
   <div class="labels">
     <label id="directorDobLabel{{index}}" for="directorDob{{index}}">Date of Birth</label>
   </div>
   <div class="input-tab">
-    <input type="date" id="directorDob{{index}}" name="directorDob{{index}}" style="width: 250px;">
+    <input type="date" id="directorDob{{index}}" name="directorDob{{index}}" style="width: 250px;" required>
   </div>
   
   <div class="labels">
     <label id="directorEmailLabel{{index}}" for="directorEmail{{index}}">Email Address</label></div>
   <div class="input-tab">
-    <input class="input-field" type="email" id="directorEmail{{index}}" name="directorEmail{{index}}" placeholder="email@email.com" style="width: 250px;">
+    <input class="input-field" type="email" id="directorEmail{{index}}" name="directorEmail{{index}}" placeholder="email@email.com" style="width: 250px;" required>
   </div>
   
   <div class="labels">
     <label id="directorPhoneLabel{{index}}" for="directorPhone{{index}}">Telephone</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="directorPhone{{index}}" name="directorPhone{{index}}" placeholder="Telephone" style="width: 250px;">
+    <input class="input-field" type="text" id="directorPhone{{index}}" name="directorPhone{{index}}" placeholder="Telephone" style="width: 250px;" required>
   </div>
   
   <div class="labels">
@@ -1120,7 +1120,7 @@ const htmlForAdditionalUbo = `
     <label></label>
   </div>
   <div class="input-tab">
-    <label><input type="radio" name="directorPep{{index}}" value="directorYesPep{{index}}" style="margin-left: 50px;">Yes</label>
+    <label><input type="radio" name="directorPep{{index}}" value="directorYesPep{{index}}" style="margin-left: 50px;" required>Yes</label>
     <label><input type="radio" name="directorPep{{index}}" value="directorNoPep{{index}}">No</label>
   </div>
   
@@ -1132,7 +1132,7 @@ const htmlForAdditionalUbo = `
     <label></label>
   </div>
   <div class="input-tab">
-    <label><input type="radio" name="directorCrime{{index}}" value="directorYesCrime{{index}}" style="margin-left: 50px;">Yes</label>
+    <label><input type="radio" name="directorCrime{{index}}" value="directorYesCrime{{index}}" style="margin-left: 50px;" required>Yes</label>
     <label><input type="radio" name="directorCrime{{index}}" value="directorNoCrime{{index}}">No</label>
   </div>
   
@@ -1144,7 +1144,7 @@ const htmlForAdditionalUbo = `
     <label></label>
   </div>
   <div class="input-tab" style="margin-left: 20px;">
-    <input type="checkbox" name="directorDeclareCheckbox{{index}}" value="directorDeclareCheckbox{{index}}">I declare that the above information is true and correct.<br>
+    <input type="checkbox" name="directorDeclareCheckbox{{index}}" value="directorDeclareCheckbox{{index}}" required>I declare that the above information is true and correct.<br>
   </div>
 
   <div class="labels">
@@ -1152,7 +1152,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="directorPassportFile{{index}}" class="fileUploadButton">Choose File
-      <input id="directorPassportFile{{index}}" type="file" name="directorPassportFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorPassportFile{{index}}', 'directorPassportFileNameSpan{{index}}')">
+      <input id="directorPassportFile{{index}}" type="file" name="directorPassportFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorPassportFile{{index}}', 'directorPassportFileNameSpan{{index}}')" required>
     </label>
     <span id="directorPassportFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -1162,7 +1162,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="directorDniFrontFile{{index}}" class="fileUploadButton">Choose File
-      <input id="directorDniFrontFile{{index}}" type="file" name="directorDniFrontFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorDniFrontFile{{index}}', 'directorDniFrontFileNameSpan{{index}}')">
+      <input id="directorDniFrontFile{{index}}" type="file" name="directorDniFrontFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorDniFrontFile{{index}}', 'directorDniFrontFileNameSpan{{index}}')" required>
     </label>
     <span id="directorDniFrontFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -1172,7 +1172,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="directorDniReverseFile{{index}}" class="fileUploadButton">Choose File
-      <input id="directorDniReverseFile{{index}}" type="file" name="directorDniReverseFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorDniReverseFile{{index}}', 'directorDniReverseFileNameSpan{{index}}')">
+      <input id="directorDniReverseFile{{index}}" type="file" name="directorDniReverseFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorDniReverseFile{{index}}', 'directorDniReverseFileNameSpan{{index}}')" required>
     </label>
     <span id="directorDniReverseFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -1182,7 +1182,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="directorBillAddressProofFile{{index}}" class="fileUploadButton">Choose File
-      <input id="directorBillAddressProofFile{{index}}" type="file" name="directorBillAddressProofFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorBillAddressProofFile{{index}}', 'directorBillAddressProofFileNameSpan{{index}}')">
+      <input id="directorBillAddressProofFile{{index}}" type="file" name="directorBillAddressProofFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorBillAddressProofFile{{index}}', 'directorBillAddressProofFileNameSpan{{index}}')" required>
     </label>
     <span id="directorBillAddressProofFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -1192,7 +1192,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="directorCreditCheckFile{{index}}" class="fileUploadButton">Choose File
-      <input id="directorCreditCheckFile{{index}}" type="file" name="directorCreditCheckFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorCreditCheckFile{{index}}', 'directorCreditCheckFileNameSpan{{index}}')">
+      <input id="directorCreditCheckFile{{index}}" type="file" name="directorCreditCheckFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorCreditCheckFile{{index}}', 'directorCreditCheckFileNameSpan{{index}}')" required>
     </label>
     <span id="directorCreditCheckFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -1202,7 +1202,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="directorWorldCheckFile{{index}}" class="fileUploadButton">Choose File
-      <input id="directorWorldCheckFile{{index}}" type="file" name="directorWorldCheckFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorWorldCheckFile{{index}}', 'directorWorldCheckFileNameSpan{{index}}')">
+      <input id="directorWorldCheckFile{{index}}" type="file" name="directorWorldCheckFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorWorldCheckFile{{index}}', 'directorWorldCheckFileNameSpan{{index}}')" required>
     </label>
     <span id="directorWorldCheckFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
@@ -1212,7 +1212,7 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <label for="directorOfacFile{{index}}" class="fileUploadButton">Choose File
-      <input id="directorOfacFile{{index}}" type="file" name="directorOfacFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorOfacFile{{index}}', 'directorOfacFileNameSpan{{index}}')">
+      <input id="directorOfacFile{{index}}" type="file" name="directorOfacFile{{index}}" style="position:absolute; left:-999999px;" onchange="displayFileName('directorOfacFile{{index}}', 'directorOfacFileNameSpan{{index}}')" required>
     </label>
     <span id="directorOfacFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
