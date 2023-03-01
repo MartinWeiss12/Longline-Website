@@ -94,6 +94,13 @@ def submit():
     agreeDisbursedTotal = request.form.get('agreeDisbursedTotal')
     borrowerDropdown = request.form.get('borrowerDropdown')
     individualPersonalGuarantorDropdown1 = request.form.get('individualPersonalGuarantorDropdown1')
+    individualCitizenDropdown1 = request.form.get('individualCitizenDropdown1')
+    individualSDResidentDropdown1 = request.form.get('individualSDResidentDropdown1')
+    individualFirstName1 = request.form.get('individualFirstName1')
+    individualMiddleName1 = request.form.get('individualMiddleName1')
+    individualLastName1 = request.form.get('individualLastName1')
+    individualHomeBankAddress1 = request.form.get('individualHomeBankAddress1')
+    individualHomeStreetAddress1 = request.form.get('individualHomeStreetAddress1')
     
     
     data = {
@@ -127,7 +134,14 @@ def submit():
         'Disbursed Total': disbursedTotal,
         'Agree Disbursed Total': agreeDisbursedTotal,
         'Borrower is an': borrowerDropdown,
-        'Individual 1 Personal Guarantor': individualPersonalGuarantorDropdown1
+        'Individual 1 Personal Guarantor': individualPersonalGuarantorDropdown1,
+        'Individual 1 Citizen': individualCitizenDropdown1,
+        'Individual 1 South Dakota Resident': individualSDResidentDropdown1,
+        'Individual 1 First Name': individualFirstName1,
+        'Individual 1 Middle Name': individualMiddleName1,
+        'Individual 1 Last Name': individualLastName1,
+        'Individual 1 Home Address': individualHomeBankAddress1,
+        'Individual 1 Home Street Address': individualHomeStreetAddress1,
     }
     
 #   fileName = last name + first name + date/loan number?
