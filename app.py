@@ -5,6 +5,8 @@ import boto3
 import datetime
 from flask import Flask, render_template, request, jsonify, session, redirect
 from flask_session import Session
+from werkzeug.utils import secure_filename
+
 
 app = Flask(__name__, template_folder='templates')
 app.config ['SECRET_KEY'] = 'longline'
@@ -198,20 +200,26 @@ def submit():
         'Individual 1 Declare': individualDeclareCheckbox1,
     }
     
-    jsonName = individualLastName1 + individualFirstName1 + 'Data.json' 
     folderForData = individualLastName1 + individualFirstName1 + 'Data'
     os.mkdir(folderForData)
     
     folderForFiles = os.path.join(folderForData, individualLastName1 + individualFirstName1 + 'Files')
     os.mkdir(folderForFiles)
     
-#   individualPassportFile1FileName = individualFirstName1 + individualLastName1 + 'passportFile'
-    individualPassportFile1.save(f'{folderForFiles}/{individualPassportFile1.filename}')
-#   os.rename(f'{folderName}/{individualPassportFile1.filename}', f'{folderName}/{individualPassportFile1FileName}')
+    # Get the filename and extension of the uploaded file
+    individualPassportFile1FileName = secure_filename(individualPassportFile1.filename)
+    individualPassportFile1FileNameExt = os.path.splitext(individualPassportFile1FileName)[1]
+    
+    # Generate the new filename and path
+    renamedIndividualPassportFile1 = individualLastName1 + individualFirstName1 + 'PassportFile' + individualPassportFile1FileNameExt
+    repathedIndividualPassportFile1 = os.path.join(folderForFiles, renamedIndividualPassportFile1)
+    
+    # Save the uploaded file with the new filename and path
+    individualPassportFile1.save(repathedIndividualPassportFile1)
     
     
     
-    # Create a JSON file with some data
+    jsonName = individualLastName1 + individualFirstName1 + 'Data.json' 
     with open(f'{folderForData}/{jsonName}', 'w') as f:
         json.dump(data, f)
     
