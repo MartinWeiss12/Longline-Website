@@ -479,7 +479,7 @@ const htmlForAdditionalIndividual = `
   </div>
   
   <div class="labels">
-    <label for="dropdown">Own or Rent?</label>
+    <label for="individualOwnRentDropdown">Own or Rent?</label>
   </div>
   <div class="input-tab">
     <select id="individualOwnRentDropdown" name="individualOwnRentDropdown{{index}}" style="width: 262px;">
@@ -579,6 +579,8 @@ const htmlForAdditionalIndividual = `
     <input type="checkbox" name="individualDeclareCheckbox{{index}}" value="Yes" required>I declare that the above information is true and correct.<br>
   </div>
 
+  <br><br><h3>Upload a PDF or Image for Each of the Following</h3>
+
   <div class="labels">
     <label id="individualPassportFileLabel{{index}}" for="individualPassportFile{{index}}">Passport</label>
   </div>
@@ -656,7 +658,7 @@ const htmlForAdditionalUbo = `
   <br><br><h3 id="uboInfoSubtitle{{index}}">Info for UBO {{index}}</h3>
   
   <div class="labels">
-    <label for="dropdown">Control Person Authorized to Apply for, Take, and Execute, Loan?</label>
+    <label for="uboControlPersonAuthDropdown">Control Person Authorized to Apply for, Take, and Execute, Loan?</label>
   </div>
   <div class="input-tab">
     <select id="uboControlPersonAuthDropdown" name="uboControlPersonAuthDropdown{{index}}" style="width: 262px;" required>
@@ -667,7 +669,7 @@ const htmlForAdditionalUbo = `
   </div>
 
   <div class="labels">
-  <label for="dropdown">Personal Guarantor?</label>
+  <label for="uboPersonalGuarantorDropdown">Personal Guarantor?</label>
   </div>
   <div class="input-tab">
     <select id="uboPersonalGuarantorDropdown" name="uboPersonalGuarantorDropdown{{index}}" style="width: 262px;" required>
@@ -678,7 +680,7 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label for="dropdown">U.S. Citizen or Green Card?</label>
+    <label for="uboCitizenDropdown">U.S. Citizen or Green Card?</label>
   </div>
   <div class="input-tab">
     <select id="uboCitizenDropdown" name="uboCitizenDropdown{{index}}" style="width: 262px;" required>
@@ -689,7 +691,7 @@ const htmlForAdditionalUbo = `
   </div>
 
   <div class="labels">
-    <label for="dropdown">South Dakota Resident?</label>
+    <label for="uboSDResidentDropdown">South Dakota Resident?</label>
   </div>
   <div class="input-tab">
     <select id="uboSDResidentDropdown" name="uboSDResidentDropdown{{index}}" style="width: 262px;" required>
@@ -763,7 +765,7 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label for="dropdown">Own or Rent?</label>
+    <label for="uboOwnRentDropdown">Own or Rent?</label>
   </div>
   <div class="input-tab">
     <select id="uboOwnRentDropdown" name="uboOwnRentDropdown{{index}}" style="width: 262px;">
@@ -862,6 +864,8 @@ const htmlForAdditionalUbo = `
   <div class="input-tab" style="margin-left: 20px;">
     <input type="checkbox" name="uboDeclareCheckbox{{index}}" value="uboDeclareCheckbox{{index}}" required>I declare that the above information is true and correct.<br>
   </div>
+
+  <br><br><h3>Upload a PDF or Image for Each of the Following</h3>
 
   <div class="labels">
     <label id="uboPassportFileLabel{{index}}" for="uboPassportFile{{index}}">Passport</label>
@@ -998,10 +1002,10 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="directorLastName{{index}}" for="directorLastName{{index}}">Last Name(s)</label>
+    <label id="directorLastNameLabel{{index}}" for="directorLastName{{index}}">Last Name(s)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="directorLastName{{index}}" name="lastName{{index}}" placeholder="Last Name(s)" style="width: 250px;" required>
+    <input class="input-field" type="text" id="directorLastName{{index}}" name="directorLastName{{index}}" placeholder="Last Name(s)" style="width: 250px;" required>
   </div>
   
   <div class="labels">
@@ -1047,7 +1051,7 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label for="dropdown">Own or Rent?</label>
+    <label for="directorOwnRentDropdown">Own or Rent?</label>
   </div>
   <div class="input-tab">
     <select id="directorOwnRentDropdown" name="directorOwnRentDropdown{{index}}" style="width: 262px;">
@@ -1146,6 +1150,8 @@ const htmlForAdditionalUbo = `
   <div class="input-tab" style="margin-left: 20px;">
     <input type="checkbox" name="directorDeclareCheckbox{{index}}" value="directorDeclareCheckbox{{index}}" required>I declare that the above information is true and correct.<br>
   </div>
+  
+  <br><br><h3>Upload a PDF or Image for Each of the Following</h3>
 
   <div class="labels">
     <label id="directorPassportFileLabel{{index}}" for="directorPassportFile{{index}}">Passport</label>
@@ -1279,6 +1285,7 @@ function addIndividualEventListeners() {
 
 function addUboEventListeners() {
   uboCount = 1;
+  
   for (let i = 1; i <= 8; i++) {
     const addUboButton = document.getElementById(`addUboButton${i}`);
     addUboButton.addEventListener('click', function() {
@@ -1337,6 +1344,7 @@ function addUboEventListeners() {
 
 function addDirectorEventListeners() {
   directorCount = 1;
+  
   for (let i = 1; i <= 8; i++) {
     const addDirectorButton = document.getElementById(`addDirectorButton${i}`);
     addDirectorButton.addEventListener('click', function() {
@@ -1417,7 +1425,15 @@ function handleBorrowerSelect() {
   if (option.value == "Individual") {   
     
     submitButton.disabled = true;
-
+    
+    
+//  if (individualCount === 1) {
+//    removeIndividualButton.style.display = "none";
+//  } else {
+//    removeIndividualButton.style.display = "block"; // show the button
+//    removeIndividualButton.style.margin = "0 auto";
+//  }
+  
     document.getElementById("borrowerSpecificDetails").innerHTML = "";
     document.getElementById("additionalUboInfo1").innerHTML = "";
     document.getElementById("additionalUboInfo2").innerHTML = "";
