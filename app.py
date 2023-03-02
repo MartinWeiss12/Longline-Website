@@ -3,9 +3,11 @@ import os
 import json
 import boto3
 import datetime
-from flask import Flask, render_template, request, jsonify, session, redirect
+from flask import Flask, render_template, request, jsonify, session, redirect, make_response
 from flask_session import Session
 from werkzeug.utils import secure_filename
+from io import BytesIO
+import pdfkit
 
 
 app = Flask(__name__, template_folder='templates')
@@ -21,6 +23,19 @@ flaskBackendPin = '1234'
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+#@app.route('/')
+#def downloadIndexPDF():
+#   name = "Giovanni Smith"
+#   html = render_template(
+#       "about.html",
+#       name=name)
+#   pdf = pdfkit.from_string(html, False)
+#   response = make_response(pdf)
+#   response.headers["Content-Type"] = "application/pdf"
+#   response.headers["Content-Disposition"] = "inline; filename=output.pdf"
+#   return response
 
 @app.route('/about', methods=['GET', 'POST'])
 def about():
@@ -140,7 +155,6 @@ def submit():
     individualPep1 = request.form.get('individualPep1')
     individualCrime1 = request.form.get('individualCrime1')
     individualDeclareCheckbox1 = request.form.get('individualDeclareCheckbox1')
-    individualPassportFile1 = request.files['individualPassportFile1']
     
     data = {
         'Loan Purpose': loanPurpose,
@@ -206,24 +220,57 @@ def submit():
     folderForFiles = os.path.join(folderForData, individualLastName1 + individualFirstName1 + 'Files')
     os.mkdir(folderForFiles)
     
-    # Get the filename and extension of the uploaded file
+    individualPassportFile1 = request.files['individualPassportFile1']
     individualPassportFile1FileName = secure_filename(individualPassportFile1.filename)
     individualPassportFile1FileNameExt = os.path.splitext(individualPassportFile1FileName)[1]
-    
-    # Generate the new filename and path
     renamedIndividualPassportFile1 = individualLastName1 + individualFirstName1 + 'PassportFile' + individualPassportFile1FileNameExt
     repathedIndividualPassportFile1 = os.path.join(folderForFiles, renamedIndividualPassportFile1)
-    
-    # Save the uploaded file with the new filename and path
     individualPassportFile1.save(repathedIndividualPassportFile1)
     
+    individualDniFrontFile1 = request.files['individualDniFrontFile1']
+    individualDniFrontFile1FileName = secure_filename(individualDniFrontFile1.filename)
+    individualDniFrontFile1FileNameExt = os.path.splitext(individualDniFrontFile1FileName)[1]
+    renamedIndividualDniFrontFile1 = individualLastName1 + individualFirstName1 + 'DniFrontFile' + individualDniFrontFile1FileNameExt
+    repathedIndividualDniFrontFile1 = os.path.join(folderForFiles, renamedIndividualDniFrontFile1)
+    individualDniFrontFile1.save(repathedIndividualDniFrontFile1)
+    
+    individualDniReverseFile1 = request.files['individualDniReverseFile1']
+    individualDniReverseFile1FileName = secure_filename(individualDniReverseFile1.filename)
+    individualDniReverseFile1FileNameExt = os.path.splitext(individualDniReverseFile1FileName)[1]
+    renamedIndividualDniReverseFile1 = individualLastName1 + individualFirstName1 + 'DniReverseFile' + individualDniReverseFile1FileNameExt
+    repathedIndividualDniReverseFile1 = os.path.join(folderForFiles, renamedIndividualDniReverseFile1)
+    individualDniReverseFile1.save(repathedIndividualDniReverseFile1)
     
     
+    
+    
+    
+    
+    
+    
+    
+    null = ''
+    cleanedData = {k: v for k, v in data.items() if v != ''}    
     jsonName = individualLastName1 + individualFirstName1 + 'Data.json' 
     with open(f'{folderForData}/{jsonName}', 'w') as f:
-        json.dump(data, f)
+        json.dump(cleanedData, f)
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
-    
+#   html = render_template('borrow.html') #use longlinelending.com, not borrow.html
+#   pdf = pdfkit.from_string(html, options={"enable-local-file-access": ""})
+#   
+#   # Save the PDF file to disk
+#   with open("output.pdf", "wb") as f:
+#       f.write(pdf)
+        
     
     
 #   JSON -> fileName = last name + first name + date/loan number?
@@ -237,7 +284,30 @@ def submit():
     return render_template('submitted.html', title='Submitted')
 
 
+
+
+
+#
+#@app.route('/submit', methods=['POST'])
+#def downloadPDF():
+#   form_data = request.form
+#   
+#   # create PDF version of HTML form data
+#   pdf = pdfkit.from_file('borrow.html', False)
+#   
+#   # set headers to download the PDF file
+#   response = make_response(pdf)
+#   response.headers['Content-Type'] = 'application/pdf'
+#   response.headers['Content-Disposition'] = 'attachment; filename=form.pdf'
+#   
+#   return response
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
-    
-    
