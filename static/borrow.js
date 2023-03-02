@@ -1239,8 +1239,7 @@ function addIndividualEventListeners() {
         }
       }
     });
-  
-      
+
       const removeIndividualButton = document.getElementById(`removeIndividualButton${i}`);
       removeIndividualButton.addEventListener('click', function() {
         if (individualCount > 2 && individualCount <= 9) {

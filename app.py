@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
+import os
 import json
 import boto3
-from flask import Flask, render_template, request, jsonify, session
+import datetime
+from flask import Flask, render_template, request, jsonify, session, redirect
 from flask_session import Session
 
 app = Flask(__name__, template_folder='templates')
@@ -10,6 +12,7 @@ app.config ['SECRET_KEY'] = 'longline'
 #app.config ['SESSION_TYPE'] = 'filesystem'
 #Session(app)
 
+directory = '/userFiles'
 flaskBackendPin = '1234'
 
 
@@ -57,6 +60,15 @@ def borrow():
     else:
         error = 'Incorrect PIN. Please try again.'
         return render_template('borrowLogin.html', title='Borrow', error=error)
+    
+    
+@app.route('/borrow')
+def borrow_redirect():
+    userPin = request.args.get('userPin')
+    if userPin == flaskBackendPin:
+        return render_template('borrow.html', title='Borrow')
+    else:
+        return redirect('/borrowLogin')
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -71,7 +83,8 @@ def submit():
     collateralValue = request.form.get('collateralValue')
     escrowAgent = request.form.get('escrowAgent')
     vaultInfo = request.form.get('vaultInfo')
-    securityCheckbox = request.form.getlist('securityCheckbox')
+    securityReceivedCheckbox = request.form.getlist('securityReceivedCheckbox')
+    securityGuaranteedCheckbox = request.form.getlist('securityGuaranteedCheckbox')
     secRecDate = request.form.get('secRecDate')
     orgFeePoints = request.form.get('orgFeePoints')
     orgFeeUSD = request.form.get('orgFeeUSD')
@@ -101,7 +114,23 @@ def submit():
     individualLastName1 = request.form.get('individualLastName1')
     individualHomeBankAddress1 = request.form.get('individualHomeBankAddress1')
     individualHomeStreetAddress1 = request.form.get('individualHomeStreetAddress1')
-    
+    individualHomeCity1 = request.form.get('individualHomeCity1')
+    individualHomeState1 = request.form.get('individualHomeState1')
+    individualHomeZip1 = request.form.get('individualHomeZip1')
+    individualhomeCountry1 = request.form.get('individualhomeCountry1')
+    individualOwnRentDropdown1 = request.form.get('individualOwnRentDropdown1')
+    individualMonthlyRent1 = request.form.get('individualMonthlyRent1')
+    individualPassportNumber1 = request.form.get('individualPassportNumber1')
+    individualSsn1 = request.form.get('individualSsn1')
+    individualDob1 = request.form.get('individualDob1')
+    individualEmail1 = request.form.get('individualEmail1')
+    individualPhone1 = request.form.get('individualPhone1')
+    individualFico1 = request.form.get('individualFico1')
+    individualIncome1 = request.form.get('individualIncome1')
+    individualPep1 = request.form.get('individualPep1')
+    individualCrime1 = request.form.get('individualCrime1')
+    individualDeclareCheckbox1 = request.form.get('individualDeclareCheckbox1')
+    individualPassportFile1 = request.files['individualPassportFile1']
     
     data = {
         'Loan Purpose': loanPurpose,
@@ -114,7 +143,8 @@ def submit():
         'Collateral Value': collateralValue,
         'Escrow Agent': escrowAgent,
         'Vault Info': vaultInfo,
-        'Security Received/Guaranteed': securityCheckbox,
+        'Security Received': securityReceivedCheckbox,
+        'Security Guaranteed': securityGuaranteedCheckbox,
         'Security Received Date': secRecDate,
         'Origination Fee (points)': orgFeePoints,
         'Origination Fee (USD)': orgFeeUSD,
@@ -142,9 +172,30 @@ def submit():
         'Individual 1 Last Name': individualLastName1,
         'Individual 1 Home Address': individualHomeBankAddress1,
         'Individual 1 Home Street Address': individualHomeStreetAddress1,
+        'Individual 1 Home City': individualHomeCity1,
+        'Individual 1 Home State': individualHomeState1,
+        'Individual 1 Home Zip': individualHomeZip1,
+        'Individual 1 Home Country': individualhomeCountry1,
+        'Individual 1 Own or Rent': individualOwnRentDropdown1,
+        'Individual 1 Monthly Mortgage/Rent': individualMonthlyRent1,
+        'Individual 1 Passport Number': individualPassportNumber1,
+        'Individual 1 SSN': individualSsn1,
+        'Individual 1 Date of Birth': individualDob1,
+        'Individual 1 Email': individualEmail1,
+        'Individual 1 Phone Number': individualPhone1,
+        'Individual 1 FICO/NOSIS Number': individualFico1,
+        'Individual 1 Income': individualIncome1,
+        'Individual 1 Politically Exposed Person': individualPep1,
+        'Individual 1 Crime': individualCrime1,
+        'Individual 1 Declare': individualDeclareCheckbox1,
     }
     
-#   fileName = last name + first name + date/loan number?
+    individualPassportFile1FileName = individualFirstName1 + individualLastName1 + 'passportFile'
+    individualPassportFile1.save(f'userFiles/{individualPassportFile1FileName}')
+    
+    
+    
+#   JSON -> fileName = last name + first name + date/loan number?
     
     with open('data.json', 'w') as f:
         json.dump(data, f)
