@@ -60,8 +60,7 @@ def borrow():
     else:
         error = 'Incorrect PIN. Please try again.'
         return render_template('borrowLogin.html', title='Borrow', error=error)
-    
-    
+
 @app.route('/borrow')
 def borrow_redirect():
     userPin = request.args.get('userPin')
@@ -69,6 +68,15 @@ def borrow_redirect():
         return render_template('borrow.html', title='Borrow')
     else:
         return redirect('/borrowLogin')
+
+@app.route('/submit')
+def submit_redirect():
+    userPin = request.args.get('userPin')
+    if userPin == flaskBackendPin:
+        return render_template('submit.html', title='Submit')
+    else:
+        return redirect('/borrowLogin')
+    
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -190,15 +198,27 @@ def submit():
         'Individual 1 Declare': individualDeclareCheckbox1,
     }
     
-    individualPassportFile1FileName = individualFirstName1 + individualLastName1 + 'passportFile'
-    individualPassportFile1.save(f'userFiles/{individualPassportFile1FileName}')
+    jsonName = individualLastName1 + individualFirstName1 + 'Data.json' 
+    folderForData = individualLastName1 + individualFirstName1 + 'Data'
+    os.mkdir(folderForData)
+    
+    folderForFiles = os.path.join(folderForData, individualLastName1 + individualFirstName1 + 'Files')
+    os.mkdir(folderForFiles)
+    
+#   individualPassportFile1FileName = individualFirstName1 + individualLastName1 + 'passportFile'
+    individualPassportFile1.save(f'{folderForFiles}/{individualPassportFile1.filename}')
+#   os.rename(f'{folderName}/{individualPassportFile1.filename}', f'{folderName}/{individualPassportFile1FileName}')
+    
+    
+    
+    # Create a JSON file with some data
+    with open(f'{folderForData}/{jsonName}', 'w') as f:
+        json.dump(data, f)
+    
     
     
     
 #   JSON -> fileName = last name + first name + date/loan number?
-    
-    with open('data.json', 'w') as f:
-        json.dump(data, f)
         
     # Upload data.json to S3
     #s3 = boto3.resource('s3')

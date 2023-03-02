@@ -433,7 +433,7 @@ const htmlForAdditionalIndividual = `
     <label id="individualLastNameLabel{{index}}" for="individualLastName{{index}}">Last Name(s)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="individualLastName{{index}}" name="lastName{{index}}" placeholder="Last Name(s)" required style="width: 250px;">
+    <input class="input-field" type="text" id="individualLastName{{index}}" name="individualLastName{{index}}" placeholder="Last Name(s)" required style="width: 250px;">
   </div>
   
   <div class="labels">
@@ -552,8 +552,8 @@ const htmlForAdditionalIndividual = `
     <label></label>
   </div>
   <div class="input-tab">
-    <label><input type="radio" name="individualPep{{index}}" value="individualYesPep{{index}}" style="margin-left: 50px;" required>Yes</label>
-    <label><input type="radio" name="individualPep{{index}}" value="individualNoPep{{index}}">No</label>
+    <label><input type="radio" name="individualPep{{index}}" value="Yes" style="margin-left: 50px;" required>Yes</label>
+    <label><input type="radio" name="individualPep{{index}}" value="No">No</label>
   </div>
   
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px;">
@@ -564,8 +564,8 @@ const htmlForAdditionalIndividual = `
     <label></label>
   </div>
   <div class="input-tab">
-    <label><input type="radio" name="individualCrime{{index}}" value="individualYesCrime{{index}}" style="margin-left: 50px;" required>Yes</label>
-    <label><input type="radio" name="individualCrime{{index}}" value="individualNoCrime{{index}}">No</label>
+    <label><input type="radio" name="individualCrime{{index}}" value="Yes" style="margin-left: 50px;" required>Yes</label>
+    <label><input type="radio" name="individualCrime{{index}}" value="No">No</label>
   </div>
   
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
@@ -576,7 +576,7 @@ const htmlForAdditionalIndividual = `
     <label></label>
   </div>
   <div class="input-tab" style="margin-left: 20px;">
-    <input type="checkbox" name="individualDeclareCheckbox{{index}}" value="individualDeclareCheckbox{{index}}" required>I declare that the above information is true and correct.<br>
+    <input type="checkbox" name="individualDeclareCheckbox{{index}}" value="Yes" required>I declare that the above information is true and correct.<br>
   </div>
 
   <div class="labels">
