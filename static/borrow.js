@@ -275,7 +275,7 @@ const htmlForIndividualStepTitle = `
 // base html for entity details
 const htmlForEntity = `
   <div class="labels">
-      <label id="entityNameLabel" for="entityNameLabel">Entity Name</label>
+      <label id="entityNameLabel" for="entityName">Entity Name</label>
     </div>
     <div class="input-tab">
       <input class="input-field" type="text" id="entityName" name="entityName" placeholder="Entity Name" required style="width: 250px;">
@@ -283,7 +283,7 @@ const htmlForEntity = `
   </div>
 
   <div class="labels">
-      <label id="entityCountryLabel" for="entityCountryLabel">Entity Country of Formation</label>
+      <label id="entityCountryLabel" for="entityCountry">Entity Country of Formation</label>
     </div>
     <div class="input-tab">
       <input class="input-field" type="text" id="entityCountry" name="entityCountry" placeholder="Entity Country" required style="width: 250px;">
@@ -291,7 +291,7 @@ const htmlForEntity = `
   </div>
 
   <div class="labels">
-      <label id="entityStreetAddressLabel" for="entityStreetAddressLabel">Entity Street Address</label>
+      <label id="entityStreetAddressLabel" for="entityStreetAddress">Entity Street Address</label>
     </div>
     <div class="input-tab">
       <input class="input-field" type="text" id="entityStreetAddress" name="entityStreetAddress" placeholder="Entity Street Address" required style="width: 250px;">
@@ -299,7 +299,7 @@ const htmlForEntity = `
   </div>
 
   <div class="labels">
-      <label id="entityCityLabel" for="entityCityLabel">Entity City</label>
+      <label id="entityCityLabel" for="entityCity">Entity City</label>
     </div>
     <div class="input-tab">
       <input class="input-field" type="text" id="entityCity" name="entityCity" placeholder="Entity City" required style="width: 250px;">
@@ -307,7 +307,7 @@ const htmlForEntity = `
   </div>
 
   <div class="labels">
-      <label id="entityStateLabel" for="entityStateLabel">Entity State or Province</label>
+      <label id="entityStateLabel" for="entityState">Entity State or Province</label>
     </div>
     <div class="input-tab">
       <input class="input-field" type="text" id="entityState" name="entityState" placeholder="Entity State or Province" required style="width: 250px;">
@@ -315,7 +315,7 @@ const htmlForEntity = `
   </div>
 
   <div class="labels">
-      <label id="entityZipLabel" for="entityZipLabel">Entity Zip</label>
+      <label id="entityZipLabel" for="entityZip">Entity Zip</label>
     </div>
     <div class="input-tab">
       <input class="input-field" type="text" id="entityZip" name="entityZip" placeholder="Entity Zip" required style="width: 250px;">
@@ -323,7 +323,7 @@ const htmlForEntity = `
   </div>
 
   <div class="labels">
-      <label id="entityWebsiteLabel" for="entityWebsiteLabel">Entity Website</label>
+      <label id="entityWebsiteLabel" for="entityWebsite">Entity Website</label>
     </div>
     <div class="input-tab">
       <input class="input-field" type="text" id="entityWebsite" name="entityWebsite" placeholder="Entity Website" required style="width: 250px;">
@@ -333,7 +333,7 @@ const htmlForEntity = `
   <br><br><h3>Upload PDF or Image for Each of the Following</h3>
   
   <div class="labels">
-    <label id="entityArticlesLabel" for="entityArticlesLabel">Articles of Organization</label>
+    <label id="entityArticlesLabel" for="entityArticles">Articles of Organization</label>
   </div>
   <div class="input-tab">
     <label for="entityArticlesFile" class="fileUploadButton">Choose File
@@ -343,7 +343,7 @@ const htmlForEntity = `
   </div>
   
   <div class="labels">
-    <label id="entityCertFileLabel" for="entityCertFileLabel">Certificate of Formation</label>
+    <label id="entityCertFileLabel" for="entityCertFile">Certificate of Formation</label>
   </div>
   <div class="input-tab">
     <label for="entityCertFile" class="fileUploadButton">Choose File
@@ -353,7 +353,7 @@ const htmlForEntity = `
   </div>
   
   <div class="labels">
-    <label id="entityEinFileLabel" for="entityEinFileLabel">EIN</label>
+    <label id="entityEinFileLabel" for="entityEinFile">EIN</label>
   </div>
   <div class="input-tab">
     <label for="entityEinFile" class="fileUploadButton">Choose File
@@ -363,7 +363,7 @@ const htmlForEntity = `
   </div>
   
   <div class="labels">
-    <label id="entityOtherFileLabel" for="entityOtherFileLabel">Other</label>
+    <label id="entityOtherFileLabel" for="entityOtherFile">Other</label>
   </div>
   <div class="input-tab">
     <label for="entityOtherFile" class="fileUploadButton">Choose File
