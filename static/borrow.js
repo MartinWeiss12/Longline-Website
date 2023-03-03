@@ -268,7 +268,9 @@ const entityContainer = document.getElementById("borrowerSpecificDetails");
 const htmlForIndividualStepTitle = `
     
   <br><br><br><h2 id="stepSixIndividualTitle">Step 6 - Individual Info</h2><br>
-  <br><br><h2 id="stepSixIndividualSubtitle"> At Least ONE Individual is Required</h2><br>
+  <br><br><h2 id="stepSixIndividualSubtitle1"> At Least ONE Individual is Required</h2><br>
+  <br><h3 id="stepSixIndividualSubtitle2">There is a max of 8 Individuals</h3>
+
 
 `;
   
@@ -375,6 +377,7 @@ const htmlForEntity = `
   <br><br><br><h2 id="stepSixUboTitle">Step 6 - UBO and Director Info</h2><br>  
   <br><br><h2 id="stepSixUboSubtitle"> At Least ONE UBO is Required</h2><br>
   <br><h3 id="uboInfoSubtitle1">Please add UBOs THEN Directors</h3>
+  <br><h3 id="uboInfoSubtitle2">There is a max of 8 UBOs and 8 Directors</h3>
   
 `;
 

@@ -8,7 +8,7 @@
     
     <title>Invest</title>
     <style>
-  
+      
       @import url('https://fonts.googleapis.com/css?family=Abel');
       
       body, html {
@@ -67,7 +67,7 @@
         letter-spacing: 2px;
         word-spacing: 5px;
         line-height: 1em;
-/*      font-weight: bold;*/
+        font-weight: bold;
       }
       
       p {
@@ -104,13 +104,13 @@
         width: 40%;
         vertical-align: top; 
         margin-top: 20px;
+        margin-left: 75px;
       }
       
       .input-tab {
         display: inline-block;
         text-align: left;
         width: 50%;
-        margin-left: 10px;
       }
       
       .input-field {
@@ -142,14 +142,289 @@
         border-radius: 3px;
         font-family: inherit;
         font-size: 15px;
+        width: 150px;
+      }      
+      
+      #interestDropdownID {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }    
+      
+      #interestPaymentDropdownID {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }    
+      
+      #investorDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
       }
+      
+      #individualPersonalGuarantorDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }   
+      
+      #individualCitizenDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }
+      
+      #individualSDResidentDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }
+      
+      #individualOwnRentDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }
+      
+      #uboControlPersonAuthDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }   
+      
+      #uboPersonalGuarantorDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }  
+      
+      #uboCitizenDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }
+      
+      #uboSDResidentDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }
+      
+      #uboOwnRentDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }
+      
+      #directorControlPersonAuthDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }  
+      
+      #directorPersonalGuarantorDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }  
+      
+      #directorCitizenDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }
+      
+      #directorSDResidentDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }
+      
+      #directorOwnRentDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }
+      
+      #bankAccountTypeDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }
+      
+      #loanAssementDropdown {
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0 10px 10px;  
+        border: 1px solid #0000FF;
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 15px;
+        width: 150px;
+      }
+      
+      .fileUploadButton {
+        background-color: #0000FF;
+        margin: 0;
+        border-radius: 4px;
+        color: white;
+        font-size: 1em;
+        font-weight: bold;
+        font-family: inherit;
+        padding: 4px 8px;
+        border: 1px solid;
+        cursor: pointer;
+        display: inline-block;
+        text-align: center;
+        margin: 15px 0 0;
+      }
+      
+      .fileUploadButton:hover {
+        background-color: #00008B;
+      }
+      
+      input[type="date"] {
+        display: inline-block;
+        width: 18%;
+        padding: 5px;
+        margin: 18px 0 0 10px;
+        border: 1px solid #0000FF;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: bold;
+        color: #333;
+        background-color: #fff;
+      }
+      
       .btn {
         width: 100%;
         text-align: center;
         margin: 20px;
       }
       
-      #submit-button-container {
+      #submitButtonContainer {
+        display: flex;
+        justify-content: center;
+      }
+      
+      #addIndividualContainer {
+        display: flex;
+        justify-content: center;
+      }
+      
+      #addUboContainer {
+        display: flex;
+        justify-content: center;
+      }
+      
+      #addDirectorContainer {
+        display: flex;
+        justify-content: center;
+      }
+      
+      #removeIndividualContainer {
+        display: flex;
+        justify-content: center;
+      }
+      
+      #removeUboContainer {
+        display: flex;
+        justify-content: center;
+      }
+      
+      #removeDirectorContainer {
         display: flex;
         justify-content: center;
       }
@@ -165,6 +440,7 @@
         padding: 10px 15px;
         border: 1px solid;
       }
+      
       button:hover {
         background-color: #00008B;
       }
@@ -248,182 +524,265 @@
         resize: none;
       }
 
-      
     </style>    
   </head>
   <body>
     <header>
-      <header>
-        <div class="logo">
-        </div>
-        <nav>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="about">About</a></li>
-            <li><a href="solutions">Solutions</a></li>
-            <li><a href="borrowLogin">Borrow</a></li>
-            <li><a href="invest">Invest</a></li>
-            <li><a href="login">Log In</a></li>
-            <li><a href="contact">Contact</a></li>
-          </ul>
-        </nav>
-      </header>
+      <div class="logo">
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="about">About</a></li>
+          <li><a href="solutions">Solutions</a></li>
+          <li><a href="borrowLogin">Borrow</a></li>
+          <li><a href="invest">Invest</a></li>
+          <li><a href="login">Log In</a></li>
+          <li><a href="contact">Contact</a></li>
+        </ul>
+      </nav>
     </header>
     
     <header>
       <div class="text-box">
-        <h1 id="title">LONGLINE LENDING LLC</h1>
-        <h1 id="title">Invest FORM</h1>
+        <h1 id="longlineTitle">LONGLINE LENDING LLC</h1>
+        <h1 id="loanApplicationTitle">INVESTOR APPLICATION FORM</h1>
       </div>
     </header>
     <main>
-      <div class="container">
-        <form id="survey-form" method="GET">
+      
+      <div class="container" id="investFormContainer">
+        <form id="loanForm" method="POST" action="/submit" enctype="multipart/form-data">
           
-          <h2 id="title">Step 1 - Loan Purpose</h2>
+          <br><br><br><h2 id="stepOneTitle">Step 1 - Investment Amount Requested</h2>
           <br>
-          <div class="labels">
-            <label></label></div>
-          <div class="input-tab">
-            <input type="checkbox" name="asset" value="asset">Asset Purchase or Down Payment<br>
-            <input type="checkbox" name="industrial" value="ind">Industrial Loan<br>
-            <input type="checkbox" name="tax" value="tax">Tax Payment<br>
-            <input type="checkbox" name="insurance" value="insurance">Insurance Premium<br>
-            <input type="checkbox" name="trade" value="trade">Margin Trading or Investment<br>
-            <input type="checkbox" name="edu" value="edu">Education Expenses<br>
-            <input type="checkbox" name="otherLoan" value="otherLoan" onclick="otherLoanFunction(this)" >Other<br>
-            <p id="insertOtherLoan"></p>
-          </div>   
-          
-          <br><br><br>
-          
-          <h2 id="title">Step 2 - Loan Amount Requested</h2>
+          <h3 id="stepTwoSubtitle">In Tranches of USD $20,000</h3>
           <br>
-          <h3 id="subtitle">In Tranches of USD$ 20,000</h3>
-          <br>
-    
+          
           <div class="labels">
-            <label id="name-label" for="name">Loan Amount</label></div>
+            <label id="investmentTotalLabel" for="investmentTotal">Investment Amount USD $</label>
+          </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="loanAmt" name="loanAmt" placeholder="Loan Total" required autofocus style="width: 150px;" onchange="updateLoanAmount()" readonly>
+            <input class="input-field" type="text" id="investmentTotal" name="investmentTotal" placeholder="Loan Amount" required style="width: 150px;" onchange="updateLoanAmount()" >
           </div>
           
           <div class="labels">
-            <label id="name-label" for="name">Amount per Tranche</label></div>
+            <label id="trancheLabel" for="trancheAmt">Amount per Tranche USD $</label>
+          </div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="trancheAmt" name=trancheAmt placeholder="Amount per Tranche" required autofocus style="width: 150px;" onchange="updateLoanAmount()" readonly>
+            <input class="input-field" type="text" id="trancheAmt" name=trancheAmt placeholder="Amount per Tranche" required style="width: 150px;" onchange="updateLoanAmount()" readonly>
           </div>
           
           <div class="labels">
-            <label id="name-label" for="name">Number of Tranches</label></div>
-          <div class="input-tab">
-            <input class="input-field" type="text" id="numTranches" name="numTranches" placeholder="Number of Tranches" required autofocus style="width: 150px;" onchange="updateLoanAmount()">
+            <label id="numberOfTranchesLabel" for="numTranches">Number of Tranches</label>
           </div>
-        
-          
-          <br><br><br>
-          
-          <h2 id="title">Step 3 - Escrow Information</h2>
-          <br>
-<!--      <h3 id="subtitle">Escrow Type</h3>-->
-<!--      <br>-->
-          <div class="labels">
-            <label></label></div>
           <div class="input-tab">
-            <input type="checkbox" name="personalProp" value="personalProp">Personal Property<br>
-            <input type="checkbox" name="realProp" value="realProp">Real Property<br>
-            <input type="checkbox" name="titledProp" value="titledProp">Titled Property<br>
-            <input type="checkbox" name="stock" value="stock">Stock Instruments<br>
-            <input type="checkbox" name="debt" value="debt">Debt Instruments<br>
-            <input type="checkbox" name="negotiable" value="negotiable">Negotiable Instruments<br>
-            <input type="checkbox" name="banknotes" value="banknotes">Banknotes<br>
-            <input type="checkbox" name="otherEscrow" value="otherEscrow" onclick="otherEscrowFucntion(this)" >Other<br>
-            <p id="insertOtherEscrow"></p>
-          </div>   
-
+            <input class="input-field" type="text" id="numTranches" name="numTranches" placeholder="Number of Tranches" required style="width: 150px;" onchange="updateLoanAmount()" pattern="[0-9]+" title="Please enter only numbers.">
+          </div> 
+          
+          <br><br><br><h2 id="stepFiveTitle">Step 2 - Borrower Information</h2><br>
           <div class="labels">
-            <label id="name-label" for="name">Escrow Specifications</label></div>
-          <div class="input-tab">
-            <textarea class="input-field" id="escrowSpec" name="escrowSpec" rows="5" cols="40" placeholder="Your comments..."></textarea>
+            <label for="investorDropdown">Investor is an</label>
           </div>
-          
-          
-          
-          
-          
-    
-          
-          
-          
-          <div class="labels">
-            <label id="name-label" for="name">* Full Name</label></div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="name" name="name" placeholder="Enter your name" required autofocus>
-          </div>
-          
-          <div class="labels">
-            <label id="email-label" for="email">* Email</label></div>
-          <div class="input-tab">
-            <input class="input-field" type="email" id="email" name="email" placeholder="email@email.com" required></div>
-          
-          <div class="labels">
-            <label id="number-label" for="number">* Age</label></div>
-          <div class="input-tab">
-            <input class="input-field" type="number" id="number" name="number" min="1" max="120" placeholder="15" required></div>
-          
-          
-          <div class="labels">
-            <label for="dropdown">How do you watch South Park?</label></div>
-          <div class="input-tab">
-            <select id="dropdown" name="site">
+            <select id="investorDropdown" name="investorDropdown" onchange="handleInvestorSelect()" style="width: 250px;" required>
               <option disabled value selected>Select an option</option>
-              <option value="web">Website</option>
-              <option value="hulu">Hulu</option>
-              <option value="youtube">Youtube</option>
-              <option value="tv">TV</option>
-              <option value="other">Other</option>
+              <option value="Individual">Individual</option>
+              <option value="Entity">Entity</option>
             </select>
           </div>
           
+          <div id="investorSpecificDetails"></div>
+          <div id="additionalIndividualInfo1"></div>
+          <div id="additionalIndividualInfo"></div>
+          <div id="additionalIndividualInfo2"></div>
+          <div id="additionalIndividualInfo3"></div>
+          <div id="additionalIndividualInfo4"></div>
+          <div id="additionalIndividualInfo5"></div>
+          <div id="additionalIndividualInfo6"></div>
+          <div id="additionalIndividualInfo7"></div>
+          <div id="additionalIndividualInfo8"></div>
+          
+          <div id="additionalUboInfo"></div>
+          <div id="additionalUboInfo1"></div>
+          <div id="additionalUboInfo2"></div>
+          <div id="additionalUboInfo3"></div>
+          <div id="additionalUboInfo4"></div>
+          <div id="additionalUboInfo5"></div>
+          <div id="additionalUboInfo6"></div>
+          <div id="additionalUboInfo7"></div>
+          <div id="additionalUboInfo8"></div>
+          
+          <div id="additionalDirectorInfo"></div>
+          <div id="additionalDirectorInfo1"></div>
+          <div id="additionalDirectorInfo2"></div>
+          <div id="additionalDirectorInfo3"></div>
+          <div id="additionalDirectorInfo4"></div>
+          <div id="additionalDirectorInfo5"></div>
+          <div id="additionalDirectorInfo6"></div>
+          <div id="additionalDirectorInfo7"></div>
+          <div id="additionalDirectorInfo8"></div>
+          
+          <div class="addIndividualContainer">
+            <div class="btn">
+              <button id="addIndividualButton1" type="button">Add Individual</button>
+            </div>
+          </div>
+          
+          <div class="addUboContainer">
+            <div class="btn">
+              <button id="addUboButton1" type="button">Add UBO</button>
+            </div>
+          </div>
+          
+          <div class="addDirectorContainer">
+            <div class="btn">
+              <button id="addDirectorButton1" type="button">Add an Entity Director who is not a UBO</button>
+            </div>
+          </div>
+          
+          <div class="removeIndividualContainer">
+            <div class="btn">
+              <button id="removeIndividualButton1" type="button" disabled>Remove above Individual</button>
+            </div>
+          </div>
+          
+          <div class="removeUboContainer">
+            <div class="btn">
+              <button id="removeUboButton1" type="button" disabled>Remove above UBO</button>
+            </div>
+          </div>
+          
+          <div class="removeDirectorContainer">
+            <div class="btn">
+              <button id="removeDirectorButton1" type="button" disabled>Remove above Director</button>
+            </div>
+          </div>
+          
+          <br><br><br><h2 id="stepSevenTitle">Step 4</h2><br>
+          <h3 id="stepSevenSubtitle">Bank Account Information</h3>
+          
           <div class="labels">
-            <label>How much do you like South Park?</label></div>
+            <label id="beneficiaryNameLabel" for="beneficiaryName">Beneficiary Name</label>
+          </div>
           <div class="input-tab">
-            <input type="radio" name="radio-button" value="love">I love it!<br>
-            <input type="radio" name="radio-button" value="like">I like it<br>
-            <input type="radio" name="radio-button" value="ok">It's ok<br>
-            <input type="radio" name="radio-button" value="nah">Not really<br>
+            <input class="input-field" type="text" id="beneficiaryName" name="beneficiaryName" placeholder="Beneficiary Name" required style="width: 250px;">
           </div>
           
           <div class="labels">
-            <label for="dropdown">How many seasons of South Park have you watched?</label></div>
+            <label id="bankNameLabel" for="bankName">Bank Name</label>
+          </div>
           <div class="input-tab">
-            <select id="dropdown" name="seasons">
+            <input class="input-field" type="text" id="bankName" name="bankName" placeholder="Bank Name" required style="width: 250px;">
+          </div>
+          
+          <div class="labels">
+            <label id="bankAddressLabel" for="bankAddress">Bank Address</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="bankAddress" name="bankAddress" placeholder="Bank Address" required style="width: 250px;">
+          </div>
+          
+          <div class="labels">
+            <label id="bankCityLabel" for="bankCity">Bank City</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="bankCity" name="bankCity" placeholder="Bank City" required style="width: 250px;">
+          </div>
+          
+          <div class="labels">
+            <label id="bankStateLabel" for="bankState">Bank State</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="bankState" name="bankState" placeholder="Bank State" required style="width: 250px;">
+          </div>
+          
+          <div class="labels">
+            <label id="accountNumberLabel" for="accountNumber">Account Number</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="accountNumber" name="accountNumber" placeholder="Account Number" required style="width: 250px;">
+          </div>
+          
+          <div class="labels">
+            <label for="bankAccountTypeDropdown">Bank Account Type</label>
+          </div>
+          <div class="input-tab">
+            <select id="bankAccountTypeDropdown" name="bankAccountTypeDropdown" onchange="otherBankAccountType()" required style="width: 262px;">
               <option disabled value selected>Select an option</option>
-              <option value="<=5">0-5</option>
-              <option value="<=10">6-10</option>
-              <option value="<=15">10-15</option>
-              <option value="<=21">15-21</option>
+              <option value="Checking">Checking</option>
+              <option value="Savings">Savings</option>
+              <option value="Investment">Investment</option>
+              <option value="Other">Other</option>
             </select>
           </div>
+          <div id="bankOtherInputContainer"></div>
           
           <div class="labels">
-            <label for="comments">Tell us more about your favorite character(s) or episode(s)</label></div>
+            <label id="ibanLabel" for="iban">IBAN</label>
+          </div>
           <div class="input-tab">
-            <textarea class="input-field" id="comments" name="comments" rows="10" cols="40" placeholder="Your comments..."></textarea></div>
+            <input class="input-field" type="text" id="iban" name="iban" placeholder="IBAN" style="width: 250px;">
+          </div>
+          
+          <div class="labels">
+            <label id="swiftLabel" for="swift">SWIFT</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="swift" name="swift" placeholder="SWIFT" style="width: 250px;">
+          </div>
+          
+          <div class="labels">
+            <label id="abaNumberLabel" for="abaNumber">ABA Number</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="abaNumber" name="abaNumber" placeholder="ABA Number" style="width: 250px;">
+          </div>
+          
+          <div class="labels">
+            <label id="memoLabel" for="memo">Memo</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="memo" name="memo" placeholder="Memo" style="width: 250px;">
+          </div>
+          
+          <br><br><h3>Upload a PDF or Image for Each of the Following</h3>
+          
+          <div class="labels">
+            <label id="bankAcctFileLabel" for="bankAcctFile">Bank Account Statement</label>
+          </div>
+          <div class="input-tab">
+            <label for="bankAcctFile" class="fileUploadButton">Choose File
+              <input id="bankAcctFile" type="file" name="bankAcctFile" style="position:absolute; left:-999999px;" onchange="displayFileName('bankAcctFile', 'bankAcctFileNameSpan')" required>
+            </label>
+            <span id="bankAcctFileNameSpan">Uploaded File: None</span>
+          </div>
+          
+          <br><br><br><h2 id="stepEightTitle">Step 5</h2><br>
+          <h3 id="stepEightSubtitle">Investor Certification</h3>
+          
+          <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
+            Waiting for new text from Simon.
+          </div>
+          
+          <div class="labels">
+            <label id="loanOfficerNameLabel" for="loanOfficerName">Staff Officer Name</label>
+          </div>
+          <div class="input-tab">
+            <input class="input-field" type="text" id="loanOfficerName" name="loanOfficerName" placeholder="Loan Officer Name" style="width: 250px;" required>
+          </div>
+          
+          <div class="submitButtonContainer">
+            <div class="btn">
+              <button id="submit" type="submit" disabled>Submit</button>
+            </div>
+          </div>
           
         </form>
       </div>
-      
-      
-      <div class="submit-button-container">
-        <div class="btn">
-          <button id="submit" type="submit">Submit</button>
-        </div>
-      </div>
-      
     </main>
     <footer>
       <p id="copyright"></p>
-    </footer>
+    </footer>    
   </body>
 </html>
