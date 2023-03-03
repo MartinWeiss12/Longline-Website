@@ -1235,14 +1235,7 @@ function addIndividualEventListeners() {
         const additionalIndividualInfo = document.getElementById(additionalIndividualInfoID);
         const htmlForAdditionalIndividualWithIndex = htmlForAdditionalIndividual.replace(/{{index}}/g, individualCount);
         additionalIndividualInfo.insertAdjacentHTML('beforeend', htmlForAdditionalIndividualWithIndex);
-        individualCount++;
         
-        if (individualCount > 9) {
-          for (let j = 1; j <= 8; j++) {
-            const addIndividualButton = document.getElementById(`addIndividualButton${j}`);
-            addIndividualButton.style.display = 'none';
-          }
-        }
         
         if (i === 1) {
           removeIndividualButton.style.display = 'block';
@@ -1250,6 +1243,13 @@ function addIndividualEventListeners() {
         } else {
           removeIndividualButton.style.display = 'none';
         }
+        
+        if (individualCount === 8) {
+          const addIndividualButton1 = document.getElementById('addIndividualButton1');
+          addIndividualButton1.style.display = 'none';
+        } 
+        
+        individualCount++;
       }
     });
     
@@ -1290,6 +1290,7 @@ function addIndividualEventListeners() {
   }
 }
 
+
 function addUboEventListeners() {
   uboCount = 1;
   for (let i = 1; i <= 8; i++) {
@@ -1300,14 +1301,6 @@ function addUboEventListeners() {
         const additionalUboInfo = document.getElementById(additionalUboInfoID);
         const htmlForAdditionalUboWithIndex = htmlForAdditionalUbo.replace(/{{index}}/g, uboCount);
         additionalUboInfo.insertAdjacentHTML('beforeend', htmlForAdditionalUboWithIndex);
-        uboCount++;
-        
-        if (uboCount > 9) {
-          for (let j = 1; j <= 8; j++) {
-            const addUboButton = document.getElementById(`addUboButton${j}`);
-            addUboButton.style.display = 'none';
-          }
-        }
         
         if (i === 1) {
           removeUboButton.style.display = 'block';
@@ -1315,8 +1308,13 @@ function addUboEventListeners() {
         } else {
           removeUboButton.style.display = 'none';
         }
-
         
+        if (uboCount === 8) {
+          const addUboButton1 = document.getElementById('addUboButton1');
+          addUboButton1.style.display = 'none';
+        } 
+        
+        uboCount++;
       }
     });
     
@@ -1367,14 +1365,6 @@ function addDirectorEventListeners() {
         const additionalDirectorInfo = document.getElementById(additionalDirectorInfoID);
         const htmlForAdditionalDirectorWithIndex = htmlForAdditionalDirector.replace(/{{index}}/g, directorCount);
         additionalDirectorInfo.insertAdjacentHTML('beforeend', htmlForAdditionalDirectorWithIndex);
-        directorCount++;
-        
-        if (directorCount > 9) {
-          for (let j = 1; j <= 8; j++) {
-            const addDirectorButton = document.getElementById(`addDirectorButton${j}`);
-            addDirectorButton.style.display = 'none';
-          }
-        }
         
         if (i === 1) {
           removeDirectorButton.style.display = 'block';
@@ -1383,6 +1373,12 @@ function addDirectorEventListeners() {
           removeDirectorButton.style.display = 'none';
         }
         
+        if (directorCount === 8) {
+          const addDirectorButton1 = document.getElementById('addDirectorButton1');
+          addDirectorButton1.style.display = 'none';
+        } 
+        
+        directorCount++;
       }
     });
     
@@ -1474,8 +1470,6 @@ function handleBorrowerSelect() {
     removeDirectorButton.style.display = "none"; // hide the button
     addIndividualButton.style.display = "block"; // show the button
     addIndividualButton.style.margin = "0 auto";
-//  removeIndividualButton.style.display = "block"; // show the button
-//  removeIndividualButton.style.margin = "0 auto";
     addIndividualEventListeners();
     
     additionalUboInfo1.style.display = 'none';
@@ -1529,10 +1523,6 @@ function handleBorrowerSelect() {
     addUboButton.style.margin = "0 auto";
     addDirectorButton.style.display = "block"; // show the button
     addDirectorButton.style.margin = "0 auto";
-//  removeUboButton.style.display = "block"; // show the button
-//  removeUboButton.style.margin = "0 auto";
-//  removeDirectorButton.style.display = "block"; // show the button
-//  removeDirectorButton.style.margin = "0 auto";
     addUboEventListeners();
     
     additionalUboInfo1.style.display = 'block';
