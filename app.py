@@ -263,7 +263,33 @@ def loanSubmit():
 		repathedIndividualDniReverseFile1 = os.path.join(folderForFiles, renamedIndividualDniReverseFile1)
 		individualDniReverseFile1.save(repathedIndividualDniReverseFile1)
 		
+		individualBillAddressProofFile1 = request.files['individualBillAddressProofFile1']
+		individualBillAddressProofFile1FileName = secure_filename(individualBillAddressProofFile1.filename)
+		individualBillAddressProofFile1FileNameExt = os.path.splitext(individualBillAddressProofFile1FileName)[1]
+		renamedIndividualBillAddressProofFile1 = individualLastName1 + individualFirstName1 + 'BillAddressProofFile1' + individualBillAddressProofFile1FileNameExt
+		repathedIndividualBillAddressProofFile1 = os.path.join(folderForFiles, renamedIndividualBillAddressProofFile1)
+		individualBillAddressProofFile1.save(repathedIndividualBillAddressProofFile1)
 		
+		individualCreditCheckFile1 = request.files['individualCreditCheckFile1']
+		individualCreditCheckFile1FileName = secure_filename(individualCreditCheckFile1.filename)
+		individualCreditCheckFile1FileNameExt = os.path.splitext(individualCreditCheckFile1FileName)[1]
+		renamedIndividualCreditCheckFile1 = individualLastName1 + individualFirstName1 + 'CreditCheckFile1' + individualCreditCheckFile1FileNameExt
+		repathedIndividualCreditCheckFile1 = os.path.join(folderForFiles, renamedIndividualCreditCheckFile1)
+		individualCreditCheckFile1.save(repathedIndividualCreditCheckFile1)
+		
+		individualWorldCheckFile1 = request.files['individualWorldCheckFile1']
+		individualWorldCheckFile1FileName = secure_filename(individualWorldCheckFile1.filename)
+		individualWorldCheckFile1FileNameExt = os.path.splitext(individualWorldCheckFile1FileName)[1]
+		renamedIndividualWorldCheckFile1 = individualLastName1 + individualFirstName1 + 'WorldCheckFile1' + individualWorldCheckFile1FileNameExt
+		repathedIndividualWorldCheckFile1 = os.path.join(folderForFiles, renamedIndividualWorldCheckFile1)
+		individualWorldCheckFile1.save(repathedIndividualWorldCheckFile1)
+		
+		individualOfacFile1 = request.files['individualOfacFile1']
+		individualOfacFile1FileName = secure_filename(individualOfacFile1.filename)
+		individualOfacFile1FileNameExt = os.path.splitext(individualOfacFile1FileName)[1]
+		renamedIndividualOfacFile1 = individualLastName1 + individualFirstName1 + 'OfacFile1' + individualOfacFile1FileNameExt
+		repathedIndividualOfacFile1 = os.path.join(folderForFiles, renamedIndividualOfacFile1)
+		individualOfacFile1.save(repathedIndividualOfacFile1)
 		
 		
 		
@@ -324,7 +350,7 @@ def loanSubmit():
 
 
 
-#
+
 #@app.route('/submit', methods=['POST'])
 #def downloadPDF():
 #   form_data = request.form

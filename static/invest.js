@@ -116,10 +116,10 @@ trancheAmtInput.addEventListener('input', function() {
 
 const entityContainer = document.getElementById("investorSpecificDetails");
 
-// html for individual Step 6 title
-const htmlForIndividualStepTitle = `
+// html for individual Step 3 title
+const htmlForIndividualTitle = `
     
-  <br><br><br><h2 id="stepSixIndividualTitle">Step 6 - Individual Info</h2><br>
+  <br><br><br><h2 id="stepSixIndividualTitle">Step 3 - Individual Info</h2><br>
   <br><h2 id="stepSixIndividualSubtitle1"> At Least ONE Individual is Required</h2><br>
   <br><h3 id="stepSixIndividualSubtitle2">There is a max of 8 Individuals</h3>
 
@@ -226,8 +226,8 @@ const htmlForEntity = `
     <span id="entityOtherFileNameSpan">Uploaded File: None</span>
   </div>
 
-  <br><br><br><h2 id="stepSixUboTitle">Step 6 - UBO and Director Info</h2><br>  
-  <br><h2 id="stepSixUboSubtitle"> At Least ONE UBO is Required</h2><br>
+  <br><br><br><h2 id="stepThreeUboTitle">Step 3 - UBO and Director Info</h2><br>  
+  <br><h2 id="stepThreeUboSubtitle"> At Least ONE UBO is Required</h2><br>
   <br><h3 id="uboInfoSubtitle1">Please add UBOs THEN Directors</h3>
   <br><h3 id="uboInfoSubtitle2">There is a max of 8 UBOs and 8 Directors</h3>
   
@@ -1243,7 +1243,7 @@ function handleInvestorSelect() {
     document.getElementById("additionalDirectorInfo7").innerHTML = "";
     document.getElementById("additionalDirectorInfo8").innerHTML = "";
     
-    entityContainer.innerHTML = htmlForIndividualStepTitle;
+    entityContainer.innerHTML = htmlForIndividualTitle;
     addUboButton.style.display = "none"; // hide the button
     addDirectorButton.style.display = "none"; // hide the button
     removeUboButton.style.display = "none"; // hide the button

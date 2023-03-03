@@ -265,7 +265,7 @@ function otherBankAccountType() {
 const entityContainer = document.getElementById("borrowerSpecificDetails");
 
 // html for individual Step 6 title
-const htmlForIndividualStepTitle = `
+const htmlForIndividualTitle = `
     
   <br><br><br><h2 id="stepSixIndividualTitle">Step 6 - Individual Info</h2><br>
   <br><h2 id="stepSixIndividualSubtitle1"> At Least ONE Individual is Required</h2><br>
@@ -1466,7 +1466,7 @@ function handleBorrowerSelect() {
     document.getElementById("additionalDirectorInfo7").innerHTML = "";
     document.getElementById("additionalDirectorInfo8").innerHTML = "";
     
-    entityContainer.innerHTML = htmlForIndividualStepTitle;
+    entityContainer.innerHTML = htmlForIndividualTitle;
     addUboButton.style.display = "none"; // hide the button
     addDirectorButton.style.display = "none"; // hide the button
     removeUboButton.style.display = "none"; // hide the button
