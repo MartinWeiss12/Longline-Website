@@ -1,8 +1,4 @@
 #!/usr/bin/env python3
-
-#!/usr/bin/env python3
-
-#!/usr/bin/env python3
 import os
 import json
 import random
@@ -122,10 +118,15 @@ def loanSubmit():
 	
 	loanPurpose = request.form.getlist('loanPurpose')
 	otherLoanPurpose = request.form.get('otherLoanText')
+	if (otherLoanPurpose is None):
+		otherLoanPurpose = ''
 	loanTotal = request.form.get('loanTotal')
 	trancheAmt = request.form.get('trancheAmt')
 	numTranches = request.form.get('numTranches')
 	collateralInfo = request.form.getlist('collateralInfo')
+	otherCollateralText = request.form.get('otherCollateralText')
+	if (otherCollateralText is None):
+		otherCollateralText = ''
 	collateralSpec = request.form.get('collateralSpec')
 	collateralValue = request.form.get('collateralValue')
 	escrowAgent = request.form.get('escrowAgent')
@@ -167,6 +168,8 @@ def loanSubmit():
 	individualHomeZip1 = request.form.get('individualHomeZip1')
 	individualhomeCountry1 = request.form.get('individualhomeCountry1')
 	individualOwnRentDropdown1 = request.form.get('individualOwnRentDropdown1')
+	if (individualOwnRentDropdown1 is None):
+		individualOwnRentDropdown1 = ''
 	individualMonthlyRent1 = request.form.get('individualMonthlyRent1')
 	individualPassportNumber1 = request.form.get('individualPassportNumber1')
 	individualSsn1 = request.form.get('individualSsn1')
@@ -192,6 +195,8 @@ def loanSubmit():
 	individualHomeZip2 = request.form.get('individualHomeZip2')
 	individualhomeCountry2 = request.form.get('individualhomeCountry2')
 	individualOwnRentDropdown2 = request.form.get('individualOwnRentDropdown2')
+	if (individualOwnRentDropdown2 is None):
+		individualOwnRentDropdown2 = ''
 	individualMonthlyRent2 = request.form.get('individualMonthlyRent2')
 	individualPassportNumber2 = request.form.get('individualPassportNumber2')
 	individualSsn2 = request.form.get('individualSsn2')
@@ -217,6 +222,8 @@ def loanSubmit():
 	individualHomeZip3 = request.form.get('individualHomeZip3')
 	individualhomeCountry3 = request.form.get('individualhomeCountry3')
 	individualOwnRentDropdown3 = request.form.get('individualOwnRentDropdown3')
+	if (individualOwnRentDropdown3 is None):
+		individualOwnRentDropdown3 = ''
 	individualMonthlyRent3 = request.form.get('individualMonthlyRent3')
 	individualPassportNumber3 = request.form.get('individualPassportNumber3')
 	individualSsn3 = request.form.get('individualSsn3')
@@ -242,6 +249,8 @@ def loanSubmit():
 	individualHomeZip4 = request.form.get('individualHomeZip4')
 	individualhomeCountry4 = request.form.get('individualhomeCountry4')
 	individualOwnRentDropdown4 = request.form.get('individualOwnRentDropdown4')
+	if (individualOwnRentDropdown4 is None):
+		individualOwnRentDropdown4 = ''
 	individualMonthlyRent4 = request.form.get('individualMonthlyRent4')
 	individualPassportNumber4 = request.form.get('individualPassportNumber4')
 	individualSsn4 = request.form.get('individualSsn4')
@@ -267,6 +276,8 @@ def loanSubmit():
 	individualHomeZip5 = request.form.get('individualHomeZip5')
 	individualhomeCountry5 = request.form.get('individualhomeCountry5')
 	individualOwnRentDropdown5 = request.form.get('individualOwnRentDropdown5')
+	if (individualOwnRentDropdown5 is None):
+		individualOwnRentDropdown5 = ''
 	individualMonthlyRent5 = request.form.get('individualMonthlyRent5')
 	individualPassportNumber5 = request.form.get('individualPassportNumber5')
 	individualSsn5 = request.form.get('individualSsn5')
@@ -292,6 +303,8 @@ def loanSubmit():
 	individualHomeZip6 = request.form.get('individualHomeZip6')
 	individualhomeCountry6 = request.form.get('individualhomeCountry6')
 	individualOwnRentDropdown6 = request.form.get('individualOwnRentDropdown6')
+	if (individualOwnRentDropdown6 is None):
+		individualOwnRentDropdown6 = ''
 	individualMonthlyRent6 = request.form.get('individualMonthlyRent6')
 	individualPassportNumber6 = request.form.get('individualPassportNumber6')
 	individualSsn6 = request.form.get('individualSsn6')
@@ -317,6 +330,8 @@ def loanSubmit():
 	individualHomeZip7 = request.form.get('individualHomeZip7')
 	individualhomeCountry7 = request.form.get('individualhomeCountry7')
 	individualOwnRentDropdown7 = request.form.get('individualOwnRentDropdown7')
+	if (individualOwnRentDropdown7 is None):
+		individualOwnRentDropdown7 = ''
 	individualMonthlyRent7 = request.form.get('individualMonthlyRent7')
 	individualPassportNumber7 = request.form.get('individualPassportNumber7')
 	individualSsn7 = request.form.get('individualSsn7')
@@ -342,6 +357,8 @@ def loanSubmit():
 	individualHomeZip8 = request.form.get('individualHomeZip8')
 	individualhomeCountry8 = request.form.get('individualhomeCountry8')
 	individualOwnRentDropdown8 = request.form.get('individualOwnRentDropdown8')
+	if (individualOwnRentDropdown8 is None):
+		individualOwnRentDropdown8 = ''
 	individualMonthlyRent8 = request.form.get('individualMonthlyRent8')
 	individualPassportNumber8 = request.form.get('individualPassportNumber8')
 	individualSsn8 = request.form.get('individualSsn8')
@@ -421,12 +438,12 @@ def loanSubmit():
 	folderForApplication = 'LoanApplication' + str(random.randint(1, 100))
 	os.mkdir(folderForApplication)
 	
+	folderForData = os.path.join(folderForApplication, individualLastName1 + individualFirstName1 + 'Data')
+	os.mkdir(folderForData)
+	
 	if (borrowerDropdown == 'Individual'):
 		
-		folderForDataIndividual1 = os.path.join(folderForApplication, individualLastName1 + individualFirstName1 + 'Data')
-		os.mkdir(folderForDataIndividual1)
-		
-		folderForFilesIndividual1 = os.path.join(folderForDataIndividual1, individualLastName1 + individualFirstName1 + 'Files')
+		folderForFilesIndividual1 = os.path.join(folderForData, individualLastName1 + individualFirstName1 + 'Files')
 		os.mkdir(folderForFilesIndividual1)
 		
 		individualPassportFile1 = request.files['individualPassportFile1']
@@ -478,12 +495,9 @@ def loanSubmit():
 		repathedIndividualOfacFile1 = os.path.join(folderForFilesIndividual1, renamedIndividualOfacFile1)
 		individualOfacFile1.save(repathedIndividualOfacFile1)
 		
-		if (len(individualFirstName2) > 0):
+		if (individualFirstName2 is not None):
 			
-			folderForDataIndividual2 = individualLastName2 + individualFirstName2 + 'Data'
-			os.mkdir(folderForDataIndividual2)
-			
-			folderForFilesIndividual2 = os.path.join(folderForDataIndividual2, individualLastName2 + individualFirstName2 + 'Files')
+			folderForFilesIndividual2 = os.path.join(folderForData, individualLastName2 + individualFirstName2 + 'Files')
 			os.mkdir(folderForFilesIndividual2)
 			
 			individualPassportFile2 = request.files['individualPassportFile2']
@@ -535,15 +549,9 @@ def loanSubmit():
 			repathedIndividualOfacFile2 = os.path.join(folderForFilesIndividual2, renamedIndividualOfacFile2)
 			individualOfacFile2.save(repathedIndividualOfacFile2)
 			
+		if (individualFirstName3 is not None):
 			
-			'''
-			
-		if (len(individualFirstName3) > 0):
-			
-			folderForDataIndividual3 = individualLastName3 + individualFirstName3 + 'Data'
-			os.mkdir(folderForDataIndividual3)
-			
-			folderForFilesIndividual3 = os.path.join(folderForDataIndividual3, individualLastName3 + individualFirstName3 + 'Files')
+			folderForFilesIndividual3 = os.path.join(folderForData, individualLastName3 + individualFirstName3 + 'Files')
 			os.mkdir(folderForFilesIndividual3)
 			
 			individualPassportFile3 = request.files['individualPassportFile3']
@@ -595,12 +603,9 @@ def loanSubmit():
 			repathedIndividualOfacFile3 = os.path.join(folderForFilesIndividual3, renamedIndividualOfacFile3)
 			individualOfacFile3.save(repathedIndividualOfacFile3)
 		
-		if (len(individualFirstName4) > 0):
+		if (individualFirstName4 is not None):
 			
-			folderForDataIndividual4 = individualLastName4 + individualFirstName4 + 'Data'
-			os.mkdir(folderForDataIndividual4)
-			
-			folderForFilesIndividual4 = os.path.join(folderForFilesIndividual4, individualLastName4 + individualFirstName4 + 'Files')
+			folderForFilesIndividual4 = os.path.join(folderForData, individualLastName4 + individualFirstName4 + 'Files')
 			os.mkdir(folderForFilesIndividual4)
 			
 			individualPassportFile4 = request.files['individualPassportFile4']
@@ -652,12 +657,9 @@ def loanSubmit():
 			repathedIndividualOfacFile4 = os.path.join(folderForFilesIndividual4, renamedIndividualOfacFile4)
 			individualOfacFile4.save(repathedIndividualOfacFile4)
 			
-		if (len(individualFirstName5) > 0):
+		if (individualFirstName5 is not None):
 			
-			folderForDataIndividual5 = individualLastName5 + individualFirstName5 + 'Data'
-			os.mkdir(folderForDataIndividual5)
-			
-			folderForFilesIndividual5 = os.path.join(folderForFilesIndividual5, individualLastName5 + individualFirstName5 + 'Files')
+			folderForFilesIndividual5 = os.path.join(folderForData, individualLastName5 + individualFirstName5 + 'Files')
 			os.mkdir(folderForFilesIndividual5)
 			
 			individualPassportFile5 = request.files['individualPassportFile5']
@@ -709,12 +711,9 @@ def loanSubmit():
 			repathedIndividualOfacFile5 = os.path.join(folderForFilesIndividual5, renamedIndividualOfacFile5)
 			individualOfacFile5.save(repathedIndividualOfacFile5)
 			
-		if (len(individualFirstName6) > 0):
+		if (individualFirstName6 is not None):
 			
-			folderForDataIndividual6 = individualLastName6 + individualFirstName6 + 'Data'
-			os.mkdir(folderForDataIndividual6)
-			
-			folderForFilesIndividual6 = os.path.join(folderForFilesIndividual6, individualLastName6 + individualFirstName6 + 'Files')
+			folderForFilesIndividual6 = os.path.join(folderForData, individualLastName6 + individualFirstName6 + 'Files')
 			os.mkdir(folderForFilesIndividual6)
 			
 			individualPassportFile6 = request.files['individualPassportFile6']
@@ -766,12 +765,9 @@ def loanSubmit():
 			repathedIndividualOfacFile6 = os.path.join(folderForFilesIndividual6, renamedIndividualOfacFile6)
 			individualOfacFile6.save(repathedIndividualOfacFile6)
 		
-		if (len(individualFirstName7) > 0):
+		if (individualFirstName7 is not None):
 			
-			folderForDataIndividual7 = individualLastName7 + individualFirstName7 + 'Data'
-			os.mkdir(folderForDataIndividual7)
-			
-			folderForFilesIndividual7 = os.path.join(folderForFilesIndividual7, individualLastName7 + individualFirstName7 + 'Files')
+			folderForFilesIndividual7 = os.path.join(folderForData, individualLastName7 + individualFirstName7 + 'Files')
 			os.mkdir(folderForFilesIndividual7)
 			
 			individualPassportFile7 = request.files['individualPassportFile7']
@@ -823,12 +819,9 @@ def loanSubmit():
 			repathedIndividualOfacFile7 = os.path.join(folderForFilesIndividual7, renamedIndividualOfacFile7)
 			individualOfacFile7.save(repathedIndividualOfacFile7)
 			
-		if (len(individualFirstName8) > 0):
+		if (individualFirstName8 is not None):
 			
-			folderForDataIndividual8 = individualLastName8 + individualFirstName8 + 'Data'
-			os.mkdir(folderForDataIndividual8)
-			
-			folderForFilesIndividual8 = os.path.join(folderForFilesIndividual8, individualLastName8 + individualFirstName8 + 'Files')
+			folderForFilesIndividual8 = os.path.join(folderForData, individualLastName8 + individualFirstName8 + 'Files')
 			os.mkdir(folderForFilesIndividual8)
 			
 			individualPassportFile8 = request.files['individualPassportFile8']
@@ -879,10 +872,8 @@ def loanSubmit():
 			renamedIndividualOfacFile8 = individualLastName8 + individualFirstName8 + 'OfacFile8' + individualOfacFile8FileNameExt
 			repathedIndividualOfacFile8 = os.path.join(folderForFilesIndividual8, renamedIndividualOfacFile8)
 			individualOfacFile8.save(repathedIndividualOfacFile8)
-			
-			'''
-			
-			
+
+						
 			
 			
 			
