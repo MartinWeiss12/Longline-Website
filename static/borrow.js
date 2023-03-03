@@ -1226,7 +1226,7 @@ const htmlForAdditionalUbo = `
 
 function addIndividualEventListeners() {
   individualCount = 1;
-
+  
   for (let i = 1; i <= 8; i++) {
     const addIndividualButton = document.getElementById(`addIndividualButton${i}`);
     addIndividualButton.addEventListener('click', function() {
@@ -1243,49 +1243,55 @@ function addIndividualEventListeners() {
             addIndividualButton.style.display = 'none';
           }
         }
+        
+        if (i === 1) {
+          removeIndividualButton.style.display = 'block';
+          removeIndividualButton.style.margin = "0 auto";
+        } else {
+          removeIndividualButton.style.display = 'none';
+        }
       }
     });
-
-      const removeIndividualButton = document.getElementById(`removeIndividualButton${i}`);
-      removeIndividualButton.addEventListener('click', function() {
-        if (individualCount > 2 && individualCount <= 9) {
-          const additionalIndividualInfoToRemove = document.getElementById(`additionalIndividualInfo${individualCount-1}`);
-          additionalIndividualInfoToRemove.remove();
-          
-          const replacementDiv = document.createElement("div");
-          replacementDiv.setAttribute("id", `additionalIndividualInfo${individualCount-1}`);
-          // Add any content or attributes you need to the replacement div here
-          
-          const divAfterOneJustRemoved = document.getElementById(`additionalIndividualInfo${individualCount}`);
-          const parentDiv = additionalIndividualInfo1.parentNode;
-          parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
-          
-          individualCount--;
-        }
+    
+    const removeIndividualButton = document.getElementById(`removeIndividualButton${i}`);
+    removeIndividualButton.addEventListener('click', function() {
+      if (individualCount > 2 && individualCount <= 9) {
+        const additionalIndividualInfoToRemove = document.getElementById(`additionalIndividualInfo${individualCount-1}`);
+        additionalIndividualInfoToRemove.remove();
         
-        // Check if additionalIndividualInfo1 is present, and if it should be removed
-        const additionalIndividualInfo1Present = document.getElementById("additionalIndividualInfo1");
-        if (additionalIndividualInfo1Present && individualCount === 1) {
-          const additionalIndividualInfoToRemove = additionalIndividualInfo1Present;
-          additionalIndividualInfoToRemove.remove();
-          
-          const replacementDiv = document.createElement("div");
-          replacementDiv.setAttribute("id", "additionalIndividualInfo1");
-          // Add any content or attributes you need to the replacement div here
-          
-          const firstDiv = document.getElementById("additionalIndividualInfo");
-          const parentDiv = firstDiv.parentNode;
-          parentDiv.insertBefore(replacementDiv, firstDiv);
-          
-          individualCount--;
-        }
-      });
+        const replacementDiv = document.createElement("div");
+        replacementDiv.setAttribute("id", `additionalIndividualInfo${individualCount-1}`);
+        // Add any content or attributes you need to the replacement div here
+        
+        const divAfterOneJustRemoved = document.getElementById(`additionalIndividualInfo${individualCount}`);
+        const parentDiv = additionalIndividualInfo1.parentNode;
+        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
+        
+        individualCount--;
+      }
+      
+      // Check if additionalIndividualInfo1 is present, and if it should be removed
+      const additionalIndividualInfo1Present = document.getElementById("additionalIndividualInfo1");
+      if (additionalIndividualInfo1Present && individualCount === 1) {
+        const additionalIndividualInfoToRemove = additionalIndividualInfo1Present;
+        additionalIndividualInfoToRemove.remove();
+        
+        const replacementDiv = document.createElement("div");
+        replacementDiv.setAttribute("id", "additionalIndividualInfo1");
+        // Add any content or attributes you need to the replacement div here
+        
+        const firstDiv = document.getElementById("additionalIndividualInfo");
+        const parentDiv = firstDiv.parentNode;
+        parentDiv.insertBefore(replacementDiv, firstDiv);
+        
+        individualCount--;
+      }
+    });
   }
 }
 
 function addUboEventListeners() {
   uboCount = 1;
-  
   for (let i = 1; i <= 8; i++) {
     const addUboButton = document.getElementById(`addUboButton${i}`);
     addUboButton.addEventListener('click', function() {
@@ -1302,6 +1308,15 @@ function addUboEventListeners() {
             addUboButton.style.display = 'none';
           }
         }
+        
+        if (i === 1) {
+          removeUboButton.style.display = 'block';
+          removeUboButton.style.margin = "0 auto";
+        } else {
+          removeUboButton.style.display = 'none';
+        }
+
+        
       }
     });
     
@@ -1344,7 +1359,6 @@ function addUboEventListeners() {
 
 function addDirectorEventListeners() {
   directorCount = 1;
-  
   for (let i = 1; i <= 8; i++) {
     const addDirectorButton = document.getElementById(`addDirectorButton${i}`);
     addDirectorButton.addEventListener('click', function() {
@@ -1361,6 +1375,14 @@ function addDirectorEventListeners() {
             addDirectorButton.style.display = 'none';
           }
         }
+        
+        if (i === 1) {
+          removeDirectorButton.style.display = 'block';
+          removeDirectorButton.style.margin = "0 auto";
+        } else {
+          removeDirectorButton.style.display = 'none';
+        }
+        
       }
     });
     
@@ -1421,19 +1443,11 @@ function handleBorrowerSelect() {
   var individualCount = 1;
   var uboCount = 1;
   submitButton.disabled = true;
-    
+  
   if (option.value == "Individual") {   
     
     submitButton.disabled = true;
     
-    
-//  if (individualCount === 1) {
-//    removeIndividualButton.style.display = "none";
-//  } else {
-//    removeIndividualButton.style.display = "block"; // show the button
-//    removeIndividualButton.style.margin = "0 auto";
-//  }
-  
     document.getElementById("borrowerSpecificDetails").innerHTML = "";
     document.getElementById("additionalUboInfo1").innerHTML = "";
     document.getElementById("additionalUboInfo2").innerHTML = "";
@@ -1452,7 +1466,7 @@ function handleBorrowerSelect() {
     document.getElementById("additionalDirectorInfo6").innerHTML = "";
     document.getElementById("additionalDirectorInfo7").innerHTML = "";
     document.getElementById("additionalDirectorInfo8").innerHTML = "";
-
+    
     entityContainer.innerHTML = htmlForIndividualStepTitle;
     addUboButton.style.display = "none"; // hide the button
     addDirectorButton.style.display = "none"; // hide the button
@@ -1460,8 +1474,8 @@ function handleBorrowerSelect() {
     removeDirectorButton.style.display = "none"; // hide the button
     addIndividualButton.style.display = "block"; // show the button
     addIndividualButton.style.margin = "0 auto";
-    removeIndividualButton.style.display = "block"; // show the button
-    removeIndividualButton.style.margin = "0 auto";
+//  removeIndividualButton.style.display = "block"; // show the button
+//  removeIndividualButton.style.margin = "0 auto";
     addIndividualEventListeners();
     
     additionalUboInfo1.style.display = 'none';
@@ -1491,7 +1505,7 @@ function handleBorrowerSelect() {
     additionalIndividualInfo6.style.display = 'block';
     additionalIndividualInfo7.style.display = 'block';
     additionalIndividualInfo8.style.display = 'block';
-
+    
   }
   
   if (option.value == "Entity") {
@@ -1515,12 +1529,12 @@ function handleBorrowerSelect() {
     addUboButton.style.margin = "0 auto";
     addDirectorButton.style.display = "block"; // show the button
     addDirectorButton.style.margin = "0 auto";
-    removeUboButton.style.display = "block"; // show the button
-    removeUboButton.style.margin = "0 auto";
-    removeDirectorButton.style.display = "block"; // show the button
-    removeDirectorButton.style.margin = "0 auto";
+//  removeUboButton.style.display = "block"; // show the button
+//  removeUboButton.style.margin = "0 auto";
+//  removeDirectorButton.style.display = "block"; // show the button
+//  removeDirectorButton.style.margin = "0 auto";
     addUboEventListeners();
-
+    
     additionalUboInfo1.style.display = 'block';
     additionalUboInfo2.style.display = 'block';
     additionalUboInfo3.style.display = 'block';
