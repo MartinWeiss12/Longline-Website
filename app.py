@@ -36,10 +36,10 @@ def solutions():
 	if request.method == 'GET':
 		return render_template('solutions.html', title='Solutions')
 	
-@app.route('/invest', methods=['GET', 'POST'])
-def invest():
-	if request.method == 'GET':
-		return render_template('invest.html', title='Invest')
+#@app.route('/invest', methods=['GET', 'POST'])
+#def invest():
+#	if request.method == 'GET':
+#		return render_template('invest.html', title='Invest')
 	
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
@@ -60,7 +60,6 @@ def borrowLogin():
 def borrow():
 	
 	userPin = request.form.get('userPin')
-	
 	if(userPin == flaskBackendPin):
 		return render_template('borrow.html', title='Borrow')
 	else:
@@ -68,24 +67,55 @@ def borrow():
 		return render_template('borrowLogin.html', title='Borrow', error=error)
 	
 @app.route('/borrow')
-def borrow_redirect():
+def borrowRedirect():
 	userPin = request.args.get('userPin')
 	if userPin == flaskBackendPin:
 		return render_template('borrow.html', title='Borrow')
 	else:
 		return redirect('/borrowLogin')
+
+@app.route('/investorLogin', methods=['GET', 'POST'])
+def investorLogin():
+	if request.method == 'GET':
+		return render_template('investorLogin.html', title='Invest')
+
+@app.route('/invest', methods=['POST'])
+def invest():
 	
-@app.route('/submit')
-def submit_redirect():
+	userPin = request.form.get('userPin')
+	if(userPin == flaskBackendPin):
+		return render_template('invest.html', title='Invest')
+	else:
+		error = 'Incorrect PIN. Please try again.'
+		return render_template('investorLogin.html', title='Invest', error=error)
+	
+@app.route('/invest')
+def investRedirect():
 	userPin = request.args.get('userPin')
 	if userPin == flaskBackendPin:
-		return render_template('submit.html', title='Submit')
+		return render_template('invest.html', title='Invest')
+	else:
+		return redirect('/investorLogin')
+	
+@app.route('/borrowSubmitted')
+def loanSubmitRedirect():
+	userPin = request.args.get('userPin')
+	if userPin == flaskBackendPin:
+		return render_template('borrowSubmitted.html', title='Submitted')
 	else:
 		return redirect('/borrowLogin')
+
+@app.route('/investorSubmitted')
+def investSubmitRedirect():
+	userPin = request.args.get('userPin')
+	if userPin == flaskBackendPin:
+		return render_template('investorSubmitted.html', title='Submitted')
+	else:
+		return redirect('/investorLogin')
 	
 	
-@app.route('/submit', methods=['POST'])
-def submit():
+@app.route('/borrowSubmitted', methods=['POST'])
+def loanSubmit():
 	
 	loanPurpose = request.form.getlist('loanPurpose')
 	otherLoanPurpose = request.form.get('otherLoanText')
@@ -288,7 +318,7 @@ def submit():
 	object_key = 'data.json'
 	#s3.Object(bucket_name, object_key).put(Body=open('data.json', 'rb'))
 	
-	return render_template('submitted.html', title='Submitted')
+	return render_template('borrowSubmitted.html', title='Submitted')
 
 
 
@@ -311,7 +341,10 @@ def submit():
 
 
 
+@app.route('/investorSubmitted', methods=['POST'])
+def investorSubmit():
 
+	return render_template('investorSubmitted.html', title='Submitted')
 
 
 

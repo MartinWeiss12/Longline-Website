@@ -120,7 +120,7 @@ const entityContainer = document.getElementById("investorSpecificDetails");
 const htmlForIndividualStepTitle = `
     
   <br><br><br><h2 id="stepSixIndividualTitle">Step 6 - Individual Info</h2><br>
-  <br><br><h2 id="stepSixIndividualSubtitle1"> At Least ONE Individual is Required</h2><br>
+  <br><h2 id="stepSixIndividualSubtitle1"> At Least ONE Individual is Required</h2><br>
   <br><h3 id="stepSixIndividualSubtitle2">There is a max of 8 Individuals</h3>
 
 
@@ -227,7 +227,7 @@ const htmlForEntity = `
   </div>
 
   <br><br><br><h2 id="stepSixUboTitle">Step 6 - UBO and Director Info</h2><br>  
-  <br><br><h2 id="stepSixUboSubtitle"> At Least ONE UBO is Required</h2><br>
+  <br><h2 id="stepSixUboSubtitle"> At Least ONE UBO is Required</h2><br>
   <br><h3 id="uboInfoSubtitle1">Please add UBOs THEN Directors</h3>
   <br><h3 id="uboInfoSubtitle2">There is a max of 8 UBOs and 8 Directors</h3>
   
@@ -749,7 +749,7 @@ const htmlForAdditionalUbo = `
   <br><br><h3 id="directorInfoSubtitle{{index}}">Info for Director {{index}}</h3>
   
   <div class="labels">
-    <label for="directorControlPersonAuthDropdown">Control Person Authorized to Apply for, Take, and Execute, Loan?</label>
+    <label for="directorControlPersonAuthDropdown">Control Person Authorized to Apply for, Make, and Execute, Investment?</label>
   </div>
   <div class="input-tab">
     <select id="directorControlPersonAuthDropdown" name="directorControlPersonAuthDropdown{{index}}" style="width: 262px;" required>
