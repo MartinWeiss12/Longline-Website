@@ -1405,18 +1405,9 @@ function addDirectorEventListeners() {
     const removeDirectorButton = document.getElementById(`removeDirectorButton${i}`);
     removeDirectorButton.addEventListener('click', function() {
       if (directorCount > 1 && directorCount <= 9) {
-        const additionalDirectorInfoToRemove = document.getElementById(`additionalDirectorInfo${directorCount}`);
-        additionalDirectorInfoToRemove.remove();
+        const additionalDirectorInfoToRemove = document.getElementById(`additionalDirectorInfo${directorCount-1}`);
+        additionalDirectorInfoToRemove.innerHTML = ''; // clear the content of the div
         
-        const replacementDiv = document.createElement("div");
-        const replacementDivID = `additionalDirectorInfo${directorCount}`;
-        replacementDiv.setAttribute("id", replacementDivID);
-        // Add any content or attributes you need to the replacement div here
-        
-        const divAfterOneJustRemoved = document.getElementById(`additionalDirectorInfo${directorCount-1}`);
-        const parentDiv = divAfterOneJustRemoved.parentNode;
-        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved.nextSibling);
-
         directorCount--;
         
         if (directorCount === 0) {
@@ -1426,16 +1417,7 @@ function addDirectorEventListeners() {
       
       const additionalDirectorInfo1Present = document.getElementById("additionalDirectorInfo1");
       if (additionalDirectorInfo1Present && directorCount === 1) {
-        const additionalDirectorInfoToRemove = additionalDirectorInfo1Present;
-        additionalDirectorInfoToRemove.remove();
-        
-        const replacementDiv = document.createElement("div");
-        replacementDiv.setAttribute("id", "additionalDirectorInfo1");
-        // Add any content or attributes you need to the replacement div here
-        
-        const firstDiv = document.getElementById("additionalDirectorInfo");
-        const parentDiv = firstDiv.parentNode;
-        parentDiv.insertBefore(replacementDiv, firstDiv);
+        additionalDirectorInfo1Present.innerHTML = ''; // clear the content of the div
       }
       
       if (directorCount === 1) {
