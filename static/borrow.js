@@ -1301,8 +1301,6 @@ function addIndividualEventListeners() {
   }
 }
 
-
-
 function addUboEventListeners() {
   uboCount = 1;
   for (let i = 1; i <= 8; i++) {
@@ -1404,23 +1402,21 @@ function addDirectorEventListeners() {
       }
     });
     
-    
     const removeDirectorButton = document.getElementById(`removeDirectorButton${i}`);
     removeDirectorButton.addEventListener('click', function() {
       if (directorCount > 1 && directorCount <= 9) {
-        const additionalDirectorInfoToRemove = document.getElementById(`additionalDirectorInfo${directorCount-1}`);
+        const additionalDirectorInfoToRemove = document.getElementById(`additionalDirectorInfo${directorCount}`);
         additionalDirectorInfoToRemove.remove();
         
         const replacementDiv = document.createElement("div");
-        const replacementDivID = `additionalDirectorInfo${directorCount-1}`;
+        const replacementDivID = `additionalDirectorInfo${directorCount}`;
         replacementDiv.setAttribute("id", replacementDivID);
         // Add any content or attributes you need to the replacement div here
         
-        const divAfterOneJustRemoved = document.getElementById(`additionalDirectorInfo${directorCount}`);
+        const divAfterOneJustRemoved = document.getElementById(`additionalDirectorInfo${directorCount-1}`);
         const parentDiv = divAfterOneJustRemoved.parentNode;
         parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved.nextSibling);
 
-        
         directorCount--;
         
         if (directorCount === 0) {
@@ -1453,13 +1449,6 @@ function addDirectorEventListeners() {
     });
   }
 }
-
-
-
-
-
-
-
 
 var addIndividualButton = document.getElementById("addIndividualButton1");
 addIndividualButton.style.display = "none"; // hide the button by default
