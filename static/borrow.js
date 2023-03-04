@@ -255,7 +255,7 @@ function otherBankAccountType() {
   var select = document.getElementById("bankAccountTypeDropdown");
   var option = select.options[select.selectedIndex];
   
-  if (option.value == "bankOther") {
+  if (option.value == "Other") {
     bankOtherInputContainer.innerHTML = otherBankAccountHtml;
   } else {
     bankOtherInputContainer.innerHTML = "";
@@ -1240,12 +1240,16 @@ function addIndividualEventListeners() {
         additionalIndividualInfo.insertAdjacentHTML('beforeend', htmlForAdditionalIndividualWithIndex);
         
         
-        if (i === 1) {
+        if (individualCount === 1) {
+          removeIndividualButton.style.display = 'none';
+        } else {
           removeIndividualButton.style.display = 'block';
           removeIndividualButton.style.margin = "0 auto";
-        } else {
-          removeIndividualButton.style.display = 'none';
         }
+        
+//      if (individualCount > 1){
+//        
+//      }
         
         if (individualCount === 8) {
           const addIndividualButton1 = document.getElementById('addIndividualButton1');
@@ -1305,11 +1309,11 @@ function addUboEventListeners() {
         const htmlForAdditionalUboWithIndex = htmlForAdditionalUbo.replace(/{{index}}/g, uboCount);
         additionalUboInfo.insertAdjacentHTML('beforeend', htmlForAdditionalUboWithIndex);
         
-        if (i === 1) {
+        if (uboCount === 1) {
+          removeUboButton.style.display = 'none';
+        } else {
           removeUboButton.style.display = 'block';
           removeUboButton.style.margin = "0 auto";
-        } else {
-          removeUboButton.style.display = 'none';
         }
         
         if (uboCount === 8) {
@@ -1369,11 +1373,11 @@ function addDirectorEventListeners() {
         const htmlForAdditionalDirectorWithIndex = htmlForAdditionalDirector.replace(/{{index}}/g, directorCount);
         additionalDirectorInfo.insertAdjacentHTML('beforeend', htmlForAdditionalDirectorWithIndex);
         
-        if (i === 1) {
+        if (directorCount === 1) {
+          removeDirectorButton.style.display = 'none';
+        } else {
           removeDirectorButton.style.display = 'block';
           removeDirectorButton.style.margin = "0 auto";
-        } else {
-          removeDirectorButton.style.display = 'none';
         }
         
         if (directorCount === 8) {
@@ -1404,7 +1408,7 @@ function addDirectorEventListeners() {
       
       // Check if additionalDirectorInfo1 is present, and if it should be removed
       const additionalDirectorInfo1Present = document.getElementById("additionalDirectorInfo1");
-      if (additionalDirectorInfo1Present && directorCount === 2) {
+      if (additionalDirectorInfo1Present && directorCount === 1) {
         const additionalDirectorInfoToRemove = additionalDirectorInfo1Present;
         additionalDirectorInfoToRemove.remove();
         
@@ -1441,6 +1445,7 @@ function handleBorrowerSelect() {
   var option = select.options[select.selectedIndex];
   var individualCount = 1;
   var uboCount = 1;
+  var directorCount = 1;
   submitButton.disabled = true;
   
   if (option.value == "Individual") {   
@@ -1508,7 +1513,6 @@ function handleBorrowerSelect() {
   if (option.value == "Entity") {
     
     submitButton.disabled = true;
-    var directorCount = 1;
     
     document.getElementById("additionalIndividualInfo1").innerHTML = "";
     document.getElementById("additionalIndividualInfo2").innerHTML = "";

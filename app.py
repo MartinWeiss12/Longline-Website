@@ -8,7 +8,6 @@ from flask import Flask, render_template, request, jsonify, session, redirect, m
 from flask_session import Session
 from werkzeug.utils import secure_filename
 
-
 app = Flask(__name__, template_folder='templates')
 app.config ['SECRET_KEY'] = 'longline'
 #app.config ['SESSION_PERMANENT'] = False
@@ -17,7 +16,6 @@ app.config ['SECRET_KEY'] = 'longline'
 
 directory = '/userFiles'
 flaskBackendPin = '1234'
-
 
 @app.route('/')
 def index():
@@ -32,11 +30,6 @@ def about():
 def solutions():
 	if request.method == 'GET':
 		return render_template('solutions.html', title='Solutions')
-	
-#@app.route('/invest', methods=['GET', 'POST'])
-#def invest():
-#	if request.method == 'GET':
-#		return render_template('invest.html', title='Invest')
 	
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
@@ -109,14 +102,13 @@ def investSubmitRedirect():
 		return render_template('investorSubmitted.html', title='Submitted')
 	else:
 		return redirect('/investorLogin')
-	
-	
+
 @app.route('/borrowSubmitted', methods=['POST'])
 def loanSubmit():
 	
 	data = {}
 	data['Loan Purpose'] = request.form.getlist('loanPurpose')
-	data['Other Loan Purpose'] = request.form.get('otherLoanText', '#No Value')
+	data['Loan Purpose (other)'] = request.form.get('otherLoanText', '#No Value')
 	data['Loan Total'] = request.form.get('loanTotal')
 	data['Trance Amount'] = request.form.get('trancheAmt')
 	data['Number of Tranches'] = request.form.get('numTranches')
@@ -150,6 +142,14 @@ def loanSubmit():
 	data['Agree Disbursed Total'] = request.form.get('agreeDisbursedTotal')
 	data['Borrower is an'] = request.form.get('borrowerDropdown')
 	data['Beneficiary Name'] = request.form.get('beneficiaryName')
+	data['Bank Name'] = request.form.get('bankName')
+	data['Bank Address'] = request.form.get('bankAddress')
+	data['Bank City'] = request.form.get('bankCity')
+	data['Bank State'] = request.form.get('bankState')
+	data['Bank Account Type'] = request.form.get('bankAccountTypeDropdown')
+	data['Bank Account Type (other)'] = request.form.get('bankAccountOther', '#No Value')
+	data['IBAN'] = request.form.get('iban')
+	data['IBAN'] = request.form.get('iban')
 	
 	repeatedIndividualData = {}
 	for i in range(1, 9):
@@ -217,6 +217,7 @@ def loanSubmit():
 
 	# Upload cleanedData.json to S3
 	#s3 = boto3.resource('s3')
+	# make two buckets, one for borrowers, one for investors
 	bucket_name = 'your-bucket-name'
 	object_key = 'data.json'
 	#s3.Object(bucket_name, object_key).put(Body=open('cleanedData.json', 'rb'))
