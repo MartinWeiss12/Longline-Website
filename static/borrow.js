@@ -1294,7 +1294,7 @@ function addIndividualEventListeners() {
       }
       
       const addIndividualButton1 = document.getElementById('addIndividualButton1');
-      if (individualCount < 8) {
+      if (individualCount <= 8) {
         addIndividualButton1.style.display = 'block';
       }
     });
@@ -1372,7 +1372,7 @@ function addUboEventListeners() {
       }
       
       const addUboButton1 = document.getElementById('addUboButton1');
-      if (uboCount < 8) {
+      if (uboCount <= 8) {
         addUboButton1.style.display = 'block';
       }
     });
@@ -1447,7 +1447,7 @@ function addDirectorEventListeners() {
       }
       
       const addDirectorButton1 = document.getElementById('addDirectorButton1');
-      if (directorCount < 8) {
+      if (directorCount <= 8) {
         addDirectorButton1.style.display = 'block';
       }
     });
