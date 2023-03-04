@@ -1265,9 +1265,9 @@ function addIndividualEventListeners() {
         replacementDiv.setAttribute("id", `additionalIndividualInfo${individualCount-1}`);
         // Add any content or attributes you need to the replacement div here
         
-        const divAfterOneJustRemoved = document.getElementById(`additionalIndividualInfo${individualCount}`);
+        const divAfterOneJustRemoved = document.getElementById(`additionalIndividualInfo${individualCount-2}`);
         const parentDiv = additionalIndividualInfo1.parentNode;
-        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
+        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved.nextSibling);
         
         individualCount--;
       }
@@ -1300,6 +1300,7 @@ function addIndividualEventListeners() {
     });
   }
 }
+
 
 
 function addUboEventListeners() {
@@ -1342,9 +1343,9 @@ function addUboEventListeners() {
         replacementDiv.setAttribute("id", `additionalUboInfo${uboCount-1}`);
         // Add any content or attributes you need to the replacement div here
         
-        const divAfterOneJustRemoved = document.getElementById(`additionalUboInfo${uboCount}`);
+        const divAfterOneJustRemoved = document.getElementById(`additionalUboInfo${uboCount-2}`);
         const parentDiv = additionalUboInfo1.parentNode;
-        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
+        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved.nextSibling);
         
         uboCount--;
       }
@@ -1368,6 +1369,11 @@ function addUboEventListeners() {
       
       if (uboCount === 2) {
         removeUboButton.style.display = 'none';
+      }
+      
+      const addUboButton1 = document.getElementById('addUboButton1');
+      if (uboCount < 8) {
+        addUboButton1.style.display = 'block';
       }
     });
   }
@@ -1412,7 +1418,8 @@ function addDirectorEventListeners() {
         
         const divAfterOneJustRemoved = document.getElementById(`additionalDirectorInfo${directorCount}`);
         const parentDiv = divAfterOneJustRemoved.parentNode;
-        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
+        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved.nextSibling);
+
         
         directorCount--;
         
@@ -1435,9 +1442,13 @@ function addDirectorEventListeners() {
         parentDiv.insertBefore(replacementDiv, firstDiv);
       }
       
-      // Hide the "remove director" button if all directors have been removed
       if (directorCount === 1) {
         removeDirectorButton.style.display = 'none';
+      }
+      
+      const addDirectorButton1 = document.getElementById('addDirectorButton1');
+      if (directorCount < 8) {
+        addDirectorButton1.style.display = 'block';
       }
     });
   }
