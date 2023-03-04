@@ -7,8 +7,6 @@ import datetime
 from flask import Flask, render_template, request, jsonify, session, redirect, make_response
 from flask_session import Session
 from werkzeug.utils import secure_filename
-from io import BytesIO
-import pdfkit
 
 
 app = Flask(__name__, template_folder='templates')
@@ -180,17 +178,15 @@ def loanSubmit():
 		repeatedIndividualData[f'Individual {i} Crime'] = request.form.get(f'individualCrime{i}', '#No Value')
 		repeatedIndividualData[f'Individual {i} Declare'] = request.form.get(f'individualDeclareCheckbox{i}', '#No Value')
 		
-		
 	data.update(repeatedIndividualData)	
 	loanApplicationNumber = str(random.randint(1, 100))
 	folderForApplication = 'LoanApplication' + loanApplicationNumber
 	os.mkdir(folderForApplication)
 	
 	if (request.form.get('borrowerDropdown') == 'Individual'):
-		
 		for i in range(1, 9):
-			individualFirstName = request.form.get(f'individualFirstName{i}', '#No Value')
-			individualLastName = request.form.get(f'individualLastName{i}', '#No Value')
+			individualFirstName = repeatedIndividualData[f'Individual {i} First Name']
+			individualLastName = repeatedIndividualData[f'Individual {i} First Name']
 			PassportFile = f'individualPassportFile{i}'
 			DNIFrontFile = f'individualDniFrontFile{i}'
 			DNIReverseFile = f'individualDniReverseFile{i}'
@@ -218,60 +214,20 @@ def loanSubmit():
 	with open(f'{folderForApplication}/{jsonName}', 'w') as f:
 		json.dump(cleanedData, f)
 		
-		
-		
-		
-		
-		
-		
-		
-		
-#   html = render_template('borrow.html') #use longlinelending.com, not borrow.html
-#   pdf = pdfkit.from_string(html, options={'enable-local-file-access': ''})
-#   
-#   # Save the PDF file to disk
-#   with open('output.pdf', 'wb') as f:
-#       f.write(pdf)
-		
-		
-		
-#   JSON -> fileName = last name + first name + date/loan number?
-		
-	# Upload data.json to S3
+
+	# Upload cleanedData.json to S3
 	#s3 = boto3.resource('s3')
 	bucket_name = 'your-bucket-name'
 	object_key = 'data.json'
-	#s3.Object(bucket_name, object_key).put(Body=open('data.json', 'rb'))
+	#s3.Object(bucket_name, object_key).put(Body=open('cleanedData.json', 'rb'))
 	
 	return render_template('borrowSubmitted.html', title='Submitted')
-
-
-
-
-
-
-#@app.route('/submit', methods=['POST'])
-#def downloadPDF():
-#   form_data = request.form
-#   
-#   # create PDF version of HTML form data
-#   pdf = pdfkit.from_file('borrow.html', False)
-#   
-#   # set headers to download the PDF file
-#   response = make_response(pdf)
-#   response.headers['Content-Type'] = 'application/pdf'
-#   response.headers['Content-Disposition'] = 'attachment; filename=form.pdf'
-#   
-#   return response
-
 
 
 @app.route('/investorSubmitted', methods=['POST'])
 def investorSubmit():
 	
 	return render_template('investorSubmitted.html', title='Submitted')
-
-
 
 
 if __name__ == '__main__':
