@@ -306,31 +306,6 @@ def loanSubmit():
 	with open(f'{folderForApplication}/{jsonName}', 'w') as f:
 		json.dump(cleanedData, f)
 	
-#	if (request.form.get('borrowerDropdown') == 'Individual' and individualFirstName != '!#$'):
-#		folderForIndividualFilesName = individualLastName + individualFirstName + 'Files'
-#		folderForIndividualFiles = os.path.join(folderForApplication, folderForIndividualFilesName)
-#		os.mkdir(folderForIndividualFiles)
-#		
-#		for i in range(1, 9):
-#			PassportFile = f'individualPassportFile{i}'
-#			DNIFrontFile = f'individualDniFrontFile{i}'
-#			DNIReverseFile = f'individualDniReverseFile{i}'
-#			BillAddressProofFile = f'individualBillAddressProofFile{i}'
-#			CreditCheckFile = f'individualCreditCheckFile{i}'
-#			WorldCheckFile = f'individualWorldCheckFile{i}'
-#			OFACFile = f'individualOfacFile{i}'
-#			
-#			for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
-#				file = request.files[fileType]
-#				fileName = secure_filename(file.filename)
-#				fileNameExt = os.path.splitext(fileName)[1]
-#				newFileName = (individualLastName + individualFirstName + fileType + fileNameExt).replace('individual', '')
-#				newFilePath = os.path.join(folderForIndividualFiles, newFileName)
-#				file.save(newFilePath)
-					
-
-	
-	
 	if (request.form.get('borrowerDropdown') == 'Individual' and individualFirstName != '!#$'):
 		folderForIndividualFilesName = individualLastName + individualFirstName + 'Files'
 		folderForIndividualFiles = os.path.join(folderForApplication, folderForIndividualFilesName)
@@ -353,7 +328,6 @@ def loanSubmit():
 					newFileName = (individualLastName + individualFirstName + fileType + fileNameExt).replace('individual', '')
 					newFilePath = os.path.join(folderForIndividualFiles, newFileName)
 					file.save(newFilePath)
-				
 		
 		bankAccountFile = request.files['bankAccountFile']
 		bankAccountFileName = secure_filename(bankAccountFile.filename)
@@ -408,13 +382,13 @@ def loanSubmit():
 					newFilePath = os.path.join(folderForDirectorFiles, newFileName)
 					file.save(newFilePath)
 					
-#	if (request.form.get('borrowerDropdown') == 'Entity'):
-#		bankAccountFile = request.files['bankAccountFile']
-#		bankAccountFileName = secure_filename(bankAccountFile.filename)
-#		bankAccountFileNameExt = os.path.splitext(bankAccountFileName)[1]
-#		newBankAccountFileName = entityName + 'bankAccountFile' + bankAccountFileNameExt
-#		newBankAccountFilePath = os.path.join(folderForEntityFiles, newBankAccountFileName)
-#		bankAccountFile.save(newBankAccountFilePath)
+	if (request.form.get('borrowerDropdown') == 'Entity'):
+		bankAccountFile = request.files['bankAccountFile']
+		bankAccountFileName = secure_filename(bankAccountFile.filename)
+		bankAccountFileNameExt = os.path.splitext(bankAccountFileName)[1]
+		newBankAccountFileName = entityName + 'bankAccountFile' + bankAccountFileNameExt
+		newBankAccountFilePath = os.path.join(folderForEntityFiles, newBankAccountFileName)
+		bankAccountFile.save(newBankAccountFilePath)
 					
 
 	# Upload cleanedData.json to S3
