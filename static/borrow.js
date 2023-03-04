@@ -376,7 +376,6 @@ const htmlForEntity = `
 
   <br><br><br><h2 id="stepSixUboTitle">Step 6 - UBO and Director Info</h2><br>  
   <br><h2 id="stepSixUboSubtitle"> At Least ONE UBO is Required</h2><br>
-  <br><h3 id="uboInfoSubtitle1">Please add UBOs THEN Directors</h3>
   <br><h3 id="uboInfoSubtitle2">There is a max of 8 UBOs and 8 Directors</h3>
   
 `;
@@ -1238,7 +1237,6 @@ function addIndividualEventListeners() {
         const htmlForAdditionalIndividualWithIndex = htmlForAdditionalIndividual.replace(/{{index}}/g, individualCount);
         additionalIndividualInfo.insertAdjacentHTML('beforeend', htmlForAdditionalIndividualWithIndex);
         
-        
         if (individualCount === 1) {
           removeIndividualButton.style.display = 'none';
         } else {
@@ -1259,33 +1257,7 @@ function addIndividualEventListeners() {
     removeIndividualButton.addEventListener('click', function() {
       if (individualCount > 2 && individualCount <= 9) {
         const additionalIndividualInfoToRemove = document.getElementById(`additionalIndividualInfo${individualCount-1}`);
-        additionalIndividualInfoToRemove.remove();
-        
-        const replacementDiv = document.createElement("div");
-        replacementDiv.setAttribute("id", `additionalIndividualInfo${individualCount-1}`);
-        // Add any content or attributes you need to the replacement div here
-        
-        const divAfterOneJustRemoved = document.getElementById(`additionalIndividualInfo${individualCount-2}`);
-        const parentDiv = additionalIndividualInfo1.parentNode;
-        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved.nextSibling);
-        
-        individualCount--;
-      }
-      
-      // Check if additionalIndividualInfo1 is present, and if it should be removed
-      const additionalIndividualInfo1Present = document.getElementById("additionalIndividualInfo1");
-      if (additionalIndividualInfo1Present && individualCount === 1) {
-        const additionalIndividualInfoToRemove = additionalIndividualInfo1Present;
-        additionalIndividualInfoToRemove.remove();
-        
-        const replacementDiv = document.createElement("div");
-        replacementDiv.setAttribute("id", "additionalIndividualInfo1");
-        // Add any content or attributes you need to the replacement div here
-        
-        const firstDiv = document.getElementById("additionalIndividualInfo");
-        const parentDiv = firstDiv.parentNode;
-        parentDiv.insertBefore(replacementDiv, firstDiv);
-        
+        additionalIndividualInfoToRemove.innerHTML = '';
         individualCount--;
       }
       
@@ -1335,33 +1307,7 @@ function addUboEventListeners() {
     removeUboButton.addEventListener('click', function() {
       if (uboCount > 2 && uboCount <= 9) {
         const additionalUboInfoToRemove = document.getElementById(`additionalUboInfo${uboCount-1}`);
-        additionalUboInfoToRemove.remove();
-        
-        const replacementDiv = document.createElement("div");
-        replacementDiv.setAttribute("id", `additionalUboInfo${uboCount-1}`);
-        // Add any content or attributes you need to the replacement div here
-        
-        const divAfterOneJustRemoved = document.getElementById(`additionalUboInfo${uboCount-2}`);
-        const parentDiv = additionalUboInfo1.parentNode;
-        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved.nextSibling);
-        
-        uboCount--;
-      }
-      
-      // Check if additionalUboInfo1 is present, and if it should be removed
-      const additionalUboInfo1Present = document.getElementById("additionalUboInfo1");
-      if (additionalUboInfo1Present && uboCount === 1) {
-        const additionalUboInfoToRemove = additionalUboInfo1Present;
-        additionalUboInfoToRemove.remove();
-        
-        const replacementDiv = document.createElement("div");
-        replacementDiv.setAttribute("id", "additionalUboInfo1");
-        // Add any content or attributes you need to the replacement div here
-        
-        const firstDiv = document.getElementById("additionalUboInfo");
-        const parentDiv = firstDiv.parentNode;
-        parentDiv.insertBefore(replacementDiv, firstDiv);
-        
+        additionalUboInfoToRemove.innerHTML = '';
         uboCount--;
       }
       
@@ -1485,35 +1431,6 @@ function handleBorrowerSelect() {
     addIndividualButton.style.display = "block"; // show the button
     addIndividualButton.style.margin = "0 auto";
     addIndividualEventListeners();
-    
-    additionalUboInfo1.style.display = 'none';
-    additionalUboInfo1.style.display = 'none';
-    additionalUboInfo2.style.display = 'none';
-    additionalUboInfo3.style.display = 'none';
-    additionalUboInfo4.style.display = 'none';
-    additionalUboInfo5.style.display = 'none';
-    additionalUboInfo6.style.display = 'none';
-    additionalUboInfo7.style.display = 'none';
-    additionalUboInfo8.style.display = 'none';
-    
-    additionalDirectorInfo1.style.display = 'none';
-    additionalDirectorInfo2.style.display = 'none';
-    additionalDirectorInfo3.style.display = 'none';
-    additionalDirectorInfo4.style.display = 'none';
-    additionalDirectorInfo5.style.display = 'none';
-    additionalDirectorInfo6.style.display = 'none';
-    additionalDirectorInfo7.style.display = 'none';
-    additionalDirectorInfo8.style.display = 'none';
-    
-    additionalIndividualInfo1.style.display = 'block';
-    additionalIndividualInfo2.style.display = 'block';
-    additionalIndividualInfo3.style.display = 'block';
-    additionalIndividualInfo4.style.display = 'block';
-    additionalIndividualInfo5.style.display = 'block';
-    additionalIndividualInfo6.style.display = 'block';
-    additionalIndividualInfo7.style.display = 'block';
-    additionalIndividualInfo8.style.display = 'block';
-    
   }
   
   if (option.value == "Entity") {
@@ -1535,25 +1452,6 @@ function handleBorrowerSelect() {
     addUboButton.style.display = "block"; // show the button
     addUboButton.style.margin = "0 auto";
     addUboEventListeners();
-    
-    additionalUboInfo1.style.display = 'block';
-    additionalUboInfo2.style.display = 'block';
-    additionalUboInfo3.style.display = 'block';
-    additionalUboInfo4.style.display = 'block';
-    additionalUboInfo5.style.display = 'block';
-    additionalUboInfo6.style.display = 'block';
-    additionalUboInfo7.style.display = 'block';
-    additionalUboInfo8.style.display = 'block';
-    
-    additionalDirectorInfo1.style.display = 'block';
-    additionalDirectorInfo2.style.display = 'block';
-    additionalDirectorInfo3.style.display = 'block';
-    additionalDirectorInfo4.style.display = 'block';
-    additionalDirectorInfo5.style.display = 'block';
-    additionalDirectorInfo6.style.display = 'block';
-    additionalDirectorInfo7.style.display = 'block';
-    additionalDirectorInfo8.style.display = 'block';
-    
   }
 }
 
