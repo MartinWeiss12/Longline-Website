@@ -1229,7 +1229,6 @@ const htmlForAdditionalUbo = `
 
 function addIndividualEventListeners() {
   individualCount = 1;
-  
   for (let i = 1; i <= 8; i++) {
     const addIndividualButton = document.getElementById(`addIndividualButton${i}`);
     addIndividualButton.addEventListener('click', function() {
@@ -1294,6 +1293,10 @@ function addIndividualEventListeners() {
         removeIndividualButton.style.display = 'none';
       }
       
+      const addIndividualButton1 = document.getElementById('addIndividualButton1');
+      if (individualCount < 8) {
+        addIndividualButton1.style.display = 'block';
+      }
     });
   }
 }
