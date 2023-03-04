@@ -1362,7 +1362,7 @@ function addUboEventListeners() {
         parentDiv.insertBefore(replacementDiv, firstDiv);
         
         uboCount--;
-      }
+      }      
     });
   }
 }
@@ -1412,15 +1412,9 @@ function addDirectorEventListeners() {
         
         if (directorCount === 0) {
           directorCount = 1; // reset directorCount to 1 if the removed director was the first one
-          const addDirectorButton1 = document.getElementById('addDirectorButton1');
-          addDirectorButton1.style.display = 'block'; // make sure the add button is visible
-          const removeDirectorButton = document.getElementById(`removeDirectorButton${directorCount}`);
-          removeDirectorButton.style.display = 'none';
         }
       }
       
-      
-      // Check if additionalDirectorInfo1 is present, and if it should be removed
       const additionalDirectorInfo1Present = document.getElementById("additionalDirectorInfo1");
       if (additionalDirectorInfo1Present && directorCount === 1) {
         const additionalDirectorInfoToRemove = additionalDirectorInfo1Present;
@@ -1433,6 +1427,11 @@ function addDirectorEventListeners() {
         const firstDiv = document.getElementById("additionalDirectorInfo");
         const parentDiv = firstDiv.parentNode;
         parentDiv.insertBefore(replacementDiv, firstDiv);
+      }
+      
+      // Hide the "remove director" button if all directors have been removed
+      if (directorCount === 1) {
+        removeDirectorButton.style.display = 'none';
       }
     });
   }
