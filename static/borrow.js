@@ -271,7 +271,6 @@ const htmlForIndividualTitle = `
   <br><h2 id="stepSixIndividualSubtitle1"> At Least ONE Individual is Required</h2><br>
   <br><h3 id="stepSixIndividualSubtitle2">There is a max of 8 Individuals</h3>
 
-
 `;
   
 // base html for entity details

@@ -14,9 +14,7 @@ function displayFileName(inputId, spanId) {
   }
 }
 
-
 const submitButton = document.getElementById("submit");
-
 
 // function to do the math for Loan Total and copy values around
 function updateLoanAmount() {
@@ -86,7 +84,6 @@ investmentTotalInput.addEventListener('input', function() {
   }
 });
 
-
 // Event listener for number of tranches input field
 numTranchesInput.addEventListener('input', function() {
   // Check if the numTranchesInput input field has a value
@@ -117,15 +114,15 @@ trancheAmtInput.addEventListener('input', function() {
 const entityContainer = document.getElementById("investorSpecificDetails");
 
 // html for individual Step 3 title
+// html for individual Step 6 title
 const htmlForIndividualTitle = `
     
-  <br><br><br><h2 id="stepSixIndividualTitle">Step 3 - Individual Info</h2><br>
+  <br><br><br><h2 id="stepSixIndividualTitle">Step 6 - Individual Info</h2><br>
   <br><h2 id="stepSixIndividualSubtitle1"> At Least ONE Individual is Required</h2><br>
   <br><h3 id="stepSixIndividualSubtitle2">There is a max of 8 Individuals</h3>
 
-
 `;
-  
+
 // base html for entity details
 const htmlForEntity = `
   <div class="labels">
@@ -184,7 +181,7 @@ const htmlForEntity = `
     </div>
   </div>
   
-  <br><br><h3>Upload PDF or Image for Each of the Following</h3>
+  <br><br><h3>Upload PDF or Image for Articles of Organization and Certificate of Formation</h3>
   
   <div class="labels">
     <label id="entityArticlesLabel" for="entityArticles">Articles of Organization</label>
@@ -226,9 +223,8 @@ const htmlForEntity = `
     <span id="entityOtherFileNameSpan">Uploaded File: None</span>
   </div>
 
-  <br><br><br><h2 id="stepThreeUboTitle">Step 3 - UBO and Director Info</h2><br>  
-  <br><h2 id="stepThreeUboSubtitle"> At Least ONE UBO is Required</h2><br>
-  <br><h3 id="uboInfoSubtitle1">Please add UBOs THEN Directors</h3>
+  <br><br><br><h2 id="stepSixUboTitle">Step 6 - UBO and Director Info</h2><br>  
+  <br><h2 id="stepSixUboSubtitle"> At Least ONE UBO is Required</h2><br>
   <br><h3 id="uboInfoSubtitle2">There is a max of 8 UBOs and 8 Directors</h3>
   
 `;
@@ -334,6 +330,24 @@ const htmlForAdditionalIndividual = `
   </div>
   
   <div class="labels">
+    <label for="individualOwnRentDropdown">Own or Rent?</label>
+  </div>
+  <div class="input-tab">
+    <select id="individualOwnRentDropdown" name="individualOwnRentDropdown{{index}}" style="width: 262px;">
+      <option disabled value selected>Select an option</option>
+      <option value="Own">Own</option>
+      <option value="Rent">Rent</option>
+    </select>
+  </div>
+  
+  <div class="labels">
+    <label id="individualRentLabel{{index}}" for="individualRent{{index}}">Monthly Mortgage or Rent in USD</label>
+  </div>
+  <div class="input-tab">
+    <input class="input-field" type="text" id="individualMonthlyRent{{index}}" name="individualMonthlyRent{{index}}" placeholder="Monthly Mortgage or Rent" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
+  </div>
+  
+  <div class="labels">
     <label id="individualPassportNumberLabel{{index}}" for="individualPassportNumber{{index}}">Passport Number</label>
   </div>
   <div class="input-tab">
@@ -372,6 +386,13 @@ const htmlForAdditionalIndividual = `
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualFico{{index}}" name="individualFico{{index}}" placeholder="FICO or NOSIS Score" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
+  </div>
+  
+  <div class="labels">
+    <label id="individualIncomeLabel{{index}}" for="individualIncome{{index}}">Monthly Income in USD</label>
+  </div>
+  <div class="input-tab">
+    <input class="input-field" type="text" id="individualIncome{{index}}" name="individualIncome{{index}}" placeholder="Monthly Income in USD" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
   </div>
   
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
@@ -488,7 +509,7 @@ const htmlForAdditionalUbo = `
   <br><br><h3 id="uboInfoSubtitle{{index}}">Info for UBO {{index}}</h3>
   
   <div class="labels">
-    <label for="uboControlPersonAuthDropdown">Control Person Authorized to Apply for, Make, and Execute, Investment?</label>
+    <label for="uboControlPersonAuthDropdown">Control Person Authorized to Apply for, Take, and Execute, Loan?</label>
   </div>
   <div class="input-tab">
     <select id="uboControlPersonAuthDropdown" name="uboControlPersonAuthDropdown{{index}}" style="width: 262px;" required>
@@ -549,7 +570,7 @@ const htmlForAdditionalUbo = `
     <label id="uboLastName{{index}}" for="uboLastName{{index}}">Last Name(s)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="uboLastName{{index}}" name="lastName{{index}}" placeholder="Last Name(s)" style="width: 250px;" required>
+    <input class="input-field" type="text" id="uboLastName{{index}}" name="uboLastName{{index}}" placeholder="Last Name(s)" style="width: 250px;" required>
   </div>
   
   <div class="labels">
@@ -595,6 +616,24 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
+    <label for="uboOwnRentDropdown">Own or Rent?</label>
+  </div>
+  <div class="input-tab">
+    <select id="uboOwnRentDropdown" name="uboOwnRentDropdown{{index}}" style="width: 262px;">
+      <option disabled value selected>Select an option</option>
+      <option value="Own">Own</option>
+      <option value="Rent">Rent</option>
+    </select>
+  </div>
+  
+  <div class="labels">
+    <label id="uboRentLabel{{index}}" for="uboRent{{index}}">Monthly Mortgage or Rent in USD</label>
+  </div>
+  <div class="input-tab">
+    <input class="input-field" type="text" id="uboMonthlyRent{{index}}" name="uboMonthlyRent{{index}}" placeholder="Monthly Mortgage or Rent" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
+  </div>
+  
+  <div class="labels">
     <label id="uboPassportNumberLabel{{index}}" for="uboPassportNumber{{index}}">Passport Number</label>
   </div>
   <div class="input-tab">
@@ -633,6 +672,13 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboFico{{index}}" name="uboFico{{index}}" placeholder="FICO or NOSIS Score" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
+  </div>
+  
+  <div class="labels">
+    <label id="uboIncomeLabel{{index}}" for="uboIncome{{index}}">Monthly Income in USD</label>
+  </div>
+  <div class="input-tab">
+    <input class="input-field" type="text" id="uboIncome{{index}}" name="uboIncome{{index}}" placeholder="Monthly Income in USD" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
   </div>
   
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
@@ -742,14 +788,14 @@ const htmlForAdditionalUbo = `
     <span id="uboOfacFileNameSpan{{index}}">Uploaded File: None</span>
   </div>
 `;
-  
-  // html for additional Director
-  const htmlForAdditionalDirector = `
+
+// html for additional Director
+const htmlForAdditionalDirector = `
 
   <br><br><h3 id="directorInfoSubtitle{{index}}">Info for Director {{index}}</h3>
   
   <div class="labels">
-    <label for="directorControlPersonAuthDropdown">Control Person Authorized to Apply for, Make, and Execute, Investment?</label>
+    <label for="directorControlPersonAuthDropdown">Control Person Authorized to Apply for, Take, and Execute, Loan?</label>
   </div>
   <div class="input-tab">
     <select id="directorControlPersonAuthDropdown" name="directorControlPersonAuthDropdown{{index}}" style="width: 262px;" required>
@@ -856,6 +902,24 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
+    <label for="directorOwnRentDropdown">Own or Rent?</label>
+  </div>
+  <div class="input-tab">
+    <select id="directorOwnRentDropdown" name="directorOwnRentDropdown{{index}}" style="width: 262px;">
+      <option disabled value selected>Select an option</option>
+      <option value="directorOwn{{index}}">Own</option>
+      <option value="directorRent{{index}}">Rent</option>
+    </select>
+  </div>
+  
+  <div class="labels">
+    <label id="directorRentLabel{{index}}" for="directorRent{{index}}">Monthly Mortgage or Rent in USD</label>
+  </div>
+  <div class="input-tab">
+    <input class="input-field" type="text" id="directorMonthlyRent{{index}}" name="directorMonthlyRent{{index}}" placeholder="Monthly Mortgage or Rent" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
+  </div>
+  
+  <div class="labels">
     <label id="directorPassportNumberLabel{{index}}" for="directorPassportNumber{{index}}">Passport Number</label>
   </div>
   <div class="input-tab">
@@ -894,6 +958,13 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="directorFico{{index}}" name="directorFico{{index}}" placeholder="FICO or NOSIS Score" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
+  </div>
+  
+  <div class="labels">
+    <label id="directorIncomeLabel{{index}}" for="directorIncome{{index}}">Monthly Income in USD</label>
+  </div>
+  <div class="input-tab">
+    <input class="input-field" type="text" id="directorIncome{{index}}" name="directorIncome{{index}}" placeholder="Monthly Income in USD" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
   </div>
   
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
@@ -1006,7 +1077,6 @@ const htmlForAdditionalUbo = `
 
 function addIndividualEventListeners() {
   individualCount = 1;
-  
   for (let i = 1; i <= 8; i++) {
     const addIndividualButton = document.getElementById(`addIndividualButton${i}`);
     addIndividualButton.addEventListener('click', function() {
@@ -1016,12 +1086,11 @@ function addIndividualEventListeners() {
         const htmlForAdditionalIndividualWithIndex = htmlForAdditionalIndividual.replace(/{{index}}/g, individualCount);
         additionalIndividualInfo.insertAdjacentHTML('beforeend', htmlForAdditionalIndividualWithIndex);
         
-        
-        if (i === 1) {
+        if (individualCount === 1) {
+          removeIndividualButton.style.display = 'none';
+        } else {
           removeIndividualButton.style.display = 'block';
           removeIndividualButton.style.margin = "0 auto";
-        } else {
-          removeIndividualButton.style.display = 'none';
         }
         
         if (individualCount === 8) {
@@ -1037,39 +1106,21 @@ function addIndividualEventListeners() {
     removeIndividualButton.addEventListener('click', function() {
       if (individualCount > 2 && individualCount <= 9) {
         const additionalIndividualInfoToRemove = document.getElementById(`additionalIndividualInfo${individualCount-1}`);
-        additionalIndividualInfoToRemove.remove();
-        
-        const replacementDiv = document.createElement("div");
-        replacementDiv.setAttribute("id", `additionalIndividualInfo${individualCount-1}`);
-        // Add any content or attributes you need to the replacement div here
-        
-        const divAfterOneJustRemoved = document.getElementById(`additionalIndividualInfo${individualCount}`);
-        const parentDiv = additionalIndividualInfo1.parentNode;
-        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
-        
+        additionalIndividualInfoToRemove.innerHTML = '';
         individualCount--;
       }
       
-      // Check if additionalIndividualInfo1 is present, and if it should be removed
-      const additionalIndividualInfo1Present = document.getElementById("additionalIndividualInfo1");
-      if (additionalIndividualInfo1Present && individualCount === 1) {
-        const additionalIndividualInfoToRemove = additionalIndividualInfo1Present;
-        additionalIndividualInfoToRemove.remove();
-        
-        const replacementDiv = document.createElement("div");
-        replacementDiv.setAttribute("id", "additionalIndividualInfo1");
-        // Add any content or attributes you need to the replacement div here
-        
-        const firstDiv = document.getElementById("additionalIndividualInfo");
-        const parentDiv = firstDiv.parentNode;
-        parentDiv.insertBefore(replacementDiv, firstDiv);
-        
-        individualCount--;
+      if (individualCount === 2) {
+        removeIndividualButton.style.display = 'none';
+      }
+      
+      const addIndividualButton1 = document.getElementById('addIndividualButton1');
+      if (individualCount <= 8) {
+        addIndividualButton1.style.display = 'block';
       }
     });
   }
 }
-
 
 function addUboEventListeners() {
   uboCount = 1;
@@ -1082,11 +1133,14 @@ function addUboEventListeners() {
         const htmlForAdditionalUboWithIndex = htmlForAdditionalUbo.replace(/{{index}}/g, uboCount);
         additionalUboInfo.insertAdjacentHTML('beforeend', htmlForAdditionalUboWithIndex);
         
-        if (i === 1) {
+        if (uboCount > 1) {
           removeUboButton.style.display = 'block';
           removeUboButton.style.margin = "0 auto";
-        } else {
-          removeUboButton.style.display = 'none';
+        }
+        
+        if (uboCount > 0) {
+          addDirectorButton.style.display = "block"; // show the button
+          addDirectorButton.style.margin = "0 auto";
         }
         
         if (uboCount === 8) {
@@ -1102,34 +1156,17 @@ function addUboEventListeners() {
     removeUboButton.addEventListener('click', function() {
       if (uboCount > 2 && uboCount <= 9) {
         const additionalUboInfoToRemove = document.getElementById(`additionalUboInfo${uboCount-1}`);
-        additionalUboInfoToRemove.remove();
-        
-        const replacementDiv = document.createElement("div");
-        replacementDiv.setAttribute("id", `additionalUboInfo${uboCount-1}`);
-        // Add any content or attributes you need to the replacement div here
-        
-        const divAfterOneJustRemoved = document.getElementById(`additionalUboInfo${uboCount}`);
-        const parentDiv = additionalUboInfo1.parentNode;
-        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
-        
+        additionalUboInfoToRemove.innerHTML = '';
         uboCount--;
       }
       
-      // Check if additionalUboInfo1 is present, and if it should be removed
-      const additionalUboInfo1Present = document.getElementById("additionalUboInfo1");
-      if (additionalUboInfo1Present && uboCount === 1) {
-        const additionalUboInfoToRemove = additionalUboInfo1Present;
-        additionalUboInfoToRemove.remove();
-        
-        const replacementDiv = document.createElement("div");
-        replacementDiv.setAttribute("id", "additionalUboInfo1");
-        // Add any content or attributes you need to the replacement div here
-        
-        const firstDiv = document.getElementById("additionalUboInfo");
-        const parentDiv = firstDiv.parentNode;
-        parentDiv.insertBefore(replacementDiv, firstDiv);
-        
-        uboCount--;
+      if (uboCount === 2) {
+        removeUboButton.style.display = 'none';
+      }
+      
+      const addUboButton1 = document.getElementById('addUboButton1');
+      if (uboCount <= 8) {
+        addUboButton1.style.display = 'block';
       }
     });
   }
@@ -1146,11 +1183,9 @@ function addDirectorEventListeners() {
         const htmlForAdditionalDirectorWithIndex = htmlForAdditionalDirector.replace(/{{index}}/g, directorCount);
         additionalDirectorInfo.insertAdjacentHTML('beforeend', htmlForAdditionalDirectorWithIndex);
         
-        if (i === 1) {
+        if (directorCount > 0) {
           removeDirectorButton.style.display = 'block';
-          removeDirectorButton.style.margin = "0 auto";
-        } else {
-          removeDirectorButton.style.display = 'none';
+          removeDirectorButton.style.margin = "0 auto";          
         }
         
         if (directorCount === 8) {
@@ -1164,36 +1199,29 @@ function addDirectorEventListeners() {
     
     const removeDirectorButton = document.getElementById(`removeDirectorButton${i}`);
     removeDirectorButton.addEventListener('click', function() {
-      if (directorCount > 2 && directorCount <= 9) {
+      if (directorCount > 1 && directorCount <= 9) {
         const additionalDirectorInfoToRemove = document.getElementById(`additionalDirectorInfo${directorCount-1}`);
-        additionalDirectorInfoToRemove.remove();
-        
-        const replacementDiv = document.createElement("div");
-        replacementDiv.setAttribute("id", `additionalDirectorInfo${directorCount-1}`);
-        // Add any content or attributes you need to the replacement div here
-        
-        const divAfterOneJustRemoved = document.getElementById(`additionalDirectorInfo${directorCount}`);
-        const parentDiv = additionalDirectorInfo1.parentNode;
-        parentDiv.insertBefore(replacementDiv, divAfterOneJustRemoved);
+        additionalDirectorInfoToRemove.innerHTML = ''; // clear the content of the div
         
         directorCount--;
+        
+        if (directorCount === 0) {
+          directorCount = 1; // reset directorCount to 1 if the removed director was the first one
+        }
       }
       
-      // Check if additionalDirectorInfo1 is present, and if it should be removed
       const additionalDirectorInfo1Present = document.getElementById("additionalDirectorInfo1");
-      if (additionalDirectorInfo1Present && directorCount === 2) {
-        const additionalDirectorInfoToRemove = additionalDirectorInfo1Present;
-        additionalDirectorInfoToRemove.remove();
-        
-        const replacementDiv = document.createElement("div");
-        replacementDiv.setAttribute("id", "additionalDirectorInfo1");
-        // Add any content or attributes you need to the replacement div here
-        
-        const firstDiv = document.getElementById("additionalDirectorInfo");
-        const parentDiv = firstDiv.parentNode;
-        parentDiv.insertBefore(replacementDiv, firstDiv);
-        
-        directorCount--;
+      if (additionalDirectorInfo1Present && directorCount === 1) {
+        additionalDirectorInfo1Present.innerHTML = ''; // clear the content of the div
+      }
+      
+      if (directorCount === 1) {
+        removeDirectorButton.style.display = 'none';
+      }
+      
+      const addDirectorButton1 = document.getElementById('addDirectorButton1');
+      if (directorCount <= 8) {
+        addDirectorButton1.style.display = 'block';
       }
     });
   }
@@ -1218,13 +1246,14 @@ function handleInvestorSelect() {
   var option = select.options[select.selectedIndex];
   var individualCount = 1;
   var uboCount = 1;
+  var directorCount = 1;
   submitButton.disabled = true;
   
   if (option.value == "Individual") {   
     
     submitButton.disabled = true;
     
-    document.getElementById("investorSpecificDetails").innerHTML = "";
+    document.getElementById("borrowerSpecificDetails").innerHTML = "";
     document.getElementById("additionalUboInfo1").innerHTML = "";
     document.getElementById("additionalUboInfo2").innerHTML = "";
     document.getElementById("additionalUboInfo3").innerHTML = "";
@@ -1251,41 +1280,11 @@ function handleInvestorSelect() {
     addIndividualButton.style.display = "block"; // show the button
     addIndividualButton.style.margin = "0 auto";
     addIndividualEventListeners();
-    
-    additionalUboInfo1.style.display = 'none';
-    additionalUboInfo1.style.display = 'none';
-    additionalUboInfo2.style.display = 'none';
-    additionalUboInfo3.style.display = 'none';
-    additionalUboInfo4.style.display = 'none';
-    additionalUboInfo5.style.display = 'none';
-    additionalUboInfo6.style.display = 'none';
-    additionalUboInfo7.style.display = 'none';
-    additionalUboInfo8.style.display = 'none';
-    
-    additionalDirectorInfo1.style.display = 'none';
-    additionalDirectorInfo2.style.display = 'none';
-    additionalDirectorInfo3.style.display = 'none';
-    additionalDirectorInfo4.style.display = 'none';
-    additionalDirectorInfo5.style.display = 'none';
-    additionalDirectorInfo6.style.display = 'none';
-    additionalDirectorInfo7.style.display = 'none';
-    additionalDirectorInfo8.style.display = 'none';
-    
-    additionalIndividualInfo1.style.display = 'block';
-    additionalIndividualInfo2.style.display = 'block';
-    additionalIndividualInfo3.style.display = 'block';
-    additionalIndividualInfo4.style.display = 'block';
-    additionalIndividualInfo5.style.display = 'block';
-    additionalIndividualInfo6.style.display = 'block';
-    additionalIndividualInfo7.style.display = 'block';
-    additionalIndividualInfo8.style.display = 'block';
-    
   }
   
   if (option.value == "Entity") {
     
     submitButton.disabled = true;
-    var directorCount = 1;
     
     document.getElementById("additionalIndividualInfo1").innerHTML = "";
     document.getElementById("additionalIndividualInfo2").innerHTML = "";
@@ -1301,28 +1300,7 @@ function handleInvestorSelect() {
     removeIndividualButton.style.display = "none"; // hide the button
     addUboButton.style.display = "block"; // show the button
     addUboButton.style.margin = "0 auto";
-    addDirectorButton.style.display = "block"; // show the button
-    addDirectorButton.style.margin = "0 auto";
     addUboEventListeners();
-    
-    additionalUboInfo1.style.display = 'block';
-    additionalUboInfo2.style.display = 'block';
-    additionalUboInfo3.style.display = 'block';
-    additionalUboInfo4.style.display = 'block';
-    additionalUboInfo5.style.display = 'block';
-    additionalUboInfo6.style.display = 'block';
-    additionalUboInfo7.style.display = 'block';
-    additionalUboInfo8.style.display = 'block';
-    
-    additionalDirectorInfo1.style.display = 'block';
-    additionalDirectorInfo2.style.display = 'block';
-    additionalDirectorInfo3.style.display = 'block';
-    additionalDirectorInfo4.style.display = 'block';
-    additionalDirectorInfo5.style.display = 'block';
-    additionalDirectorInfo6.style.display = 'block';
-    additionalDirectorInfo7.style.display = 'block';
-    additionalDirectorInfo8.style.display = 'block';
-    
   }
 }
 
