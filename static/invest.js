@@ -197,13 +197,13 @@ const htmlForEntity = `
   </div>
   
   <div class="labels">
-    <label id="entityCertFileLabel" for="entityCertFile">Certificate of Formation</label>
+    <label id="entityCertificateFileLabel" for="entityCertificateFile">Certificate of Formation</label>
   </div>
   <div class="input-tab">
-    <label for="entityCertFile" class="fileUploadButton">Choose File
-    <input id="entityCertFile" type="file" name="entityCertFile" style="position:absolute; left:-999999px;" required onchange="displayFileName('entityCertFile', 'entityCertFileNameSpan')" required>
+    <label for="entityCertificateFile" class="fileUploadButton">Choose File
+    <input id="entityCertificateFile" type="file" name="entityCertificateFile" style="position:absolute; left:-999999px;" required onchange="displayFileName('entityCertificateFile', 'entityCertificateFileNameSpan')" required>
   </label>
-    <span id="entityCertFileNameSpan">Uploaded File: None</span>
+    <span id="entityCertificateFileNameSpan">Uploaded File: None</span>
   </div>
   
   <div class="labels">

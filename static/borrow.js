@@ -332,7 +332,7 @@ const htmlForEntity = `
     </div>
   </div>
   
-  <br><br><h3>Upload PDF or Image for Each of the Following</h3>
+  <br><br><h3>Upload PDF or Image for Articles of Organization and Certificate of Formation</h3>
   
   <div class="labels">
     <label id="entityArticlesLabel" for="entityArticles">Articles of Organization</label>
@@ -345,13 +345,13 @@ const htmlForEntity = `
   </div>
   
   <div class="labels">
-    <label id="entityCertFileLabel" for="entityCertFile">Certificate of Formation</label>
+    <label id="entityCertificateFileLabel" for="entityCertificateFile">Certificate of Formation</label>
   </div>
   <div class="input-tab">
-    <label for="entityCertFile" class="fileUploadButton">Choose File
-    <input id="entityCertFile" type="file" name="entityCertFile" style="position:absolute; left:-999999px;" required onchange="displayFileName('entityCertFile', 'entityCertFileNameSpan')" required>
+    <label for="entityCertificateFile" class="fileUploadButton">Choose File
+    <input id="entityCertificateFile" type="file" name="entityCertificateFile" style="position:absolute; left:-999999px;" required onchange="displayFileName('entityCertificateFile', 'entityCertificateFileNameSpan')" required>
   </label>
-    <span id="entityCertFileNameSpan">Uploaded File: None</span>
+    <span id="entityCertificateFileNameSpan">Uploaded File: None</span>
   </div>
   
   <div class="labels">
@@ -722,7 +722,7 @@ const htmlForAdditionalUbo = `
     <label id="uboLastName{{index}}" for="uboLastName{{index}}">Last Name(s)</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="uboLastName{{index}}" name="lastName{{index}}" placeholder="Last Name(s)" style="width: 250px;" required>
+    <input class="input-field" type="text" id="uboLastName{{index}}" name="uboLastName{{index}}" placeholder="Last Name(s)" style="width: 250px;" required>
   </div>
   
   <div class="labels">
@@ -1388,6 +1388,10 @@ function addDirectorEventListeners() {
         directorCount++;
       }
     });
+    
+    
+    
+    // check if dirCount is === 1 AND ubo. maybe sum them?
     
     const removeDirectorButton = document.getElementById(`removeDirectorButton${i}`);
     removeDirectorButton.addEventListener('click', function() {
