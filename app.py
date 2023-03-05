@@ -16,7 +16,6 @@ app.config ['SECRET_KEY'] = 'longline'
 
 directory = '/userFiles'
 flaskBackendPin = '1234'
-contacted = False
 
 @app.route('/')
 def index():
@@ -103,6 +102,11 @@ def investSubmitRedirect():
 		return render_template('investorSubmitted.html', title='Submitted')
 	else:
 		return redirect('/investorLogin')
+	
+@app.route('/contactSubmitted')
+def contactSubmitRedirect():
+	
+	return redirect('/contact')
 
 @app.route('/borrowSubmitted', methods=['POST'])
 def loanSubmit():
@@ -666,23 +670,65 @@ def investorSubmit():
 @app.route('/contactSubmitted', methods=['POST'])
 def contactSubmit():
 
-	contacted = True
+	fullName = request.form['fullName']
+	email = request.form['email']
+	phoneNumber = request.form['phoneNumber']
+	userContactType = request.form['userContactType']
+	message = request.form['message']
 	
-#		name = request.form['name']
-#		email = request.form['email']
-#		message = request.form['message']
+	
+	'''
+	
+	# create a WorkMail client
+	client = boto3.client('workmail')
+	
+	# create an email message
+	message = {
+		'Subject': {
+			'Data': f'New Contact Form Submission From {fullName}'
+		},
+		'Body': {
+			'Text': {
+				'Data': f'Name: {fullName}\nEmail: {email}\nMessage: {message}'
+			}
+		},
+		'FromEmailAddress': 'your-email@your-domain.com',
+		'Destination': {
+			'ToAddresses': ['recipient-email@recipient-domain.com']
+		}
+	}
+	
 
-
+	# send the email message
+	response = client.send_email(
+		FromEmailAddress=message['FromEmailAddress'],
+		Destination=message['Destination'],
+		Content={
+			'Simple': {
+				'Subject': {
+					'Data': message['Subject']['Data']
+				},
+				'Body': {
+					'Text': {
+						'Data': message['Body']['Text']['Data']
+					}
+				}
+			}
+		}
+	)
+	
+	print(Content)
+	
+	'''
 
 	return render_template('contactSubmitted.html', title='Submitted')
 
+	
 
 
 
-@app.route('/contactSubmitted')
-def contactSubmitRedirect():
-	if (not contacted):
-		return redirect('/contact')
+
+
 			
 
 
@@ -691,38 +737,3 @@ def contactSubmitRedirect():
 
 if __name__ == '__main__':
 	app.run(debug=True)
-	
-	
-	
-	
-	''' 
-	repeatedIndividualLoanData = {}
-	repeatedUboLoanData = {}
-	repeatedDirectorLoanData = {}
-	
-	for investorType in ['Individual', 'Ubo', 'Director']:
-		for i in range(1, 9):
-			prefix = 'repeated' + f'{investorType}' + 'LoanData'
-			prefix[f'{investorType} {i} Personal Guarantor'] = request.form.get(f'{investorType}PersonalGuarantorDropdown{i}', '!#$')
-			prefix[f'{investorType} {i} Citizen'] = request.form.get(f'{investorType}CitizenDropdown{i}', '!#$')
-			prefix[f'{investorType} {i} South Dakota Resident'] = request.form.get(f'{investorType}SDResidentDropdown{i}', '!#$')
-			prefix[f'{investorType} {i} First Name'] = request.form.get(f'{investorType}FirstName{i}', '!#$')
-			prefix[f'{investorType} {i} Middle Name'] = request.form.get(f'{investorType}MiddleName{i}', '!#$')
-			prefix[f'{investorType} {i} Last Name'] = request.form.get(f'{investorType}LastName{i}', '!#$')
-			prefix[f'{investorType} {i} Home Address'] = request.form.get(f'{investorType}HomeBankAddress{i}', '!#$')
-			prefix[f'{investorType} {i} Home Street Address'] = request.form.get(f'{investorType}HomeStreetAddress{i}', '!#$')
-			prefix[f'{investorType} {i} Home City'] = request.form.get(f'{investorType}HomeCity{i}', '!#$')
-			prefix[f'{investorType} {i} Home State'] = request.form.get(f'{investorType}HomeState{i}', '!#$')
-			prefix[f'{investorType} {i} Home Zip'] = request.form.get(f'{investorType}HomeZip{i}', '!#$')
-			prefix[f'{investorType} {i} Home Country'] = request.form.get(f'{investorType}homeCountry{i}', '!#$')
-			prefix[f'{investorType} {i} Passport Number'] = request.form.get(f'{investorType}PassportNumber{i}', '!#$')
-			prefix[f'{investorType} {i} SSN'] = request.form.get(f'{investorType}Ssn{i}', '!#$')
-			prefix[f'{investorType} {i} Date of Birth'] = request.form.get(f'{investorType}Dob{i}', '!#$')
-			prefix[f'{investorType} {i} Email'] = request.form.get(f'{investorType}Email{i}', '!#$')
-			prefix[f'{investorType} {i} Phone Number'] = request.form.get(f'{investorType}Phone{i}', '!#$')
-			prefix[f'{investorType} {i} FICO/NOSIS Number'] = request.form.get(f'{investorType}Fico{i}', '!#$')
-			prefix[f'{investorType} {i} Politically Exposed Person'] = request.form.get(f'{investorType}Pep{i}', '!#$')
-			prefix[f'{investorType} {i} Crime'] = request.form.get(f'{investorType}Crime{i}', '!#$')
-			prefix[f'{investorType} {i} Declare'] = request.form.get(f'{investorType}DeclareCheckbox{i}', '!#$')
-	
-	'''

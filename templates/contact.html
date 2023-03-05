@@ -104,6 +104,7 @@
         width: 40%;
         vertical-align: top; 
         margin-top: 20px;
+        margin-left: 25px;
       }
       
       .input-tab {
@@ -285,37 +286,37 @@
           
           
           <div class="labels">
-            <label id="nameLabel" for="name">Full Name</label></div>
+            <label id="fullNameLabel" for="fullName">Full Name</label></div>
           <div class="input-tab">
-            <input class="input-field" type="text" id="fullName" name="fullName" placeholder="Enter your name"  autofocus>
+            <input class="input-field" type="text" id="fullName" name="fullName" placeholder="Enter your name" required style="width: 250px;">
           </div>
           
           <div class="labels">
             <label id="emailLabel" for="email">Email</label></div>
           <div class="input-tab">
-            <input class="input-field" type="email" id="email" name="email" placeholder="email@domain.com" ></div>
+            <input class="input-field" type="email" id="email" name="email" placeholder="email@domain.com" required style="width: 250px;"></div>
           
           <div class="labels">
-            <label id="phoneLabel" for="phoneNumber">Phone Number</label></div>
+            <label id="phoneNumberLabel" for="phoneNumber">Phone Number</label></div>
           <div class="input-tab">
-            <input class="input-field" type="phoneNumber" id="phoneNumber" name="phoneNumber" placeholder="xxx-xxx-xxxx" ></div>
+            <input class="input-field" type="phoneNumber" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" required style="width: 250px;"></div>
           
           
           <div class="labels">
             <label for="dropdown">I am a</label></div>
           <div class="input-tab">
-            <select id="dropdown" name="userContactType" >
+            <select id="dropdown" name="userContactType" required style="width: 250px;">
               <option disabled value selected>Select an option</option>
-              <option value="borrowerContact">Borrower</option>
-              <option value="investorContact">Investor</option>
-              <option value="other">Other</option>
+              <option value="Borrower">Borrower</option>
+              <option value="Investor">Investor</option>
+              <option value="Other">Other</option>
             </select>
           </div>
           
           <div class="labels">
-            <label for="comments">Message</label></div>
+            <label for="message">Message</label></div>
           <div class="input-tab">
-            <textarea class="input-field" id="comments" name="comments" rows="10" cols="40" placeholder="Your comments..." ></textarea></div>
+            <textarea class="input-field" id="message" name="message" rows="10" cols="40" placeholder="Your inquiry" required style="width: 450px;"></textarea></div>
           
           <div class="submitButtonContainer">
             <div class="btn">
