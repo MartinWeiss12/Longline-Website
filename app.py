@@ -332,7 +332,7 @@ def loanSubmit():
 		bankAccountFile = request.files['bankAccountFile']
 		bankAccountFileName = secure_filename(bankAccountFile.filename)
 		bankAccountFileNameExt = os.path.splitext(bankAccountFileName)[1]
-		newBankAccountFileName = individualLastName + individualFirstName + 'bankAccountFile' + bankAccountFileNameExt
+		newBankAccountFileName = individualLastName + individualFirstName + 'BankAccountFile' + bankAccountFileNameExt
 		newBankAccountFilePath = os.path.join(folderForIndividualFiles, newBankAccountFileName)
 		bankAccountFile.save(newBankAccountFilePath)
 
@@ -386,7 +386,7 @@ def loanSubmit():
 		bankAccountFile = request.files['bankAccountFile']
 		bankAccountFileName = secure_filename(bankAccountFile.filename)
 		bankAccountFileNameExt = os.path.splitext(bankAccountFileName)[1]
-		newBankAccountFileName = entityName + 'bankAccountFile' + bankAccountFileNameExt
+		newBankAccountFileName = entityName + 'BankAccountFile' + bankAccountFileNameExt
 		newBankAccountFilePath = os.path.join(folderForEntityFiles, newBankAccountFileName)
 		bankAccountFile.save(newBankAccountFilePath)
 					
