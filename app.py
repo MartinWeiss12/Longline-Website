@@ -16,6 +16,7 @@ app.config ['SECRET_KEY'] = 'longline'
 
 directory = '/userFiles'
 flaskBackendPin = '1234'
+contacted = False
 
 @app.route('/')
 def index():
@@ -405,7 +406,6 @@ def loanSubmit():
 @app.route('/investorSubmitted', methods=['POST'])
 def investorSubmit():
 	
-	
 	investorApplicationNumber = str(random.randint(1, 100))
 	folderForApplication = 'InvestorApplication' + investorApplicationNumber
 	os.mkdir(folderForApplication)
@@ -620,7 +620,7 @@ def investorSubmit():
 					file.save(newFilePath)
 					
 	if (request.form.get('investorDropdown') == 'Entity' and directorFirstName != '!#$'):
-		folderForDirectorFilesName = directorLastName + directorFirstName + 'Files2'
+		folderForDirectorFilesName = directorLastName + directorFirstName + 'Files'
 		folderForDirectorFiles = os.path.join(folderForApplication, folderForDirectorFilesName)
 		os.mkdir(folderForDirectorFiles)
 		
@@ -661,6 +661,32 @@ def investorSubmit():
 	
 	
 	return render_template('investorSubmitted.html', title='Submitted')
+
+
+@app.route('/contactSubmitted', methods=['POST'])
+def contactSubmit():
+
+	contacted = True
+	
+#		name = request.form['name']
+#		email = request.form['email']
+#		message = request.form['message']
+
+
+
+	return render_template('contactSubmitted.html', title='Submitted')
+
+
+
+
+@app.route('/contactSubmitted')
+def contactSubmitRedirect():
+	if (not contacted):
+		return redirect('/contact')
+			
+
+
+
 
 
 if __name__ == '__main__':

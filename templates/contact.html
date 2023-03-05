@@ -8,7 +8,7 @@
     
     <title>Contact</title>
     <style>
-  
+      
       @import url('https://fonts.googleapis.com/css?family=Abel');
       
       body, html {
@@ -67,7 +67,7 @@
         letter-spacing: 2px;
         word-spacing: 5px;
         line-height: 1em;
-/*      font-weight: bold;*/
+        /*      font-weight: bold;*/
       }
       
       p {
@@ -96,7 +96,7 @@
         width: 80%;
         padding: 10px;
       }
-
+      
       
       .labels {
         display: inline-block;
@@ -167,7 +167,7 @@
         padding: 10px 15px;
         border: 1px solid;
       }
-
+      
       
       button:hover {
         background-color: #00008B;
@@ -251,7 +251,7 @@
       textarea {
         resize: none;
       }
-
+      
       
     </style>    
   </head>
@@ -280,10 +280,10 @@
       </div>
     </header>
     <main>
-        <form id="survey-form" method="POST" required>
-          <div id="contentToPrint">
-
-            
+      <div class="container" id="investorFormContainer">
+        <form id="contactForm" method="POST" action="/contactSubmitted">
+          
+          
           <div class="labels">
             <label id="nameLabel" for="name">Full Name</label></div>
           <div class="input-tab">
@@ -312,7 +312,6 @@
             </select>
           </div>
           
-          
           <div class="labels">
             <label for="comments">Message</label></div>
           <div class="input-tab">
@@ -323,15 +322,14 @@
               <button id="submit" type="submit">Submit</button>
             </div>
           </div>
-        
-          </div>
-
+          
         </form>
-      
+      </div>
         
-    </main>
-    <footer>
-      <p id="copyright"></p>
-    </footer>
-  </body>
-</html>
+        
+        </main>
+        <footer>
+          <p id="copyright"></p>
+        </footer>
+        </body>
+        </html>
