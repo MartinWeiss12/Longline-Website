@@ -330,24 +330,6 @@ const htmlForAdditionalIndividual = `
   </div>
   
   <div class="labels">
-    <label for="individualOwnRentDropdown">Own or Rent?</label>
-  </div>
-  <div class="input-tab">
-    <select id="individualOwnRentDropdown" name="individualOwnRentDropdown{{index}}" style="width: 262px;">
-      <option disabled value selected>Select an option</option>
-      <option value="Own">Own</option>
-      <option value="Rent">Rent</option>
-    </select>
-  </div>
-  
-  <div class="labels">
-    <label id="individualRentLabel{{index}}" for="individualRent{{index}}">Monthly Mortgage or Rent in USD</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="individualMonthlyRent{{index}}" name="individualMonthlyRent{{index}}" placeholder="Monthly Mortgage or Rent" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
-  </div>
-  
-  <div class="labels">
     <label id="individualPassportNumberLabel{{index}}" for="individualPassportNumber{{index}}">Passport Number</label>
   </div>
   <div class="input-tab">
@@ -386,13 +368,6 @@ const htmlForAdditionalIndividual = `
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="individualFico{{index}}" name="individualFico{{index}}" placeholder="FICO or NOSIS Score" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
-  </div>
-  
-  <div class="labels">
-    <label id="individualIncomeLabel{{index}}" for="individualIncome{{index}}">Monthly Income in USD</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="individualIncome{{index}}" name="individualIncome{{index}}" placeholder="Monthly Income in USD" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
   </div>
   
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
@@ -509,7 +484,7 @@ const htmlForAdditionalUbo = `
   <br><br><h3 id="uboInfoSubtitle{{index}}">Info for UBO {{index}}</h3>
   
   <div class="labels">
-    <label for="uboControlPersonAuthDropdown">Control Person Authorized to Apply for, Take, and Execute, Loan?</label>
+    <label for="uboControlPersonAuthDropdown">Control Person Authorized to Apply for, Make, and Execute?</label>
   </div>
   <div class="input-tab">
     <select id="uboControlPersonAuthDropdown" name="uboControlPersonAuthDropdown{{index}}" style="width: 262px;" required>
@@ -616,24 +591,6 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label for="uboOwnRentDropdown">Own or Rent?</label>
-  </div>
-  <div class="input-tab">
-    <select id="uboOwnRentDropdown" name="uboOwnRentDropdown{{index}}" style="width: 262px;">
-      <option disabled value selected>Select an option</option>
-      <option value="Own">Own</option>
-      <option value="Rent">Rent</option>
-    </select>
-  </div>
-  
-  <div class="labels">
-    <label id="uboRentLabel{{index}}" for="uboRent{{index}}">Monthly Mortgage or Rent in USD</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="uboMonthlyRent{{index}}" name="uboMonthlyRent{{index}}" placeholder="Monthly Mortgage or Rent" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
-  </div>
-  
-  <div class="labels">
     <label id="uboPassportNumberLabel{{index}}" for="uboPassportNumber{{index}}">Passport Number</label>
   </div>
   <div class="input-tab">
@@ -672,13 +629,6 @@ const htmlForAdditionalUbo = `
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboFico{{index}}" name="uboFico{{index}}" placeholder="FICO or NOSIS Score" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
-  </div>
-  
-  <div class="labels">
-    <label id="uboIncomeLabel{{index}}" for="uboIncome{{index}}">Monthly Income in USD</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="uboIncome{{index}}" name="uboIncome{{index}}" placeholder="Monthly Income in USD" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
   </div>
   
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
@@ -795,7 +745,7 @@ const htmlForAdditionalDirector = `
   <br><br><h3 id="directorInfoSubtitle{{index}}">Info for Director {{index}}</h3>
   
   <div class="labels">
-    <label for="directorControlPersonAuthDropdown">Control Person Authorized to Apply for, Take, and Execute, Loan?</label>
+    <label for="directorControlPersonAuthDropdown">Control Person Authorized to Apply for, Make, and Execute?</label>
   </div>
   <div class="input-tab">
     <select id="directorControlPersonAuthDropdown" name="directorControlPersonAuthDropdown{{index}}" style="width: 262px;" required>
@@ -902,24 +852,6 @@ const htmlForAdditionalDirector = `
   </div>
   
   <div class="labels">
-    <label for="directorOwnRentDropdown">Own or Rent?</label>
-  </div>
-  <div class="input-tab">
-    <select id="directorOwnRentDropdown" name="directorOwnRentDropdown{{index}}" style="width: 262px;">
-      <option disabled value selected>Select an option</option>
-      <option value="directorOwn{{index}}">Own</option>
-      <option value="directorRent{{index}}">Rent</option>
-    </select>
-  </div>
-  
-  <div class="labels">
-    <label id="directorRentLabel{{index}}" for="directorRent{{index}}">Monthly Mortgage or Rent in USD</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="directorMonthlyRent{{index}}" name="directorMonthlyRent{{index}}" placeholder="Monthly Mortgage or Rent" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
-  </div>
-  
-  <div class="labels">
     <label id="directorPassportNumberLabel{{index}}" for="directorPassportNumber{{index}}">Passport Number</label>
   </div>
   <div class="input-tab">
@@ -958,13 +890,6 @@ const htmlForAdditionalDirector = `
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="directorFico{{index}}" name="directorFico{{index}}" placeholder="FICO or NOSIS Score" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
-  </div>
-  
-  <div class="labels">
-    <label id="directorIncomeLabel{{index}}" for="directorIncome{{index}}">Monthly Income in USD</label>
-  </div>
-  <div class="input-tab">
-    <input class="input-field" type="text" id="directorIncome{{index}}" name="directorIncome{{index}}" placeholder="Monthly Income in USD" style="width: 250px;" pattern="[0-9]+" title="Please enter only numbers.">
   </div>
   
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
