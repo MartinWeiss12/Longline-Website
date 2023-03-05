@@ -298,6 +298,7 @@ def loanSubmit():
 		repeatedDirectorLoanData[f'Director {i} Crime'] = request.form.get(f'directorCrime{i}', '!#$')
 		repeatedDirectorLoanData[f'Director {i} Declare'] = request.form.get(f'directorDeclareCheckbox{i}', '!#$')
 			
+			
 	loanData = {**loanData, **repeatedIndividualLoanData, **repeatedUboLoanData, **repeatedDirectorLoanData}
 	
 	cleanedData = {k: v for k, v in loanData.items() if v != '!#$'}
@@ -325,7 +326,7 @@ def loanSubmit():
 					file = request.files[fileType]
 					fileName = secure_filename(file.filename)
 					fileNameExt = os.path.splitext(fileName)[1]
-					newFileName = (individualLastName + individualFirstName + fileType + fileNameExt).replace('individual', '')
+					newFileName = (repeatedIndividualLoanData[f'Individual {i} Last Name'] + repeatedIndividualLoanData[f'Individual {i} First Name'] + fileType + fileNameExt).replace('individual', '')
 					newFilePath = os.path.join(folderForIndividualFiles, newFileName)
 					file.save(newFilePath)
 		
@@ -355,7 +356,7 @@ def loanSubmit():
 					file = request.files[fileType]
 					fileName = secure_filename(file.filename)
 					fileNameExt = os.path.splitext(fileName)[1]
-					newFileName = (uboLastName + uboFirstName + fileType + fileNameExt).replace('ubo', '')
+					newFileName = (repeatedUboLoanData[f'Ubo {i} Last Name'] + repeatedUboLoanData[f'Ubo {i} First Name'] + fileType + fileNameExt).replace('ubo', '')
 					newFilePath = os.path.join(folderForUboFiles, newFileName)
 					file.save(newFilePath)
 	
@@ -378,7 +379,7 @@ def loanSubmit():
 					file = request.files[fileType]
 					fileName = secure_filename(file.filename)
 					fileNameExt = os.path.splitext(fileName)[1]
-					newFileName = (directorLastName + directorFirstName + fileType + fileNameExt).replace('director', '')
+					newFileName = (repeatedDirectorLoanData[f'Director {i} Last Name'] + repeatedDirectorLoanData[f'Director {i} First Name'] + fileType + fileNameExt).replace('director', '')
 					newFilePath = os.path.join(folderForDirectorFiles, newFileName)
 					file.save(newFilePath)
 					
@@ -438,7 +439,7 @@ def investorSubmit():
 	entityName = investorData['Entity Name']#.str.replace(' ', '')
 	entityName = investorData['Entity Name']
 	
-	if (request.form.get('borrowerDropdown') == 'Entity' and entityName != '!#$'):
+	if (request.form.get('investorDropdown') == 'Entity' and entityName != '!#$'):
 		
 		folderForEntityFilesName = investorData['Entity Name'] + 'Files'
 		folderForEntityFiles = os.path.join(folderForApplication, folderForEntityFilesName)
@@ -565,7 +566,7 @@ def investorSubmit():
 	with open(f'{folderForApplication}/{jsonName}', 'w') as f:
 		json.dump(cleanedData, f)
 		
-	if (request.form.get('borrowerDropdown') == 'Individual' and individualFirstName != '!#$'):
+	if (request.form.get('investorDropdown') == 'Individual' and individualFirstName != '!#$'):
 		folderForIndividualFilesName = individualLastName + individualFirstName + 'Files'
 		folderForIndividualFiles = os.path.join(folderForApplication, folderForIndividualFilesName)
 		os.mkdir(folderForIndividualFiles)
@@ -584,7 +585,7 @@ def investorSubmit():
 					file = request.files[fileType]
 					fileName = secure_filename(file.filename)
 					fileNameExt = os.path.splitext(fileName)[1]
-					newFileName = (individualLastName + individualFirstName + fileType + fileNameExt).replace('individual', '')
+					newFileName = (repeatedIndividualInvestorData[f'Individual {i} Last Name'] + repeatedIndividualInvestorData[f'Individual {i} First Name'] + fileType + fileNameExt).replace('individual', '')
 					newFilePath = os.path.join(folderForIndividualFiles, newFileName)
 					file.save(newFilePath)
 					
@@ -595,7 +596,7 @@ def investorSubmit():
 		newBankAccountFilePath = os.path.join(folderForIndividualFiles, newBankAccountFileName)
 		bankAccountFile.save(newBankAccountFilePath)
 		
-	if (request.form.get('borrowerDropdown') == 'Entity' and entityName != '!#$'):
+	if (request.form.get('investorDropdown') == 'Entity' and entityName != '!#$'):
 		folderForUboFilesName = uboLastName + uboFirstName + 'Files'
 		folderForUboFiles = os.path.join(folderForApplication, folderForUboFilesName)
 		os.mkdir(folderForUboFiles)
@@ -614,12 +615,12 @@ def investorSubmit():
 					file = request.files[fileType]
 					fileName = secure_filename(file.filename)
 					fileNameExt = os.path.splitext(fileName)[1]
-					newFileName = (uboLastName + uboFirstName + fileType + fileNameExt).replace('ubo', '')
+					newFileName = (repeatedUboInvestorData[f'Ubo {i} Last Name'] + repeatedUboInvestorData[f'Ubo {i} First Name'] + fileType + fileNameExt).replace('ubo', '')
 					newFilePath = os.path.join(folderForUboFiles, newFileName)
 					file.save(newFilePath)
 					
-	if (request.form.get('borrowerDropdown') == 'Entity' and directorFirstName != '!#$'):
-		folderForDirectorFilesName = directorLastName + directorFirstName + 'Files'
+	if (request.form.get('investorDropdown') == 'Entity' and directorFirstName != '!#$'):
+		folderForDirectorFilesName = directorLastName + directorFirstName + 'Files2'
 		folderForDirectorFiles = os.path.join(folderForApplication, folderForDirectorFilesName)
 		os.mkdir(folderForDirectorFiles)
 		
@@ -637,11 +638,11 @@ def investorSubmit():
 					file = request.files[fileType]
 					fileName = secure_filename(file.filename)
 					fileNameExt = os.path.splitext(fileName)[1]
-					newFileName = (directorLastName + directorFirstName + fileType + fileNameExt).replace('director', '')
+					newFileName = (repeatedDirectorInvestorData[f'Director {i} Last Name'] + repeatedDirectorInvestorData[f'Director {i} First Name'] + fileType + fileNameExt).replace('director', '')
 					newFilePath = os.path.join(folderForDirectorFiles, newFileName)
 					file.save(newFilePath)
 					
-	if (request.form.get('borrowerDropdown') == 'Entity'):
+	if (request.form.get('investorDropdown') == 'Entity'):
 		bankAccountFile = request.files['bankAccountFile']
 		bankAccountFileName = secure_filename(bankAccountFile.filename)
 		bankAccountFileNameExt = os.path.splitext(bankAccountFileName)[1]
@@ -664,3 +665,38 @@ def investorSubmit():
 
 if __name__ == '__main__':
 	app.run(debug=True)
+	
+	
+	
+	
+	''' 
+	repeatedIndividualLoanData = {}
+	repeatedUboLoanData = {}
+	repeatedDirectorLoanData = {}
+	
+	for investorType in ['Individual', 'Ubo', 'Director']:
+		for i in range(1, 9):
+			prefix = 'repeated' + f'{investorType}' + 'LoanData'
+			prefix[f'{investorType} {i} Personal Guarantor'] = request.form.get(f'{investorType}PersonalGuarantorDropdown{i}', '!#$')
+			prefix[f'{investorType} {i} Citizen'] = request.form.get(f'{investorType}CitizenDropdown{i}', '!#$')
+			prefix[f'{investorType} {i} South Dakota Resident'] = request.form.get(f'{investorType}SDResidentDropdown{i}', '!#$')
+			prefix[f'{investorType} {i} First Name'] = request.form.get(f'{investorType}FirstName{i}', '!#$')
+			prefix[f'{investorType} {i} Middle Name'] = request.form.get(f'{investorType}MiddleName{i}', '!#$')
+			prefix[f'{investorType} {i} Last Name'] = request.form.get(f'{investorType}LastName{i}', '!#$')
+			prefix[f'{investorType} {i} Home Address'] = request.form.get(f'{investorType}HomeBankAddress{i}', '!#$')
+			prefix[f'{investorType} {i} Home Street Address'] = request.form.get(f'{investorType}HomeStreetAddress{i}', '!#$')
+			prefix[f'{investorType} {i} Home City'] = request.form.get(f'{investorType}HomeCity{i}', '!#$')
+			prefix[f'{investorType} {i} Home State'] = request.form.get(f'{investorType}HomeState{i}', '!#$')
+			prefix[f'{investorType} {i} Home Zip'] = request.form.get(f'{investorType}HomeZip{i}', '!#$')
+			prefix[f'{investorType} {i} Home Country'] = request.form.get(f'{investorType}homeCountry{i}', '!#$')
+			prefix[f'{investorType} {i} Passport Number'] = request.form.get(f'{investorType}PassportNumber{i}', '!#$')
+			prefix[f'{investorType} {i} SSN'] = request.form.get(f'{investorType}Ssn{i}', '!#$')
+			prefix[f'{investorType} {i} Date of Birth'] = request.form.get(f'{investorType}Dob{i}', '!#$')
+			prefix[f'{investorType} {i} Email'] = request.form.get(f'{investorType}Email{i}', '!#$')
+			prefix[f'{investorType} {i} Phone Number'] = request.form.get(f'{investorType}Phone{i}', '!#$')
+			prefix[f'{investorType} {i} FICO/NOSIS Number'] = request.form.get(f'{investorType}Fico{i}', '!#$')
+			prefix[f'{investorType} {i} Politically Exposed Person'] = request.form.get(f'{investorType}Pep{i}', '!#$')
+			prefix[f'{investorType} {i} Crime'] = request.form.get(f'{investorType}Crime{i}', '!#$')
+			prefix[f'{investorType} {i} Declare'] = request.form.get(f'{investorType}DeclareCheckbox{i}', '!#$')
+	
+	'''
