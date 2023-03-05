@@ -1253,7 +1253,7 @@ function handleInvestorSelect() {
     
     submitButton.disabled = true;
     
-    document.getElementById("borrowerSpecificDetails").innerHTML = "";
+    document.getElementById("investorSpecificDetails").innerHTML = "";
     document.getElementById("additionalUboInfo1").innerHTML = "";
     document.getElementById("additionalUboInfo2").innerHTML = "";
     document.getElementById("additionalUboInfo3").innerHTML = "";
