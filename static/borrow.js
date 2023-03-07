@@ -1485,12 +1485,30 @@ buttonsClicked = false;
 
 document.getElementById("loanForm").addEventListener("submit", function(event) {
   for (var i = 1; i <= 8; i++) {
-    var individualDropdown = document.getElementById("#individualCitizenDropdown" + i);
-    var uboDropdown = document.getElementById("#uboCitizenDropdown" + i);
-    var directorDropdown = document.getElementById("#directorCitizenDropdown" + i);
-    if (individualDropdown.value == "Yes" || uboDropdown.value == "Yes" || directorDropdown.value == "Yes") {
+    var individualDropdown = document.getElementById("individualCitizenDropdown" + i);
+    if (individualDropdown.value == "Yes") {
       event.preventDefault();
-      alert("You cannot be a U.S. citizen or permeant U.S resident.");
+      alert("Individual cannot be a U.S. citizen or permeant U.S resident.");
+      return;
+    }
+  }
+});
+document.getElementById("loanForm").addEventListener("submit", function(event) {
+  for (var i = 1; i <= 8; i++) {
+    var uboDropdown = document.getElementById("uboCitizenDropdown" + i);
+    if (uboDropdown.value == "Yes") {
+      event.preventDefault();
+      alert("UBO cannot be a U.S. citizen or permeant U.S resident.");
+      return;
+    }
+  }
+});
+document.getElementById("loanForm").addEventListener("submit", function(event) {
+  for (var i = 1; i <= 8; i++) {
+    var directorDropdown = document.getElementById("directorCitizenDropdown" + i);
+    if (directorDropdown.value == "Yes") {
+      event.preventDefault();
+      alert("Director cannot be a U.S. citizen or permeant U.S resident.");
       return;
     }
   }
