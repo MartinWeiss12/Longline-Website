@@ -4,7 +4,7 @@ import json
 import random
 import boto3
 import datetime
-from flask import Flask, render_template, request, jsonify, session, redirect, make_response
+from flask import Flask, render_template, request, jsonify, session, redirect, make_response, flash
 from flask_session import Session
 from werkzeug.utils import secure_filename
 
@@ -417,7 +417,7 @@ def investorSubmit():
 	# !#$ refers to a blank
 	
 	investorData = {}
-	investorData['Loan Total'] = request.form.get('loanTotal')
+	investorData['Investment Total'] = request.form.get('investmentTotal')
 	investorData['Trance Amount'] = request.form.get('trancheAmt')
 	investorData['Number of Tranches'] = request.form.get('numTranches')
 	investorData['Borrower is an'] = request.form.get('investorDropdown')

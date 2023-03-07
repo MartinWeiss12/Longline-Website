@@ -114,10 +114,9 @@ trancheAmtInput.addEventListener('input', function() {
 const entityContainer = document.getElementById("investorSpecificDetails");
 
 // html for individual Step 3 title
-// html for individual Step 6 title
 const htmlForIndividualTitle = `
     
-  <br><br><br><h2 id="stepSixIndividualTitle">Step 6 - Individual Info</h2><br>
+  <br><br><br><h2 id="stepSixIndividualTitle">Step 3 - Individual Info</h2><br>
   <br><h2 id="stepSixIndividualSubtitle1"> At Least ONE Individual is Required</h2><br>
   <br><h3 id="stepSixIndividualSubtitle2">There is a max of 8 Individuals</h3>
 
@@ -223,7 +222,7 @@ const htmlForEntity = `
     <span id="entityOtherFileNameSpan">Uploaded File: None</span>
   </div>
 
-  <br><br><br><h2 id="stepSixUboTitle">Step 6 - UBO and Director Info</h2><br>  
+  <br><br><br><h2 id="stepSixUboTitle">Step 3 - UBO and Director Info</h2><br>  
   <br><h2 id="stepSixUboSubtitle"> At Least ONE UBO is Required</h2><br>
   <br><h3 id="uboInfoSubtitle2">There is a max of 8 UBOs and 8 Directors</h3>
   
@@ -248,7 +247,7 @@ const htmlForAdditionalIndividual = `
     <label for="individualCitizenDropdown">U.S. Citizen or Green Card?</label>
   </div>
   <div class="input-tab">
-    <select id="individualCitizenDropdown" name="individualCitizenDropdown{{index}}" style="width: 262px;" required>
+    <select id="individualCitizenDropdown{{index}}" name="individualCitizenDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
       <option value="Yes">Yes</option>
       <option value="No">No</option>
@@ -353,7 +352,7 @@ const htmlForAdditionalIndividual = `
   <div class="labels">
     <label id="individualEmailLabel{{index}}" for="individualEmail{{index}}">Email Address</label></div>
   <div class="input-tab">
-    <input class="input-field" type="email" id="individualEmail{{index}}" name="individualEmail{{index}}" placeholder="email@email.com" required style="width: 250px;">
+    <input class="input-field" type="email" id="individualEmail{{index}}" name="individualEmail{{index}}" placeholder="Email Address" required style="width: 250px;">
   </div>
   
   <div class="labels">
@@ -509,7 +508,7 @@ const htmlForAdditionalUbo = `
     <label for="uboCitizenDropdown">U.S. Citizen or Green Card?</label>
   </div>
   <div class="input-tab">
-    <select id="uboCitizenDropdown" name="uboCitizenDropdown{{index}}" style="width: 262px;" required>
+    <select id="uboCitizenDropdown{{index}}" name="uboCitizenDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
       <option value="Yes">Yes</option>
       <option value="No">No</option>
@@ -614,7 +613,7 @@ const htmlForAdditionalUbo = `
   <div class="labels">
     <label id="uboEmailLabel{{index}}" for="uboEmail{{index}}">Email Address</label></div>
   <div class="input-tab">
-    <input class="input-field" type="email" id="uboEmail{{index}}" name="uboEmail{{index}}" placeholder="email@email.com" style="width: 250px;" required>
+    <input class="input-field" type="email" id="uboEmail{{index}}" name="uboEmail{{index}}" placeholder="Email Address" style="width: 250px;" required>
   </div>
   
   <div class="labels">
@@ -770,7 +769,7 @@ const htmlForAdditionalDirector = `
     <label for="directorCitizenDropdown">U.S. Citizen or Green Card?</label>
   </div>
   <div class="input-tab">
-    <select id="directorCitizenDropdown" name="directorCitizenDropdown{{index}}" style="width: 262px;" required>
+    <select id="directorCitizenDropdown{{index}}" name="directorCitizenDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
       <option value="Yes">Yes</option>
       <option value="No">No</option>
@@ -875,7 +874,7 @@ const htmlForAdditionalDirector = `
   <div class="labels">
     <label id="directorEmailLabel{{index}}" for="directorEmail{{index}}">Email Address</label></div>
   <div class="input-tab">
-    <input class="input-field" type="email" id="directorEmail{{index}}" name="directorEmail{{index}}" placeholder="email@email.com" style="width: 250px;" required>
+    <input class="input-field" type="email" id="directorEmail{{index}}" name="directorEmail{{index}}" placeholder="Email Address" style="width: 250px;" required>
   </div>
   
   <div class="labels">
@@ -1258,6 +1257,22 @@ addUboButton1ForBoolean.addEventListener("click", function() {
 });
 buttonsClicked = false;
 
+
+
+// only works for individualDropdown
+
+document.getElementById("investorForm").addEventListener("submit", function(event) {
+  for (var i = 1; i <= 8; i++) {
+    var individualDropdown = document.getElementById("#individualCitizenDropdown" + i);
+    var uboDropdown = document.getElementById("#uboCitizenDropdown" + i);
+    var directorDropdown = document.getElementById("#directorCitizenDropdown" + i);
+    if (individualDropdown.value == "Yes" || uboDropdown.value == "Yes" || directorDropdown.value == "Yes") {
+      event.preventDefault();
+      alert("You cannot be a U.S. citizen or permeant U.S resident.");
+      return;
+    }
+  }
+});
 
 addDirectorEventListeners();
 // NO JAVASCRIPT BELOW THIS LINE
