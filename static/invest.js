@@ -1318,6 +1318,23 @@ document.getElementById("investorForm").addEventListener("submit", function(even
 });
 
 document.getElementById("investorForm").addEventListener("submit", function(event) {
+  var individualDobInputs = document.querySelectorAll('[id^="individualDob"]');
+  var today = new Date();
+  var eighteenYearsAgo = new Date();
+  eighteenYearsAgo.setFullYear(today.getFullYear() - 18);
+  
+  individualDobInputs.forEach(function(dobInput) {
+    var individualDobValue = new Date(dobInput.value);
+    if (individualDobValue > eighteenYearsAgo) {
+      event.preventDefault();
+      alert("Individual must be at least 18 years old.");
+      dobInput.value = "";
+    }
+  });
+});
+
+
+document.getElementById("investorForm").addEventListener("submit", function(event) {
   for (var i = 1; i <= 8; i++) {
     var uboDropdown = document.getElementById("uboCitizenDropdown" + i);
     if (uboDropdown.value == "Yes") {
@@ -1351,6 +1368,22 @@ document.getElementById("investorForm").addEventListener("submit", function(even
 });
 
 document.getElementById("investorForm").addEventListener("submit", function(event) {
+  var uboDobInputs = document.querySelectorAll('[id^="uboDob"]');
+  var today = new Date();
+  var eighteenYearsAgo = new Date();
+  eighteenYearsAgo.setFullYear(today.getFullYear() - 18);
+  
+  uboDobInputs.forEach(function(dobInput) {
+    var uboDobValue = new Date(dobInput.value);
+    if (uboDobValue > eighteenYearsAgo) {
+      event.preventDefault();
+      alert("UBO must be at least 18 years old.");
+      dobInput.value = "";
+    }
+  });
+});
+
+document.getElementById("investorForm").addEventListener("submit", function(event) {
   for (var i = 1; i <= 8; i++) {
     var directorDropdown = document.getElementById("directorCitizenDropdown" + i);
     if (directorDropdown.value == "Yes") {
@@ -1381,6 +1414,22 @@ document.getElementById("investorForm").addEventListener("submit", function(even
     }
     directorNames.push(directorNameToCheck);
   }
+});
+
+document.getElementById("investorForm").addEventListener("submit", function(event) {
+  var directorDobInputs = document.querySelectorAll('[id^="directorDob"]');
+  var today = new Date();
+  var eighteenYearsAgo = new Date();
+  eighteenYearsAgo.setFullYear(today.getFullYear() - 18);
+  
+  directorDobInputs.forEach(function(dobInput) {
+    var directorDobValue = new Date(dobInput.value);
+    if (directorDobValue > eighteenYearsAgo) {
+      event.preventDefault();
+      alert("Director must be at least 18 years old.");
+      dobInput.value = "";
+    }
+  });
 });
 
 

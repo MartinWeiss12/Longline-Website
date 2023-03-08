@@ -1582,6 +1582,21 @@ document.getElementById("loanForm").addEventListener("submit", function(event) {
   }
 });
 
+document.getElementById("loanForm").addEventListener("submit", function(event) {
+  for (var i = 1; i <= 8; i++) {
+    var uboFirstNameInput = document.getElementById("uboFirstName" + i);
+    var uboLastNameInput = document.getElementById("uboLastName" + i);
+    var uboNameToCheck = uboFirstNameInput.value.trim() + " " + uboLastNameInput.value.trim();
+    var directorFirstNameInput = document.getElementById("directorFirstName" + i);
+    var directorLastNameInput = document.getElementById("directorLastName" + i);
+    var directorNameToCheck = directorFirstNameInput.value.trim() + " " + directorLastNameInput.value.trim();
+    if (directorNameToCheck === uboNameToCheck) {
+      event.preventDefault();
+      alert("A Director cannot have the same name as the Ultimate Beneficial Owner.");
+      return;
+    }
+  }
+});
 
 
 addDirectorEventListeners();
