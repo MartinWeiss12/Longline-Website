@@ -703,21 +703,21 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="uboFirstName{{index}}" for="uboFirstName{{index}}">First Name(s)</label>
+    <label id="uboFirstNameLabel{{index}}" for="uboFirstName{{index}}">First Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboFirstName{{index}}" name="uboFirstName{{index}}" placeholder="First Name(s)" style="width: 250px;" required>
   </div>
   
   <div class="labels">
-    <label id="uboMiddleName{{index}}" for="uboMiddleName{{index}}">Middle Name(s)</label>
+    <label id="uboMiddleNameLabel{{index}}" for="uboMiddleName{{index}}">Middle Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboMiddleName{{index}}" name="uboMiddleName{{index}}" placeholder="Middle Name(s)" style="width: 250px;">
   </div>
   
   <div class="labels">
-    <label id="uboLastName{{index}}" for="uboLastName{{index}}">Last Name(s)</label>
+    <label id="uboLastNameLabel{{index}}" for="uboLastName{{index}}">Last Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboLastName{{index}}" name="uboLastName{{index}}" placeholder="Last Name(s)" style="width: 250px;" required>
@@ -989,14 +989,14 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="directorFirstName{{index}}" for="directorFirstName{{index}}">First Name(s)</label>
+    <label id="directorFirstNameLabel{{index}}" for="directorFirstName{{index}}">First Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="directorFirstName{{index}}" name="directorFirstName{{index}}" placeholder="First Name(s)" style="width: 250px;" required>
   </div>
   
   <div class="labels">
-    <label id="directorMiddleName{{index}}" for="directorMiddleName{{index}}">Middle Name(s)</label>
+    <label id="directorMiddleNameLabel{{index}}" for="directorMiddleName{{index}}">Middle Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="directorMiddleName{{index}}" name="directorMiddleName{{index}}" placeholder="Middle Name(s)" style="width: 250px;">
@@ -1495,6 +1495,28 @@ document.getElementById("loanForm").addEventListener("submit", function(event) {
 });
 
 document.getElementById("loanForm").addEventListener("submit", function(event) {
+  var individualNames = [];
+  for (var i = 1; i <= 8; i++) {
+    var individualFirstNameInput = document.getElementById("individualFirstName" + i);
+    var individualLastNameInput = document.getElementById("individualLastName" + i);
+    var individualNameToCheck = individualFirstNameInput.value.trim() + " " + individualLastNameInput.value.trim();
+    var duplicateIndividualName = false;
+    for (var j = 0; j < individualNames.length; j++) {
+      if (individualNames[j] === individualNameToCheck) {
+        duplicateIndividualName = true;
+        break;
+      }
+    }
+    if (duplicateIndividualName) {
+      event.preventDefault();
+      alert("Duplicate Individual name found. Please ensure that each Individual has a unique name.");
+      return;
+    }
+    individualNames.push(individualNameToCheck);
+  }
+});
+
+document.getElementById("loanForm").addEventListener("submit", function(event) {
   for (var i = 1; i <= 8; i++) {
     var uboDropdown = document.getElementById("uboCitizenDropdown" + i);
     if (uboDropdown.value == "Yes") {
@@ -1502,6 +1524,28 @@ document.getElementById("loanForm").addEventListener("submit", function(event) {
       alert("UBO cannot be a U.S. citizen or permeant U.S resident.");
       return;
     }
+  }
+});
+
+document.getElementById("loanForm").addEventListener("submit", function(event) {
+  var uboNames = [];
+  for (var i = 1; i <= 8; i++) {
+    var uboFirstNameInput = document.getElementById("uboFirstName" + i);
+    var uboLastNameInput = document.getElementById("uboLastName" + i);
+    var uboNameToCheck = uboFirstNameInput.value.trim() + " " + uboLastNameInput.value.trim();
+    var duplicateUboName = false;
+    for (var j = 0; j < uboNames.length; j++) {
+      if (uboNames[j] === uboNameToCheck) {
+        duplicateUboName = true;
+        break;
+      }
+    }
+    if (duplicateUboName) {
+      event.preventDefault();
+      alert("Duplicate UBO name found. Please ensure that each UBO has a unique name.");
+      return;
+    }
+    uboNames.push(uboNameToCheck);
   }
 });
 
@@ -1515,6 +1559,30 @@ document.getElementById("loanForm").addEventListener("submit", function(event) {
     }
   }
 });
+
+document.getElementById("loanForm").addEventListener("submit", function(event) {
+  var directorNames = [];
+  for (var i = 1; i <= 8; i++) {
+    var directorFirstNameInput = document.getElementById("directorFirstName" + i);
+    var directorLastNameInput = document.getElementById("directorLastName" + i);
+    var directorNameToCheck = directorFirstNameInput.value.trim() + " " + directorLastNameInput.value.trim();
+    var duplicateDirectorName = false;
+    for (var j = 0; j < directorNames.length; j++) {
+      if (directorNames[j] === directorNameToCheck) {
+        duplicateDirectorName = true;
+        break;
+      }
+    }
+    if (duplicateDirectorName) {
+      event.preventDefault();
+      alert("Duplicate Director name found. Please ensure that each Director has a unique name.");
+      return;
+    }
+    directorNames.push(directorNameToCheck);
+  }
+});
+
+
 
 addDirectorEventListeners();
 // NO JAVASCRIPT BELOW THIS LINE

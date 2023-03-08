@@ -25,9 +25,6 @@ function updateLoanAmount() {
 
   const numTranches = document.getElementById('numTranches').value;
   // hold variable for Loan Total
-  const investmentTotalToCopy = document.getElementById("investmentTotal");
-  collateralValue.value = investmentTotalToCopy.value;
-  // local variable for local Collateral Value
 
   if (isNaN(numTranches)) {
     return;
@@ -110,6 +107,30 @@ trancheAmtInput.addEventListener('input', function() {
     updateinvestmentTotal();
   }
 });
+
+// container for bankOtherInputContainer
+const bankOtherInputContainer = document.getElementById("bankOtherInputContainer");
+const otherBankAccountHtml = `
+      <div class="labels">
+        <label id="bankAccountOtherTextLabel" for="bankAccountOtherText">Please Specify</label>
+      </div>
+      <div class="input-tab">
+        <input class="input-field" type="text" id="bankAccountOther" name="bankAccountOther" placeholder="Other Bank Account Type" style="width: 150px;">
+      </div>
+    </div>
+    `;
+
+// show above html if other is selected for bank account type
+function otherBankAccountType() {
+  var select = document.getElementById("bankAccountTypeDropdown");
+  var option = select.options[select.selectedIndex];
+  
+  if (option.value == "Other") {
+    bankOtherInputContainer.innerHTML = otherBankAccountHtml;
+  } else {
+    bankOtherInputContainer.innerHTML = "";
+  }
+}
 
 const entityContainer = document.getElementById("investorSpecificDetails");
 
@@ -527,21 +548,21 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="uboFirstName{{index}}" for="uboFirstName{{index}}">First Name(s)</label>
+    <label id="uboFirstNameLabel{{index}}" for="uboFirstName{{index}}">First Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboFirstName{{index}}" name="uboFirstName{{index}}" placeholder="First Name(s)" style="width: 250px;" required>
   </div>
   
   <div class="labels">
-    <label id="uboMiddleName{{index}}" for="uboMiddleName{{index}}">Middle Name(s)</label>
+    <label id="uboMiddleNameLabel{{index}}" for="uboMiddleName{{index}}">Middle Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboMiddleName{{index}}" name="uboMiddleName{{index}}" placeholder="Middle Name(s)" style="width: 250px;">
   </div>
   
   <div class="labels">
-    <label id="uboLastName{{index}}" for="uboLastName{{index}}">Last Name(s)</label>
+    <label id="uboLastNameLabel{{index}}" for="uboLastName{{index}}">Last Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="uboLastName{{index}}" name="uboLastName{{index}}" placeholder="Last Name(s)" style="width: 250px;" required>
@@ -788,14 +809,14 @@ const htmlForAdditionalDirector = `
   </div>
   
   <div class="labels">
-    <label id="directorFirstName{{index}}" for="directorFirstName{{index}}">First Name(s)</label>
+    <label id="directorFirstNameLabel{{index}}" for="directorFirstName{{index}}">First Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="directorFirstName{{index}}" name="directorFirstName{{index}}" placeholder="First Name(s)" style="width: 250px;" required>
   </div>
   
   <div class="labels">
-    <label id="directorMiddleName{{index}}" for="directorMiddleName{{index}}">Middle Name(s)</label>
+    <label id="directorMiddleNameLabel{{index}}" for="directorMiddleName{{index}}">Middle Name(s)</label>
   </div>
   <div class="input-tab">
     <input class="input-field" type="text" id="directorMiddleName{{index}}" name="directorMiddleName{{index}}" placeholder="Middle Name(s)" style="width: 250px;">
@@ -1258,6 +1279,11 @@ addUboButton1ForBoolean.addEventListener("click", function() {
 buttonsClicked = false;
 
 
+
+// need to debug ubo name check
+
+
+
 document.getElementById("investorForm").addEventListener("submit", function(event) {
   for (var i = 1; i <= 8; i++) {
     var individualDropdown = document.getElementById("individualCitizenDropdown" + i);
@@ -1356,6 +1382,24 @@ document.getElementById("investorForm").addEventListener("submit", function(even
     directorNames.push(directorNameToCheck);
   }
 });
+
+
+document.getElementById("investorForm").addEventListener("submit", function(event) {
+  for (var i = 1; i <= 8; i++) {
+    var uboFirstNameInput = document.getElementById("uboFirstName" + i);
+    var uboLastNameInput = document.getElementById("uboLastName" + i);
+    var uboNameToCheck = uboFirstNameInput.value.trim() + " " + uboLastNameInput.value.trim();
+    var directorFirstNameInput = document.getElementById("directorFirstName" + i);
+    var directorLastNameInput = document.getElementById("directorLastName" + i);
+    var directorNameToCheck = directorFirstNameInput.value.trim() + " " + directorLastNameInput.value.trim();
+    if (directorNameToCheck === uboNameToCheck) {
+      event.preventDefault();
+      alert("A Director cannot have the same name as the Ultimate Beneficial Owner.");
+      return;
+    }
+  }
+});
+
 
 
 
