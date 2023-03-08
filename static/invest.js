@@ -1258,9 +1258,6 @@ addUboButton1ForBoolean.addEventListener("click", function() {
 buttonsClicked = false;
 
 
-
-// only works for individualDropdown
-
 document.getElementById("investorForm").addEventListener("submit", function(event) {
   for (var i = 1; i <= 8; i++) {
     var individualDropdown = document.getElementById("individualCitizenDropdown" + i);
@@ -1269,6 +1266,28 @@ document.getElementById("investorForm").addEventListener("submit", function(even
       alert("Individual cannot be a U.S. citizen or permeant U.S resident.");
       return;
     }
+  }
+});
+
+document.getElementById("investorForm").addEventListener("submit", function(event) {
+  var individualNames = [];
+  for (var i = 1; i <= 8; i++) {
+    var individualFirstNameInput = document.getElementById("individualFirstName" + i);
+    var individualLastNameInput = document.getElementById("individualLastName" + i);
+    var individualNameToCheck = individualFirstNameInput.value.trim() + " " + individualLastNameInput.value.trim();
+    var duplicateIndividualName = false;
+    for (var j = 0; j < individualNames.length; j++) {
+      if (individualNames[j] === individualNameToCheck) {
+        duplicateIndividualName = true;
+        break;
+      }
+    }
+    if (duplicateIndividualName) {
+      event.preventDefault();
+      alert("Duplicate Individual name found. Please ensure that each Individual has a unique name.");
+      return;
+    }
+    individualNames.push(individualNameToCheck);
   }
 });
 
@@ -1284,6 +1303,28 @@ document.getElementById("investorForm").addEventListener("submit", function(even
 });
 
 document.getElementById("investorForm").addEventListener("submit", function(event) {
+  var uboNames = [];
+  for (var i = 1; i <= 8; i++) {
+    var uboFirstNameInput = document.getElementById("uboFirstName" + i);
+    var uboLastNameInput = document.getElementById("uboLastName" + i);
+    var uboNameToCheck = uboFirstNameInput.value.trim() + " " + uboLastNameInput.value.trim();
+    var duplicateUboName = false;
+    for (var j = 0; j < uboNames.length; j++) {
+      if (uboNames[j] === uboNameToCheck) {
+        duplicateUboName = true;
+        break;
+      }
+    }
+    if (duplicateUboName) {
+      event.preventDefault();
+      alert("Duplicate UBO name found. Please ensure that each UBO has a unique name.");
+      return;
+    }
+    uboNames.push(uboNameToCheck);
+  }
+});
+
+document.getElementById("investorForm").addEventListener("submit", function(event) {
   for (var i = 1; i <= 8; i++) {
     var directorDropdown = document.getElementById("directorCitizenDropdown" + i);
     if (directorDropdown.value == "Yes") {
@@ -1293,6 +1334,33 @@ document.getElementById("investorForm").addEventListener("submit", function(even
     }
   }
 });
+
+document.getElementById("investorForm").addEventListener("submit", function(event) {
+  var directorNames = [];
+  for (var i = 1; i <= 8; i++) {
+    var directorFirstNameInput = document.getElementById("directorFirstName" + i);
+    var directorLastNameInput = document.getElementById("directorLastName" + i);
+    var directorNameToCheck = directorFirstNameInput.value.trim() + " " + directorLastNameInput.value.trim();
+    var duplicateDirectorName = false;
+    for (var j = 0; j < directorNames.length; j++) {
+      if (directorNames[j] === directorNameToCheck) {
+        duplicateDirectorName = true;
+        break;
+      }
+    }
+    if (duplicateDirectorName) {
+      event.preventDefault();
+      alert("Duplicate Director name found. Please ensure that each Director has a unique name.");
+      return;
+    }
+    directorNames.push(directorNameToCheck);
+  }
+});
+
+
+
+// ubo and director must have different names
+
 
 addDirectorEventListeners();
 // NO JAVASCRIPT BELOW THIS LINE
