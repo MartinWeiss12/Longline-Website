@@ -245,7 +245,7 @@ const otherBankAccountHtml = `
         <label id="bankAccountOtherTextLabel" for="bankAccountOtherText">Please Specify</label>
       </div>
       <div class="input-tab">
-        <input class="input-field" type="text" id="bankAccountOther" name="bankAccountOther" placeholder="Other Bank Account Type" style="width: 150px;">
+        <input class="input-field" type="text" id="bankAccountOther" name="bankAccountOther" placeholder="Other Bank Account Type" style="width: 250px;">
       </div>
     </div>
     `;
@@ -839,8 +839,8 @@ const htmlForAdditionalUbo = `
     <label></label>
   </div>
   <div class="input-tab">
-    <label><input type="radio" name="uboPep{{index}}" value="uboYesPep{{index}}" style="margin-left: 50px;" required>Yes</label>
-    <label><input type="radio" name="uboPep{{index}}" value="uboNoPep{{index}}">No</label>
+    <label><input type="radio" name="uboPep{{index}}" value="Yes" style="margin-left: 50px;" required>Yes</label>
+    <label><input type="radio" name="uboPep{{index}}" value="No">No</label>
   </div>
   
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px;">
@@ -851,8 +851,8 @@ const htmlForAdditionalUbo = `
     <label></label>
   </div>
   <div class="input-tab">
-    <label><input type="radio" name="uboCrime{{index}}" value="uboYesCrime{{index}}" style="margin-left: 50px;" required>Yes</label>
-    <label><input type="radio" name="uboCrime{{index}}" value="uboNoCrime{{index}}">No</label>
+    <label><input type="radio" name="uboCrime{{index}}" value="Yes" style="margin-left: 50px;" required>Yes</label>
+    <label><input type="radio" name="uboCrime{{index}}" value="No">No</label>
   </div>
   
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
@@ -863,7 +863,7 @@ const htmlForAdditionalUbo = `
     <label></label>
   </div>
   <div class="input-tab" style="margin-left: 20px;">
-    <input type="checkbox" name="uboDeclareCheckbox{{index}}" value="uboDeclareCheckbox{{index}}" required>I declare that the above information is true and correct.<br>
+    <input type="checkbox" name="uboDeclareCheckbox{{index}}" value="Yes" required>I declare that the above information is true and correct.<br>
   </div>
 
   <br><br><h3>Upload a PDF or Image for Each of the Following</h3>
@@ -1057,8 +1057,8 @@ const htmlForAdditionalUbo = `
   <div class="input-tab">
     <select id="directorOwnRentDropdown" name="directorOwnRentDropdown{{index}}" style="width: 262px;">
       <option disabled value selected>Select an option</option>
-      <option value="directorOwn{{index}}">Own</option>
-      <option value="directorRent{{index}}">Rent</option>
+      <option value="Own">Own</option>
+      <option value="Rent">Rent</option>
     </select>
   </div>
   
@@ -1125,8 +1125,8 @@ const htmlForAdditionalUbo = `
     <label></label>
   </div>
   <div class="input-tab">
-    <label><input type="radio" name="directorPep{{index}}" value="directorYesPep{{index}}" style="margin-left: 50px;" required>Yes</label>
-    <label><input type="radio" name="directorPep{{index}}" value="directorNoPep{{index}}">No</label>
+    <label><input type="radio" name="directorPep{{index}}" value="Yes" style="margin-left: 50px;" required>Yes</label>
+    <label><input type="radio" name="directorPep{{index}}" value="No">No</label>
   </div>
   
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px;">
@@ -1137,8 +1137,8 @@ const htmlForAdditionalUbo = `
     <label></label>
   </div>
   <div class="input-tab">
-    <label><input type="radio" name="directorCrime{{index}}" value="directorYesCrime{{index}}" style="margin-left: 50px;" required>Yes</label>
-    <label><input type="radio" name="directorCrime{{index}}" value="directorNoCrime{{index}}">No</label>
+    <label><input type="radio" name="directorCrime{{index}}" value="Yes" style="margin-left: 50px;" required>Yes</label>
+    <label><input type="radio" name="directorCrime{{index}}" value="No">No</label>
   </div>
   
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
@@ -1149,7 +1149,7 @@ const htmlForAdditionalUbo = `
     <label></label>
   </div>
   <div class="input-tab" style="margin-left: 20px;">
-    <input type="checkbox" name="directorDeclareCheckbox{{index}}" value="directorDeclareCheckbox{{index}}" required>I declare that the above information is true and correct.<br>
+    <input type="checkbox" name="directorDeclareCheckbox{{index}}" value="Yes" required>I declare that the above information is true and correct.<br>
   </div>
   
   <br><br><h3>Upload a PDF or Image for Each of the Following</h3>
@@ -1517,6 +1517,22 @@ document.getElementById("loanForm").addEventListener("submit", function(event) {
 });
 
 document.getElementById("loanForm").addEventListener("submit", function(event) {
+  var individualDobInputs = document.querySelectorAll('[id^="individualDob"]');
+  var today = new Date();
+  var eighteenYearsAgo = new Date();
+  eighteenYearsAgo.setFullYear(today.getFullYear() - 18);
+  
+  individualDobInputs.forEach(function(dobInput) {
+    var individualDobValue = new Date(dobInput.value);
+    if (individualDobValue > eighteenYearsAgo) {
+      event.preventDefault();
+      alert("Individual must be at least 18 years old.");
+      dobInput.value = "";
+    }
+  });
+});
+
+document.getElementById("loanForm").addEventListener("submit", function(event) {
   for (var i = 1; i <= 8; i++) {
     var uboDropdown = document.getElementById("uboCitizenDropdown" + i);
     if (uboDropdown.value == "Yes") {
@@ -1550,6 +1566,22 @@ document.getElementById("loanForm").addEventListener("submit", function(event) {
 });
 
 document.getElementById("loanForm").addEventListener("submit", function(event) {
+  var uboDobInputs = document.querySelectorAll('[id^="uboDob"]');
+  var today = new Date();
+  var eighteenYearsAgo = new Date();
+  eighteenYearsAgo.setFullYear(today.getFullYear() - 18);
+  
+  uboDobInputs.forEach(function(dobInput) {
+    var uboDobValue = new Date(dobInput.value);
+    if (uboDobValue > eighteenYearsAgo) {
+      event.preventDefault();
+      alert("UBO must be at least 18 years old.");
+      dobInput.value = "";
+    }
+  });
+});
+
+document.getElementById("loanForm").addEventListener("submit", function(event) {
   for (var i = 1; i <= 8; i++) {
     var directorDropdown = document.getElementById("directorCitizenDropdown" + i);
     if (directorDropdown.value == "Yes") {
@@ -1580,6 +1612,22 @@ document.getElementById("loanForm").addEventListener("submit", function(event) {
     }
     directorNames.push(directorNameToCheck);
   }
+});
+
+document.getElementById("loanForm").addEventListener("submit", function(event) {
+  var directorDobInputs = document.querySelectorAll('[id^="directorDob"]');
+  var today = new Date();
+  var eighteenYearsAgo = new Date();
+  eighteenYearsAgo.setFullYear(today.getFullYear() - 18);
+  
+  directorDobInputs.forEach(function(dobInput) {
+    var directorDobValue = new Date(dobInput.value);
+    if (directorDobValue > eighteenYearsAgo) {
+      event.preventDefault();
+      alert("Director must be at least 18 years old.");
+      dobInput.value = "";
+    }
+  });
 });
 
 document.getElementById("loanForm").addEventListener("submit", function(event) {

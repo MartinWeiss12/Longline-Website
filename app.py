@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-
-#!/usr/bin/env python3
 import os
 import json
-import random
 import boto3
+import random
 import datetime
+import openpyxl
 from flask import Flask, render_template, request, jsonify, session, redirect, make_response, flash
 from flask_session import Session
 from werkzeug.utils import secure_filename
@@ -304,6 +303,17 @@ def loanSubmit():
 	jsonName = 'LoanApplication' + loanApplicationNumber + '.json' 
 	with open(f'{folderForApplication}/{jsonName}', 'w') as f:
 		json.dump(cleanedData, f)
+#		dataAsExcel = json.load(f)
+#
+#		
+#	workbook = openpyxl.Workbook()
+#	worksheet = workbook.active
+#	headers = list(dataAsExcel.keys())
+#	values = [dataAsExcel[header] for header in headers]
+#	worksheet.append(values)
+#	workbookName = 'LoanApplication' + loanApplicationNumber + '.xlsx' 
+#	fullPath = os.path.join(folderForApplication, workbookName)
+#	workbook.save(fullPath)
 		
 	for i in range(1, 9):
 		if (request.form.get('borrowerDropdown') == 'Individual' and repeatedIndividualLoanData[f'Individual {i} First Name'] != '!#$'):		
@@ -331,22 +341,18 @@ def loanSubmit():
 					newFilePath = os.path.join(folderForIndividualFiles, newFileName)
 					file.save(newFilePath)
 					
-		bankAccountFile = request.files['bankAccountFile']
-		bankAccountFileName = secure_filename(bankAccountFile.filename)
-		bankAccountFileNameExt = os.path.splitext(bankAccountFileName)[1]
+			bankAccountFile = request.files['bankAccountFile']
+			bankAccountFileName = secure_filename(bankAccountFile.filename)
+			bankAccountFileNameExt = os.path.splitext(bankAccountFileName)[1]
+					
+			# use first ind name for bank file
+			#newBankAccountFileName = request.form.get('individualFirstName1').replace(' ', '') + request.form.get('individualFirstName1').replace(' ', '') + 'BankAccountFile' + bankAccountFileNameExt
+			
+			# use loan application number
+			newBankAccountFileName = 'LoanApplication' + loanApplicationNumber + 'BankAccountFile' + bankAccountFileNameExt
 		
-		
-		# use first ind name for bank file
-		newBankAccountFileName = request.form.get('individualFirstName1', '!#$').replace(' ', '') + request.form.get('individualFirstName1', '!#$').replace(' ', '') + 'BankAccountFile' + bankAccountFileNameExt
-		
-		# use loan application number
-		newBankAccountFileName = 'LoanApplication' + loanApplicationNumber + 'BankAccountFile' + bankAccountFileNameExt
-		
-		
-		
-		
-		newBankAccountFilePath = os.path.join(folderForIndividualFiles, newBankAccountFileName)
-		bankAccountFile.save(newBankAccountFilePath)
+			newBankAccountFilePath = os.path.join(folderForIndividualFiles, newBankAccountFileName)
+			bankAccountFile.save(newBankAccountFilePath)
 		
 	for i in range(1, 9):
 		if (request.form.get('borrowerDropdown') == 'Entity' and repeatedUboLoanData[f'Ubo {i} First Name'] != '!#$'):
@@ -409,10 +415,16 @@ def loanSubmit():
 		bankAccountFile.save(newBankAccountFilePath)
 		
 		
+		
+		
+
+		
+		
+		
 	# Upload cleanedData.json to S3
 	#s3 = boto3.resource('s3')
 	# make two buckets, one for borrowers, one for investors
-	bucket_name = 'your-bucket-name'
+	bucket_name = 'Loan-Bucket'
 	object_key = 'loanData.json'
 	#s3.Object(bucket_name, object_key).put(Body=open('loanData.json', 'rb'))
 	
@@ -495,7 +507,6 @@ def investorSubmit():
 	
 	repeatedIndividualInvestorData = {}
 	for i in range(1, 9):
-		repeatedIndividualInvestorData[f'Individual {i} Personal Guarantor'] = request.form.get(f'individualPersonalGuarantorDropdown{i}', '!#$')
 		repeatedIndividualInvestorData[f'Individual {i} Citizen'] = request.form.get(f'individualCitizenDropdown{i}', '!#$')
 		repeatedIndividualInvestorData[f'Individual {i} South Dakota Resident'] = request.form.get(f'individualSDResidentDropdown{i}', '!#$')
 		repeatedIndividualInvestorData[f'Individual {i} First Name'] = request.form.get(f'individualFirstName{i}', '!#$')
@@ -519,7 +530,6 @@ def investorSubmit():
 		
 	repeatedUboInvestorData = {}
 	for i in range(1, 9):
-		repeatedUboInvestorData[f'Ubo {i} Personal Guarantor'] = request.form.get(f'uboPersonalGuarantorDropdown{i}', '!#$')
 		repeatedUboInvestorData[f'Ubo {i} Citizen'] = request.form.get(f'uboCitizenDropdown{i}', '!#$')
 		repeatedUboInvestorData[f'Ubo {i} South Dakota Resident'] = request.form.get(f'uboSDResidentDropdown{i}', '!#$')
 		repeatedUboInvestorData[f'Ubo {i} First Name'] = request.form.get(f'uboFirstName{i}', '!#$')
@@ -543,7 +553,6 @@ def investorSubmit():
 		
 	repeatedDirectorInvestorData = {}
 	for i in range(1, 9):
-		repeatedDirectorInvestorData[f'Director {i} Personal Guarantor'] = request.form.get(f'directorPersonalGuarantorDropdown{i}', '!#$')
 		repeatedDirectorInvestorData[f'Director {i} Citizen'] = request.form.get(f'directorCitizenDropdown{i}', '!#$')
 		repeatedDirectorInvestorData[f'Director {i} South Dakota Resident'] = request.form.get(f'directorSDResidentDropdown{i}', '!#$')
 		repeatedDirectorInvestorData[f'Director {i} First Name'] = request.form.get(f'directorFirstName{i}', '!#$')
@@ -671,8 +680,8 @@ def investorSubmit():
 	# Upload cleanedData.json to S3
 	#s3 = boto3.resource('s3')
 	# make two buckets, one for borrowers, one for investors
-	bucket_name = 'your-bucket-name'
-	object_key = 'loanData.json'
+	bucket_name = 'Investor-Bucket'
+	object_key = 'investorData.json'
 	#s3.Object(bucket_name, object_key).put(Body=open('loanData.json', 'rb'))
 	
 	

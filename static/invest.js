@@ -254,17 +254,6 @@ const htmlForAdditionalIndividual = `
   <br><br><h3 id="individualInfoSubtitle{{index}}">Info for Individual {{index}}</h3>
   
   <div class="labels">
-    <label for="individualPersonalGuarantorDropdown">Personal Guarantor?</label>
-  </div>
-  <div class="input-tab">
-    <select id="individualPersonalGuarantorDropdown" name="individualPersonalGuarantorDropdown{{index}}" style="width: 262px;" required>
-      <option disabled value selected>Select an option</option>
-      <option value="Yes">Yes</option>
-      <option value="No">No</option>
-    </select>
-  </div>
-  
-  <div class="labels">
     <label for="individualCitizenDropdown">U.S. Citizen or Green Card?</label>
   </div>
   <div class="input-tab">
@@ -513,17 +502,6 @@ const htmlForAdditionalUbo = `
       <option value="No">No</option>
     </select>
   </div>
-
-  <div class="labels">
-  <label for="uboPersonalGuarantorDropdown">Personal Guarantor?</label>
-  </div>
-  <div class="input-tab">
-    <select id="uboPersonalGuarantorDropdown" name="uboPersonalGuarantorDropdown{{index}}" style="width: 262px;" required>
-      <option disabled value selected>Select an option</option>
-      <option value="Yes">Yes</option>
-      <option value="No">No</option>
-    </select>
-  </div>
   
   <div class="labels">
     <label for="uboCitizenDropdown">U.S. Citizen or Green Card?</label>
@@ -659,8 +637,8 @@ const htmlForAdditionalUbo = `
     <label></label>
   </div>
   <div class="input-tab">
-    <label><input type="radio" name="uboPep{{index}}" value="uboYesPep{{index}}" style="margin-left: 50px;" required>Yes</label>
-    <label><input type="radio" name="uboPep{{index}}" value="uboNoPep{{index}}">No</label>
+    <label><input type="radio" name="uboPep{{index}}" value="Yes" style="margin-left: 50px;" required>Yes</label>
+    <label><input type="radio" name="uboPep{{index}}" value="No">No</label>
   </div>
   
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px;">
@@ -671,8 +649,8 @@ const htmlForAdditionalUbo = `
     <label></label>
   </div>
   <div class="input-tab">
-    <label><input type="radio" name="uboCrime{{index}}" value="uboYesCrime{{index}}" style="margin-left: 50px;" required>Yes</label>
-    <label><input type="radio" name="uboCrime{{index}}" value="uboNoCrime{{index}}">No</label>
+    <label><input type="radio" name="uboCrime{{index}}" value="Yes" style="margin-left: 50px;" required>Yes</label>
+    <label><input type="radio" name="uboCrime{{index}}" value="No">No</label>
   </div>
   
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
@@ -683,7 +661,7 @@ const htmlForAdditionalUbo = `
     <label></label>
   </div>
   <div class="input-tab" style="margin-left: 20px;">
-    <input type="checkbox" name="uboDeclareCheckbox{{index}}" value="uboDeclareCheckbox{{index}}" required>I declare that the above information is true and correct.<br>
+    <input type="checkbox" name="uboDeclareCheckbox{{index}}" value="Yes" required>I declare that the above information is true and correct.<br>
   </div>
 
   <br><br><h3>Upload a PDF or Image for Each of the Following</h3>
@@ -769,17 +747,6 @@ const htmlForAdditionalDirector = `
   </div>
   <div class="input-tab">
     <select id="directorControlPersonAuthDropdown" name="directorControlPersonAuthDropdown{{index}}" style="width: 262px;" required>
-      <option disabled value selected>Select an option</option>
-      <option value="Yes">Yes</option>
-      <option value="No">No</option>
-    </select>
-  </div>
-
-  <div class="labels">
-  <label for="directorPersonalGuarantorDropdown">Personal Guarantor?</label>
-  </div>
-  <div class="input-tab">
-    <select id="directorPersonalGuarantorDropdown" name="directorPersonalGuarantorDropdown{{index}}" style="width: 262px;" required>
       <option disabled value selected>Select an option</option>
       <option value="Yes">Yes</option>
       <option value="No">No</option>
@@ -920,8 +887,8 @@ const htmlForAdditionalDirector = `
     <label></label>
   </div>
   <div class="input-tab">
-    <label><input type="radio" name="directorPep{{index}}" value="directorYesPep{{index}}" style="margin-left: 50px;" required>Yes</label>
-    <label><input type="radio" name="directorPep{{index}}" value="directorNoPep{{index}}">No</label>
+    <label><input type="radio" name="directorPep{{index}}" value="Yes" style="margin-left: 50px;" required>Yes</label>
+    <label><input type="radio" name="directorPep{{index}}" value="No">No</label>
   </div>
   
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px;">
@@ -932,8 +899,8 @@ const htmlForAdditionalDirector = `
     <label></label>
   </div>
   <div class="input-tab">
-    <label><input type="radio" name="directorCrime{{index}}" value="directorYesCrime{{index}}" style="margin-left: 50px;" required>Yes</label>
-    <label><input type="radio" name="directorCrime{{index}}" value="directorNoCrime{{index}}">No</label>
+    <label><input type="radio" name="directorCrime{{index}}" value="Yes" style="margin-left: 50px;" required>Yes</label>
+    <label><input type="radio" name="directorCrime{{index}}" value="No">No</label>
   </div>
   
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
@@ -944,7 +911,7 @@ const htmlForAdditionalDirector = `
     <label></label>
   </div>
   <div class="input-tab" style="margin-left: 20px;">
-    <input type="checkbox" name="directorDeclareCheckbox{{index}}" value="directorDeclareCheckbox{{index}}" required>I declare that the above information is true and correct.<br>
+    <input type="checkbox" name="directorDeclareCheckbox{{index}}" value="Yes" required>I declare that the above information is true and correct.<br>
   </div>
   
   <br><br><h3>Upload a PDF or Image for Each of the Following</h3>
