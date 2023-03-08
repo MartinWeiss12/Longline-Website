@@ -5,6 +5,7 @@ import boto3
 import random
 import datetime
 import openpyxl
+from openpyxl.styles import Font
 from flask import Flask, render_template, request, jsonify, session, redirect, make_response, flash
 from flask_session import Session
 from werkzeug.utils import secure_filename
@@ -113,8 +114,8 @@ def contactSubmitRedirect():
 def loanSubmit():
 	
 	loanApplicationNumber = str(random.randint(1, 100))
-	folderForApplication = 'LoanApplication' + loanApplicationNumber
-	os.mkdir(folderForApplication)
+	folderForLoanApplication = 'LoanApplication' + loanApplicationNumber
+	os.mkdir(folderForLoanApplication)
 	
 	# !#$ refers to a blank
 	
@@ -155,7 +156,7 @@ def loanSubmit():
 	loanData['Agree Disbursed Total'] = request.form.get('agreeDisbursedTotal')
 	loanData['Borrower is an'] = request.form.get('borrowerDropdown')
 	loanData['Entity Name'] = request.form.get('entityName', '!#$')
-	loanData['Entity Country'] = request.form.get('entityCountry')
+	loanData['Entity Country'] = request.form.get('entityCountry', '!#$')
 	loanData['Entity Street Address'] = request.form.get('entityStreetAddress', '!#$')
 	loanData['Entity City'] = request.form.get('entityCity', '!#$')
 	loanData['Entity State'] = request.form.get('entityState', '!#$')
@@ -173,13 +174,13 @@ def loanSubmit():
 	loanData['ABA Number'] = request.form.get('abaNumber')
 	loanData['Memo'] = request.form.get('memo')
 	
-	#entityName = loanData['Entity Name'].str.replace(' ', '')
-	entityName = loanData['Entity Name']
+	entityName = loanData['Entity Name'].replace(' ', '')
+	#entityName = loanData['Entity Name']
 	
 	if (request.form.get('borrowerDropdown') == 'Entity' and entityName != '!#$'):
 		
 		folderForEntityFilesName = loanData['Entity Name'] + 'Files'
-		folderForEntityFiles = os.path.join(folderForApplication, folderForEntityFilesName)
+		folderForEntityFiles = os.path.join(folderForLoanApplication, folderForEntityFilesName)
 		os.mkdir(folderForEntityFiles)
 		
 		# Entity Articles of Organization File 
@@ -297,23 +298,29 @@ def loanSubmit():
 		
 		
 	loanData = {**loanData, **repeatedIndividualLoanData, **repeatedUboLoanData, **repeatedDirectorLoanData}
-	
-	cleanedData = {k: v for k, v in loanData.items() if v != '!#$'}
-	#cleanedData = {k: v for k, v in loanData.items() if v not in ('!#$', '')} remove blanks too?
+#	cleanedData = {k: v for k, v in loanData.items() if v != '!#$'}
+	cleanedData = {k: v for k, v in loanData.items() if v not in ('!#$', '')}
 	jsonName = 'LoanApplication' + loanApplicationNumber + '.json' 
-	with open(f'{folderForApplication}/{jsonName}', 'w') as f:
+	with open(f'{folderForLoanApplication}/{jsonName}', 'w') as f:
 		json.dump(cleanedData, f)
-#		dataAsExcel = json.load(f)
-#
-#		
-#	workbook = openpyxl.Workbook()
-#	worksheet = workbook.active
-#	headers = list(dataAsExcel.keys())
-#	values = [dataAsExcel[header] for header in headers]
-#	worksheet.append(values)
-#	workbookName = 'LoanApplication' + loanApplicationNumber + '.xlsx' 
-#	fullPath = os.path.join(folderForApplication, workbookName)
-#	workbook.save(fullPath)
+
+	workbook = openpyxl.Workbook()
+	worksheet = workbook.active
+	columnHeaders = ['Question', 'Value']
+	worksheet.append(columnHeaders)
+	columnHeadersFont = Font(bold=True)
+	for cell in worksheet[1]:
+		cell.font = columnHeadersFont
+		
+	for key, value in cleanedData.items():
+		if isinstance(value, list):
+			value_str = ', '.join(value)
+			worksheet.append([key, value_str])
+		else:
+			worksheet.append([key, value])
+			
+	workbookName = 'LoanApplication' + loanApplicationNumber + '.xlsx' 
+	workbook.save(f'{folderForLoanApplication}/{workbookName}')
 		
 	for i in range(1, 9):
 		if (request.form.get('borrowerDropdown') == 'Individual' and repeatedIndividualLoanData[f'Individual {i} First Name'] != '!#$'):		
@@ -329,7 +336,7 @@ def loanSubmit():
 				individualFirstName = request.form.get(f'individualFirstName{i}', '!#$').replace(' ', '')
 				individualLastName = request.form.get(f'individualLastName{i}', '!#$').replace(' ', '')
 				folderForIndividualFilesName = individualLastName + individualFirstName + 'Files'
-				folderForIndividualFiles = os.path.join(folderForApplication, folderForIndividualFilesName)
+				folderForIndividualFiles = os.path.join(folderForLoanApplication, folderForIndividualFilesName)
 				os.mkdir(folderForIndividualFiles)
 				
 				for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
@@ -368,7 +375,7 @@ def loanSubmit():
 				uboFirstName = request.form.get(f'uboFirstName{i}', '!#$').replace(' ', '')
 				uboLastName = request.form.get(f'uboLastName{i}', '!#$').replace(' ', '')
 				folderForUboFilesName = uboLastName + uboFirstName + 'Files'
-				folderForUboFiles = os.path.join(folderForApplication, folderForUboFilesName)
+				folderForUboFiles = os.path.join(folderForLoanApplication, folderForUboFilesName)
 				os.mkdir(folderForUboFiles)
 				
 				for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
@@ -394,7 +401,7 @@ def loanSubmit():
 				directorFirstName = request.form.get(f'directorFirstName{i}', '!#$').replace(' ', '')
 				directorLastName = request.form.get(f'directorLastName{i}', '!#$').replace(' ', '')
 				folderForDirectorFilesName = directorLastName + directorFirstName + 'Files'
-				folderForDirectorFiles = os.path.join(folderForApplication, folderForDirectorFilesName)
+				folderForDirectorFiles = os.path.join(folderForLoanApplication, folderForDirectorFilesName)
 				os.mkdir(folderForDirectorFiles)
 				
 				for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
@@ -435,8 +442,8 @@ def loanSubmit():
 def investorSubmit():
 	
 	investorApplicationNumber = str(random.randint(1, 100))
-	folderForApplication = 'InvestorApplication' + investorApplicationNumber
-	os.mkdir(folderForApplication)
+	folderForInvestmentApplication = 'InvestorApplication' + investorApplicationNumber
+	os.mkdir(folderForInvestmentApplication)
 	
 	# !#$ refers to a blank
 	
@@ -464,13 +471,13 @@ def investorSubmit():
 	investorData['ABA Number'] = request.form.get('abaNumber')
 	investorData['Memo'] = request.form.get('memo')
 	
-	entityName = investorData['Entity Name']#.str.replace(' ', '')
-	entityName = investorData['Entity Name']
+	entityName = investorData['Entity Name'].replace(' ', '')
+	#entityName = investorData['Entity Name']
 	
 	if (request.form.get('investorDropdown') == 'Entity' and entityName != '!#$'):
 		
 		folderForEntityFilesName = investorData['Entity Name'] + 'Files'
-		folderForEntityFiles = os.path.join(folderForApplication, folderForEntityFilesName)
+		folderForEntityFiles = os.path.join(folderForInvestmentApplication, folderForEntityFilesName)
 		os.mkdir(folderForEntityFiles)
 		
 		# Entity Articles of Organization File 
@@ -576,11 +583,29 @@ def investorSubmit():
 		
 	investorData = {**investorData, **repeatedIndividualInvestorData, **repeatedUboInvestorData, **repeatedDirectorInvestorData}
 	
-	cleanedData = {k: v for k, v in investorData.items() if v != '!#$'}
-	#cleanedData = {k: v for k, v in investorData.items() if v not in ('!#$', '')} remove blanks too?
+#	cleanedData = {k: v for k, v in investorData.items() if v != '!#$'}
+	cleanedData = {k: v for k, v in investorData.items() if v not in ('!#$', '')}
 	jsonName = 'InvestorApplication' + investorApplicationNumber + '.json' 
-	with open(f'{folderForApplication}/{jsonName}', 'w') as f:
+	with open(f'{folderForInvestmentApplication}/{jsonName}', 'w') as f:
 		json.dump(cleanedData, f)
+		
+	workbook = openpyxl.Workbook()
+	worksheet = workbook.active
+	columnHeaders = ['Question', 'Value']
+	worksheet.append(columnHeaders)
+	columnHeadersFont = Font(bold=True)
+	for cell in worksheet[1]:
+		cell.font = columnHeadersFont
+		
+	for key, value in cleanedData.items():
+		if isinstance(value, list):
+			value_str = ', '.join(value)
+			worksheet.append([key, value_str])
+		else:
+			worksheet.append([key, value])
+			
+	workbookName = 'InvestorApplication' + investorApplicationNumber + '.xlsx' 
+	workbook.save(f'{folderForInvestmentApplication}/{workbookName}')
 		
 	for i in range(1, 9):
 		if (request.form.get('investorDropdown') == 'Individual' and repeatedIndividualInvestorData[f'Individual {i} First Name'] != '!#$'):		
@@ -596,7 +621,7 @@ def investorSubmit():
 				individualFirstName = request.form.get(f'individualFirstName{i}', '!#$').replace(' ', '')
 				individualLastName = request.form.get(f'individualLastName{i}', '!#$').replace(' ', '')
 				folderForIndividualFilesName = individualLastName + individualFirstName + 'Files'
-				folderForIndividualFiles = os.path.join(folderForApplication, folderForIndividualFilesName)
+				folderForIndividualFiles = os.path.join(folderForInvestmentApplication, folderForIndividualFilesName)
 				os.mkdir(folderForIndividualFiles)
 				
 				for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
@@ -630,7 +655,7 @@ def investorSubmit():
 				uboFirstName = request.form.get(f'uboFirstName{i}', '!#$').replace(' ', '')
 				uboLastName = request.form.get(f'uboLastName{i}', '!#$').replace(' ', '')
 				folderForUboFilesName = uboLastName + uboFirstName + 'Files'
-				folderForUboFiles = os.path.join(folderForApplication, folderForUboFilesName)
+				folderForUboFiles = os.path.join(folderForInvestmentApplication, folderForUboFilesName)
 				os.mkdir(folderForUboFiles)
 				
 				for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
@@ -656,7 +681,7 @@ def investorSubmit():
 				directorFirstName = request.form.get(f'directorFirstName{i}', '!#$').replace(' ', '')
 				directorLastName = request.form.get(f'directorLastName{i}', '!#$').replace(' ', '')
 				folderForDirectorFilesName = directorLastName + directorFirstName + 'Files'
-				folderForDirectorFiles = os.path.join(folderForApplication, folderForDirectorFilesName)
+				folderForDirectorFiles = os.path.join(folderForInvestmentApplication, folderForDirectorFilesName)
 				os.mkdir(folderForDirectorFiles)
 				
 				for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
