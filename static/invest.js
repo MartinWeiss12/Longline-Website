@@ -1271,6 +1271,7 @@ document.getElementById("investorForm").addEventListener("submit", function(even
     }
   }
 });
+
 document.getElementById("investorForm").addEventListener("submit", function(event) {
   for (var i = 1; i <= 8; i++) {
     var uboDropdown = document.getElementById("uboCitizenDropdown" + i);
@@ -1281,6 +1282,7 @@ document.getElementById("investorForm").addEventListener("submit", function(even
     }
   }
 });
+
 document.getElementById("investorForm").addEventListener("submit", function(event) {
   for (var i = 1; i <= 8; i++) {
     var directorDropdown = document.getElementById("directorCitizenDropdown" + i);
