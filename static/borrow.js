@@ -445,10 +445,10 @@ const htmlForAdditionalIndividual = `
   </div>
   
   <div class="labels">
-    <label id="individualHomeStreetAddressLabel{{index}}" for="individualHomeStreetAddress{{index}}">Home Street Address</label>
+    <label id="individualAddressLineTwoLabel{{index}}" for="individualAddressLineTwo{{index}}">Address Line 2</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="individualHomeStreetAddress{{index}}" name="individualHomeStreetAddress{{index}}" placeholder="Home Street Address" style="width: 250px;">
+    <input class="input-field" type="text" id="individualAddressLineTwo{{index}}" name="individualAddressLineTwo{{index}}" placeholder="Address Line 2" style="width: 250px;">
   </div>
   
   <div class="labels">
@@ -731,10 +731,10 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="uboHomeStreetAddressLabel{{index}}" for="uboHomeStreetAddress{{index}}">Home Street Address</label>
+    <label id="uboAddressLineTwoLabel{{index}}" for="uboAddressLineTwo{{index}}">Address Line 2</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="uboHomeStreetAddress{{index}}" name="uboHomeStreetAddress{{index}}" placeholder="Home Street Address" style="width: 250px;">
+    <input class="input-field" type="text" id="uboAddressLineTwo{{index}}" name="uboAddressLineTwo{{index}}" placeholder="Address Line 2" style="width: 250px;">
   </div>
   
   <div class="labels">
@@ -1017,10 +1017,10 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label id="directorHomeStreetAddressLabel{{index}}" for="directorHomeStreetAddress{{index}}">Home Street Address</label>
+    <label id="directorAddressLineTwoLabel{{index}}" for="directorAddressLineTwo{{index}}">Address Line 2</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="directorHomeStreetAddress{{index}}" name="directorHomeStreetAddress{{index}}" placeholder="Home Street Address" style="width: 250px;" required>
+    <input class="input-field" type="text" id="directorAddressLineTwo{{index}}" name="directorAddressLineTwo{{index}}" placeholder="Address Line 2" style="width: 250px;">
   </div>
   
   <div class="labels">
