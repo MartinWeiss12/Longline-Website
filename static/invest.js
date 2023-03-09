@@ -112,7 +112,7 @@ trancheAmtInput.addEventListener('input', function() {
 const bankOtherInputContainer = document.getElementById("bankOtherInputContainer");
 const otherBankAccountHtml = `
       <div class="labels">
-        <label id="bankAccountOtherTextLabel" for="bankAccountOtherText">Please Specify</label>
+        <label id="bankAccountOtherTextLabel" for="bankAccountOther">Please Specify</label>
       </div>
       <div class="input-tab">
         <input class="input-field" type="text" id="bankAccountOther" name="bankAccountOther" placeholder="Other Bank Account Type" style="width: 250px;">
@@ -204,7 +204,7 @@ const htmlForEntity = `
   <br><br><h3>Upload PDF or Image for Articles of Organization and Certificate of Formation</h3>
   
   <div class="labels">
-    <label id="entityArticlesLabel" for="entityArticles">Articles of Organization</label>
+    <label id="entityArticlesLabel" for="entityArticlesFile">Articles of Organization</label>
   </div>
   <div class="input-tab">
     <label for="entityArticlesFile" class="fileUploadButton">Choose File
@@ -254,7 +254,7 @@ const htmlForAdditionalIndividual = `
   <br><br><h3 id="individualInfoSubtitle{{index}}">Info for Individual {{index}}</h3>
   
   <div class="labels">
-    <label for="individualCitizenDropdown">U.S. Citizen or Green Card?</label>
+    <label for="individualCitizenDropdown{{index}}">U.S. Citizen or Green Card?</label>
   </div>
   <div class="input-tab">
     <select id="individualCitizenDropdown{{index}}" name="individualCitizenDropdown{{index}}" style="width: 262px;" required>
@@ -335,7 +335,7 @@ const htmlForAdditionalIndividual = `
     <label id="individualHomeCountryLabel{{index}}" for="individualHomeCountry{{index}}">Home Country</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="individualhomeCountry{{index}}" name="individualhomeCountry{{index}}" placeholder="Home Country" required style="width: 250px;">
+    <input class="input-field" type="text" id="individualHomeCountry{{index}}" name="individualHomeCountry{{index}}" placeholder="Home Country" required style="width: 250px;">
   </div>
   
   <div class="labels">
@@ -504,7 +504,7 @@ const htmlForAdditionalUbo = `
   </div>
   
   <div class="labels">
-    <label for="uboCitizenDropdown">U.S. Citizen or Green Card?</label>
+    <label for="uboCitizenDropdown{{index}}">U.S. Citizen or Green Card?</label>
   </div>
   <div class="input-tab">
     <select id="uboCitizenDropdown{{index}}" name="uboCitizenDropdown{{index}}" style="width: 262px;" required>
@@ -585,7 +585,7 @@ const htmlForAdditionalUbo = `
     <label id="uboHomeCountryLabel{{index}}" for="uboHomeCountry{{index}}">Home Country</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="ubohomeCountry{{index}}" name="ubohomeCountry{{index}}" placeholder="Home Country" style="width: 250px;" required>
+    <input class="input-field" type="text" id="uboHomeCountry{{index}}" name="uboHomeCountry{{index}}" placeholder="Home Country" style="width: 250px;" required>
   </div>
   
   <div class="labels">
@@ -754,7 +754,7 @@ const htmlForAdditionalDirector = `
   </div>
   
   <div class="labels">
-    <label for="directorCitizenDropdown">U.S. Citizen or Green Card?</label>
+    <label for="directorCitizenDropdown{{index}}">U.S. Citizen or Green Card?</label>
   </div>
   <div class="input-tab">
     <select id="directorCitizenDropdown{{index}}" name="directorCitizenDropdown{{index}}" style="width: 262px;" required>
@@ -835,7 +835,7 @@ const htmlForAdditionalDirector = `
     <label id="directorHomeCountryLabel{{index}}" for="directorHomeCountry{{index}}">Home Country</label>
   </div>
   <div class="input-tab">
-    <input class="input-field" type="text" id="directorhomeCountry{{index}}" name="directorhomeCountry{{index}}" placeholder="Home Country" style="width: 250px;" required>
+    <input class="input-field" type="text" id="directorHomeCountry{{index}}" name="directorHomeCountry{{index}}" placeholder="Home Country" style="width: 250px;" required>
   </div>
   
   <div class="labels">
