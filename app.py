@@ -137,7 +137,7 @@ def loanSubmit():
 	loanData['Loan Purpose'] = request.form.getlist('loanPurpose')
 	loanData['Loan Purpose (other)'] = request.form.get('otherLoanText', '!#$')
 	loanData['Loan Total'] = request.form.get('loanTotal')
-	loanData['Trance Amount'] = request.form.get('trancheAmt')
+	loanData['Tranche Amount'] = request.form.get('trancheAmt')
 	loanData['Number of Tranches'] = request.form.get('numTranches')
 	loanData['Collateral'] = request.form.getlist('collateralInfo')
 	loanData['Collateral (other)'] = request.form.get('otherCollateralText', '!#$')
@@ -458,7 +458,7 @@ def investorSubmit():
 	
 	investorData = {}
 	investorData['Investment Total'] = request.form.get('investmentTotal')
-	investorData['Trance Amount'] = request.form.get('trancheAmt')
+	investorData['Tranche Amount'] = request.form.get('trancheAmt')
 	investorData['Number of Tranches'] = request.form.get('numTranches')
 	investorData['Borrower is an'] = request.form.get('investorDropdown')
 	investorData['Entity Name'] = (request.form.get('entityName', '!#$')).replace(' ', '')
