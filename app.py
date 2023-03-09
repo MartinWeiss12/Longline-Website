@@ -127,9 +127,9 @@ def error():
 @app.route('/borrowSubmitted', methods=['POST'])
 def loanSubmit():
 	
-	loanApplicationNumber = str(random.randint(1, 1000))
-	folderForLoanApplication = 'LoanApplication' + loanApplicationNumber
-	os.mkdir(folderForLoanApplication)
+	duplicateUboDirectorNameForLoan = False
+	loanUboNameList = []
+	loanDirectorNameList = []
 	
 	# !#$ refers to a blank
 	
@@ -189,45 +189,6 @@ def loanSubmit():
 	loanData['Memo'] = request.form.get('memo')
 	
 	entityName = loanData['Entity Name'].replace(' ', '')
-	#entityName = loanData['Entity Name']
-	
-	if (request.form.get('borrowerDropdown') == 'Entity' and entityName != '!#$'):
-		
-		folderForEntityFilesName = loanData['Entity Name'] + 'Files'
-		folderForEntityFiles = os.path.join(folderForLoanApplication, folderForEntityFilesName)
-		os.mkdir(folderForEntityFiles)
-		
-		# Entity Articles of Organization File 
-		entityArticlesFile = request.files['entityArticlesFile']
-		entityArticlesFileName = secure_filename(entityArticlesFile.filename)
-		entityArticlesFileNameExt = os.path.splitext(entityArticlesFileName)[1]
-		newEntityArticlesFileName = (entityName + 'EntityArticlesFile' + entityArticlesFileNameExt)
-		newEntityArticlesFilePath = os.path.join(folderForEntityFiles, newEntityArticlesFileName)
-		entityArticlesFile.save(newEntityArticlesFilePath)
-		
-		# Entity Certificate of Formation File 
-		entityCertificateFile = request.files['entityCertificateFile']
-		entityCertificateFileName = secure_filename(entityCertificateFile.filename)
-		entityCertificateFileExt = os.path.splitext(entityCertificateFileName)[1]
-		newEntityCertificateFileName = (entityName + 'EntityCertificateFile' + entityCertificateFileExt)
-		newEntityCertificateFilePath = os.path.join(folderForEntityFiles, newEntityCertificateFileName)
-		entityCertificateFile.save(newEntityCertificateFilePath)
-		
-		# Entity EIN File
-		entityEinFile = request.files['entityEinFile']
-		entityEinFileName = secure_filename(entityEinFile.filename)
-		entityEinFileExt = os.path.splitext(entityEinFileName)[1]
-		newEntityEinFileFileName = (entityName + 'EntityEinFile' + entityEinFileExt)
-		newEntityEinFileFilePath = os.path.join(folderForEntityFiles, newEntityEinFileFileName)
-		entityEinFile.save(newEntityEinFileFilePath)
-		
-		# Entity Other File
-		entityOtherFile = request.files['entityOtherFile']
-		entityOtherFileName = secure_filename(entityOtherFile.filename)
-		entityOtherFileExt = os.path.splitext(entityOtherFileName)[1]
-		newEntityOtherFileName = (entityName + 'EntityEinFile' + entityOtherFileExt)
-		newEntityOtherFilePath = os.path.join(folderForEntityFiles, newEntityOtherFileName)
-		entityOtherFile.save(newEntityOtherFilePath)
 	
 	repeatedIndividualLoanData = {}
 	for i in range(1, 9):
@@ -283,6 +244,8 @@ def loanSubmit():
 		repeatedUboLoanData[f'Ubo {i} Crime'] = request.form.get(f'uboCrime{i}', '!#$')
 		repeatedUboLoanData[f'Ubo {i} Declare'] = request.form.get(f'uboDeclareCheckbox{i}', '!#$')
 		
+		loanUboNameList.append(repeatedUboLoanData[f'Ubo {i} First Name'].strip() + repeatedUboLoanData[f'Ubo {i} Last Name'].strip())
+		
 	repeatedDirectorLoanData = {}
 	for i in range(1, 9):
 		repeatedDirectorLoanData[f'Director {i} Personal Guarantor'] = request.form.get(f'directorPersonalGuarantorDropdown{i}', '!#$')
@@ -309,141 +272,188 @@ def loanSubmit():
 		repeatedDirectorLoanData[f'Director {i} Politically Exposed Person'] = request.form.get(f'directorPep{i}', '!#$')
 		repeatedDirectorLoanData[f'Director {i} Crime'] = request.form.get(f'directorCrime{i}', '!#$')
 		repeatedDirectorLoanData[f'Director {i} Declare'] = request.form.get(f'directorDeclareCheckbox{i}', '!#$')
+	
+	
+		loanDirectorNameList.append(repeatedDirectorLoanData[f'Director {i} First Name'].strip() + repeatedDirectorLoanData[f'Director {i} Last Name'].strip())
 		
 		
-	loanData = {**loanData, **repeatedIndividualLoanData, **repeatedUboLoanData, **repeatedDirectorLoanData}
-#	cleanedData = {k: v for k, v in loanData.items() if v != '!#$'}
-	cleanedData = {k: v for k, v in loanData.items() if v not in ('!#$', '')}
-	jsonName = 'LoanApplication' + loanApplicationNumber + '.json' 
-	with open(f'{folderForLoanApplication}/{jsonName}', 'w') as f:
-		json.dump(cleanedData, f)
-
-	workbook = openpyxl.Workbook()
-	worksheet = workbook.active
-	columnHeaders = ['Question', 'Value']
-	worksheet.append(columnHeaders)
-	columnHeadersFont = Font(bold=True)
-	for cell in worksheet[1]:
-		cell.font = columnHeadersFont
+	loanUboNameList = [name for name in loanUboNameList if name != '!#$!#$']
+	loanDirectorNameList = [name for name in loanDirectorNameList if name != '!#$!#$']
+	
+	for name in loanUboNameList:
+		if name in loanDirectorNameList:
+			duplicateUboDirectorNameForLoan = True
+			return render_template('error.html')
 		
-	for key, value in cleanedData.items():
-		if isinstance(value, list):
-			value_str = ', '.join(value)
-			worksheet.append([key, value_str])
-		else:
-			worksheet.append([key, value])
+	if not duplicateUboDirectorNameForLoan:
+		
+		loanApplicationNumber = str(random.randint(1, 1000))
+		folderForLoanApplication = 'LoanApplication' + loanApplicationNumber
+		os.mkdir(folderForLoanApplication)
+	
+		if (request.form.get('borrowerDropdown') == 'Entity' and entityName != '!#$'):
 			
-	workbookName = 'LoanApplication' + loanApplicationNumber + '.xlsx' 
-	workbook.save(f'{folderForLoanApplication}/{workbookName}')
-		
-	for i in range(1, 9):
-		if (request.form.get('borrowerDropdown') == 'Individual' and repeatedIndividualLoanData[f'Individual {i} First Name'] != '!#$'):		
-			PassportFile = f'individualPassportFile{i}'
-			DNIFrontFile = f'individualDniFrontFile{i}'
-			DNIReverseFile = f'individualDniReverseFile{i}'
-			BillAddressProofFile = f'individualBillAddressProofFile{i}'
-			CreditCheckFile = f'individualCreditCheckFile{i}'
-			WorldCheckFile = f'individualWorldCheckFile{i}'
-			OFACFile = f'individualOfacFile{i}'
+			folderForEntityFilesName = loanData['Entity Name'] + 'Files'
+			folderForEntityFiles = os.path.join(folderForLoanApplication, folderForEntityFilesName)
+			os.mkdir(folderForEntityFiles)
 			
-			if (repeatedIndividualLoanData[f'Individual {i} First Name'] != '!#$'):
-				individualFirstName = request.form.get(f'individualFirstName{i}', '!#$').replace(' ', '')
-				individualLastName = request.form.get(f'individualLastName{i}', '!#$').replace(' ', '')
-				folderForIndividualFilesName = individualLastName + individualFirstName + 'Files'
-				folderForIndividualFiles = os.path.join(folderForLoanApplication, folderForIndividualFilesName)
-				os.mkdir(folderForIndividualFiles)
+			# Entity Articles of Organization File 
+			entityArticlesFile = request.files['entityArticlesFile']
+			entityArticlesFileName = secure_filename(entityArticlesFile.filename)
+			entityArticlesFileNameExt = os.path.splitext(entityArticlesFileName)[1]
+			newEntityArticlesFileName = (entityName + 'EntityArticlesFile' + entityArticlesFileNameExt)
+			newEntityArticlesFilePath = os.path.join(folderForEntityFiles, newEntityArticlesFileName)
+			entityArticlesFile.save(newEntityArticlesFilePath)
+			
+			# Entity Certificate of Formation File 
+			entityCertificateFile = request.files['entityCertificateFile']
+			entityCertificateFileName = secure_filename(entityCertificateFile.filename)
+			entityCertificateFileExt = os.path.splitext(entityCertificateFileName)[1]
+			newEntityCertificateFileName = (entityName + 'EntityCertificateFile' + entityCertificateFileExt)
+			newEntityCertificateFilePath = os.path.join(folderForEntityFiles, newEntityCertificateFileName)
+			entityCertificateFile.save(newEntityCertificateFilePath)
+			
+			# Entity EIN File
+			entityEinFile = request.files['entityEinFile']
+			entityEinFileName = secure_filename(entityEinFile.filename)
+			entityEinFileExt = os.path.splitext(entityEinFileName)[1]
+			newEntityEinFileFileName = (entityName + 'EntityEinFile' + entityEinFileExt)
+			newEntityEinFileFilePath = os.path.join(folderForEntityFiles, newEntityEinFileFileName)
+			entityEinFile.save(newEntityEinFileFilePath)
+			
+			# Entity Other File
+			entityOtherFile = request.files['entityOtherFile']
+			entityOtherFileName = secure_filename(entityOtherFile.filename)
+			entityOtherFileExt = os.path.splitext(entityOtherFileName)[1]
+			newEntityOtherFileName = (entityName + 'EntityEinFile' + entityOtherFileExt)
+			newEntityOtherFilePath = os.path.join(folderForEntityFiles, newEntityOtherFileName)
+			entityOtherFile.save(newEntityOtherFilePath)
+			
+		for i in range(1, 9):
+			if (request.form.get('borrowerDropdown') == 'Individual' and repeatedIndividualLoanData[f'Individual {i} First Name'] != '!#$'):		
+				PassportFile = f'individualPassportFile{i}'
+				DNIFrontFile = f'individualDniFrontFile{i}'
+				DNIReverseFile = f'individualDniReverseFile{i}'
+				BillAddressProofFile = f'individualBillAddressProofFile{i}'
+				CreditCheckFile = f'individualCreditCheckFile{i}'
+				WorldCheckFile = f'individualWorldCheckFile{i}'
+				OFACFile = f'individualOfacFile{i}'
 				
-				for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
-					file = request.files[fileType]
-					fileName = secure_filename(file.filename)
-					fileNameExt = os.path.splitext(fileName)[1]
-					newFileName = (repeatedIndividualLoanData[f'Individual {i} Last Name'] + repeatedIndividualLoanData[f'Individual {i} First Name'] + fileType + fileNameExt).replace('individual', '')
-					newFileName = newFileName.replace(f'{i}', '')
-					newFilePath = os.path.join(folderForIndividualFiles, newFileName)
-					file.save(newFilePath)
+				if (repeatedIndividualLoanData[f'Individual {i} First Name'] != '!#$'):
+					individualFirstName = request.form.get(f'individualFirstName{i}', '!#$').replace(' ', '')
+					individualLastName = request.form.get(f'individualLastName{i}', '!#$').replace(' ', '')
+					folderForIndividualFilesName = individualLastName + individualFirstName + 'Files'
+					folderForIndividualFiles = os.path.join(folderForLoanApplication, folderForIndividualFilesName)
+					os.mkdir(folderForIndividualFiles)
 					
+					for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
+						file = request.files[fileType]
+						fileName = secure_filename(file.filename)
+						fileNameExt = os.path.splitext(fileName)[1]
+						newFileName = (repeatedIndividualLoanData[f'Individual {i} Last Name'] + repeatedIndividualLoanData[f'Individual {i} First Name'] + fileType + fileNameExt).replace('individual', '')
+						newFileName = newFileName.replace(f'{i}', '')
+						newFilePath = os.path.join(folderForIndividualFiles, newFileName)
+						file.save(newFilePath)
+						
+				bankAccountFile = request.files['bankAccountFile']
+				bankAccountFileName = secure_filename(bankAccountFile.filename)
+				bankAccountFileNameExt = os.path.splitext(bankAccountFileName)[1]
+				newBankAccountFileName = 'LoanApplication' + loanApplicationNumber + 'BankAccountFile' + bankAccountFileNameExt
+				newBankAccountFilePath = os.path.join(folderForIndividualFiles, newBankAccountFileName)
+				bankAccountFile.save(newBankAccountFilePath)
+			
+		for i in range(1, 9):
+			if (request.form.get('borrowerDropdown') == 'Entity' and repeatedUboLoanData[f'Ubo {i} First Name'] != '!#$'):
+				PassportFile = f'uboPassportFile{i}'
+				DNIFrontFile = f'uboDniFrontFile{i}'
+				DNIReverseFile = f'uboDniReverseFile{i}'
+				BillAddressProofFile = f'uboBillAddressProofFile{i}'
+				CreditCheckFile = f'uboCreditCheckFile{i}'
+				WorldCheckFile = f'uboWorldCheckFile{i}'
+				OFACFile = f'uboOfacFile{i}'
+				
+				if (repeatedUboLoanData[f'Ubo {i} First Name'] != '!#$'):
+					uboFirstName = request.form.get(f'uboFirstName{i}', '!#$').replace(' ', '')
+					uboLastName = request.form.get(f'uboLastName{i}', '!#$').replace(' ', '')
+					folderForUboFilesName = uboLastName + uboFirstName + 'Files'
+					folderForUboFiles = os.path.join(folderForLoanApplication, folderForUboFilesName)
+					os.mkdir(folderForUboFiles)
+					
+					for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
+						file = request.files[fileType]
+						fileName = secure_filename(file.filename)
+						fileNameExt = os.path.splitext(fileName)[1]
+						newFileName = (repeatedUboLoanData[f'Ubo {i} Last Name'] + repeatedUboLoanData[f'Ubo {i} First Name'] + fileType + fileNameExt).replace('ubo', '')
+						newFileName = newFileName.replace(f'{i}', '')
+						newFilePath = os.path.join(folderForUboFiles, newFileName)
+						file.save(newFilePath)
+						
+		for i in range(1, 9):
+			if (request.form.get('borrowerDropdown') == 'Entity' and repeatedDirectorLoanData[f'Director {i} First Name'] != '!#$'):
+				PassportFile = f'directorPassportFile{i}'
+				DNIFrontFile = f'directorDniFrontFile{i}'
+				DNIReverseFile = f'directorDniReverseFile{i}'
+				BillAddressProofFile = f'directorBillAddressProofFile{i}'
+				CreditCheckFile = f'directorCreditCheckFile{i}'
+				WorldCheckFile = f'directorWorldCheckFile{i}'
+				OFACFile = f'directorOfacFile{i}'
+				
+				if (repeatedDirectorLoanData[f'Director {i} First Name'] != '!#$'):
+					directorFirstName = request.form.get(f'directorFirstName{i}', '!#$').replace(' ', '')
+					directorLastName = request.form.get(f'directorLastName{i}', '!#$').replace(' ', '')
+					folderForDirectorFilesName = directorLastName + directorFirstName + 'Files'
+					folderForDirectorFiles = os.path.join(folderForLoanApplication, folderForDirectorFilesName)
+					os.mkdir(folderForDirectorFiles)
+					
+					for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
+						file = request.files[fileType]
+						fileName = secure_filename(file.filename)
+						fileNameExt = os.path.splitext(fileName)[1]
+						newFileName = (repeatedDirectorLoanData[f'Director {i} Last Name'] + repeatedDirectorLoanData[f'Director {i} First Name'] + fileType + fileNameExt).replace('director', '')
+						newFileName = newFileName.replace(f'{i}', '')
+						newFilePath = os.path.join(folderForDirectorFiles, newFileName)
+						file.save(newFilePath)
+						
+		if (request.form.get('borrowerDropdown') == 'Entity'):
 			bankAccountFile = request.files['bankAccountFile']
 			bankAccountFileName = secure_filename(bankAccountFile.filename)
 			bankAccountFileNameExt = os.path.splitext(bankAccountFileName)[1]
-			newBankAccountFileName = 'LoanApplication' + loanApplicationNumber + 'BankAccountFile' + bankAccountFileNameExt
-			newBankAccountFilePath = os.path.join(folderForIndividualFiles, newBankAccountFileName)
+			newBankAccountFileName = entityName + 'BankAccountFile' + bankAccountFileNameExt
+			newBankAccountFilePath = os.path.join(folderForEntityFiles, newBankAccountFileName)
 			bankAccountFile.save(newBankAccountFilePath)
-		
-	for i in range(1, 9):
-		if (request.form.get('borrowerDropdown') == 'Entity' and repeatedUboLoanData[f'Ubo {i} First Name'] != '!#$'):
-			PassportFile = f'uboPassportFile{i}'
-			DNIFrontFile = f'uboDniFrontFile{i}'
-			DNIReverseFile = f'uboDniReverseFile{i}'
-			BillAddressProofFile = f'uboBillAddressProofFile{i}'
-			CreditCheckFile = f'uboCreditCheckFile{i}'
-			WorldCheckFile = f'uboWorldCheckFile{i}'
-			OFACFile = f'uboOfacFile{i}'
 			
-			if (repeatedUboLoanData[f'Ubo {i} First Name'] != '!#$'):
-				uboFirstName = request.form.get(f'uboFirstName{i}', '!#$').replace(' ', '')
-				uboLastName = request.form.get(f'uboLastName{i}', '!#$').replace(' ', '')
-				folderForUboFilesName = uboLastName + uboFirstName + 'Files'
-				folderForUboFiles = os.path.join(folderForLoanApplication, folderForUboFilesName)
-				os.mkdir(folderForUboFiles)
-				
-				for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
-					file = request.files[fileType]
-					fileName = secure_filename(file.filename)
-					fileNameExt = os.path.splitext(fileName)[1]
-					newFileName = (repeatedUboLoanData[f'Ubo {i} Last Name'] + repeatedUboLoanData[f'Ubo {i} First Name'] + fileType + fileNameExt).replace('ubo', '')
-					newFileName = newFileName.replace(f'{i}', '')
-					newFilePath = os.path.join(folderForUboFiles, newFileName)
-					file.save(newFilePath)
-					
-	for i in range(1, 9):
-		if (request.form.get('borrowerDropdown') == 'Entity' and repeatedDirectorLoanData[f'Director {i} First Name'] != '!#$'):
-			PassportFile = f'directorPassportFile{i}'
-			DNIFrontFile = f'directorDniFrontFile{i}'
-			DNIReverseFile = f'directorDniReverseFile{i}'
-			BillAddressProofFile = f'directorBillAddressProofFile{i}'
-			CreditCheckFile = f'directorCreditCheckFile{i}'
-			WorldCheckFile = f'directorWorldCheckFile{i}'
-			OFACFile = f'directorOfacFile{i}'
+		loanData = {**loanData, **repeatedIndividualLoanData, **repeatedUboLoanData, **repeatedDirectorLoanData}
+		cleanedData = {k: v for k, v in loanData.items() if v not in ('!#$', '')}
+		jsonName = 'LoanApplication' + loanApplicationNumber + '.json' 
+		with open(f'{folderForLoanApplication}/{jsonName}', 'w') as f:
+			json.dump(cleanedData, f)
 			
-			if (repeatedDirectorLoanData[f'Director {i} First Name'] != '!#$'):
-				directorFirstName = request.form.get(f'directorFirstName{i}', '!#$').replace(' ', '')
-				directorLastName = request.form.get(f'directorLastName{i}', '!#$').replace(' ', '')
-				folderForDirectorFilesName = directorLastName + directorFirstName + 'Files'
-				folderForDirectorFiles = os.path.join(folderForLoanApplication, folderForDirectorFilesName)
-				os.mkdir(folderForDirectorFiles)
+		workbook = openpyxl.Workbook()
+		worksheet = workbook.active
+		columnHeaders = ['Question', 'Value']
+		worksheet.append(columnHeaders)
+		columnHeadersFont = Font(bold=True)
+		for cell in worksheet[1]:
+			cell.font = columnHeadersFont
+			
+		for key, value in cleanedData.items():
+			if isinstance(value, list):
+				value_str = ', '.join(value)
+				worksheet.append([key, value_str])
+			else:
+				worksheet.append([key, value])
 				
-				for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
-					file = request.files[fileType]
-					fileName = secure_filename(file.filename)
-					fileNameExt = os.path.splitext(fileName)[1]
-					newFileName = (repeatedDirectorLoanData[f'Director {i} Last Name'] + repeatedDirectorLoanData[f'Director {i} First Name'] + fileType + fileNameExt).replace('director', '')
-					newFileName = newFileName.replace(f'{i}', '')
-					newFilePath = os.path.join(folderForDirectorFiles, newFileName)
-					file.save(newFilePath)
-					
-	if (request.form.get('borrowerDropdown') == 'Entity'):
-		bankAccountFile = request.files['bankAccountFile']
-		bankAccountFileName = secure_filename(bankAccountFile.filename)
-		bankAccountFileNameExt = os.path.splitext(bankAccountFileName)[1]
-		newBankAccountFileName = entityName + 'BankAccountFile' + bankAccountFileNameExt
-		newBankAccountFilePath = os.path.join(folderForEntityFiles, newBankAccountFileName)
-		bankAccountFile.save(newBankAccountFilePath)
-		
-		
-		
-		
+		workbookName = 'LoanApplication' + loanApplicationNumber + '.xlsx' 
+		workbook.save(f'{folderForLoanApplication}/{workbookName}')
 
+		# Upload cleanedData.json to S3
+		#s3 = boto3.resource('s3')
+		# make two buckets, one for borrowers, one for investors
+		bucket_name = 'Loan-Bucket'
+		object_key = 'loanData.json'
+		#s3.Object(bucket_name, object_key).put(Body=open('loanData.json', 'rb'))
 		
-		
-		
-	# Upload cleanedData.json to S3
-	#s3 = boto3.resource('s3')
-	# make two buckets, one for borrowers, one for investors
-	bucket_name = 'Loan-Bucket'
-	object_key = 'loanData.json'
-	#s3.Object(bucket_name, object_key).put(Body=open('loanData.json', 'rb'))
-	
-	return render_template('borrowSubmitted.html', title='Submitted')
+		return render_template('borrowSubmitted.html', title='Submitted')
 
 
 @app.route('/investorSubmitted', methods=['POST'])
@@ -733,11 +743,6 @@ def investorSubmit():
 		#s3.Object(bucket_name, object_key).put(Body=open('loanData.json', 'rb'))
 		
 		return render_template('investorSubmitted.html', title='Submitted')
-	
-
-
-
-
 
 @app.route('/contactSubmitted', methods=['POST'])
 def contactSubmit():
