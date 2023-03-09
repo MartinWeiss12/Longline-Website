@@ -451,8 +451,8 @@ def investorSubmit():
 	
 	# !#$ refers to a blank
 	duplicateUboDirectorNameForInvestor = False
-	uboNameList = []
-	directorNameList = []
+	investorUboNameList = []
+	investorDirectorNameList = []
 	
 	investorData = {}
 	investorData['Investment Total'] = request.form.get('investmentTotal')
@@ -460,7 +460,7 @@ def investorSubmit():
 	investorData['Number of Tranches'] = request.form.get('numTranches')
 	investorData['Borrower is an'] = request.form.get('investorDropdown')
 	investorData['Entity Name'] = (request.form.get('entityName', '!#$')).replace(' ', '')
-	investorData['Entity Country'] = request.form.get('entityCountry')
+	investorData['Entity Country'] = request.form.get('entityCountry', '!#$')
 	investorData['Entity Street Address'] = request.form.get('entityStreetAddress', '!#$')
 	investorData['Entity City'] = request.form.get('entityCity', '!#$')
 	investorData['Entity State'] = request.form.get('entityState', '!#$')
@@ -527,7 +527,7 @@ def investorSubmit():
 		repeatedUboInvestorData[f'Ubo {i} Crime'] = request.form.get(f'uboCrime{i}', '!#$')
 		repeatedUboInvestorData[f'Ubo {i} Declare'] = request.form.get(f'uboDeclareCheckbox{i}', '!#$')
 		
-		uboNameList.append(repeatedUboInvestorData[f'Ubo {i} First Name'].strip() + repeatedUboInvestorData[f'Ubo {i} Last Name'].strip())
+		investorUboNameList.append(repeatedUboInvestorData[f'Ubo {i} First Name'].strip() + repeatedUboInvestorData[f'Ubo {i} Last Name'].strip())
 		
 		
 	repeatedDirectorInvestorData = {}
@@ -553,13 +553,13 @@ def investorSubmit():
 		repeatedDirectorInvestorData[f'Director {i} Crime'] = request.form.get(f'directorCrime{i}', '!#$')
 		repeatedDirectorInvestorData[f'Director {i} Declare'] = request.form.get(f'directorDeclareCheckbox{i}', '!#$')
 		
-		directorNameList.append(repeatedDirectorInvestorData[f'Director {i} First Name'].strip() + repeatedDirectorInvestorData[f'Director {i} Last Name'].strip())
+		investorDirectorNameList.append(repeatedDirectorInvestorData[f'Director {i} First Name'].strip() + repeatedDirectorInvestorData[f'Director {i} Last Name'].strip())
 	
-	uboNameList = [name for name in uboNameList if name != '!#$!#$']
-	directorNameList = [name for name in directorNameList if name != '!#$!#$']
+	investorUboNameList = [name for name in investorUboNameList if name != '!#$!#$']
+	investorDirectorNameList = [name for name in investorDirectorNameList if name != '!#$!#$']
 
-	for name in uboNameList:
-		if name in directorNameList:
+	for name in investorUboNameList:
+		if name in investorDirectorNameList:
 			duplicateUboDirectorNameForInvestor = True
 			return render_template('error.html')		
 	
