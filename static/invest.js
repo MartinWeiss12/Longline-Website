@@ -115,7 +115,7 @@ const otherBankAccountHtml = `
         <label id="bankAccountOtherTextLabel" for="bankAccountOtherText">Please Specify</label>
       </div>
       <div class="input-tab">
-        <input class="input-field" type="text" id="bankAccountOther" name="bankAccountOther" placeholder="Other Bank Account Type" style="width: 150px;">
+        <input class="input-field" type="text" id="bankAccountOther" name="bankAccountOther" placeholder="Other Bank Account Type" style="width: 250px;">
       </div>
     </div>
     `;
@@ -1400,23 +1400,19 @@ document.getElementById("investorForm").addEventListener("submit", function(even
 });
 
 
-//document.getElementById("investorForm").addEventListener("submit", function(event) {
-//for (var i = 1; i <= 8; i++) {
-//  for (var j = 1; j <= 8; j++) {
-//    var uboFirstNameInput = document.getElementById("uboFirstName" + i);
-//    var uboLastNameInput = document.getElementById("uboLastName" + i);
-//    var uboNameToCheck = uboFirstNameInput.value.trim() + " " + uboLastNameInput.value.trim();
-//    var directorFirstNameInput = document.getElementById("directorFirstName" + j);
-//    var directorLastNameInput = document.getElementById("directorLastName" + j);
-//    var directorNameToCheck = directorFirstNameInput.value.trim() + " " + directorLastNameInput.value.trim();
-//    if (directorNameToCheck === uboNameToCheck) {
-//      event.preventDefault();
-//      alert("A Director cannot have the same name as the Ultimate Beneficial Owner.");
-//      return;
-//    }
-//  }
-//}
-//});
+
+
+
+
+/*
+
+
+
+
+
+
+
+
 
 
 
@@ -1424,38 +1420,149 @@ document.getElementById("investorForm").addEventListener("submit", function(even
 
 document.getElementById("investorForm").addEventListener("submit", function(event) {
   for (var i = 1; i <= 8; i++) {
+    var uboFirstNameInput1 = document.getElementById("uboFirstName" + i);
+    var uboLastNameInput1 = document.getElementById("uboLastName" + i);
+    var uboNameToCheck1 = uboFirstNameInput1.value.trim() + " " + uboLastNameInput1.value.trim();
+    
     for (var j = 1; j <= 8; j++) {
-      var uboFirstNameInput1 = document.getElementById("uboFirstName" + i);
-      var uboLastNameInput1 = document.getElementById("uboLastName" + i);
-      var uboNameToCheck1 = uboFirstNameInput1.value.trim() + " " + uboLastNameInput1.value.trim();
-      
-      // Check for same name between UBO1 and director1
       var directorFirstNameInput1 = document.getElementById("directorFirstName" + j);
       var directorLastNameInput1 = document.getElementById("directorLastName" + j);
       var directorNameToCheck1 = directorFirstNameInput1.value.trim() + " " + directorLastNameInput1.value.trim();
+      
+      // Check for same name between UBO and director
       if (directorNameToCheck1 === uboNameToCheck1) {
         event.preventDefault();
         alert("A Director cannot have the same name as the Ultimate Beneficial Owner.");
         return;
       }
       
+      // Check for same name between director and any UBO
       for (var k = 1; k <= 8; k++) {
-//      var uboFirstNameInput2 = document.getElementById("uboFirstName" + k);
-//      var uboLastNameInput2 = document.getElementById("uboLastName" + k);
-//      var uboNameToCheck2 = uboFirstNameInput2.value.trim() + " " + uboLastNameInput2.value.trim();
-//      
-//      // Check for same name between any two UBOs
-//      if (k !== i && uboNameToCheck1 === uboNameToCheck2) {
-//        event.preventDefault();
-//        alert("The Ultimate Beneficial Owners cannot have the same name.");
-//        return;
-//      }
+        if (k !== i) {
+          var uboFirstNameInput2 = document.getElementById("uboFirstName" + k);
+          var uboLastNameInput2 = document.getElementById("uboLastName" + k);
+          var uboNameToCheck2 = uboFirstNameInput2.value.trim() + " " + uboLastNameInput2.value.trim();
+          
+          if (directorNameToCheck1 === uboNameToCheck2) {
+            event.preventDefault();
+            alert("A Director cannot have the same name as the Ultimate Beneficial Owner.");
+            return;
+          }
+        }
+      }
+    }
+    
+    // Check for same name between any two UBOs
+    for (var l = 1; l <= 8; l++) {
+      if (l !== i) {
+        var uboFirstNameInput2 = document.getElementById("uboFirstName" + l);
+        var uboLastNameInput2 = document.getElementById("uboLastName" + l);
+        var uboNameToCheck2 = uboFirstNameInput2.value.trim() + " " + uboLastNameInput2.value.trim();
         
-        // Check for same name between director1 and any UBO
-        var directorFirstNameInput2 = document.getElementById("directorFirstName" + j);
-        var directorLastNameInput2 = document.getElementById("directorLastName" + j);
+        if (uboNameToCheck1 === uboNameToCheck2) {
+          event.preventDefault();
+          alert("The Ultimate Beneficial Owners cannot have the same name.");
+          return;
+        }
+      }
+    }
+  }
+});
+
+
+document.getElementById("investorForm").addEventListener("submit", function(event) {
+  for (var i = 1; i <= 8; i++) {
+    var uboFirstNameInput = document.getElementById("uboFirstName" + i);
+    var uboLastNameInput = document.getElementById("uboLastName" + i);
+    var uboNameToCheck = uboFirstNameInput.value.trim() + " " + uboLastNameInput.value.trim();
+    
+    for (var j = 1; j <= 8; j++) {
+      var directorFirstNameInput = document.getElementById("directorFirstName" + j);
+      var directorLastNameInput = document.getElementById("directorLastName" + j);
+      var directorNameToCheck = directorFirstNameInput.value.trim() + " " + directorLastNameInput.value.trim();
+      
+      // Check for same name between UBO and director
+      if (directorNameToCheck === uboNameToCheck) {
+        event.preventDefault();
+        alert("A Director cannot have the same name as the Ultimate Beneficial Owner.");
+        return;
+      }
+    }
+    
+    for (var k = 1; k <= 8; k++) {
+      if (k !== i) {
+        var otherUboFirstNameInput = document.getElementById("uboFirstName" + k);
+        var otherUboLastNameInput = document.getElementById("uboLastName" + k);
+        var otherUboNameToCheck = otherUboFirstNameInput.value.trim() + " " + otherUboLastNameInput.value.trim();
+        
+        // Check for same name between any two UBOs
+        if (uboNameToCheck === otherUboNameToCheck) {
+          event.preventDefault();
+          alert("The Ultimate Beneficial Owners cannot have the same name.");
+          return;
+        }
+        
+        // Check for same name between director and any UBO
+        for (var l = 1; l <= 8; l++) {
+          if (l !== j) {
+            var otherDirectorFirstNameInput = document.getElementById("directorFirstName" + l);
+            var otherDirectorLastNameInput = document.getElementById("directorLastName" + l);
+            var otherDirectorNameToCheck = otherDirectorFirstNameInput.value.trim() + " " + otherDirectorLastNameInput.value.trim();
+            
+            if (otherDirectorNameToCheck === uboNameToCheck) {
+              event.preventDefault();
+              alert("A Director cannot have the same name as the Ultimate Beneficial Owner.");
+              return;
+            }
+          }
+        }
+      }
+    }
+  }
+});
+
+document.getElementById("investorForm").addEventListener("submit", function(event) {
+  for (var i = 1; i <= 8; i++) {
+    var uboFirstNameInput1 = document.getElementById("uboFirstName" + i);
+    var uboLastNameInput1 = document.getElementById("uboLastName" + i);
+    var uboNameToCheck1 = uboFirstNameInput1.value.trim() + " " + uboLastNameInput1.value.trim();
+    
+    for (var j = 1; j <= 8; j++) {
+      var directorFirstNameInput1 = document.getElementById("directorFirstName" + j);
+      var directorLastNameInput1 = document.getElementById("directorLastName" + j);
+      var directorNameToCheck1 = directorFirstNameInput1.value.trim() + " " + directorLastNameInput1.value.trim();
+      
+      // Check for same name between UBO and director
+      if (directorNameToCheck1 === uboNameToCheck1) {
+        event.preventDefault();
+        alert("A Director cannot have the same name as the Ultimate Beneficial Owner.");
+        return;
+      }
+    }
+    
+    // Check for same name between any two UBOs
+    for (var k = 1; k <= 8; k++) {
+      if (k !== i) {
+        var uboFirstNameInput2 = document.getElementById("uboFirstName" + k);
+        var uboLastNameInput2 = document.getElementById("uboLastName" + k);
+        var uboNameToCheck2 = uboFirstNameInput2.value.trim() + " " + uboLastNameInput2.value.trim();
+        
+        if (uboNameToCheck1 === uboNameToCheck2) {
+          event.preventDefault();
+          alert("The Ultimate Beneficial Owners cannot have the same name.");
+          return;
+        }
+      }
+    }
+    
+    // Check for same name between director and any UBO
+    for (var l = 1; l <= 8; l++) {
+      if (l !== j) {
+        var directorFirstNameInput2 = document.getElementById("directorFirstName" + l);
+        var directorLastNameInput2 = document.getElementById("directorLastName" + l);
         var directorNameToCheck2 = directorFirstNameInput2.value.trim() + " " + directorLastNameInput2.value.trim();
-        if (k !== i && directorNameToCheck2 === uboNameToCheck1) {
+        
+        if (directorNameToCheck2 === uboNameToCheck1) {
           event.preventDefault();
           alert("A Director cannot have the same name as the Ultimate Beneficial Owner.");
           return;
@@ -1484,10 +1591,76 @@ document.getElementById("investorForm").addEventListener("submit", function(even
 
 
 
+document.getElementById("investorForm").addEventListener("submit", function(event) {
+  for (var i = 1; i <= 8; i++) {
+    for (var j = 1; j <= 8; j++) {
+      var uboFirstNameInput = document.getElementById("uboFirstName" + i);
+      var uboLastNameInput = document.getElementById("uboLastName" + i);
+      var uboNameToCheck = uboFirstNameInput.value.trim() + " " + uboLastNameInput.value.trim();
+      var directorFirstNameInput = document.getElementById("directorFirstName" + j);
+      var directorLastNameInput = document.getElementById("directorLastName" + j);
+      var directorNameToCheck = directorFirstNameInput.value.trim() + " " + directorLastNameInput.value.trim();
+      if (directorNameToCheck === uboNameToCheck) {
+        event.preventDefault();
+        alert("A Director cannot have the same name as the Ultimate Beneficial Owner.");
+        return;
+      }
+    }
+  }
+});
 
 
 
-// ubo and director must have different names
+
+document.getElementById("investorForm").addEventListener("submit", function(event) {
+  for (var i = 1; i <= 8; i++) {
+    for (var j = 1; j <= 8; j++) {
+      var uboFirstNameInput1 = document.getElementById("uboFirstName" + i);
+      var uboLastNameInput1 = document.getElementById("uboLastName" + i);
+      var uboNameToCheck1 = uboFirstNameInput1.value.trim() + " " + uboLastNameInput1.value.trim();
+      
+      // Check for same name between UBO1 and director1
+      var directorFirstNameInput1 = document.getElementById("directorFirstName" + j);
+      var directorLastNameInput1 = document.getElementById("directorLastName" + j);
+      var directorNameToCheck1 = directorFirstNameInput1.value.trim() + " " + directorLastNameInput1.value.trim();
+      if (directorNameToCheck1 === uboNameToCheck1) {
+        event.preventDefault();
+        alert("A Director cannot have the same name as the Ultimate Beneficial Owner.");
+        return;
+      }
+      
+      for (var k = 1; k <= 8; k++) {
+        var uboFirstNameInput2 = document.getElementById("uboFirstName" + k);
+        var uboLastNameInput2 = document.getElementById("uboLastName" + k);
+        var uboNameToCheck2 = uboFirstNameInput2.value.trim() + " " + uboLastNameInput2.value.trim();
+        
+        // Check for same name between any two UBOs
+        if (k !== i && uboNameToCheck1 === uboNameToCheck2) {
+          event.preventDefault();
+          alert("The Ultimate Beneficial Owners cannot have the same name.");
+          return;
+        }
+        
+        // Check for same name between director1 and any UBO
+        var directorFirstNameInput2 = document.getElementById("directorFirstName" + j);
+        var directorLastNameInput2 = document.getElementById("directorLastName" + j);
+        var directorNameToCheck2 = directorFirstNameInput2.value.trim() + " " + directorLastNameInput2.value.trim();
+        if (k !== i && directorNameToCheck2 === uboNameToCheck1) {
+          event.preventDefault();
+          alert("A Director cannot have the same name as the Ultimate Beneficial Owner.");
+          return;
+        }
+      }
+    }
+  }
+});
+
+
+
+
+
+
+*/
 
 
 addDirectorEventListeners();

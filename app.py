@@ -107,13 +107,27 @@ def investSubmitRedirect():
 	
 @app.route('/contactSubmitted')
 def contactSubmitRedirect():
-	
 	return redirect('/contact')
+
+def error():
+	# check if the referrer is from the backend
+	if request.referrer and request.referrer.startswith(request.host_url):
+		return render_template('error.html')
+	else:
+		return redirect(url_for('index'))
+
+@app.route('/error')
+def error():
+	is_generated_by_backend = request.args.get('generated_by_backend', False)
+	if not is_generated_by_backend:
+		return redirect('/')
+	return render_template('error.html', generated_by_backend=True)
+
 
 @app.route('/borrowSubmitted', methods=['POST'])
 def loanSubmit():
 	
-	loanApplicationNumber = str(random.randint(1, 100))
+	loanApplicationNumber = str(random.randint(1, 1000))
 	folderForLoanApplication = 'LoanApplication' + loanApplicationNumber
 	os.mkdir(folderForLoanApplication)
 	
@@ -351,13 +365,7 @@ def loanSubmit():
 			bankAccountFile = request.files['bankAccountFile']
 			bankAccountFileName = secure_filename(bankAccountFile.filename)
 			bankAccountFileNameExt = os.path.splitext(bankAccountFileName)[1]
-					
-			# use first ind name for bank file
-			#newBankAccountFileName = request.form.get('individualFirstName1').replace(' ', '') + request.form.get('individualFirstName1').replace(' ', '') + 'BankAccountFile' + bankAccountFileNameExt
-			
-			# use loan application number
 			newBankAccountFileName = 'LoanApplication' + loanApplicationNumber + 'BankAccountFile' + bankAccountFileNameExt
-		
 			newBankAccountFilePath = os.path.join(folderForIndividualFiles, newBankAccountFileName)
 			bankAccountFile.save(newBankAccountFilePath)
 		
@@ -441,7 +449,8 @@ def loanSubmit():
 @app.route('/investorSubmitted', methods=['POST'])
 def investorSubmit():
 	
-	investorApplicationNumber = str(random.randint(1, 100))
+	duplicateFileNameError = False
+	investorApplicationNumber = str(random.randint(1, 1000))
 	folderForInvestmentApplication = 'InvestorApplication' + investorApplicationNumber
 	os.mkdir(folderForInvestmentApplication)
 	
@@ -581,32 +590,6 @@ def investorSubmit():
 		repeatedDirectorInvestorData[f'Director {i} Crime'] = request.form.get(f'directorCrime{i}', '!#$')
 		repeatedDirectorInvestorData[f'Director {i} Declare'] = request.form.get(f'directorDeclareCheckbox{i}', '!#$')
 		
-	investorData = {**investorData, **repeatedIndividualInvestorData, **repeatedUboInvestorData, **repeatedDirectorInvestorData}
-	
-#	cleanedData = {k: v for k, v in investorData.items() if v != '!#$'}
-	cleanedData = {k: v for k, v in investorData.items() if v not in ('!#$', '')}
-	jsonName = 'InvestorApplication' + investorApplicationNumber + '.json' 
-	with open(f'{folderForInvestmentApplication}/{jsonName}', 'w') as f:
-		json.dump(cleanedData, f)
-		
-	workbook = openpyxl.Workbook()
-	worksheet = workbook.active
-	columnHeaders = ['Question', 'Value']
-	worksheet.append(columnHeaders)
-	columnHeadersFont = Font(bold=True)
-	for cell in worksheet[1]:
-		cell.font = columnHeadersFont
-		
-	for key, value in cleanedData.items():
-		if isinstance(value, list):
-			value_str = ', '.join(value)
-			worksheet.append([key, value_str])
-		else:
-			worksheet.append([key, value])
-			
-	workbookName = 'InvestorApplication' + investorApplicationNumber + '.xlsx' 
-	workbook.save(f'{folderForInvestmentApplication}/{workbookName}')
-		
 	for i in range(1, 9):
 		if (request.form.get('investorDropdown') == 'Individual' and repeatedIndividualInvestorData[f'Individual {i} First Name'] != '!#$'):		
 			PassportFile = f'individualPassportFile{i}'
@@ -656,7 +639,11 @@ def investorSubmit():
 				uboLastName = request.form.get(f'uboLastName{i}', '!#$').replace(' ', '')
 				folderForUboFilesName = uboLastName + uboFirstName + 'Files'
 				folderForUboFiles = os.path.join(folderForInvestmentApplication, folderForUboFilesName)
-				os.mkdir(folderForUboFiles)
+				try:
+					os.mkdir(folderForUboFiles)
+				except:
+					duplicateFileNameError = True
+					return render_template('error.html')
 				
 				for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
 					file = request.files[fileType]
@@ -682,7 +669,11 @@ def investorSubmit():
 				directorLastName = request.form.get(f'directorLastName{i}', '!#$').replace(' ', '')
 				folderForDirectorFilesName = directorLastName + directorFirstName + 'Files'
 				folderForDirectorFiles = os.path.join(folderForInvestmentApplication, folderForDirectorFilesName)
-				os.mkdir(folderForDirectorFiles)
+				try:
+					os.mkdir(folderForDirectorFiles)
+				except:
+					duplicateFileNameError = True
+					return render_template('error.html')
 				
 				for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
 					file = request.files[fileType]
@@ -692,7 +683,7 @@ def investorSubmit():
 					newFileName = newFileName.replace(f'{i}', '')
 					newFilePath = os.path.join(folderForDirectorFiles, newFileName)
 					file.save(newFilePath)
-					
+
 	if (request.form.get('investorDropdown') == 'Entity'):
 		bankAccountFile = request.files['bankAccountFile']
 		bankAccountFileName = secure_filename(bankAccountFile.filename)
@@ -701,6 +692,29 @@ def investorSubmit():
 		newBankAccountFilePath = os.path.join(folderForEntityFiles, newBankAccountFileName)
 		bankAccountFile.save(newBankAccountFilePath)
 		
+	investorData = {**investorData, **repeatedIndividualInvestorData, **repeatedUboInvestorData, **repeatedDirectorInvestorData}
+	cleanedData = {k: v for k, v in investorData.items() if v not in ('!#$', '')}
+	jsonName = 'InvestorApplication' + investorApplicationNumber + '.json' 
+	with open(f'{folderForInvestmentApplication}/{jsonName}', 'w') as f:
+		json.dump(cleanedData, f)
+		
+	workbook = openpyxl.Workbook()
+	worksheet = workbook.active
+	columnHeaders = ['Question', 'Value']
+	worksheet.append(columnHeaders)
+	columnHeadersFont = Font(bold=True)
+	for cell in worksheet[1]:
+		cell.font = columnHeadersFont
+		
+	for key, value in cleanedData.items():
+		if isinstance(value, list):
+			value_str = ', '.join(value)
+			worksheet.append([key, value_str])
+		else:
+			worksheet.append([key, value])
+			
+	workbookName = 'InvestorApplication' + investorApplicationNumber + '.xlsx' 
+	workbook.save(f'{folderForInvestmentApplication}/{workbookName}')
 		
 	# Upload cleanedData.json to S3
 	#s3 = boto3.resource('s3')
@@ -709,8 +723,11 @@ def investorSubmit():
 	object_key = 'investorData.json'
 	#s3.Object(bucket_name, object_key).put(Body=open('loanData.json', 'rb'))
 	
-	
-	return render_template('investorSubmitted.html', title='Submitted')
+	if not duplicateFileNameError:
+		return render_template('investorSubmitted.html', title='Submitted')
+
+
+
 
 
 @app.route('/contactSubmitted', methods=['POST'])
