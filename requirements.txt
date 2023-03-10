@@ -24,7 +24,6 @@ auto-py-to-exe==2.21.0
 backcall==0.2.0
 beautifulsoup4==4.11.1
 ble-serial==2.6.1
-bleak==0.11.0
 boto3==1.26.79
 botocore==1.29.79
 bottle==0.12.21
@@ -142,6 +141,7 @@ pdfkit==1.0.0
 pdfminer.six==20220524
 pdfplumber==0.7.4
 pdfrw==0.4
+pdftables-api @ git+https://github.com/pdftables/python-pdftables-api.git@a2d329a346197c4dcfc6d1b63b02a89dc87481e6
 pexpect==4.8.0
 phonenumbers==8.12.49
 pickleshare==0.7.5
