@@ -107,7 +107,7 @@ jaro-winkler==2.0.0
 jedi==0.18.1
 Jinja2==3.1.2
 jmespath==1.0.1
-joblib==1.1.0
+joblib==1.2.0
 jsonschema==2.6.0
 keras==2.8.0
 keras-nightly==2.9.0.dev2022021308
@@ -400,7 +400,7 @@ weasyprint==58.0
 webdriver-manager==3.8.3
 webdriverdownloader==1.1.0.3
 webencodings==0.5.1
-Werkzeug==2.2.2
+Werkzeug==2.2.3
 whichcraft==0.6.1
 wkhtmltopdf==0.2
 wrapt==1.13.3
