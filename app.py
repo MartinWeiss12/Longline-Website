@@ -288,7 +288,7 @@ def loanSubmit():
 	
 		if (request.form.get('borrowerDropdown') == 'Entity' and entityName != '!#$'):
 			
-			folderForEntityFilesName = loanData['Entity Name'] + 'Files'
+			folderForEntityFilesName = entityName + 'Files'
 			folderForEntityFiles = os.path.join(folderForLoanApplication, folderForEntityFilesName)
 			os.mkdir(folderForEntityFiles)
 			
@@ -425,7 +425,7 @@ def loanSubmit():
 			
 		workbook = openpyxl.Workbook()
 		worksheet = workbook.active
-		columnHeaders = ['Question', 'Value']
+		columnHeaders = ['Question', 'Response']
 		worksheet.append(columnHeaders)
 		columnHeadersFont = Font(bold=True)
 		for cell in worksheet[1]:
@@ -576,7 +576,7 @@ def investorSubmit():
 	
 		if (request.form.get('investorDropdown') == 'Entity' and entityName != '!#$'):
 			
-			folderForEntityFilesName = investorData['Entity Name'] + 'Files'
+			folderForEntityFilesName = entityName + 'Files'
 			folderForEntityFiles = os.path.join(folderForInvestmentApplication, folderForEntityFilesName)
 			os.mkdir(folderForEntityFiles)
 			
@@ -714,7 +714,7 @@ def investorSubmit():
 			
 		workbook = openpyxl.Workbook()
 		worksheet = workbook.active
-		columnHeaders = ['Question', 'Value']
+		columnHeaders = ['Question', 'Response']
 		worksheet.append(columnHeaders)
 		columnHeadersFont = Font(bold=True)
 		for cell in worksheet[1]:
@@ -794,8 +794,6 @@ def contactSubmit():
 	'''
 	
 	return render_template('contactSubmitted.html', title='Submitted')
-
-
 
 if __name__ == '__main__':
 	app.run(debug=True)
