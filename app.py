@@ -168,6 +168,7 @@ def loanSubmit():
 	loanData['Entity State'] = request.form.get('entityState', '!#$')
 	loanData['Entity Zip'] = request.form.get('entityZip', '!#$')
 	loanData['Entity Website'] = request.form.get('entityWebsite', '!#$')
+	loanData['Entity Bankruptcy'] = request.form.get('entityBankruptcy', '!#$')
 	loanData['Beneficiary Name'] = request.form.get('beneficiaryName')
 	loanData['Bank Name'] = request.form.get('bankName')
 	loanData['Bank Address'] = request.form.get('bankAddress')
@@ -207,36 +208,38 @@ def loanSubmit():
 		repeatedIndividualLoanData[f'Individual {i} Income'] = request.form.get(f'individualIncome{i}', '!#$')
 		repeatedIndividualLoanData[f'Individual {i} Politically Exposed Person'] = request.form.get(f'individualPep{i}', '!#$')
 		repeatedIndividualLoanData[f'Individual {i} Crime'] = request.form.get(f'individualCrime{i}', '!#$')
+		repeatedIndividualLoanData[f'Individual {i} Bankruptcy'] = request.form.get(f'individualBankruptcy{i}', '!#$')
 		repeatedIndividualLoanData[f'Individual {i} Declare'] = request.form.get(f'individualDeclareCheckbox{i}', '!#$')
 		
 	repeatedUboLoanData = {}
 	for i in range(1, 9):
-		repeatedUboLoanData[f'Ubo {i} Personal Guarantor'] = request.form.get(f'uboPersonalGuarantorDropdown{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} Citizen'] = request.form.get(f'uboCitizenDropdown{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} South Dakota Resident'] = request.form.get(f'uboSDResidentDropdown{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} First Name'] = request.form.get(f'uboFirstName{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} Middle Name'] = request.form.get(f'uboMiddleName{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} Last Name'] = request.form.get(f'uboLastName{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} Home Address'] = request.form.get(f'uboHomeBankAddress{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} Address Line Two'] = request.form.get(f'uboAddressLineTwo{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} Home City'] = request.form.get(f'uboHomeCity{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} Home State'] = request.form.get(f'uboHomeState{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} Home Zip'] = request.form.get(f'uboHomeZip{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} Home Country'] = request.form.get(f'uboHomeCountry{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} Own or Rent'] = request.form.get(f'uboOwnRentDropdown{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} Monthly Mortgage/Rent'] = request.form.get(f'uboMonthlyRent{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} Passport Number'] = request.form.get(f'uboPassportNumber{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} SSN'] = request.form.get(f'uboSsn{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} Date of Birth'] = request.form.get(f'uboDob{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} Email'] = request.form.get(f'uboEmail{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} Phone Number'] = request.form.get(f'uboPhone{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} FICO/NOSIS Number'] = request.form.get(f'uboFico{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} Income'] = request.form.get(f'uboIncome{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} Politically Exposed Person'] = request.form.get(f'uboPep{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} Crime'] = request.form.get(f'uboCrime{i}', '!#$')
-		repeatedUboLoanData[f'Ubo {i} Declare'] = request.form.get(f'uboDeclareCheckbox{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Personal Guarantor'] = request.form.get(f'uboPersonalGuarantorDropdown{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Citizen'] = request.form.get(f'uboCitizenDropdown{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} South Dakota Resident'] = request.form.get(f'uboSDResidentDropdown{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} First Name'] = request.form.get(f'uboFirstName{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Middle Name'] = request.form.get(f'uboMiddleName{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Last Name'] = request.form.get(f'uboLastName{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Home Address'] = request.form.get(f'uboHomeBankAddress{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Address Line Two'] = request.form.get(f'uboAddressLineTwo{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Home City'] = request.form.get(f'uboHomeCity{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Home State'] = request.form.get(f'uboHomeState{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Home Zip'] = request.form.get(f'uboHomeZip{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Home Country'] = request.form.get(f'uboHomeCountry{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Own or Rent'] = request.form.get(f'uboOwnRentDropdown{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Monthly Mortgage/Rent'] = request.form.get(f'uboMonthlyRent{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Passport Number'] = request.form.get(f'uboPassportNumber{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} SSN'] = request.form.get(f'uboSsn{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Date of Birth'] = request.form.get(f'uboDob{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Email'] = request.form.get(f'uboEmail{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Phone Number'] = request.form.get(f'uboPhone{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} FICO/NOSIS Number'] = request.form.get(f'uboFico{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Income'] = request.form.get(f'uboIncome{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Politically Exposed Person'] = request.form.get(f'uboPep{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Crime'] = request.form.get(f'uboCrime{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Bankruptcy'] = request.form.get(f'uboBankruptcy{i}', '!#$')
+		repeatedUboLoanData[f'UBO {i} Declare'] = request.form.get(f'uboDeclareCheckbox{i}', '!#$')
 		
-		loanUboNameList.append(repeatedUboLoanData[f'Ubo {i} First Name'].strip() + repeatedUboLoanData[f'Ubo {i} Last Name'].strip())
+		loanUboNameList.append(repeatedUboLoanData[f'UBO {i} First Name'].strip() + repeatedUboLoanData[f'UBO {i} Last Name'].strip())
 		
 	repeatedDirectorLoanData = {}
 	for i in range(1, 9):
@@ -263,8 +266,8 @@ def loanSubmit():
 		repeatedDirectorLoanData[f'Director {i} Income'] = request.form.get(f'directorIncome{i}', '!#$')
 		repeatedDirectorLoanData[f'Director {i} Politically Exposed Person'] = request.form.get(f'directorPep{i}', '!#$')
 		repeatedDirectorLoanData[f'Director {i} Crime'] = request.form.get(f'directorCrime{i}', '!#$')
+		repeatedDirectorLoanData[f'Director {i} Bankruptcy'] = request.form.get(f'directorBankruptcy{i}', '!#$')
 		repeatedDirectorLoanData[f'Director {i} Declare'] = request.form.get(f'directorDeclareCheckbox{i}', '!#$')
-	
 	
 		loanDirectorNameList.append(repeatedDirectorLoanData[f'Director {i} First Name'].strip() + repeatedDirectorLoanData[f'Director {i} Last Name'].strip())
 		
@@ -355,7 +358,7 @@ def loanSubmit():
 				bankAccountFile.save(newBankAccountFilePath)
 			
 		for i in range(1, 9):
-			if (request.form.get('borrowerDropdown') == 'Entity' and repeatedUboLoanData[f'Ubo {i} First Name'] != '!#$'):
+			if (request.form.get('borrowerDropdown') == 'Entity' and repeatedUboLoanData[f'UBO {i} First Name'] != '!#$'):
 				PassportFile = f'uboPassportFile{i}'
 				DNIFrontFile = f'uboDniFrontFile{i}'
 				DNIReverseFile = f'uboDniReverseFile{i}'
@@ -364,7 +367,7 @@ def loanSubmit():
 				WorldCheckFile = f'uboWorldCheckFile{i}'
 				OFACFile = f'uboOfacFile{i}'
 				
-				if (repeatedUboLoanData[f'Ubo {i} First Name'] != '!#$'):
+				if (repeatedUboLoanData[f'UBO {i} First Name'] != '!#$'):
 					uboFirstName = request.form.get(f'uboFirstName{i}', '!#$').replace(' ', '')
 					uboLastName = request.form.get(f'uboLastName{i}', '!#$').replace(' ', '')
 					folderForUboFilesName = uboLastName + uboFirstName + 'Files'
@@ -375,7 +378,7 @@ def loanSubmit():
 						file = request.files[fileType]
 						fileName = secure_filename(file.filename)
 						fileNameExt = os.path.splitext(fileName)[1]
-						newFileName = (repeatedUboLoanData[f'Ubo {i} Last Name'] + repeatedUboLoanData[f'Ubo {i} First Name'] + fileType + fileNameExt).replace('ubo', '')
+						newFileName = (repeatedUboLoanData[f'UBO {i} Last Name'] + repeatedUboLoanData[f'UBO {i} First Name'] + fileType + fileNameExt).replace('ubo', '')
 						newFileName = newFileName.replace(f'{i}', '')
 						newFilePath = os.path.join(folderForUboFiles, newFileName)
 						file.save(newFilePath)
@@ -508,28 +511,28 @@ def investorSubmit():
 				
 	repeatedUboInvestorData = {}
 	for i in range(1, 9):
-		repeatedUboInvestorData[f'Ubo {i} Citizen'] = request.form.get(f'uboCitizenDropdown{i}', '!#$')
-		repeatedUboInvestorData[f'Ubo {i} South Dakota Resident'] = request.form.get(f'uboSDResidentDropdown{i}', '!#$')
-		repeatedUboInvestorData[f'Ubo {i} First Name'] = request.form.get(f'uboFirstName{i}', '!#$')
-		repeatedUboInvestorData[f'Ubo {i} Middle Name'] = request.form.get(f'uboMiddleName{i}', '!#$')
-		repeatedUboInvestorData[f'Ubo {i} Last Name'] = request.form.get(f'uboLastName{i}', '!#$')
-		repeatedUboInvestorData[f'Ubo {i} Home Address'] = request.form.get(f'uboHomeBankAddress{i}', '!#$')
-		repeatedUboInvestorData[f'Ubo {i} Address Line Two'] = request.form.get(f'uboAddressLineTwo{i}', '!#$')
-		repeatedUboInvestorData[f'Ubo {i} Home City'] = request.form.get(f'uboHomeCity{i}', '!#$')
-		repeatedUboInvestorData[f'Ubo {i} Home State'] = request.form.get(f'uboHomeState{i}', '!#$')
-		repeatedUboInvestorData[f'Ubo {i} Home Zip'] = request.form.get(f'uboHomeZip{i}', '!#$')
-		repeatedUboInvestorData[f'Ubo {i} Home Country'] = request.form.get(f'uboHomeCountry{i}', '!#$')
-		repeatedUboInvestorData[f'Ubo {i} Passport Number'] = request.form.get(f'uboPassportNumber{i}', '!#$')
-		repeatedUboInvestorData[f'Ubo {i} SSN'] = request.form.get(f'uboSsn{i}', '!#$')
-		repeatedUboInvestorData[f'Ubo {i} Date of Birth'] = request.form.get(f'uboDob{i}', '!#$')
-		repeatedUboInvestorData[f'Ubo {i} Email'] = request.form.get(f'uboEmail{i}', '!#$')
-		repeatedUboInvestorData[f'Ubo {i} Phone Number'] = request.form.get(f'uboPhone{i}', '!#$')
-		repeatedUboInvestorData[f'Ubo {i} FICO/NOSIS Number'] = request.form.get(f'uboFico{i}', '!#$')
-		repeatedUboInvestorData[f'Ubo {i} Politically Exposed Person'] = request.form.get(f'uboPep{i}', '!#$')
-		repeatedUboInvestorData[f'Ubo {i} Crime'] = request.form.get(f'uboCrime{i}', '!#$')
-		repeatedUboInvestorData[f'Ubo {i} Declare'] = request.form.get(f'uboDeclareCheckbox{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} Citizen'] = request.form.get(f'uboCitizenDropdown{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} South Dakota Resident'] = request.form.get(f'uboSDResidentDropdown{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} First Name'] = request.form.get(f'uboFirstName{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} Middle Name'] = request.form.get(f'uboMiddleName{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} Last Name'] = request.form.get(f'uboLastName{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} Home Address'] = request.form.get(f'uboHomeBankAddress{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} Address Line Two'] = request.form.get(f'uboAddressLineTwo{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} Home City'] = request.form.get(f'uboHomeCity{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} Home State'] = request.form.get(f'uboHomeState{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} Home Zip'] = request.form.get(f'uboHomeZip{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} Home Country'] = request.form.get(f'uboHomeCountry{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} Passport Number'] = request.form.get(f'uboPassportNumber{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} SSN'] = request.form.get(f'uboSsn{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} Date of Birth'] = request.form.get(f'uboDob{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} Email'] = request.form.get(f'uboEmail{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} Phone Number'] = request.form.get(f'uboPhone{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} FICO/NOSIS Number'] = request.form.get(f'uboFico{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} Politically Exposed Person'] = request.form.get(f'uboPep{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} Crime'] = request.form.get(f'uboCrime{i}', '!#$')
+		repeatedUboInvestorData[f'UBO {i} Declare'] = request.form.get(f'uboDeclareCheckbox{i}', '!#$')
 		
-		investorUboNameList.append(repeatedUboInvestorData[f'Ubo {i} First Name'].strip() + repeatedUboInvestorData[f'Ubo {i} Last Name'].strip())
+		investorUboNameList.append(repeatedUboInvestorData[f'UBO {i} First Name'].strip() + repeatedUboInvestorData[f'UBO {i} Last Name'].strip())
 		
 		
 	repeatedDirectorInvestorData = {}
@@ -644,7 +647,7 @@ def investorSubmit():
 			
 			
 		for i in range(1, 9):
-			if (request.form.get('investorDropdown') == 'Entity' and repeatedUboInvestorData[f'Ubo {i} First Name'] != '!#$'):
+			if (request.form.get('investorDropdown') == 'Entity' and repeatedUboInvestorData[f'UBO {i} First Name'] != '!#$'):
 				PassportFile = f'uboPassportFile{i}'
 				DNIFrontFile = f'uboDniFrontFile{i}'
 				DNIReverseFile = f'uboDniReverseFile{i}'
@@ -653,7 +656,7 @@ def investorSubmit():
 				WorldCheckFile = f'uboWorldCheckFile{i}'
 				OFACFile = f'uboOfacFile{i}'
 				
-				if (repeatedUboInvestorData[f'Ubo {i} First Name'] != '!#$'):
+				if (repeatedUboInvestorData[f'UBO {i} First Name'] != '!#$'):
 					uboFirstName = request.form.get(f'uboFirstName{i}', '!#$').replace(' ', '')
 					uboLastName = request.form.get(f'uboLastName{i}', '!#$').replace(' ', '')
 					folderForUboFilesName = uboLastName + uboFirstName + 'Files'
@@ -664,7 +667,7 @@ def investorSubmit():
 						file = request.files[fileType]
 						fileName = secure_filename(file.filename)
 						fileNameExt = os.path.splitext(fileName)[1]
-						newFileName = (repeatedUboInvestorData[f'Ubo {i} Last Name'] + repeatedUboInvestorData[f'Ubo {i} First Name'] + fileType + fileNameExt).replace('ubo', '')
+						newFileName = (repeatedUboInvestorData[f'UBO {i} Last Name'] + repeatedUboInvestorData[f'UBO {i} First Name'] + fileType + fileNameExt).replace('ubo', '')
 						newFileName = newFileName.replace(f'{i}', '')
 						newFilePath = os.path.join(folderForUboFiles, newFileName)
 						file.save(newFilePath)

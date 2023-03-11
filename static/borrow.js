@@ -330,6 +330,18 @@ const htmlForEntity = `
       <input class="input-field" type="text" id="entityWebsite" name="entityWebsite" placeholder="Entity Website" required style="width: 250px;">
     </div>
   </div>
+
+      <br><br><div style="font-size: 18px; width: 700px; margin-left: 600px;">
+      Has this entity ever defaulted on a loan or filed for bankruptcy? 
+    </div>
+    
+    <div class="labels">
+      <label></label>
+    </div>
+    <div class="input-tab">
+      <label><input type="radio" name="entityBankruptcy" value="Yes" style="margin-left: 50px;" required>Yes</label>
+      <label><input type="radio" name="entityBankruptcy" value="No">No</label>
+    </div>
   
   <br><br><h3>Upload PDF or Image for Articles of Organization and Certificate of Formation</h3>
   
@@ -568,6 +580,19 @@ const htmlForAdditionalIndividual = `
     <label><input type="radio" name="individualCrime{{index}}" value="Yes" style="margin-left: 50px;" required>Yes</label>
     <label><input type="radio" name="individualCrime{{index}}" value="No">No</label>
   </div>
+
+    <br><br><div style="font-size: 18px; width: 850px; margin-left: 425px;">
+      Have you personally, or has any entity you control or controlled, ever defaulted on a loan or filed for bankruptcy? 
+    </div>
+    
+    <div class="labels">
+      <label></label>
+    </div>
+    <div class="input-tab">
+      <label><input type="radio" name="individualBankruptcy{{index}}" value="Yes" style="margin-left: 50px;" required>Yes</label>
+      <label><input type="radio" name="individualBankruptcy{{index}}" value="No">No</label>
+    </div>
+
   
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
     I declare that the above information is true and correct. I am aware that I may be  subject to prosecution and criminal sanction under written law if I am found to have  made any false statement which I know to be false or which I do not believe to be true,  or if I have intentionally suppressed any material fact. 
@@ -855,6 +880,18 @@ const htmlForAdditionalUbo = `
     <label><input type="radio" name="uboCrime{{index}}" value="No">No</label>
   </div>
   
+<br><br><div style="font-size: 18px; width: 850px; margin-left: 425px;">
+    Have you personally, or has any entity you control or controlled, ever defaulted on a loan or filed for bankruptcy? 
+  </div>
+  
+  <div class="labels">
+    <label></label>
+  </div>
+  <div class="input-tab">
+    <label><input type="radio" name="uboBankruptcy{{index}}" value="Yes" style="margin-left: 50px;" required>Yes</label>
+    <label><input type="radio" name="uboBankruptcy{{index}}" value="No">No</label>
+  </div>
+  
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
     I declare that the above information is true and correct. I am aware that I may be  subject to prosecution and criminal sanction under written law if I am found to have  made any false statement which I know to be false or which I do not believe to be true,  or if I have intentionally suppressed any material fact.
   </div><br>
@@ -1140,6 +1177,18 @@ const htmlForAdditionalUbo = `
     <label><input type="radio" name="directorCrime{{index}}" value="Yes" style="margin-left: 50px;" required>Yes</label>
     <label><input type="radio" name="directorCrime{{index}}" value="No">No</label>
   </div>
+
+  <br><br><div style="font-size: 18px; width: 850px; margin-left: 425px;">
+      Have you personally, or has any entity you control or controlled, ever defaulted on a loan or filed for bankruptcy? 
+    </div>
+    
+    <div class="labels">
+      <label></label>
+    </div>
+    <div class="input-tab">
+      <label><input type="radio" name="directorBankruptcy{{index}}" value="Yes" style="margin-left: 50px;" required>Yes</label>
+      <label><input type="radio" name="directorBankruptcy{{index}}" value="No">No</label>
+    </div>
   
   <br><br><div style="font-size: 18px; width: 700px; margin-left: 425px; text-align: justify;">
     I declare that the above information is true and correct. I am aware that I may be  subject to prosecution and criminal sanction under written law if I am found to have  made any false statement which I know to be false or which I do not believe to be true,  or if I have intentionally suppressed any material fact. 
@@ -1485,10 +1534,32 @@ buttonsClicked = false;
 
 document.getElementById("loanForm").addEventListener("submit", function(event) {
   for (var i = 1; i <= 8; i++) {
+    var entityBankruptcyInput = document.querySelector(`input[name="entityBankruptcy${i}"]:checked`);
+    if (entityBankruptcyInput && entityBankruptcyInput.value === "Yes") {
+      event.preventDefault();
+      alert("Sorry, you cannot submit this form as you have indicated that the Entity has filed for bankruptcy.");
+      return;
+    }
+  }
+});
+
+document.getElementById("loanForm").addEventListener("submit", function(event) {
+  for (var i = 1; i <= 8; i++) {
     var individualDropdown = document.getElementById("individualCitizenDropdown" + i);
     if (individualDropdown.value == "Yes") {
       event.preventDefault();
       alert("Individual cannot be a U.S. citizen or permeant U.S resident.");
+      return;
+    }
+  }
+});
+
+document.getElementById("loanForm").addEventListener("submit", function(event) {
+  for (var i = 1; i <= 8; i++) {
+    var individualBankruptcyInput = document.querySelector(`input[name="individualBankruptcy${i}"]:checked`);
+    if (individualBankruptcyInput && individualBankruptcyInput.value === "Yes") {
+      event.preventDefault();
+      alert("Sorry, you cannot submit this form as you have indicated that an Individual has filed for bankruptcy.");
       return;
     }
   }
@@ -1544,6 +1615,17 @@ document.getElementById("loanForm").addEventListener("submit", function(event) {
 });
 
 document.getElementById("loanForm").addEventListener("submit", function(event) {
+  for (var i = 1; i <= 8; i++) {
+    var uboBankruptcyInput = document.querySelector(`input[name="uboBankruptcy${i}"]:checked`);
+    if (uboBankruptcyInput && uboBankruptcyInput.value === "Yes") {
+      event.preventDefault();
+      alert("Sorry, you cannot submit this form as you have indicated that a UBO has filed for bankruptcy.");
+      return;
+    }
+  }
+});
+
+document.getElementById("loanForm").addEventListener("submit", function(event) {
   var uboNames = [];
   for (var i = 1; i <= 8; i++) {
     var uboFirstNameInput = document.getElementById("uboFirstName" + i);
@@ -1593,6 +1675,17 @@ document.getElementById("loanForm").addEventListener("submit", function(event) {
 });
 
 document.getElementById("loanForm").addEventListener("submit", function(event) {
+  for (var i = 1; i <= 8; i++) {
+    var directorBankruptcyInput = document.querySelector(`input[name="directorBankruptcy${i}"]:checked`);
+    if (directorBankruptcyInput && directorBankruptcyInput.value === "Yes") {
+      event.preventDefault();
+      alert("Sorry, you cannot submit this form as you have indicated that a Director has filed for bankruptcy.");
+      return;
+    }
+  }
+});
+
+document.getElementById("loanForm").addEventListener("submit", function(event) {
   var directorNames = [];
   for (var i = 1; i <= 8; i++) {
     var directorFirstNameInput = document.getElementById("directorFirstName" + i);
@@ -1629,6 +1722,9 @@ document.getElementById("loanForm").addEventListener("submit", function(event) {
     }
   });
 });
+
+
+
 
 
 addDirectorEventListeners();
