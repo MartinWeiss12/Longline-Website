@@ -6,7 +6,7 @@ import random
 import datetime
 import openpyxl
 from openpyxl.styles import Font
-from flask import Flask, render_template, request, jsonify, session, redirect, make_response, flash
+from flask import Flask, render_template, request, jsonify, session, redirect, make_response, flash, abort
 from flask_session import Session
 from werkzeug.utils import secure_filename
 
@@ -18,6 +18,15 @@ app.config ['SECRET_KEY'] = 'longline'
 
 directory = '/userFiles'
 flaskBackendPin = '1234'
+
+#loanApplicationNumber = 0
+#investorApplicationNumber = 0
+
+ALLOWED_EXTENSIONS = {'pdf', 'docx', 'doc', 'png', 'jpg', 'jpeg', 'heic'}
+
+def allowed_file(filename):
+	return '.' in filename and \
+			filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/')
 def index():
@@ -283,6 +292,7 @@ def loanSubmit():
 	if not duplicateUboDirectorNameForLoan:
 		
 		loanApplicationNumber = str(random.randint(1, 1000))
+		#loanApplicationNumber = loanApplicationNumber + 1
 		folderForLoanApplication = 'LoanApplication' + loanApplicationNumber
 		os.mkdir(folderForLoanApplication)
 	
@@ -294,35 +304,47 @@ def loanSubmit():
 			
 			# Entity Articles of Organization File 
 			entityArticlesFile = request.files['entityArticlesFile']
-			entityArticlesFileName = secure_filename(entityArticlesFile.filename)
-			entityArticlesFileNameExt = os.path.splitext(entityArticlesFileName)[1]
-			newEntityArticlesFileName = (entityName + 'EntityArticlesFile' + entityArticlesFileNameExt)
-			newEntityArticlesFilePath = os.path.join(folderForEntityFiles, newEntityArticlesFileName)
-			entityArticlesFile.save(newEntityArticlesFilePath)
-			
+			if entityArticlesFile and allowed_file(entityArticlesFile.filename):
+				entityArticlesFileName = secure_filename(entityArticlesFile.filename)
+				entityArticlesFileNameExt = os.path.splitext(entityArticlesFileName)[1]
+				newEntityArticlesFileName = (entityName + 'EntityArticlesFile' + entityArticlesFileNameExt)
+				newEntityArticlesFilePath = os.path.join(folderForEntityFiles, newEntityArticlesFileName)
+				entityArticlesFile.save(newEntityArticlesFilePath)
+			else:
+				abort(400, 'Invalid file type for ' + entityArticlesFileName)
+				
 			# Entity Certificate of Formation File 
 			entityCertificateFile = request.files['entityCertificateFile']
-			entityCertificateFileName = secure_filename(entityCertificateFile.filename)
-			entityCertificateFileExt = os.path.splitext(entityCertificateFileName)[1]
-			newEntityCertificateFileName = (entityName + 'EntityCertificateFile' + entityCertificateFileExt)
-			newEntityCertificateFilePath = os.path.join(folderForEntityFiles, newEntityCertificateFileName)
-			entityCertificateFile.save(newEntityCertificateFilePath)
-			
+			if entityCertificateFile and allowed_file(entityCertificateFile.filename):
+				entityCertificateFileName = secure_filename(entityCertificateFile.filename)
+				entityCertificateFileExt = os.path.splitext(entityCertificateFileName)[1]
+				newEntityCertificateFileName = (entityName + 'EntityCertificateFile' + entityCertificateFileExt)
+				newEntityCertificateFilePath = os.path.join(folderForEntityFiles, newEntityCertificateFileName)
+				entityCertificateFile.save(newEntityCertificateFilePath)
+			else:
+				abort(400, 'Invalid file type for ' + entityCertificateFileName)
+				
 			# Entity EIN File
 			entityEinFile = request.files['entityEinFile']
-			entityEinFileName = secure_filename(entityEinFile.filename)
-			entityEinFileExt = os.path.splitext(entityEinFileName)[1]
-			newEntityEinFileFileName = (entityName + 'EntityEinFile' + entityEinFileExt)
-			newEntityEinFileFilePath = os.path.join(folderForEntityFiles, newEntityEinFileFileName)
-			entityEinFile.save(newEntityEinFileFilePath)
-			
+			if entityEinFile and allowed_file(entityEinFile.filename):
+				entityEinFileName = secure_filename(entityEinFile.filename)
+				entityEinFileExt = os.path.splitext(entityEinFileName)[1]
+				newEntityEinFileFileName = (entityName + 'EntityEinFile' + entityEinFileExt)
+				newEntityEinFileFilePath = os.path.join(folderForEntityFiles, newEntityEinFileFileName)
+				entityEinFile.save(newEntityEinFileFilePath)
+			else:
+				abort(400, 'Invalid file type for ' + entityEinFileName)
+				
 			# Entity Other File
 			entityOtherFile = request.files['entityOtherFile']
-			entityOtherFileName = secure_filename(entityOtherFile.filename)
-			entityOtherFileExt = os.path.splitext(entityOtherFileName)[1]
-			newEntityOtherFileName = (entityName + 'EntityEinFile' + entityOtherFileExt)
-			newEntityOtherFilePath = os.path.join(folderForEntityFiles, newEntityOtherFileName)
-			entityOtherFile.save(newEntityOtherFilePath)
+			if entityOtherFile and allowed_file(entityOtherFile.filename):
+				entityOtherFileName = secure_filename(entityOtherFile.filename)
+				entityOtherFileExt = os.path.splitext(entityOtherFileName)[1]
+				newEntityOtherFileName = (entityName + 'EntityOtherFile' + entityOtherFileExt)
+				newEntityOtherFilePath = os.path.join(folderForEntityFiles, newEntityOtherFileName)
+				entityOtherFile.save(newEntityOtherFilePath)
+			else:
+				abort(400, 'Invalid file type for ' + entityOtherFileName)
 			
 		for i in range(1, 9):
 			if (request.form.get('borrowerDropdown') == 'Individual' and repeatedIndividualLoanData[f'Individual {i} First Name'] != '!#$'):		
@@ -343,19 +365,25 @@ def loanSubmit():
 					
 					for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
 						file = request.files[fileType]
-						fileName = secure_filename(file.filename)
-						fileNameExt = os.path.splitext(fileName)[1]
-						newFileName = (repeatedIndividualLoanData[f'Individual {i} Last Name'] + repeatedIndividualLoanData[f'Individual {i} First Name'] + fileType + fileNameExt).replace('individual', '')
-						newFileName = newFileName.replace(f'{i}', '')
-						newFilePath = os.path.join(folderForIndividualFiles, newFileName)
-						file.save(newFilePath)
-						
+						if file and allowed_file(file.filename):
+							fileName = secure_filename(file.filename)
+							fileNameExt = os.path.splitext(fileName)[1]
+							newFileName = (repeatedIndividualLoanData[f'Individual {i} Last Name'] + repeatedIndividualLoanData[f'Individual {i} First Name'] + fileType + fileNameExt).replace('individual', '')
+							newFileName = newFileName.replace(f'{i}', '')
+							newFilePath = os.path.join(folderForIndividualFiles, newFileName)
+							file.save(newFilePath)
+						else:
+							abort(400, 'Invalid file type for ' + fileName)
+							
 				bankAccountFile = request.files['bankAccountFile']
-				bankAccountFileName = secure_filename(bankAccountFile.filename)
-				bankAccountFileNameExt = os.path.splitext(bankAccountFileName)[1]
-				newBankAccountFileName = 'LoanApplication' + loanApplicationNumber + 'BankAccountFile' + bankAccountFileNameExt
-				newBankAccountFilePath = os.path.join(folderForIndividualFiles, newBankAccountFileName)
-				bankAccountFile.save(newBankAccountFilePath)
+				if bankAccountFile and allowed_file(bankAccountFile.filename):
+					bankAccountFileName = secure_filename(bankAccountFile.filename)
+					bankAccountFileNameExt = os.path.splitext(bankAccountFileName)[1]
+					newBankAccountFileName = 'LoanApplication' + loanApplicationNumber + 'BankAccountFile' + bankAccountFileNameExt
+					newBankAccountFilePath = os.path.join(folderForIndividualFiles, newBankAccountFileName)
+					bankAccountFile.save(newBankAccountFilePath)
+				else:
+					abort(400, 'Invalid file type for ' + bankAccountFileName)
 			
 		for i in range(1, 9):
 			if (request.form.get('borrowerDropdown') == 'Entity' and repeatedUboLoanData[f'UBO {i} First Name'] != '!#$'):
@@ -571,6 +599,7 @@ def investorSubmit():
 	if not duplicateUboDirectorNameForInvestor: 
 	
 		investorApplicationNumber = str(random.randint(1, 1000))
+		#investorApplicationNumber = investorApplicationNumber + 1
 		folderForInvestmentApplication = 'InvestorApplication' + investorApplicationNumber
 		os.mkdir(folderForInvestmentApplication)
 	
