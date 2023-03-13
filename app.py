@@ -22,7 +22,7 @@ flaskBackendPin = '1234'
 #loanApplicationNumber = 0
 #investorApplicationNumber = 0
 
-ALLOWED_EXTENSIONS = {'pdf', 'docx', 'doc', 'png', 'jpg', 'jpeg', 'heic'}
+ALLOWED_EXTENSIONS = {'pdf', 'docx', 'doc', 'png', 'jpg', 'jpeg', 'heic', 'gif', 'xlsx', 'ppt', 'pptx'}
 
 def allowed_file(filename):
 	return '.' in filename and \
@@ -322,7 +322,7 @@ def loanSubmit():
 				entityCertificateFile.save(newEntityCertificateFilePath)
 			else:
 				abort(400, 'Invalid file type for ' + entityCertificateFileName)
-				
+
 			# Entity EIN File
 			entityEinFile = request.files['entityEinFile']
 			if entityEinFile and allowed_file(entityEinFile.filename):
