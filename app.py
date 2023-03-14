@@ -15,11 +15,8 @@ from botocore.exceptions import NoCredentialsError
 
 app = Flask(__name__, template_folder='templates')
 
-
 AWS_ACCESS_KEY_ID = ''
 AWS_SECRET_ACCESS_KEY = ''
-
-# Initialize S3 client
 s3 = boto3.client('s3', aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
 
 directory = '/userFiles'
@@ -144,8 +141,6 @@ def loanSubmit():
 	duplicateUboDirectorNameForLoan = False
 	loanUboNameList = []
 	loanDirectorNameList = []
-	
-			
 	
 	# !#$ refers to a blank
 	
@@ -410,6 +405,7 @@ def loanSubmit():
 					folderForUboFilesName = uboLastName + uboFirstName + 'Files'
 					folderForUboFiles = f'{folderForLoanApplication}/{folderForUboFilesName}'
 					s3.put_object(Bucket=loanBucket, Key=folderForUboFiles+'/')
+					
 					for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
 						file = request.files[fileType]
 						if file and allowed_file(file.filename):
@@ -440,6 +436,7 @@ def loanSubmit():
 					folderForDirectorFilesName = directorLastName + directorFirstName + 'Files'
 					folderForDirectorFiles = f'{folderForLoanApplication}/{folderForDirectorFilesName}'
 					s3.put_object(Bucket=loanBucket, Key=folderForDirectorFiles+'/')
+					
 					for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
 						file = request.files[fileType]
 						if file and allowed_file(file.filename):
@@ -528,8 +525,7 @@ def investorSubmit():
 	investorData['ABA Number'] = request.form.get('abaNumber')
 	investorData['Memo'] = request.form.get('memo')
 	
-	#entityName = investorData['Entity Name'].replace(' ', '')
-	entityName = investorData['Entity Name']
+	entityName = investorData['Entity Name'].replace(' ', '')
 	
 	repeatedIndividualInvestorData = {}
 	for i in range(1, 9):
@@ -613,18 +609,20 @@ def investorSubmit():
 			duplicateUboDirectorNameForInvestor = True
 			return render_template('error.html')		
 	
-	if not duplicateUboDirectorNameForInvestor: 
-	
+	if not duplicateUboDirectorNameForInvestor:
+		
+		investorBucket = 'longline-investor-applications'
+		global investorApplicationNumber
 		#investorApplicationNumber = str(random.randint(1, 1000))
-		investorApplicationNumber = investorApplicationNumber + 1
-		folderForInvestmentApplication = 'InvestorApplication' + investorApplicationNumber
-		os.mkdir(folderForInvestmentApplication)
+		investorApplicationNumber = str(investorApplicationNumber + 1)
+		folderForInvestorApplication = f'InvestorApplication{investorApplicationNumber}'
+		s3.put_object(Bucket=investorBucket, Key=folderForInvestorApplication+'/')
 	
 		if (request.form.get('investorDropdown') == 'Entity' and entityName != '!#$'):
 			
 			folderForEntityFilesName = entityName + 'Files'
-			folderForEntityFiles = os.path.join(folderForInvestmentApplication, folderForEntityFilesName)
-			os.mkdir(folderForEntityFiles)
+			folderForEntityFiles = f'{folderForInvestorApplication}/{folderForEntityFilesName}'
+			s3.put_object(Bucket=investorBucket, Key=folderForEntityFiles+'/')
 			
 			# Entity Articles of Organization File 
 			entityArticlesFile = request.files['entityArticlesFile']
@@ -632,8 +630,7 @@ def investorSubmit():
 				entityArticlesFileName = secure_filename(entityArticlesFile.filename)
 				entityArticlesFileNameExt = os.path.splitext(entityArticlesFileName)[1]
 				newEntityArticlesFileName = (entityName + 'EntityArticlesFile' + entityArticlesFileNameExt)
-				newEntityArticlesFilePath = os.path.join(folderForEntityFiles, newEntityArticlesFileName)
-				entityArticlesFile.save(newEntityArticlesFilePath)
+				s3.upload_fileobj(entityArticlesFile, investorBucket, f'{folderForEntityFiles}/' + newEntityArticlesFileName)
 			else:
 				abort(400, 'Invalid file type for ' + entityArticlesFileName)
 			
@@ -643,32 +640,31 @@ def investorSubmit():
 				entityCertificateFileName = secure_filename(entityCertificateFile.filename)
 				entityCertificateFileExt = os.path.splitext(entityCertificateFileName)[1]
 				newEntityCertificateFileName = (entityName + 'EntityCertificateFile' + entityCertificateFileExt)
-				newEntityCertificateFilePath = os.path.join(folderForEntityFiles, newEntityCertificateFileName)
-				entityCertificateFile.save(newEntityCertificateFilePath)
+				s3.upload_fileobj(entityCertificateFile, investorBucket, f'{folderForEntityFiles}/' + newEntityCertificateFileName)
 			else:
-				abort(400, 'Invalid file type for ' + entityCertificateFile)
+				abort(400, 'Invalid file type for ' + entityCertificateFileName)
 			
 			# Entity EIN File
 			entityEinFile = request.files['entityEinFile']
-			if entityEinFile and allowed_file(entityCertificateFile.filename):
+			if entityEinFile:
 				entityEinFileName = secure_filename(entityEinFile.filename)
-				entityEinFileExt = os.path.splitext(entityEinFileName)[1]
-				newEntityEinFileFileName = (entityName + 'EntityEinFile' + entityEinFileExt)
-				newEntityEinFileFilePath = os.path.join(folderForEntityFiles, newEntityEinFileFileName)
-				entityEinFile.save(newEntityEinFileFilePath)
-			else:
-				abort(400, 'Invalid file type for ' + entityEinFile)
+				if allowed_file(entityEinFile.filename):
+					entityEinFileExt = os.path.splitext(entityEinFileName)[1]
+					newEntityEinFileFileName = (entityName + 'EntityEinFile' + entityEinFileExt)
+					s3.upload_fileobj(entityEinFile, investorBucket, f'{folderForEntityFiles}/' + newEntityEinFileFileName)
+				else:
+					abort(400, 'Invalid file type for ' + entityEinFileName)
 				
 			# Entity Other File
 			entityOtherFile = request.files['entityOtherFile']
-			if entityOtherFile and allowed_file(entityCertificateFile.filename):
+			if entityOtherFile:
 				entityOtherFileName = secure_filename(entityOtherFile.filename)
-				entityOtherFileExt = os.path.splitext(entityOtherFileName)[1]
-				newEntityOtherFileName = (entityName + 'EntityEinFile' + entityOtherFileExt)
-				newEntityOtherFilePath = os.path.join(folderForEntityFiles, newEntityOtherFileName)
-				entityOtherFile.save(newEntityOtherFilePath)
-			else:
-				abort(400, 'Invalid file type for ' + entityOtherFile)
+				if allowed_file(entityOtherFile.filename):
+					entityOtherFileExt = os.path.splitext(entityOtherFileName)[1]
+					newEntityOtherFileName = (entityName + 'EntityOtherFile' + entityOtherFileExt)
+					s3.upload_fileobj(entityOtherFile, investorBucket, f'{folderForEntityFiles}/' + newEntityOtherFileName)
+				else:
+					abort(400, 'Invalid file type for ' + entityOtherFileName)
 			
 		for i in range(1, 9):
 			if (request.form.get('investorDropdown') == 'Individual' and repeatedIndividualInvestorData[f'Individual {i} First Name'] != '!#$'):		
@@ -684,8 +680,8 @@ def investorSubmit():
 					individualFirstName = request.form.get(f'individualFirstName{i}', '!#$').replace(' ', '')
 					individualLastName = request.form.get(f'individualLastName{i}', '!#$').replace(' ', '')
 					folderForIndividualFilesName = individualLastName + individualFirstName + 'Files'
-					folderForIndividualFiles = os.path.join(folderForInvestmentApplication, folderForIndividualFilesName)
-					os.mkdir(folderForIndividualFiles)
+					folderForIndividualFiles = f'{folderForInvestorApplication}/{folderForIndividualFilesName}'
+					s3.put_object(Bucket=investorBucket, Key=folderForIndividualFiles+'/')
 					
 					for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
 						file = request.files[fileType]
@@ -694,18 +690,19 @@ def investorSubmit():
 							fileNameExt = os.path.splitext(fileName)[1]
 							newFileName = (repeatedIndividualInvestorData[f'Individual {i} Last Name'] + repeatedIndividualInvestorData[f'Individual {i} First Name'] + fileType + fileNameExt).replace('individual', '')
 							newFileName = newFileName.replace(f'{i}', '')
-							newFilePath = os.path.join(folderForIndividualFiles, newFileName)
-							file.save(newFilePath)
+							try:
+								s3.upload_fileobj(file, investorBucket, f'{folderForIndividualFiles}/' + newFileName)
+							except NoCredentialsError:
+								abort(500, 'AWS credentials not available.')
 						else:
 							abort(400, 'Invalid file type for ' + fileName)
 						
 				bankAccountFile = request.files['bankAccountFile']
-				if bankAccountFile and allowed_file(bankAccountFile.filename):	
+				if bankAccountFile and allowed_file(bankAccountFile.filename):
 					bankAccountFileName = secure_filename(bankAccountFile.filename)
 					bankAccountFileNameExt = os.path.splitext(bankAccountFileName)[1]
-					newBankAccountFileName = individualLastName + individualFirstName + 'BankAccountFile' + bankAccountFileNameExt
-					newBankAccountFilePath = os.path.join(folderForIndividualFiles, newBankAccountFileName)
-					bankAccountFile.save(newBankAccountFilePath)
+					newBankAccountFileName = 'InvestorApplication' + investorApplicationNumber + 'BankAccountFile' + bankAccountFileNameExt
+					s3.upload_fileobj(bankAccountFile, investorBucket, f'{folderForIndividualFiles}/' + newBankAccountFileName)
 				else:
 					abort(400, 'Invalid file type for ' + bankAccountFileName)
 			
@@ -724,8 +721,8 @@ def investorSubmit():
 					uboFirstName = request.form.get(f'uboFirstName{i}', '!#$').replace(' ', '')
 					uboLastName = request.form.get(f'uboLastName{i}', '!#$').replace(' ', '')
 					folderForUboFilesName = uboLastName + uboFirstName + 'Files'
-					folderForUboFiles = os.path.join(folderForInvestmentApplication, folderForUboFilesName)
-					os.mkdir(folderForUboFiles)
+					folderForUboFiles = f'{folderForInvestorApplication}/{folderForUboFilesName}'
+					s3.put_object(Bucket=investorBucket, Key=folderForUboFiles+'/')
 					
 					for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
 						file = request.files[fileType]
@@ -734,8 +731,10 @@ def investorSubmit():
 							fileNameExt = os.path.splitext(fileName)[1]
 							newFileName = (repeatedUboInvestorData[f'UBO {i} Last Name'] + repeatedUboInvestorData[f'UBO {i} First Name'] + fileType + fileNameExt).replace('ubo', '')
 							newFileName = newFileName.replace(f'{i}', '')
-							newFilePath = os.path.join(folderForUboFiles, newFileName)
-							file.save(newFilePath)
+							try:
+								s3.upload_fileobj(file, investorBucket, f'{folderForUboFiles}/' + newFileName)
+							except NoCredentialsError:
+								abort(500, 'AWS credentials not available.')
 						else:
 							abort(400, 'Invalid file type for ' + fileName)
 						
@@ -753,8 +752,8 @@ def investorSubmit():
 					directorFirstName = request.form.get(f'directorFirstName{i}', '!#$').replace(' ', '')
 					directorLastName = request.form.get(f'directorLastName{i}', '!#$').replace(' ', '')
 					folderForDirectorFilesName = directorLastName + directorFirstName + 'Files'
-					folderForDirectorFiles = os.path.join(folderForInvestmentApplication, folderForDirectorFilesName)
-					os.mkdir(folderForDirectorFiles)
+					folderForDirectorFiles = f'{folderForInvestorApplication}/{folderForDirectorFilesName}'
+					s3.put_object(Bucket=investorBucket, Key=folderForDirectorFiles+'/')
 					
 					for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
 						file = request.files[fileType]
@@ -763,27 +762,30 @@ def investorSubmit():
 							fileNameExt = os.path.splitext(fileName)[1]
 							newFileName = (repeatedDirectorInvestorData[f'Director {i} Last Name'] + repeatedDirectorInvestorData[f'Director {i} First Name'] + fileType + fileNameExt).replace('director', '')
 							newFileName = newFileName.replace(f'{i}', '')
-							newFilePath = os.path.join(folderForDirectorFiles, newFileName)
-							file.save(newFilePath)
+							try:
+								s3.upload_fileobj(file, investorBucket, f'{folderForDirectorFiles}/' + newFileName)
+							except NoCredentialsError:
+								abort(500, 'AWS credentials not available.')
 						else:
 							abort(400, 'Invalid file type for ' + fileName)
 	
-		if (request.form.get('investorDropdown') == 'Entity'):
+		if (request.form.get('borrowerDropdown') == 'Entity'):
 			bankAccountFile = request.files['bankAccountFile']
-			if bankAccountFile and allowed_file(bankAccountFile.filename):	
+			if bankAccountFile and allowed_file(bankAccountFile.filename):
 				bankAccountFileName = secure_filename(bankAccountFile.filename)
 				bankAccountFileNameExt = os.path.splitext(bankAccountFileName)[1]
 				newBankAccountFileName = entityName + 'BankAccountFile' + bankAccountFileNameExt
-				newBankAccountFilePath = os.path.join(folderForEntityFiles, newBankAccountFileName)
-				bankAccountFile.save(newBankAccountFilePath)
+				s3.upload_fileobj(bankAccountFile, investorBucket, f'{folderForUboFiles}/' + newBankAccountFileName)
 			else:
-				abort(400, 'Invalid file type for ' + bankAccountFile)
+				abort(400, 'Invalid file type for ' + bankAccountFileName)
 			
 		investorData = {**investorData, **repeatedIndividualInvestorData, **repeatedUboInvestorData, **repeatedDirectorInvestorData}
 		cleanedData = {k: v for k, v in investorData.items() if v not in ('!#$', '')}
 		jsonName = 'InvestorApplication' + investorApplicationNumber + '.json' 
-		with open(f'{folderForInvestmentApplication}/{jsonName}', 'w') as f:
+		
+		with StringIO() as f:
 			json.dump(cleanedData, f)
+			s3.put_object(Bucket=investorBucket, Key=f'{folderForInvestorApplication}/{jsonName}', Body=f.getvalue())
 			
 		workbook = openpyxl.Workbook()
 		worksheet = workbook.active
@@ -801,14 +803,10 @@ def investorSubmit():
 				worksheet.append([key, value])
 				
 		workbookName = 'InvestorApplication' + investorApplicationNumber + '.xlsx' 
-		workbook.save(f'{folderForInvestmentApplication}/{workbookName}')
-			
-		# Upload cleanedData.json to S3
-		#s3 = boto3.resource('s3')
-		# make two buckets, one for borrowers, one for investors
-		loanBucket = 'Investor-Bucket'
-		object_key = 'investorData.json'
-		#s3.Object(loanBucket, object_key).put(Body=open('loanData.json', 'rb'))
+		with io.BytesIO() as output:
+			workbook.save(output)
+			output.seek(0)
+			s3.upload_fileobj(output, investorBucket, f'{folderForInvestorApplication}/{workbookName}')
 		
 		return render_template('investorSubmitted.html', title='Submitted')
 
