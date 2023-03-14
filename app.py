@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
+import io
 import os
 import json
 import boto3
 import random
 import datetime
 import openpyxl
+from io import StringIO
 from openpyxl.styles import Font
 from flask import Flask, render_template, request, jsonify, session, redirect, make_response, flash, abort
 from flask_session import Session
@@ -18,7 +20,11 @@ app = Flask(__name__, template_folder='templates')
 #app.config ['SESSION_TYPE'] = 'filesystem'
 #Session(app)
 
-s3 = boto3.client('s3', aws_access_key_id='', aws_secret_access_key='')
+AWS_ACCESS_KEY_ID = 'your-access-key-id'
+AWS_SECRET_ACCESS_KEY = 'your-secret-access-key'
+
+# Initialize S3 client
+s3 = boto3.client('s3', aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
 
 directory = '/userFiles'
 flaskBackendPin = '1234'
@@ -303,7 +309,7 @@ def loanSubmit():
 		if (request.form.get('borrowerDropdown') == 'Entity' and entityName != '!#$'):
 			folderForEntityFilesName = entityName + 'Files'
 			folderForEntityFiles = os.path.join(folderForLoanApplication, folderForEntityFilesName)
-			s3.put_object(Bucket=loanBucket, Key=folderForEntityFiles)
+			s3.put_object(Bucket=loanBucket, Key=f'{folderForEntityFiles}/')
 			
 			# Entity Articles of Organization File 
 			entityArticlesFile = request.files['entityArticlesFile']
@@ -311,43 +317,53 @@ def loanSubmit():
 				entityArticlesFileName = secure_filename(entityArticlesFile.filename)
 				entityArticlesFileNameExt = os.path.splitext(entityArticlesFileName)[1]
 				newEntityArticlesFileName = (entityName + 'EntityArticlesFile' + entityArticlesFileNameExt)
-				newEntityArticlesFilePath = os.path.join(loanBucket, folderForLoanApplication, folderForEntityFiles, newEntityArticlesFileName)
-				entityArticlesFile.save(newEntityArticlesFilePath)
+				s3.upload_fileobj(entityArticlesFile, loanBucket, f'{folderForEntityFiles}/' + newEntityArticlesFileName)
 			else:
 				abort(400, 'Invalid file type for ' + entityArticlesFileName)
-				
+
 			# Entity Certificate of Formation File 
 			entityCertificateFile = request.files['entityCertificateFile']
 			if entityCertificateFile and allowed_file(entityCertificateFile.filename):
 				entityCertificateFileName = secure_filename(entityCertificateFile.filename)
 				entityCertificateFileExt = os.path.splitext(entityCertificateFileName)[1]
 				newEntityCertificateFileName = (entityName + 'EntityCertificateFile' + entityCertificateFileExt)
-				newEntityCertificateFilePath = os.path.join(folderForEntityFiles, newEntityCertificateFileName)
-				entityCertificateFile.save(newEntityCertificateFilePath)
+				s3.upload_fileobj(entityCertificateFile, loanBucket, f'{folderForEntityFiles}/' + newEntityCertificateFileName)
 			else:
 				abort(400, 'Invalid file type for ' + entityCertificateFileName)
 
 			# Entity EIN File
 			entityEinFile = request.files['entityEinFile']
-			if entityEinFile and allowed_file(entityEinFile.filename):
+			if entityEinFile:
 				entityEinFileName = secure_filename(entityEinFile.filename)
-				entityEinFileExt = os.path.splitext(entityEinFileName)[1]
-				newEntityEinFileFileName = (entityName + 'EntityEinFile' + entityEinFileExt)
-				newEntityEinFileFilePath = os.path.join(folderForEntityFiles, newEntityEinFileFileName)
-				entityEinFile.save(newEntityEinFileFilePath)
-			else:
-				abort(400, 'Invalid file type for ' + entityEinFileName)
+				if allowed_file(entityEinFile.filename):
+					entityEinFileExt = os.path.splitext(entityEinFileName)[1]
+					newEntityEinFileFileName = (entityName + 'EntityEinFile' + entityEinFileExt)
+					s3.upload_fileobj(entityEinFile, loanBucket, f'{folderForEntityFiles}/' + newEntityEinFileFileName)
+				else:
+					abort(400, 'Invalid file type for ' + entityEinFileName)
 				
 			# Entity Other File
 			entityOtherFile = request.files['entityOtherFile']
-			if entityOtherFile and allowed_file(entityOtherFile.filename):
+			if entityOtherFile:
 				entityOtherFileName = secure_filename(entityOtherFile.filename)
-				entityOtherFileExt = os.path.splitext(entityOtherFileName)[1]
-				newEntityOtherFileName = (entityName + 'EntityOtherFile' + entityOtherFileExt)
-				newEntityOtherFilePath = os.path.join(folderForEntityFiles, newEntityOtherFileName)
-				entityOtherFile.save(newEntityOtherFilePath)
-			else:
-				abort(400, 'Invalid file type for ' + entityOtherFileName)
+				if allowed_file(entityOtherFile.filename):
+					entityOtherFileExt = os.path.splitext(entityOtherFileName)[1]
+					newEntityOtherFileName = (entityName + 'EntityOtherFile' + entityOtherFileExt)
+					newEntityOtherFilePath = os.path.join(folderForEntityFiles, newEntityOtherFileName)
+					entityOtherFile.save(newEntityOtherFilePath)
+				else:
+					abort(400, 'Invalid file type for ' + entityOtherFileName)
+			
+			
+			
+			
+
+			
+			
+			
+			
+			
+			
 			
 		for i in range(1, 9):
 			if (request.form.get('borrowerDropdown') == 'Individual' and repeatedIndividualLoanData[f'Individual {i} First Name'] != '!#$'):		
@@ -373,15 +389,8 @@ def loanSubmit():
 							fileNameExt = os.path.splitext(fileName)[1]
 							newFileName = (repeatedIndividualLoanData[f'Individual {i} Last Name'] + repeatedIndividualLoanData[f'Individual {i} First Name'] + fileType + fileNameExt).replace('individual', '')
 							newFileName = newFileName.replace(f'{i}', '')
-							
-							
-							print('FILE NAME', newFileName)
-							print('Folder', folderForIndividualFiles)
-							
-							
-							newFilePath = os.path.join(folderForIndividualFiles, newFileName)
 							try:
-								s3.upload_file(file.filename, loanBucket, newFilePath)
+								s3.upload_fileobj(file, loanBucket, f'{folderForIndividualFiles}/' + newFileName)
 							except NoCredentialsError:
 								abort(500, 'AWS credentials not available.')
 						else:
@@ -392,8 +401,8 @@ def loanSubmit():
 					bankAccountFileName = secure_filename(bankAccountFile.filename)
 					bankAccountFileNameExt = os.path.splitext(bankAccountFileName)[1]
 					newBankAccountFileName = 'LoanApplication' + loanApplicationNumber + 'BankAccountFile' + bankAccountFileNameExt
-					newBankAccountFilePath = os.path.join(folderForIndividualFiles, newBankAccountFileName)
-					bankAccountFile.save(newBankAccountFilePath)
+					s3.upload_fileobj(bankAccountFile, loanBucket, f'{folderForIndividualFiles}/' + newBankAccountFileName)
+					
 				else:
 					abort(400, 'Invalid file type for ' + bankAccountFileName)
 			
@@ -469,8 +478,15 @@ def loanSubmit():
 		loanData = {**loanData, **repeatedIndividualLoanData, **repeatedUboLoanData, **repeatedDirectorLoanData}
 		cleanedData = {k: v for k, v in loanData.items() if v not in ('!#$', '')}
 		jsonName = 'LoanApplication' + loanApplicationNumber + '.json' 
-		with open(f'{folderForLoanApplication}/{jsonName}', 'w') as f:
+		
+		
+#		json_data = json.dumps(cleanedData)
+#		s3.put_object(Bucket=loanBucket, Key=f'{folderForLoanApplication}/{jsonName}', Body=json_data.encode('utf-8'))
+		
+		
+		with StringIO() as f:
 			json.dump(cleanedData, f)
+			s3.put_object(Bucket=loanBucket, Key=f'{folderForLoanApplication}/{jsonName}', Body=f.getvalue())
 			
 		workbook = openpyxl.Workbook()
 		worksheet = workbook.active
@@ -488,14 +504,14 @@ def loanSubmit():
 				worksheet.append([key, value])
 				
 		workbookName = 'LoanApplication' + loanApplicationNumber + '.xlsx' 
-		workbook.save(f'{folderForLoanApplication}/{workbookName}')
+		with io.BytesIO() as output:
+			workbook.save(output)
+			output.seek(0)
+			s3.upload_fileobj(output, loanBucket, f'{folderForLoanApplication}/{workbookName}')
+			
 
-		# Upload cleanedData.json to S3
-		#s3 = boto3.resource('s3')
-		# make two buckets, one for borrowers, one for investors
-		loanBucket = 'Loan-Bucket'
-		object_key = 'loanData.json'
-		#s3.Object(loanBucket, object_key).put(Body=open('loanData.json', 'rb'))
+		
+
 		
 		return render_template('borrowSubmitted.html', title='Submitted')
 
