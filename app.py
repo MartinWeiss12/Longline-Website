@@ -9,18 +9,22 @@ from openpyxl.styles import Font
 from flask import Flask, render_template, request, jsonify, session, redirect, make_response, flash, abort
 from flask_session import Session
 from werkzeug.utils import secure_filename
+from botocore.exceptions import NoCredentialsError
+
 
 app = Flask(__name__, template_folder='templates')
-app.config ['SECRET_KEY'] = 'longline'
+#app.config ['SECRET_KEY'] = 'longline'
 #app.config ['SESSION_PERMANENT'] = False
 #app.config ['SESSION_TYPE'] = 'filesystem'
 #Session(app)
 
+s3 = boto3.client('s3', aws_access_key_id='', aws_secret_access_key='')
+
 directory = '/userFiles'
 flaskBackendPin = '1234'
 
-#loanApplicationNumber = 0
-#investorApplicationNumber = 0
+loanApplicationNumber = 1
+investorApplicationNumber = 0
 
 ALLOWED_EXTENSIONS = {'pdf', 'docx', 'doc', 'png', 'jpg', 'jpeg', 'heic', 'gif', 'xlsx', 'ppt', 'pptx'}
 
@@ -279,7 +283,6 @@ def loanSubmit():
 	
 		loanDirectorNameList.append(repeatedDirectorLoanData[f'Director {i} First Name'].strip() + repeatedDirectorLoanData[f'Director {i} Last Name'].strip())
 		
-		
 	loanUboNameList = [name for name in loanUboNameList if name != '!#$!#$']
 	loanDirectorNameList = [name for name in loanDirectorNameList if name != '!#$!#$']
 	
@@ -289,17 +292,18 @@ def loanSubmit():
 			return render_template('error.html')
 		
 	if not duplicateUboDirectorNameForLoan:
-		
+
+		loanBucket = 'longline-loan-applications'
+		# Create the directory for the loan application
 		loanApplicationNumber = str(random.randint(1, 1000))
-		#loanApplicationNumber = loanApplicationNumber + 1
-		folderForLoanApplication = 'LoanApplication' + loanApplicationNumber
-		os.mkdir(folderForLoanApplication)
-	
+		folderForLoanApplication = f'LoanApplication{loanApplicationNumber}/'
+		s3.put_object(Bucket=loanBucket, Key=folderForLoanApplication)
+		
+		# Create the subdirectory for entity files if applicable
 		if (request.form.get('borrowerDropdown') == 'Entity' and entityName != '!#$'):
-			
 			folderForEntityFilesName = entityName + 'Files'
 			folderForEntityFiles = os.path.join(folderForLoanApplication, folderForEntityFilesName)
-			os.mkdir(folderForEntityFiles)
+			s3.put_object(Bucket=loanBucket, Key=folderForEntityFiles)
 			
 			# Entity Articles of Organization File 
 			entityArticlesFile = request.files['entityArticlesFile']
@@ -307,7 +311,7 @@ def loanSubmit():
 				entityArticlesFileName = secure_filename(entityArticlesFile.filename)
 				entityArticlesFileNameExt = os.path.splitext(entityArticlesFileName)[1]
 				newEntityArticlesFileName = (entityName + 'EntityArticlesFile' + entityArticlesFileNameExt)
-				newEntityArticlesFilePath = os.path.join(folderForEntityFiles, newEntityArticlesFileName)
+				newEntityArticlesFilePath = os.path.join(loanBucket, folderForLoanApplication, folderForEntityFiles, newEntityArticlesFileName)
 				entityArticlesFile.save(newEntityArticlesFilePath)
 			else:
 				abort(400, 'Invalid file type for ' + entityArticlesFileName)
@@ -359,8 +363,8 @@ def loanSubmit():
 					individualFirstName = request.form.get(f'individualFirstName{i}', '!#$').replace(' ', '')
 					individualLastName = request.form.get(f'individualLastName{i}', '!#$').replace(' ', '')
 					folderForIndividualFilesName = individualLastName + individualFirstName + 'Files'
-					folderForIndividualFiles = os.path.join(folderForLoanApplication, folderForIndividualFilesName)
-					os.mkdir(folderForIndividualFiles)
+					folderForIndividualFiles = f'{folderForLoanApplication}/{folderForIndividualFilesName}/'
+					s3.put_object(Bucket=loanBucket, Key=f'{folderForIndividualFiles}')
 					
 					for fileType in [PassportFile, DNIFrontFile, DNIReverseFile, BillAddressProofFile, CreditCheckFile, WorldCheckFile, OFACFile]:
 						file = request.files[fileType]
@@ -369,8 +373,17 @@ def loanSubmit():
 							fileNameExt = os.path.splitext(fileName)[1]
 							newFileName = (repeatedIndividualLoanData[f'Individual {i} Last Name'] + repeatedIndividualLoanData[f'Individual {i} First Name'] + fileType + fileNameExt).replace('individual', '')
 							newFileName = newFileName.replace(f'{i}', '')
+							
+							
+							print('FILE NAME', newFileName)
+							print('Folder', folderForIndividualFiles)
+							
+							
 							newFilePath = os.path.join(folderForIndividualFiles, newFileName)
-							file.save(newFilePath)
+							try:
+								s3.upload_file(file.filename, loanBucket, newFilePath)
+							except NoCredentialsError:
+								abort(500, 'AWS credentials not available.')
 						else:
 							abort(400, 'Invalid file type for ' + fileName)
 							
@@ -480,9 +493,9 @@ def loanSubmit():
 		# Upload cleanedData.json to S3
 		#s3 = boto3.resource('s3')
 		# make two buckets, one for borrowers, one for investors
-		bucket_name = 'Loan-Bucket'
+		loanBucket = 'Loan-Bucket'
 		object_key = 'loanData.json'
-		#s3.Object(bucket_name, object_key).put(Body=open('loanData.json', 'rb'))
+		#s3.Object(loanBucket, object_key).put(Body=open('loanData.json', 'rb'))
 		
 		return render_template('borrowSubmitted.html', title='Submitted')
 
@@ -606,8 +619,8 @@ def investorSubmit():
 	
 	if not duplicateUboDirectorNameForInvestor: 
 	
-		investorApplicationNumber = str(random.randint(1, 1000))
-		#investorApplicationNumber = investorApplicationNumber + 1
+		#investorApplicationNumber = str(random.randint(1, 1000))
+		investorApplicationNumber = investorApplicationNumber + 1
 		folderForInvestmentApplication = 'InvestorApplication' + investorApplicationNumber
 		os.mkdir(folderForInvestmentApplication)
 	
@@ -797,9 +810,9 @@ def investorSubmit():
 		# Upload cleanedData.json to S3
 		#s3 = boto3.resource('s3')
 		# make two buckets, one for borrowers, one for investors
-		bucket_name = 'Investor-Bucket'
+		loanBucket = 'Investor-Bucket'
 		object_key = 'investorData.json'
-		#s3.Object(bucket_name, object_key).put(Body=open('loanData.json', 'rb'))
+		#s3.Object(loanBucket, object_key).put(Body=open('loanData.json', 'rb'))
 		
 		return render_template('investorSubmitted.html', title='Submitted')
 
