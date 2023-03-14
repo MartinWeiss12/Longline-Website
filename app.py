@@ -15,11 +15,10 @@ from botocore.exceptions import NoCredentialsError
 
 app = Flask(__name__, template_folder='templates')
 
-AWS_ACCESS_KEY_ID = ''
-AWS_SECRET_ACCESS_KEY = ''
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 s3 = boto3.client('s3', aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
 
-directory = '/userFiles'
 flaskBackendPin = '1234'
 
 loanApplicationNumber = 0
