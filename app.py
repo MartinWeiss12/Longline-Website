@@ -18,10 +18,12 @@ app = Flask(__name__, template_folder='templates')
 session = boto3.Session()
 s3 = session.client('s3')
 	
-flaskBackendPinFile = '/home/ubuntu/Longline/Data/flaskBackendPinFile.txt'
-with open(flaskBackendPinFile, 'r') as f:
-	text = f.read()
-	flaskBackendPin = text.strip()
+#flaskBackendPinFile = '/home/ubuntu/Longline/Data/flaskBackendPinFile.txt'
+#with open(flaskBackendPinFile, 'r') as f:
+#	text = f.read()
+#	flaskBackendPin = text.strip()
+
+flaskBackendPin = os.environ.get('flaskBackendPin')
 
 ALLOWED_EXTENSIONS = {'pdf', 'docx', 'doc', 'png', 'jpg', 'jpeg', 'heic', 'gif', 'xlsx', 'ppt', 'pptx'}
 
@@ -290,13 +292,15 @@ def loanSubmit():
 		
 	if not duplicateUboDirectorNameForLoan:
 
-		loanApplicationCountFile = '/home/ubuntu/Longline/Data/loanApplicationCountFile.txt'
-		with open(loanApplicationCountFile, 'r') as f:
-			loanApplicationNumber = int(f.read().strip())
-			
-		loanApplicationNumber += 1
-		with open(loanApplicationCountFile, 'w') as f:
-			f.write(str(loanApplicationNumber))
+#		loanApplicationCountFile = '/home/ubuntu/Longline/Data/loanApplicationCountFile.txt'
+#		with open(loanApplicationCountFile, 'r') as f:
+#			loanApplicationNumber = int(f.read().strip())
+#			
+#		loanApplicationNumber += 1
+#		with open(loanApplicationCountFile, 'w') as f:
+#			f.write(str(loanApplicationNumber))
+#			
+		loanApplicationNumber = '1'
 			
 		loanBucket = 'longline-loan-applications'
 		folderForLoanApplication = f'LoanApplication{loanApplicationNumber}'
@@ -611,14 +615,16 @@ def investorSubmit():
 	
 	if not duplicateUboDirectorNameForInvestor:
 		
-		investorApplicationCountFile = '/home/ubuntu/Longline/Data/investorApplicationCountFile.txt'
-		with open(investorApplicationCountFile, 'r') as f:
-			investorApplicationNumber = int(f.read().strip())
-
-		investorApplicationNumber += 1
-		investorApplicationNumber = str(investorApplicationNumber)
-		with open(investorApplicationCountFile, 'w') as f:
-			f.write(investorApplicationNumber)
+#		investorApplicationCountFile = '/home/ubuntu/Longline/Data/investorApplicationCountFile.txt'
+#		with open(investorApplicationCountFile, 'r') as f:
+#			investorApplicationNumber = int(f.read().strip())
+#
+#		investorApplicationNumber += 1
+#		investorApplicationNumber = str(investorApplicationNumber)
+#		with open(investorApplicationCountFile, 'w') as f:
+#			f.write(investorApplicationNumber)
+		
+		investorApplicationNumber = '1'
 			
 		investorBucket = 'longline-investor-applications'
 		folderForInvestorApplication = f'InvestorApplication{investorApplicationNumber}'
