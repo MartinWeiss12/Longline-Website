@@ -23,9 +23,6 @@ with open(flaskBackendPinFile, 'r') as f:
 	text = f.read()
 	flaskBackendPin = text.strip()
 
-loanApplicationCountFile = '/home/ubuntu/Longline/Data/loanApplicationCountFile.txt'
-investorApplicationCountFile = '/home/ubuntu/Longline/Data/investorApplicationCountFile.txt'
-
 ALLOWED_EXTENSIONS = {'pdf', 'docx', 'doc', 'png', 'jpg', 'jpeg', 'heic', 'gif', 'xlsx', 'ppt', 'pptx'}
 
 def allowed_file(filename):
@@ -293,6 +290,7 @@ def loanSubmit():
 		
 	if not duplicateUboDirectorNameForLoan:
 
+		loanApplicationCountFile = '/home/ubuntu/Longline/Data/loanApplicationCountFile.txt'
 		with open(loanApplicationCountFile, 'r') as f:
 			loanApplicationNumber = int(f.read().strip())
 			
@@ -613,6 +611,7 @@ def investorSubmit():
 	
 	if not duplicateUboDirectorNameForInvestor:
 		
+		investorApplicationCountFile = '/home/ubuntu/Longline/Data/investorApplicationCountFile.txt'
 		with open(investorApplicationCountFile, 'r') as f:
 			investorApplicationNumber = int(f.read().strip())
 
