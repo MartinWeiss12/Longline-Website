@@ -15,16 +15,15 @@ from botocore.exceptions import NoCredentialsError
 
 app = Flask(__name__, template_folder='templates')
 
-#AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-#AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-#s3 = boto3.client('s3', aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
-
 session = boto3.Session()
 s3 = session.client('s3')
 
-flaskBackendPin = '1234'
-loanApplicationNumber = 0
-investorApplicationNumber = 0
+with open('flaskBackendPin.txt', 'r') as f:
+	text = f.read()
+	flaskBackendPin = text.strip()
+
+loanApplicationCountFile = 'loanApplicationCountFile.txt'
+investorApplicationCountFile = 'investorApplicationCountFile.txt'
 
 ALLOWED_EXTENSIONS = {'pdf', 'docx', 'doc', 'png', 'jpg', 'jpeg', 'heic', 'gif', 'xlsx', 'ppt', 'pptx'}
 
@@ -293,12 +292,14 @@ def loanSubmit():
 		
 	if not duplicateUboDirectorNameForLoan:
 
+		with open(loanApplicationCountFile, 'r') as f:
+			loanApplicationNumber = int(f.read().strip())
+			
+		loanApplicationNumber += 1
+		with open(loanApplicationCountFile, 'w') as f:
+			f.write(str(loanApplicationNumber))
+	
 		loanBucket = 'longline-loan-applications'
-		# Create the directory for the loan application
-		global loanApplicationNumber
-		loanApplicationNumber = str(random.randint(1, 1000))
-		
-		#loanApplicationNumber = str(loanApplicationNumber + 1)
 		folderForLoanApplication = f'LoanApplication{loanApplicationNumber}'
 		s3.put_object(Bucket=loanBucket, Key=folderForLoanApplication+'/')
 		
@@ -576,7 +577,6 @@ def investorSubmit():
 		
 		investorUboNameList.append(repeatedUboInvestorData[f'UBO {i} First Name'].strip() + repeatedUboInvestorData[f'UBO {i} Last Name'].strip())
 		
-		
 	repeatedDirectorInvestorData = {}
 	for i in range(1, 9):
 		repeatedDirectorInvestorData[f'Director {i} Citizen'] = request.form.get(f'directorCitizenDropdown{i}', '!#$')
@@ -612,10 +612,15 @@ def investorSubmit():
 	
 	if not duplicateUboDirectorNameForInvestor:
 		
+		with open(investorApplicationCountFile, 'r') as f:
+			investorApplicationNumber = int(f.read().strip())
+
+		investorApplicationNumber += 1
+		investorApplicationNumber = str(investorApplicationNumber)
+		with open(investorApplicationCountFile, 'w') as f:
+			f.write(investorApplicationNumber)
+			
 		investorBucket = 'longline-investor-applications'
-		global investorApplicationNumber
-		#investorApplicationNumber = str(random.randint(1, 1000))
-		investorApplicationNumber = str(investorApplicationNumber + 1)
 		folderForInvestorApplication = f'InvestorApplication{investorApplicationNumber}'
 		s3.put_object(Bucket=investorBucket, Key=folderForInvestorApplication+'/')
 	
