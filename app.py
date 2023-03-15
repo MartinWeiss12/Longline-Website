@@ -64,7 +64,7 @@ def borrowLogin():
 def borrow():
 	
 	userPin = request.form.get('userPin')
-	if(userPin == flaskBackendPin):
+	if(userPin == str(flaskBackendPin)):
 		return render_template('borrow.html', title='Borrow')
 	else:
 		error = 'Incorrect PIN. Please try again.'
@@ -73,7 +73,7 @@ def borrow():
 @app.route('/borrow')
 def borrowRedirect():
 	userPin = request.args.get('userPin')
-	if userPin == flaskBackendPin:
+	if(userPin == str(flaskBackendPin)):
 		return render_template('borrow.html', title='Borrow')
 	else:
 		return redirect('/borrowLogin')
@@ -87,7 +87,7 @@ def investorLogin():
 def invest():
 	
 	userPin = request.form.get('userPin')
-	if(userPin == flaskBackendPin):
+	if(userPin == str(flaskBackendPin)):
 		return render_template('invest.html', title='Invest')
 	else:
 		error = 'Incorrect PIN. Please try again.'
@@ -96,7 +96,7 @@ def invest():
 @app.route('/invest')
 def investRedirect():
 	userPin = request.args.get('userPin')
-	if userPin == flaskBackendPin:
+	if(userPin == str(flaskBackendPin)):
 		return render_template('invest.html', title='Invest')
 	else:
 		return redirect('/investorLogin')
@@ -104,7 +104,7 @@ def investRedirect():
 @app.route('/borrowSubmitted')
 def loanSubmitRedirect():
 	userPin = request.args.get('userPin')
-	if userPin == flaskBackendPin:
+	if(userPin == str(flaskBackendPin)):
 		return render_template('borrowSubmitted.html', title='Submitted')
 	else:
 		return redirect('/borrowLogin')
@@ -112,7 +112,7 @@ def loanSubmitRedirect():
 @app.route('/investorSubmitted')
 def investSubmitRedirect():
 	userPin = request.args.get('userPin')
-	if userPin == flaskBackendPin:
+	if(userPin == str(flaskBackendPin)):
 		return render_template('investorSubmitted.html', title='Submitted')
 	else:
 		return redirect('/investorLogin')
