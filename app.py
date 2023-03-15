@@ -17,13 +17,14 @@ app = Flask(__name__, template_folder='templates')
 
 session = boto3.Session()
 s3 = session.client('s3')
-
-with open('flaskBackendPin.txt', 'r') as f:
+	
+flaskBackendPinFile = '/home/ubuntu/Longline/Data/flaskBackendPinFile.txt'
+with open(flaskBackendPinFile, 'r') as f:
 	text = f.read()
 	flaskBackendPin = text.strip()
 
-loanApplicationCountFile = 'loanApplicationCountFile.txt'
-investorApplicationCountFile = 'investorApplicationCountFile.txt'
+loanApplicationCountFile = '/home/ubuntu/Longline/Data/loanApplicationCountFile.txt'
+investorApplicationCountFile = '/home/ubuntu/Longline/Data/investorApplicationCountFile.txt'
 
 ALLOWED_EXTENSIONS = {'pdf', 'docx', 'doc', 'png', 'jpg', 'jpeg', 'heic', 'gif', 'xlsx', 'ppt', 'pptx'}
 
@@ -298,7 +299,7 @@ def loanSubmit():
 		loanApplicationNumber += 1
 		with open(loanApplicationCountFile, 'w') as f:
 			f.write(str(loanApplicationNumber))
-	
+			
 		loanBucket = 'longline-loan-applications'
 		folderForLoanApplication = f'LoanApplication{loanApplicationNumber}'
 		s3.put_object(Bucket=loanBucket, Key=folderForLoanApplication+'/')
