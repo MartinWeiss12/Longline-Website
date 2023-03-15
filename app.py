@@ -23,7 +23,6 @@ session = boto3.Session()
 s3 = session.client('s3')
 
 flaskBackendPin = '1234'
-
 loanApplicationNumber = 0
 investorApplicationNumber = 0
 
