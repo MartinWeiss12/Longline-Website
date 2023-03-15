@@ -17,13 +17,6 @@ app = Flask(__name__, template_folder='templates')
 
 session = boto3.Session()
 s3 = session.client('s3')
-	
-#flaskBackendPinFile = '/home/ubuntu/Longline/Data/flaskBackendPinFile.txt'
-#with open(flaskBackendPinFile, 'r') as f:
-#	text = f.read()
-#	flaskBackendPin = text.strip()
-
-flaskBackendPin = os.environ.get('flaskBackendPin')
 
 ALLOWED_EXTENSIONS = {'pdf', 'docx', 'doc', 'png', 'jpg', 'jpeg', 'heic', 'gif', 'xlsx', 'ppt', 'pptx'}
 
@@ -64,7 +57,7 @@ def borrowLogin():
 def borrow():
 	
 	userPin = request.form.get('userPin')
-	if(userPin == str(flaskBackendPin)):
+	if(userPin == os.environ.get('flaskBackendPin')):
 		return render_template('borrow.html', title='Borrow')
 	else:
 		error = 'Incorrect PIN. Please try again.'
@@ -73,7 +66,7 @@ def borrow():
 @app.route('/borrow')
 def borrowRedirect():
 	userPin = request.args.get('userPin')
-	if(userPin == str(flaskBackendPin)):
+	if(userPin == os.environ.get('flaskBackendPin')):
 		return render_template('borrow.html', title='Borrow')
 	else:
 		return redirect('/borrowLogin')
@@ -85,9 +78,8 @@ def investorLogin():
 	
 @app.route('/invest', methods=['POST'])
 def invest():
-	
 	userPin = request.form.get('userPin')
-	if(userPin == str(flaskBackendPin)):
+	if(userPin == os.environ.get('flaskBackendPin')):
 		return render_template('invest.html', title='Invest')
 	else:
 		error = 'Incorrect PIN. Please try again.'
@@ -96,7 +88,7 @@ def invest():
 @app.route('/invest')
 def investRedirect():
 	userPin = request.args.get('userPin')
-	if(userPin == str(flaskBackendPin)):
+	if(userPin == os.environ.get('flaskBackendPin')):
 		return render_template('invest.html', title='Invest')
 	else:
 		return redirect('/investorLogin')
@@ -104,7 +96,7 @@ def investRedirect():
 @app.route('/borrowSubmitted')
 def loanSubmitRedirect():
 	userPin = request.args.get('userPin')
-	if(userPin == str(flaskBackendPin)):
+	if(userPin == os.environ.get('flaskBackendPin')):
 		return render_template('borrowSubmitted.html', title='Submitted')
 	else:
 		return redirect('/borrowLogin')
@@ -112,7 +104,7 @@ def loanSubmitRedirect():
 @app.route('/investorSubmitted')
 def investSubmitRedirect():
 	userPin = request.args.get('userPin')
-	if(userPin == str(flaskBackendPin)):
+	if(userPin == os.environ.get('flaskBackendPin')):
 		return render_template('investorSubmitted.html', title='Submitted')
 	else:
 		return redirect('/investorLogin')
@@ -122,7 +114,6 @@ def contactSubmitRedirect():
 	return redirect('/contact')
 
 def error():
-	# check if the referrer is from the backend
 	if request.referrer and request.referrer.startswith(request.host_url):
 		return render_template('error.html')
 	else:
